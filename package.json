@@ -1,0 +1,61 @@
+{
+  "name": "easyzariya",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "rimraf dist && NODE_ENV=development babel-node tools/build.js",
+    "build": "rimraf dist && NODE_ENV=production babel-node tools/build.js",
+    "test": "babel-node node_modules/.bin/webpack-dev-server --content-base dist"
+  },
+  "keywords": [
+    "React",
+    "Webpack",
+    "Babel",
+    "Javascript",
+    "Enzyme",
+    "Redux-saga",
+    "ES6"
+  ],
+  "author": "Ram Krishna",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-styled-components": "^1.10.7",
+    "chalk": "^4.0.0",
+    "css-loader": "^3.5.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.4",
+    "html-webpack-plugin": "^4.2.0",
+    "jest": "^25.3.0",
+    "nodemon": "^2.0.3",
+    "postcss-loader": "^3.0.0",
+    "redux-devtools-extension": "^2.13.8",
+    "rimraf": "^3.0.2",
+    "sass-loader": "^8.0.2",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^1.1.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-hot-middleware": "^2.25.0"
+  }
+}
