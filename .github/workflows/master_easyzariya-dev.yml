@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'easyzariya-dev'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_8385b2a3b03f40be841d171a95040871 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_a673d662828047b3891803946c3b8e15 }}
         package: .
