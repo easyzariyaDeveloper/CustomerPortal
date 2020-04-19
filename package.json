@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "rimraf dist && NODE_ENV=development babel-node tools/build.js",
-    "build": "rimraf dist && NODE_ENV=production babel-node tools/build.js",
-    "test": "babel-node node_modules/.bin/webpack-dev-server --content-base dist"
+    "build": "rimraf dist && NODE_ENV=production babel-node tools/build.js"
   },
   "keywords": [
     "React",
