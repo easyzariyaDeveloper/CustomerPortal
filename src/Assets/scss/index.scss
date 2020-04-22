@@ -1,0 +1,13 @@
+
+@import "reset.scss";
+@import "variable.scss";
+
+body{
+    font-family: 'Roboto', sans-serif !important;
+    font-family: 'Roboto Condensed', sans-serif !important;
+}
+
+.vertical-center-element{
+    display: flex;
+    align-items: center;
+}
