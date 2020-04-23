@@ -1,10 +1,8 @@
 import React from "react";
-
-export default function ActionButton(props){
-    return <button
-        onClick = {props.onClick}
-        disabled = {props.disabled}
-    >
-        {props.label}
-    </button>
+import { Button } from "./styles";
+export default function ActionButton(props) {
+  return (
+    // <customButton onClick={props.onClick} disabled={props.disabled}>
+    <Button onClick={props.onClick}>{props.label}</Button>
+  );
 }
