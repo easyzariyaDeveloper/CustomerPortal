@@ -27,8 +27,9 @@ export const ServicePageHeader = styled.h1`
 `;
 
 export const ServiceData = styled.section`
-  width: 300px;
-  height: fit-content;
+  width: 24%;
+  max-width: 300px;
+  height: 300px;
   background: white;
   line-height: 1.75em;
   padding: 40px 40px 15px 40px;

@@ -5,8 +5,11 @@ const base_spacing = "10";
 
 export const AddCarPageWrapper = styled.div`
   background-size: cover;
-  min-height: 500px;
+  display: flex;
   position: relative;
+  align-items: flex-start;
+
+  // min-height: 500px;
   text-align: center;
   background: rgb(191, 190, 203);
   background: linear-gradient(
@@ -14,14 +17,21 @@ export const AddCarPageWrapper = styled.div`
     rgba(191, 190, 203, 1) 4%,
     rgba(106, 113, 117, 1) 69%
   );
-  padding: 5% 0;
+  padding: 7% 10%;
 `;
 
 export const AddCarPageHeader = styled.h1`
+  text-align: center;
   font-weight: bold;
-  font-size: 60px;
   color: white;
-  letter-spacing: 1.6px;
+  font-size: 50px;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 8px;
   text-transform: capitalize;
 `;
 
