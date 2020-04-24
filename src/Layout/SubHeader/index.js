@@ -13,7 +13,7 @@ export default function SubHeader() {
   return (
     <SubHeaderWrapper>
       <Link1>
-        <Link to="addcar">Add Car</Link>
+        <Link to="add-car">Add Car</Link>
       </Link1>
       <SubHeaderLinks>
         {" "}
