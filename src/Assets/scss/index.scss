@@ -4,10 +4,21 @@
 
 body{
     font-family: 'Roboto', sans-serif !important;
-    font-family: 'Roboto Condensed', sans-serif !important;
+    //font-family: 'Roboto Condensed', sans-serif !important;
 }
 
 .vertical-center-element{
     display: flex;
     align-items: center;
+}
+
+.link{
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+input::placeholder{
+    color: #959595;
+    letter-spacing: 1px;
 }
