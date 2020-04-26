@@ -60,6 +60,7 @@ export default function TabularData(props){
             }, {});
 
             const packageInfo = Object.entries(Packages[id]);
+            console.log(packageInfo);
             const packageGrouped = packageInfo.map((packageItem) =>{
                 const [id, {name, cost, duration, services}] = packageItem;
                  return {
@@ -71,6 +72,7 @@ export default function TabularData(props){
                      }
                 }
             });
+            console.log(packageGrouped);
             const subHeader = [], servicesToPackageMap = {};
             subHeader.push("Cost and Time");
 

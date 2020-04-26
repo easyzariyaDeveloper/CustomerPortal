@@ -1,5 +1,6 @@
 import React from "react";
 import TabularData from "./TabularData";
+import CardData from "./CardData";
 
 export const Tabs = [{
     label : "General Services",
@@ -8,7 +9,7 @@ export const Tabs = [{
 },{
     label: "AC & Electrical",
     id: "acAndElectrical",
-    //Component: <div>AC and Electrical</div>
+    Component: CardData
 },{
     label: "Car Care",
     id: "carCare",
@@ -84,7 +85,7 @@ export const Packages = {
            id: "full",
            services: ["AGF", "CCC", "COT", "CC", "AI"]
        },
-       fullService: {
+       generalAcService: {
             name: "General AC Services",
             cost: 1150,
             duration: 180,

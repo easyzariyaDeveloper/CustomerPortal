@@ -6,7 +6,7 @@ export default function Tab(props){
         return "";
     }
     const {tabs = []} = props;
-    const [activeTab, setActiveTab] = useState(tabs[0]);
+    const [activeTab, setActiveTab] = useState(tabs[1]);
 
     return <TabWrapper>
         <Tabs>
