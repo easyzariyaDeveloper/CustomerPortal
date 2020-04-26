@@ -1,6 +1,5 @@
 import styled, {css} from "styled-components";
 import { white_color, base_spacing } from "../../../Assets/style-var";
-import Phone from "../../../Assets/img/Phone.png";
 
 export const LeftPaneWrapper = styled.section`
     width:400px;
