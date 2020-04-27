@@ -6,7 +6,7 @@ import PageLayout from "../../Layout";
 export default function Service() {
     return <PageLayout>
         <ServicePageWrapper>
-        <ServicePageHeader>
+            <ServicePageHeader>
                 Services
             </ServicePageHeader>
             <ServiceData>

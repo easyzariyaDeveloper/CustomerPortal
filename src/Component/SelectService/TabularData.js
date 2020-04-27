@@ -1,6 +1,7 @@
 import React from "react";
 import { Packages, GeneralServices, CarCareServices } from "./mockData";
 import Table from "../Common/Table";
+import { ServiceName, ServiceInfo, ServiceCostInTable, ServiceDurationInTable } from "./styles";
 
 
 export default function TabularData(props){
@@ -10,8 +11,8 @@ export default function TabularData(props){
             let servicePackageObj = Packages[id];  
             const serviceDataList = Object.values(servicePackageObj);
             const headerContent = [];
-            headerContent.push(<div> Services </div>);
-            serviceDataList.forEach(({name, id}) => headerContent.push(<div key = {id}> {name}</div>));        
+            headerContent.push(<ServiceName> Services </ServiceName>);
+            serviceDataList.forEach(({name, id}) => headerContent.push(<ServiceName key = {id}> {name}</ServiceName>));        
             return headerContent;   
         }
 
@@ -79,14 +80,14 @@ export default function TabularData(props){
             packageGrouped.forEach((servicePacakges) => {
                 let [packageId, packageInfo] = Object.entries(servicePacakges)[0];
                 //packageInfo["servicesName"] = [];
-                subHeader.push(<>
-                    <p>
+                subHeader.push(<ServiceInfo>
+                    <ServiceCostInTable>
                         Rs. {packageInfo["cost"]}
-                    </p>
-                    <p>
+                    </ServiceCostInTable>
+                    <ServiceDurationInTable>
                         Time: {packageInfo["duration"] / 60} hours 
-                    </p>
-                </>);
+                    </ServiceDurationInTable>
+                </ServiceInfo>);
                 
                 packageInfo["services"].forEach((serviceCode) => {
                     const serviceName = servicesObject[serviceCode];
