@@ -41,7 +41,7 @@ export default function AddCar() {
   ];
   return (
     <PageLayout>
-      <AddCarPageWrapper>
+      <AddCarPageWrapper className="grey-gradient">
         <AddCarPageHeader>Select Car</AddCarPageHeader>
         <AddCarForm fields={dummydata}></AddCarForm>
         <ButtonWrapper>
