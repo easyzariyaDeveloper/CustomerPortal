@@ -4,3 +4,4 @@ export const white_color = "#FFFFFF";
 export const border_color = "#D5D5D5";
 export const header_font_size = 50;
 export const header_font_color = "#fff";
+export const font_color = "#333";
