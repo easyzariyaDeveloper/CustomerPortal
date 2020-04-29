@@ -48,10 +48,10 @@ export const Car = {
         diesel: ["S", "SX"],
       },
       colorvariant: [
-        {
-          name: "Blue",
-          id: "blue",
-        },
+        // {
+        //   name: "Blue",
+        //   id: "blue",
+        // },
         {
           name: "White",
           id: "white",
@@ -162,10 +162,10 @@ export const Car = {
           url:
             "https://img.favpng.com/2/3/14/honda-city-city-car-honda-fit-png-favpng-W0ZtNsJE5PPmia6Av8SKp20VH.jpg",
         },
-        {
-          name: "White",
-          id: "white",
-        },
+        // {
+        //   name: "White",
+        //   id: "white",
+        // },
       ],
       baseColorVariant: "blue",
     },
@@ -197,7 +197,7 @@ export const Car = {
         },
         {
           name: "Off-White",
-          id: "offwhite",
+          id: "#ffffe4",
           url: "https://www.pngarts.com/files/6/Kia-Seltos-PNG-Photo.png",
         },
         {

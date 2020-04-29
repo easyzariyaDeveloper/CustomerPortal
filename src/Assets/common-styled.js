@@ -20,11 +20,9 @@ export const Spacing1X = css`
 export const Spacing1_5X = css`
   padding: ${base_spacing * 1.5}px;
 `;
-
 export const PageWrapper = css`
   position: relative;
 `;
-
 export const PageHeader = css`
   position: absolute;
   top: 50px;

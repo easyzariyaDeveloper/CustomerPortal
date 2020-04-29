@@ -2,13 +2,19 @@ import React, { useState } from "react";
 
 import { StyledForm } from "./styles";
 import SelectBox from "../../common/SelectBox";
-import { Brands, Car } from "../mockData";
-export default function index({ fields }) {
-  const [brand, setBrand] = useState("0");
-  const [car, setCar] = useState("0");
-  const [type, setType] = useState("0");
-  const [fuel_type, setFuelType] = useState("0");
 
+export default function index({
+  Brands,
+  Car,
+  onBrandChange,
+  onCarChange,
+  onFuelTypeChange,
+  onTypesChange,
+  brand,
+  car,
+  fuel_type,
+  type,
+}) {
   const brands = Brands.map((brand) => ({
     name: brand.name,
     value: brand.id,
@@ -24,7 +30,6 @@ export default function index({ fields }) {
   const carObj = Car[brand]
     ? Car[brand].find((obj) => obj.id === car)
     : undefined;
-  console.log(carObj);
   const types = carObj
     ? carObj.fuelvariant.map((variant) => ({
         value: variant.id,
@@ -32,31 +37,12 @@ export default function index({ fields }) {
       }))
     : [];
   types.unshift({ name: "Select Type", value: "0" });
-
   const fuel_types =
     carObj && carObj["variant"] && carObj["variant"][type]
       ? carObj["variant"][type].map((ty) => ({ name: ty, value: ty }))
       : [];
-
   fuel_types.unshift({ name: "Select FuelType", value: "0" });
-  const onBrandChange = (obj, ind) => {
-    setBrand(obj.value);
-    setFuelType("0");
-    setType("0");
-    setCar("0");
-  };
-  const onCarChange = (obj, ind) => {
-    setCar(obj.value);
-    setType("0");
-    setFuelType("0");
-  };
-  const onTypesChange = (obj, ind) => {
-    setType(obj.value);
-    setFuelType("0");
-  };
-  const onFuelTypeChange = (obj, ind) => {
-    setFuelType(obj.value);
-  };
+
   return (
     <StyledForm>
       <SelectBox
