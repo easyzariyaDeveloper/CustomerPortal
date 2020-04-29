@@ -6,18 +6,20 @@ import {
   alignCenter,
   alignHorizontally,
 } from "../../Assets/common-styled";
-
+import backgroundBanner from "../../Assets/img/garrage.jpg";
 import { base_spacing } from "../../Assets/style-var";
 
 const color_dim = base_spacing * 4;
 export const AddCarPageWrapper = styled.div`
   ${alignHorizontally}
   ${PageWrapper}
+  background: url(${backgroundBanner});
   justify-content :space-between;
-  background-size: cover;
+  background-size: contain;
   align-items: flex-start;
-  padding: 8% 10%;
+  padding: 6% 10%;
   min-height: 450px;
+  
 `;
 
 export const AddCarPageHeader = styled.h1`
@@ -27,12 +29,12 @@ export const AddCarPageHeader = styled.h1`
 
 export const ButtonWrapper = styled.div`
   position: absolute;
-  bottom: 0%;
-  right: 12%;
+  bottom: -5%;
+  right: 10%;
 `;
 export const CenterImage = styled.img`
   width: 500px;
-  height: 320px;
+  height: 300px;
 `;
 export const ColorPallete = styled.div`
   margin-top: ${base_spacing}px;
@@ -52,15 +54,18 @@ export const ImageWrapper = styled.div`
   padding-top: ${base_spacing * 2}px;
   ${alignCenter}
   flex: 2;
+  margin-top: 10%;
 `;
 export const SideAreaWrapper = styled.div`
   flex: 1;
   min-height: 450px;
   position: relative;
+  ${alignHorizontally}
 `;
 export const ColorBoxWrapper = styled.div`
   text-align: center;
   align-items: center;
+  padding-top: ${2 * base_spacing}px;
 `;
 export const ColumnHeader = styled.h2`
   font-size: 40px;
