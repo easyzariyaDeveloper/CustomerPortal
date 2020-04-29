@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { SelectWrapper, SelectPara, Select, Option } from "./styles";
 
 /**
@@ -14,32 +14,32 @@ import { SelectWrapper, SelectPara, Select, Option } from "./styles";
       }></SelectBox>
  */
 
-export default function SelectBox(props){
-    const [selected, setSelected] = useState(props.defaultValue);
-    const [options, setOptions] =  useState(props.options)
-
-    return <SelectWrapper>
-        <SelectPara>{selected ? selected : ""}</SelectPara>
-        <Select
-            onChange = {(event) => {
-                const {value, selectedIndex} = event.target;
-                const selectedObj = options.filter((obj) => (obj["value"] || obj["name"]) === value);
-                if(selectedObj.length > 0){
-                    setSelected(selectedObj[0]["name"]);
-                    props.onChangeHandler && props.onChangeHandler(selectedObj, selectedIndex)
-                }
-            }}
-        >
-            {options.map((optionObj, index) => {
-                return <Option 
-                    value = {optionObj["value"] || optionObj["name"]} 
-                    disabled = {props.disabled}
-                    selected = {selected === optionObj["name"]}
-                    key = {optionObj["value"] || optionObj["name"]}
-                >
-                    { optionObj["name"] }
-                </Option>
-            })}
-        </Select>
+export default function SelectBox({ options, defaultValue, ...props }) {
+  const selected = defaultValue;
+  const obj = options.find((ob) => ob.value === selected);
+  return (
+    <SelectWrapper disabled={props.disabled}>
+      <SelectPara>{obj ? obj.name : ""}</SelectPara>
+      <Select
+        value={selected}
+        disabled={props.disabled}
+        onChange={(event) => {
+          const { value, selectedIndex } = event.target;
+          const selectedObj = options.find((obj) => obj["value"] === value);
+          if (selectedObj) {
+            props.onChangeHandler &&
+              props.onChangeHandler(selectedObj, selectedIndex);
+          }
+        }}
+      >
+        {options.map((optionObj, index) => {
+          return (
+            <Option value={optionObj.value} key={optionObj.value}>
+              {optionObj.name}
+            </Option>
+          );
+        })}
+      </Select>
     </SelectWrapper>
+  );
 }
