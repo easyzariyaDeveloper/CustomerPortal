@@ -1,13 +1,31 @@
-
 @import "reset.scss";
 @import "variable.scss";
+@import "mixin.scss";
 
-body{
-    font-family: 'Roboto', sans-serif !important;
-    font-family: 'Roboto Condensed', sans-serif !important;
+body {
+  font-family: "Roboto", sans-serif !important;
+  //font-family: 'Roboto Condensed', sans-serif !important;
 }
 
-.vertical-center-element{
-    display: flex;
-    align-items: center;
+.vertical-center-element {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+input::placeholder {
+  color: #959595;
+  letter-spacing: 1px;
+}
+
+.grey-gradient {
+  @include gradient(
+    saturate(rgba(191, 190, 203, 1), 4%),
+    lighten(rgba(106, 113, 117, 1), 69%)
+  );
 }
