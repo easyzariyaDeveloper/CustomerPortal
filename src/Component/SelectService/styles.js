@@ -1,12 +1,8 @@
 import styled, {css} from "styled-components";
-import { base_spacing, border_color } from "../../Assets/style-var";
+import { base_spacing, border_color, backGroundLinearGradient, borderVariable, login_bg_color } from "../../Assets/style-var";
+import { AlignItems } from "../../Assets/common-styled";
 
 const cardWidth = 320;
-
-const customStyle = css`
-    align-items: center;
-    text-align: center;
-`;
 
 export const ServicesWrapper = styled.div``;
 
@@ -25,13 +21,11 @@ export const Card = styled.div`
 `;
 
 export const ServiceName = styled.h1`
-    ${customStyle}
-    background: linear-gradient(79.68deg, #62B58F 0.29%, #29C3BE 52.74%, #03B3AD 100%);
-    border: 1px solid ${border_color};
+    ${AlignItems}
+    ${backGroundLinearGradient}
+    border: ${borderVariable};
     height: 30px;
     padding:10px;
-    align-items: center;
-    text-align: center;
     font-weight: 300;
     font-size: 22px;
     line-height: 30px;
@@ -40,26 +34,26 @@ export const ServiceName = styled.h1`
 export const ServiceInfo = styled.div``;
 
 export const ServiceCost = styled.p`
-    ${customStyle}
+    ${AlignItems}
     padding: 10px 10px;
-    border-left: 1px solid #D5D5D5;
-    border-right: 1px solid #D5D5D5;
+    border-left: ${borderVariable};
+    border-right: ${borderVariable};
     font-weight: 300;
     font-size: 24px;
     line-height: 26px;
 `;
 
 export const ServiceDuration = styled.p`
-    ${customStyle}
+    ${AlignItems}
     color: #4B4B4B;
-    border: 1px solid #D5D5D5;
+    border: ${borderVariable};
     border-top:0;
     padding: ${base_spacing}px;
 `;
 
 export const ListItem = styled.p`
-    ${customStyle}  
-    border: 1px solid #D5D5D5;
+    ${AlignItems}  
+    border: ${borderVariable};
     border-top:0;
     padding: 10px 0;
     color: #4B4B4B;
@@ -69,8 +63,8 @@ export const ButtonWrapper = ListItem;
 
 export const ServiceCostInTable = styled.section`
     padding: 10px 10px;
-    border-left: 1px solid #D5D5D5;
-    border-right: 1px solid #D5D5D5;
+    border-left: ${borderVariable};
+    border-right: ${borderVariable};
     font-weight: 300;
     font-size: 24px;
     line-height: 26px;
@@ -88,6 +82,6 @@ export const SelectServicePageHeader = styled.h1`
     margin-bottom: 0;
     font-weight: bold;
     padding: ${base_spacing * 3}px;
-    background-color: #E7EAFF;
+    background-color: ${login_bg_color};
     
 `;

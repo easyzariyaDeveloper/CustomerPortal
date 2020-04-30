@@ -3,7 +3,7 @@ import { white_color, base_spacing } from "../../../Assets/style-var";
 
 export const LeftPaneWrapper = styled.section`
     width:400px;
-    background-color: white;
+    background-color: ${white_color};
     text-align: center;
     padding: ${base_spacing * 2}px;
 `;
@@ -18,7 +18,7 @@ export const AppDnld = styled.p`
     color: #4B4B4B;
     font-size: 24px;
     line-height: 30px;
-    margin-bottom: 10px;
+    margin-bottom: ${base_spacing}px;
 `;
 
 export const AppLink = styled.img`

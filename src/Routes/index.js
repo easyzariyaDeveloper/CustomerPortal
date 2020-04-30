@@ -6,6 +6,9 @@ import AddCar from "../Component/AddCar";
 import NotFound from "../Component/NotFound";
 import Login from "../Component/Login";
 import SelectService from "../Component/SelectService";
+import SignUp from "../Component/SignUp";
+import VerifyOtp from "../Component/VerifyOtp";
+import Cart from "../Component/Cart";
 
 
 export default () => {
@@ -15,6 +18,12 @@ export default () => {
         <Route exact path = "/add-car" component = {AddCar} />
         <Route path = "/login" component = {Login} />
         <Route path = "/select-service" component = {SelectService} />
+        <Route path = "/signup" component = {SignUp} />
+        <Route path = "/verify-otp" component = {VerifyOtp} />
+        <Route path = "/home/cart" component = {Cart} />
+     
         {/* <Route component = {NotFound} /> */}
     </>
 }
+
+   
