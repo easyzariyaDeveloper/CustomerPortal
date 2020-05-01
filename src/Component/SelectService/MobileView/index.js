@@ -22,7 +22,6 @@ export default function Services() {
   const packs = Object.keys(Packages[option1]);
   const [option2, setOption2] = useState(Packages[option1][packs[0]].id);
   const data = Packages[option1][option2] || Packages[option1][packs[0]];
-  console.log(data);
   const onTabsChange = ({ target }) => {
     const value = target.value;
     setOption1(value);

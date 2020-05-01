@@ -48,6 +48,8 @@ export const ColorSquare = styled.div`
   width: ${color_dim}px;
   margin: ${base_spacing / 2}px;
   height: ${color_dim}px;
+  border-radius: 50%;
+  border: 2px solid white;
   cursor: pointer;
 `;
 export const ImageWrapper = styled.div`
