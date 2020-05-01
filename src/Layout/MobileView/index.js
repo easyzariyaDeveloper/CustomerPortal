@@ -1,12 +1,13 @@
 import React from "react";
 import { PageWrapper } from "../styles";
-export default function MobilePageLayout(props) {
+import Header from "./Header";
+
+
+export default function PageLayout(props) {
   return (
     <PageWrapper className="container">
-      {/* <Header className = "vertical-center-element"/>
-        <SubHeader /> */}
+      <Header />
       {props.children}
-      {/* <Footer/> */}
     </PageWrapper>
   );
 }

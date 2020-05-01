@@ -10,6 +10,7 @@ import {
 } from "../mockData";
 import Details from "./DetailsWrapper";
 import ActionButton from "../../Common/ActionButton";
+
 export default function Services() {
   const tabsopt1 = Tabs.map((tab) => (
     <option key={tab.id} value={tab.id}>

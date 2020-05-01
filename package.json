@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "rimraf dist && cross-env NODE_ENV=development babel-node tools/build.js",
+    "start-mobile": "rimraf dist && cross-env device=mobile NODE_ENV=development babel-node tools/build.js",
     "build": "rimraf dist && NODE_ENV=production babel-node tools/build.js"
   },
   "keywords": [
