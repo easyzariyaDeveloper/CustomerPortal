@@ -21,6 +21,8 @@ export default () => {
         <Route path = "/signup" component = {SignUp} />
         <Route path = "/verify-otp" component = {VerifyOtp} />
         <Route path = "/home/cart" component = {Cart} />
+
+        
      
         {/* <Route component = {NotFound} /> */}
     </>

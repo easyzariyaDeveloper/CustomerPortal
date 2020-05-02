@@ -23,4 +23,8 @@ export const ServiceCart = [
     }
 ]
     
+export const CouponCodes = [
+    {newUser : 50},
+    {holiday : 100},
+]
     

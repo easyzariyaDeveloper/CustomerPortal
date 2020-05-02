@@ -1,4 +1,4 @@
-import { Packages } from "./mockData";
+import { Packages } from "./mockServiceData";
 import { ServiceName, ServiceInfo, ServiceCostInTable, ServiceDurationInTable } from "./styles";
 
 export function formatHeaderData(activeId){

@@ -1,5 +1,5 @@
 import React from "react";
-import { ElectricalServices, Packages } from "./mockData";
+import { ElectricalServices, Packages } from "./mockServiceData";
 import {CardWrapper,ServiceName, ServiceInfo, ServiceCost, ServiceDuration, Card, ListItem, ButtonWrapper } from "./styles";
 import ActionButton from "../Common/ActionButton";
 

@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import styled, {css} from "styled-components";
-import { base_spacing, white_color, login_bg_color } from "./style-var";
-=======
-import { css } from "styled-components";
-import { base_spacing, header_font_size, header_font_color } from "./style-var";
->>>>>>> 86487754e784ed441362e7f6eb6759cf204e702b
+import { base_spacing, header_font_size, header_font_color, white_color, login_bg_color } from "./style-var";
 
 export const alignHorizontally = css`
   display: flex;

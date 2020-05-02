@@ -1,5 +1,5 @@
 import React from "react";
-import { Packages, GeneralServices, CarCareServices } from "./mockData";
+import { Packages, GeneralServices, CarCareServices } from "./mockServiceData";
 import Table from "../Common/Table";
 import { formatBodyData , formatHeaderData } from "./util";
 
