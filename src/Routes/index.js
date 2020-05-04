@@ -6,7 +6,7 @@ import AddCar from "../Component/AddCar";
 import NotFound from "../Component/NotFound";
 import Login from "../Component/Login";
 import SelectService from "../Component/SelectService";
-import MobSelectService from "../Component/SelectService/MobileView";
+import Profile from "../Component/Profile";
 
 export default () => {
   return (
@@ -16,7 +16,7 @@ export default () => {
       <Route exact path="/add-car" component={AddCar} />
       <Route path="/login" component={Login} />
       <Route path="/select-service" component={SelectService} />
-      <Route path="/mob-select-service" component={MobSelectService} />
+      <Route exact path="/profile" component={Profile} />
       {/* <Route component = {NotFound} /> */}
     </>
   );
