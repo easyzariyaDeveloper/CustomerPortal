@@ -3,7 +3,7 @@ import { Packages } from "./mockServiceData";
 import { ServiceName, ServiceInfo, ServiceCostInTable, ServiceDurationInTable } from "./styles";
 
 export function formatHeaderData(activeId){
-    let servicePackageObj = Packages[id];  
+    let servicePackageObj = Packages[activeId];  
     const serviceDataList = Object.values(servicePackageObj);
     const headerContent = [];
     headerContent.push(<ServiceName> Services </ServiceName>);

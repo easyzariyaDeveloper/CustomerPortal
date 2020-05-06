@@ -21,7 +21,7 @@ export default () => {
         <Route path = "/select-service" component = {SelectService} />
         <Route path = "/signup" component = {SignUp} />
         <Route path = "/verify-otp" component = {VerifyOtp} />
-        <Route path = "/home/cart" component = {Cart} />
+        <Route path = "/cart" component = {Cart} />
         <Route exact path="/profile" component={Profile} />
 
         

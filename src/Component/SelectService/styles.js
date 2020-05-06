@@ -1,5 +1,5 @@
 import styled, {css} from "styled-components";
-import { base_spacing, border_color, backGroundLinearGradient, borderVariable, login_bg_color } from "../../Assets/style-var";
+import { base_spacing, border_color, backGroundLinearGradient, borderVariable, button_bg_color, secondary_font_color } from "../../Assets/style-var";
 import { AlignItems } from "../../Assets/common-styled";
 
 const cardWidth = 320;
@@ -22,13 +22,14 @@ export const Card = styled.div`
 
 export const ServiceName = styled.h1`
     ${AlignItems}
-    ${backGroundLinearGradient}
     border: ${borderVariable};
-    height: 30px;
     padding:10px;
     font-weight: 300;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 30px;
+    background-color: ${button_bg_color};
+    color: white;
+    text-transform: capitalize;
 `;
 
 export const ServiceInfo = styled.div``;
@@ -77,11 +78,10 @@ export const ServiceDurationInTable = styled.section`
 `;
 
 export const SelectServicePageHeader = styled.h1`
-    font-size: 55px;
+    font-size: 25px;
     text-align: center;
     margin-bottom: 0;
     font-weight: bold;
-    padding: ${base_spacing * 3}px;
-    background-color: ${login_bg_color};
-    
+    padding: ${base_spacing * 3}px;  
+    color: ${secondary_font_color};
 `;

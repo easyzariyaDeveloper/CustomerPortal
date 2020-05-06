@@ -10,3 +10,4 @@ export const font_color = "#333";
 export const header_bg_color = "#1976d2";
 export const button_bg_color = "#5D62B5";
 export const disabled_button_bg_color = "#959595";
+export const secondary_font_color = "#4B4B4B";
