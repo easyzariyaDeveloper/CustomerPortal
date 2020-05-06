@@ -127,11 +127,11 @@ export const PayableAmt =styled(CartPricePara)`
 `;
 
 export const DatePicker = styled(DateTimePicker)`
-margin-top: 30px;
-border: none;
-height: 40px;
-border-bottom: 1px solid ${border_color};
-font-size: 20px;
+    margin-top: 30px;
+    border: none;
+    height: 40px;
+    border-bottom: 1px solid ${border_color};
+    font-size: 20px;
 `;
 
 export const TimePicker = styled(DateTimePicker)``;
@@ -192,6 +192,7 @@ export const Overlay = styled.div`
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
+    overflow: scroll;
 `;
 
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Packages } from "./mockServiceData";
 import { ServiceName, ServiceInfo, ServiceCostInTable, ServiceDurationInTable } from "./styles";
 
