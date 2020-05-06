@@ -9,6 +9,7 @@ import SelectService from "../Component/SelectService";
 import SignUp from "../Component/SignUp";
 import VerifyOtp from "../Component/VerifyOtp";
 import Cart from "../Component/Cart";
+import Profile from "../Component/Profile";
 
 
 export default () => {
@@ -21,6 +22,7 @@ export default () => {
         <Route path = "/signup" component = {SignUp} />
         <Route path = "/verify-otp" component = {VerifyOtp} />
         <Route path = "/home/cart" component = {Cart} />
+        <Route exact path="/profile" component={Profile} />
 
         
      

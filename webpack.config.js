@@ -4,6 +4,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import devServer from "./webpack-devserver.config";
 
 const DEV = "development";
+const MOBILE = "mobile";
 
 export default (mode) => {
   let config = {};
@@ -23,13 +24,21 @@ export default (mode) => {
         "react-router-dom",
         "redux-saga",
         "redux",
-      ],
+      ]
     },
     target: "web",
     resolve: {
       extensions: [".js", ".jsx", ".scss", ".css", ".json"],
     },
   };
+
+  if(process.env.device === MOBILE){
+    const entry = {
+      mobile: "./src/MobileView/index.js",
+      vendor: config.entry["vendor"]
+    }
+    config = {...config, entry};
+  }
 
   /**
    * Configuring the OutPut directory
@@ -38,8 +47,8 @@ export default (mode) => {
     ...config,
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: mode === DEV ? "[name].bundle.js" : "[name].[hash].js",
-      chunkFilename: "[name].[hash].js",
+      filename: mode === DEV ? `[name].bundle.js` : `[name].[hash].js`,
+      chunkFilename: `[name].[hash].js`,
       publicPath: "/",
     },
   };
@@ -107,6 +116,7 @@ export default (mode) => {
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(mode),
       __DEV__: mode === DEV ? true : false,
+      "mobile": process.env.device === MOBILE
     }),
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, "dist/index.html"),

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   SubHeaderWrapper,
-  Link1,
+  StyledLink,
   SubHeaderLinks,
   SubHeaderRightSection,
   Cart,
@@ -12,28 +12,20 @@ import {
 export default function SubHeader() {
   return (
     <SubHeaderWrapper>
-      <Link1>
-        <Link to="add-car">Add Car</Link>
-      </Link1>
+      <StyledLink active={"true"} to="add-car">
+        Add Car
+      </StyledLink>
+
       <SubHeaderLinks>
         {" "}
-        <Link1 active={true}>
-          <Link to="home">Home</Link>
-        </Link1>
-        <Link1>
-          <Link to="about">About us</Link>
-        </Link1>
-        <Link1>
-          <Link to="services">Services</Link>
-        </Link1>
-        <Link1>
-          <Link to="franchise">Franchise</Link>
-        </Link1>
+        <StyledLink to="home">Home</StyledLink>
+        <StyledLink to="about">About us</StyledLink>
+        <StyledLink to="services">Services</StyledLink>
+        <StyledLink to="franchise">Franchise</StyledLink>
       </SubHeaderLinks>
       <SubHeaderRightSection>
-        <Link1>
-          <Link to="login">Login</Link>
-        </Link1>
+        <StyledLink to="login">Login</StyledLink>
+
         <Search></Search>
         <Cart></Cart>
       </SubHeaderRightSection>
