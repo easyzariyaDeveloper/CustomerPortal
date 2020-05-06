@@ -1,14 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { header_bg_color, white_color } from "../../Assets/style-var";
 
 const link_font_size = "15px";
 export const SubHeaderWrapper = styled.div`
-  background: linear-gradient(
-    58.02deg,
-    #62b58f 0.29%,
-    #29c3be 52.74%,
-    #03b3ad 100%
-  );
+  background: ${header_bg_color};
   height: fit-content;
   display: flex;
   justify-content: space-around;
@@ -17,13 +13,14 @@ export const SubHeaderWrapper = styled.div`
 `;
 export const StyledLink = styled(Link)`
   padding: 0 15px;
-  color: #000000;
-  text-decoration: ${({ active }) => (active ? "underline" : "none")};
+  color: ${white_color};
   font-weight: ${({ active }) => (active ? "bold" : "normal")};
   cursor: pointer;
   font-size: ${link_font_size};
   vertical-align: middle;
+  text-decoration: none;
 `;
+//text-decoration: ${({ active }) => (active ? "underline" : "none")};
 export const SubHeaderLinks = styled.div`
   display: flex;
 `;

@@ -27,17 +27,16 @@ export const ServicePageHeader = styled.h1`
 `;
 
 export const ServiceData = styled.section`
-  width: 24%;
-  max-width: 300px;
-  height: 300px;
+  max-width: 320px;
   background: white;
   line-height: 1.75em;
-  padding: 40px 40px 15px 40px;
+  padding: ${base_spacing * 2.5}px;
   float: left;
   display: flex;
   justify-items: center;
   flex-direction: column;
   justify-content: space-around;
+  text-align: center;
 `;
 
 export const ServiceDataHeader = styled.h2`

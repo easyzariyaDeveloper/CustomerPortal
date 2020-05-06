@@ -7,3 +7,6 @@ export const border_color = "#D5D5D5";
 export const header_font_size = 50;
 export const header_font_color = "#fff";
 export const font_color = "#333";
+export const header_bg_color = "#1976d2";
+export const button_bg_color = "#5D62B5";
+export const disabled_button_bg_color = "#959595";

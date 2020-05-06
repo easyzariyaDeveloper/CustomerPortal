@@ -7,7 +7,7 @@ import {
   GeneralServices,
   CarCareServices,
   ElectricalServices,
-} from "../mockData";
+} from "../mockServiceData";
 import Details from "./DetailsWrapper";
 import ActionButton from "../../Common/ActionButton";
 

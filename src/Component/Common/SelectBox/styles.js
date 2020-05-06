@@ -17,6 +17,7 @@ export const SelectPara = styled.p`
   margin: 0;
   ${alignCenter}
   background-color: white;
+  border-radius: 2px;
 `;
 
 export const Select = styled.select`
