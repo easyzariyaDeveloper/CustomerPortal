@@ -34,3 +34,13 @@ export const PageHeader = css`
   text-align: center;
   text-transform: capitalize;
 `;
+export const Attached = css`
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0px;
+  margin-bottom: 0px;
+`;
+export const Labels = css`
+  font-weight: 500;
+  font-size: 24px;
+`;

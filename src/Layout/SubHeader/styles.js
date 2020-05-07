@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const link_font_size = "15px";
 export const SubHeaderWrapper = styled.div`
@@ -14,9 +15,9 @@ export const SubHeaderWrapper = styled.div`
   align-items: center;
   padding: 20px 20%;
 `;
-export const Link1 = styled.div`
+export const StyledLink = styled(Link)`
   padding: 0 15px;
-  color: white;
+  color: #000000;
   text-decoration: ${({ active }) => (active ? "underline" : "none")};
   font-weight: ${({ active }) => (active ? "bold" : "normal")};
   cursor: pointer;
