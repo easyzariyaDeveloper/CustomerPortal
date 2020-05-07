@@ -80,6 +80,7 @@ export default function index({ Brands, Car, onChangeListener = null }) {
         defaultValue={car_obj.brand}
         onChangeHandler={onChange}
         disabled={false}
+        placeholder = "Select Brand"
       />
       <Select2
         name="car"
@@ -87,6 +88,7 @@ export default function index({ Brands, Car, onChangeListener = null }) {
         defaultValue={car_obj.car}
         onChangeHandler={onChange}
         disabled={car_obj.brand === "0"}
+        placeholder = "Select Car"
       />
       <SelectBox
         name="type"
