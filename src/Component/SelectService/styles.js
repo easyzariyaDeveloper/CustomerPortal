@@ -7,16 +7,12 @@ const cardWidth = 320;
 export const ServicesWrapper = styled.div``;
 
 export const CardWrapper = styled.div` 
-    width: ${(cardWidth + 40) * 3}px;
     margin: 0 auto;
-    overflow: auto;
+    width: 80%;
 `;
 
 export const Card = styled.div`
-    width: ${cardWidth}px;
-    float: left;
-    margin: ${base_spacing * 2}px;
-    height:auto;
+    padding: ${base_spacing * 2}px;
     margin-top: 0;
 `;
 

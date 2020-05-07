@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { border_color, base_spacing } from "../../Assets/style-var";
+import { border_color, base_spacing, header_bg_color } from "../../Assets/style-var";
 import { InputForm } from "../Common/InputText/style";
-import { Login_SignUp_Button } from "../../Assets/common-styled";
-import DateTimePicker from "react-datepicker";
+import ActionButton from "../Common/ActionButton";
 
 export const CartPageWrapper = styled.div`
     background: #FFFFFF;
@@ -69,12 +68,13 @@ export const DeleteButton = styled.button`
 `;
 
 export const SelectAddressLabel = styled.p`
-    color: #959595;
-    width: 200px;
-    border: 1px solid ${border_color};
+    color: ${header_bg_color};
+    width: fit-content;
     margin: ${base_spacing * 2}px 0;
     padding: ${base_spacing / 2}px;
     clear: both;
+    font-size: 24px;
+    cursor: pointer;
 `;
 
 export const InputTextCart= styled(InputForm)`
@@ -86,8 +86,11 @@ export const InputTextCart= styled(InputForm)`
   font-size: 18px;
 `;
 
-export const CouponSubmitButton = styled(Login_SignUp_Button)`
-    width: 100px;
+export const CouponSubmitButton = styled(ActionButton)`
+    width: 15%;
+    margin: 0;
+    padding: 0;
+    color: red;
 `;
 
 export const SubTotal = styled(CartServicePara)`
@@ -126,64 +129,6 @@ export const PayableAmt =styled(CartPricePara)`
     font-size: 18px;
 `;
 
-export const DatePicker = styled(DateTimePicker)`
-    margin-top: 30px;
-    border: none;
-    height: 40px;
-    border-bottom: 1px solid ${border_color};
-    font-size: 20px;
-`;
-
-export const TimePicker = styled(DateTimePicker)``;
-
-export const DatePickerWrapper = styled.div`
-    position: relative;
-    height: 40px;
-    width: 220px;
-    float: left;
-    display: inline-block;
-    margin: ${base_spacing * 2}px ${base_spacing * 4}px ${base_spacing * 2}px 0;
-    border-bottom: 1px solid ${border_color};
-
-    span {
-        position: absolute;
-        right:0;
-        top: 0;
-    }
-
-    label, p{
-        width: 100%;
-        height: 100%;
-        display: inline-block; 
-        line-height: 40px;
-        color: #959595;
-    }
-
-    .react-datepicker__input-container{
-        width: 100%;
-        height: 100%;
-    }
-
-    input{
-        margin:0;
-        outline: transparent;
-        width: 100%;
-        height: 100%;
-    }
-
-    .react-datepicker-wrapper{
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        opacity:0;
-    }
-`;
-
-export const TimeWrapper = styled(DatePickerWrapper)`
-    width: 120px;
-`;
 
 export const Overlay = styled.div`
     position: fixed;

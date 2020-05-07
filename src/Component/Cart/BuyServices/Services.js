@@ -4,13 +4,11 @@ import {
     ServiceLabel, ServiceListItem, DeleteButton,
      InputTextCart, SubTotal, TotalPrice, CouponSubmitButton, 
      CouponWrapper, DiscountAmount, DiscountLabel, CalculateDiv, 
-     PayableDiv, PayableAmt, DatePicker, TimePicker, DatePickerWrapper,
-     TimeWrapper,
-     SelectAddressLabel
+     PayableDiv, PayableAmt,SelectAddressLabel
 } from "../style"
 import {CouponCodes} from "../mockCartData";
-import "react-datepicker/dist/react-datepicker.min.css";
-import moment from "moment";
+
+import MaterialUIPickers from "../../Common/DateTimePicker";
 
     function getPrice(ServiceCart = []){
         const ServicePrice = [];
@@ -27,8 +25,6 @@ import moment from "moment";
     }
 
     export default function Services(props) {
-        const [serviceDate, setServiceDate] = useState(null);
-        const [serviceTime, setServiceTime] = useState(null);
 
         return <ServiceCartWrapper>
         <ServiceLabel>
@@ -46,33 +42,7 @@ import moment from "moment";
             })
         }
 
-        <DatePickerWrapper>
-            <p> 
-                {serviceDate || "Please select a date"}
-                <span>&#x1F4C5;</span> 
-            </p>
-            <DatePicker
-                onChange={date => setServiceDate(date)}
-                minDate = {new Date()}
-                selected = {serviceDate ? moment(serviceDate).format("DD/MM/YYYY") : serviceDate}    
-                dateFormat="dd/MM/yyyy"
-            />
-        </DatePickerWrapper>
-
-        <TimeWrapper>
-            <label> 
-                {serviceTime || "Time slot"}
-                <span>&#x25BC;</span>
-            </label>
-            <TimePicker
-                onChange={time => setServiceTime(time)}
-                selected = {new Date()}  
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={30}
-                dateFormat="h:mm aa"
-            />
-        </TimeWrapper>
+        <MaterialUIPickers/>
 
         <SelectAddressLabel
             onClick = {() => props.setVisibilityForOverlay(true)}
@@ -83,7 +53,7 @@ import moment from "moment";
                 type="text"
                 placeholder="Enter Coupon Code"
             />
-            <CouponSubmitButton>Apply</CouponSubmitButton>
+            <CouponSubmitButton label = 'Apply'/>
         </CouponWrapper>
 
         <CalculateDiv>
