@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { 
     ServiceCartWrapper, CartServicePara, CartPricePara, 
     ServiceLabel, ServiceListItem, DeleteButton,
-     InputTextCart, SubTotal, TotalPrice, CouponSubmitButton, 
-     CouponWrapper, DiscountAmount, DiscountLabel, CalculateDiv, 
-     PayableDiv, PayableAmt,SelectAddressLabel
+    SubTotal, TotalPrice, CouponSubmitButton, 
+    CouponWrapper, DiscountAmount, DiscountLabel, CalculateDiv, 
+    PayableDiv, PayableAmt,SelectAddressLabel
 } from "../style"
 import {CouponCodes} from "../mockCartData";
 
 import MaterialUIPickers from "../../Common/DateTimePicker";
+import { TextField } from "@material-ui/core";
 
     function getPrice(ServiceCart = []){
         const ServicePrice = [];
@@ -49,9 +50,11 @@ import MaterialUIPickers from "../../Common/DateTimePicker";
         >Select Centre</SelectAddressLabel>
 
         <CouponWrapper>
-            <InputTextCart
-                type="text"
-                placeholder="Enter Coupon Code"
+            <TextField
+                name = "couponcode"
+                value = ""
+                onChange={() => console.log("Hello")}
+                label="Enter Coupon Code"
             />
             <CouponSubmitButton label = 'Apply'/>
         </CouponWrapper>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { base_spacing } from "../../../Assets/style-var";
-import { alignCenter, Login_SignUp_Button } from "../../../Assets/common-styled";
+import ActionButton from "../../Common/ActionButton";
 
 export const MapWrapper = styled.div`
     margin: 0 auto;
@@ -29,7 +29,7 @@ export const AddressLabel = styled.p`
     margin: 30px 0px; 
 `;
 
-export const ConfirmButton = styled(Login_SignUp_Button)`
+export const ConfirmButton = styled(ActionButton)`
     width: 200px;
     marging-top: 20px;
     float: right;

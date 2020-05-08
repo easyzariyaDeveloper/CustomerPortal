@@ -103,7 +103,10 @@ function AsyncLoadMap({ props, onPlaceSelected, state, onMarkerDragEnd, onInfoWi
           <div>
             <AddressLabel> Address : {`${state.area}, ${state.address}, ${state.city}, ${state.state}`}</AddressLabel>
           </div>
-          <ConfirmButton>Confirm</ConfirmButton>
+          <ConfirmButton
+            label = "Confirm"
+            onClick = {() => console.log("Confirm")}
+          />
         </GoogleMap>
       )
     )
