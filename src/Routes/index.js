@@ -11,23 +11,20 @@ import VerifyOtp from "../Component/VerifyOtp";
 import Cart from "../Component/Cart";
 import Profile from "../Component/Profile";
 
-
 export default () => {
-    return <>
-        <Route exact path = "/" component = {Home} />
-        <Route exact path = "/services" component = {Service} />
-        <Route exact path = "/add-car" component = {AddCar} />
-        <Route path = "/login" component = {Login} />
-        <Route path = "/select-service" component = {SelectService} />
-        <Route path = "/signup" component = {SignUp} />
-        <Route path = "/verify-otp" component = {VerifyOtp} />
-        <Route path = "/cart" component = {Cart} />
-        <Route exact path="/profile" component={Profile} />
-
-        
-     
-        {/* <Route component = {NotFound} /> */}
+  return (
+    <>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/services" component={Service} />
+      <Route exact path="/add-car" component={AddCar} />
+      <Route path="/login" component={Login} />
+      <Route path="/select-service" component={SelectService} />
+      <Route path="/signup" component={SignUp} />
+      <Route path="/verify-otp" component={VerifyOtp} />
+      <Route path="/cart" component={Cart} />
+      <Route path="/profile/:id" component={Profile} />
+      <Route exact path="/profile" component={Profile} />
+      {/* <Route component = {NotFound} /> */}
     </>
-}
-
-   
+  );
+};

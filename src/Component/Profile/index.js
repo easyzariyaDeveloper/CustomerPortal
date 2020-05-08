@@ -7,7 +7,8 @@ import MyCars from "./MyCar";
 import AddressList from "./AddressList";
 import OrderHistory from "./OrderHistory";
 export default function index({ location }) {
-  const [page, setPage] = useState(1);
+  const params = location.pathname.split("/");
+  const [page, setPage] = useState(parseInt(params.pop()) || 1);
   const currentDisplay = () => {
     switch (page) {
       case 1:
