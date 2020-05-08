@@ -93,7 +93,7 @@ export default (mode) => {
 
   //Loader for Image File
   rules.push({
-    test: /\.(woff|ttf|eot|gif|png|jpg|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+    test: /\.(woff|ttf|eot|gif|png|jpg|woff2|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
     loader: "file-loader",
   });
 

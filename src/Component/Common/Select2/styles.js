@@ -7,3 +7,7 @@ export const StyledSelect = styled(Select)`
   height: 40px;
   margin: ${1.5 * base_spacing}px 0;
 `;
+
+export const StyledSelectWrapper = styled.div`
+  position: relative
+`;

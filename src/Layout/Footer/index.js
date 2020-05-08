@@ -7,6 +7,7 @@ import {
   Link,
   TagLine,
   SubFooterRight,
+  FooterContainer,
 } from "./styles";
 import Left from "./Left/index";
 import Middle from "./Middle/index";
@@ -37,12 +38,14 @@ export default function Footer() {
   const blurb_text =
     "This is a blurb about the company sed do ejusmud tempor incidente ut laborde et dolor ex magna alique";
   return (
-    <FooterWrapper>
+    <FooterContainer>
+      <FooterWrapper>
       <FooterSection>
         <Left logo={logo} icons={icons} blurb_text={blurb_text} />
         <Middle rows_link={rows} />
         <Right contacts={contacts} />
       </FooterSection>
+      </FooterWrapper>
       <SubFooter>
         <TagLine>
           TagLine Lorem epsum dolor sit amet, consectetur adipiscing eiusmud{" "}
@@ -52,6 +55,6 @@ export default function Footer() {
           <Link to="/">Terms and Conditions</Link>
         </SubFooterRight>
       </SubFooter>
-    </FooterWrapper>
+    </FooterContainer>
   );
 }

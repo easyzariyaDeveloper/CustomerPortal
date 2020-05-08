@@ -1,9 +1,9 @@
 import React from "react";
 import {SelectServicePageHeader} from "./styles";
-import Tab from "./Tab";
 import PageLayout from "../../Layout";
 
-import {Tabs} from "./mockData";
+import {Tabs} from "./mockServiceData";
+import Tab from "../Common/Tab";
 
 
 export default function Services(){

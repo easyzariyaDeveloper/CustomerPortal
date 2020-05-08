@@ -1,15 +1,15 @@
 import React from "react";
 import PageLayout from "../../Layout";
-import RightPane from "./RightPane";
-import LeftPane from "./LeftPane";
+import LeftPane from "../Login/LeftPane";
+import OtpPane from "./OtpPane";
 import { LoginWrapper } from "../../Assets/common-styled";
 
 
-export default function Login(){
-    return <PageLayout>
+export default function VerifyOtp(){
+    return<PageLayout>
         <LoginWrapper>
-            <LeftPane/>
-            <RightPane />
+            <LeftPane></LeftPane>
+            <OtpPane/>
         </LoginWrapper>
     </PageLayout>
 }

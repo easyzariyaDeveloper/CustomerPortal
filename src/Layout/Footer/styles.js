@@ -1,16 +1,21 @@
 import styled from "styled-components";
+import { white_color, header_bg_color, base_spacing } from "../../Assets/style-var";
 
-const footer_bg_color = "#C6caca";
-const subfooter_bg_color = "#002366";
-export const FooterWrapper = styled.div`
-  background-color: ${footer_bg_color};
+export const FooterContainer = styled.div`
+  background-color: ${header_bg_color};
   height: fit-content;
+  color: ${white_color};
+`;
+
+export const FooterWrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: ${base_spacing * 5}px 0;
 `;
 
 export const FooterSection = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10% 17%;
   justify-items: space-between;
 `;
 
@@ -21,11 +26,11 @@ export const Link = styled.a`
 `;
 
 export const SubFooter = styled.div`
-  background: ${subfooter_bg_color};
+  background: ${white_color};
   height: 40px;
   display: flex;
   justify-content: space-between;
-  color: grey;
+  color: ${header_bg_color};
   font-size: 12px;
   padding: 15px 15%;
   align-items: center;

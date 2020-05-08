@@ -1,7 +1,11 @@
 import React from "react";
-import { ElectricalServices, Packages } from "./mockData";
+import { ElectricalServices, Packages } from "./mockServiceData";
 import {CardWrapper,ServiceName, ServiceInfo, ServiceCost, ServiceDuration, Card, ListItem, ButtonWrapper } from "./styles";
 import ActionButton from "../Common/ActionButton";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 export default function CardData(props){
     const {activeId} = props;
@@ -35,7 +39,15 @@ export default function CardData(props){
     if(activeId){
         const codeToNameMap = transformServicesToMap(ElectricalServices);
         const content = formatData(activeId, codeToNameMap);
+        const settings = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        }
         return <CardWrapper>
+            <Slider {...settings}>
             {
                 content.map((service) => {
                     return <Card>
@@ -57,6 +69,7 @@ export default function CardData(props){
                     </Card>
                 })
             }
+            </Slider>
             
         </CardWrapper>
         

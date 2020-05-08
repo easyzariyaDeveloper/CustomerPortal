@@ -22,7 +22,7 @@ export default function Service() {
           </ServiceDataInfo>
           <ActionButton
             label="Select Service"
-            onClick={() => console.log("Select services for Door Demand")}
+            onClick={() => location.href = "/select-service"}
           />
         </ServiceData>
 
@@ -34,7 +34,7 @@ export default function Service() {
           </ServiceDataInfo>
           <ActionButton
             label="Select Service"
-            onClick={() => console.log("Select services for Ez Autocare")}
+            onClick={() => location.href = "/select-service"}
           />
         </ServiceData>
       </ServicePageWrapper>

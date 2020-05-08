@@ -1,15 +1,16 @@
 import React from "react";
-import {EZLoginWrapper,Divison, SignUpText, LoginButton} from "./style";
-import InputBox from "./InputBox";
+import {EZLoginWrapper,Divison, SignUpText} from "./style";
+import InputText from "../../../Common/InputText/InputText";
+import { Login_SignUp_Button } from "../../../../Assets/common-styled";
 
 export default function EZLogin(props){
     return <EZLoginWrapper>
         <Divison>OR</Divison>
-        <InputBox
+        <InputText
             type = "text"
             placeholder = "Email/ Phone Number"
         />
-        <InputBox
+        <InputText
             type = "password"
             placeholder = "Password"
         />
@@ -18,7 +19,7 @@ export default function EZLogin(props){
             <a href = "#" className = "link">Forgot Password ?</a>
         </SignUpText>
 
-        <LoginButton>LOGIN</LoginButton>
+        <Login_SignUp_Button>LOGIN</Login_SignUp_Button>
         
     </EZLoginWrapper>
         

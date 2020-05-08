@@ -11,7 +11,7 @@ import backgroundBanner from "../../../Assets/img/garrage.jpg";
 const image_wrapper_height = "250px";
 export const AddCarPageMWrapper = styled(AddCarPageWrapper)`
   align-items: center;
-  min-height: 800px;
+  min-height: calc(100vh - 64px);
   justify-content: flex-start;
   flex-direction: column;
   background-size: cover;

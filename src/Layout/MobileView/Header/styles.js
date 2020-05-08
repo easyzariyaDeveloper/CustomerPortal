@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { base_spacing, border_color } from "../../../Assets/style-var";
+import { base_spacing, border_color, header_bg_color } from "../../../Assets/style-var";
 import { alignCenter } from "../../../Assets/common-styled";
 
 const menu_width = 240;
@@ -9,7 +9,7 @@ export const HeaderWrapper = styled.div`
   height: ${mobile_header_height}px;
   padding: ${base_spacing}px;
   border-bottom: 1px solid ${border_color};
-  background: #1976d2;
+  background: ${header_bg_color};
   position: relative;
   line-height: ${mobile_header_height}px;
   display: flex;
@@ -56,4 +56,5 @@ export const Overlay = styled.div`
   opacity: ${(props) => (props.active ? 1 : 0)};
   visibility: ${(props) => (props.active ? "visible" : "hidden")};
   transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  z-index: 1;
 `;
