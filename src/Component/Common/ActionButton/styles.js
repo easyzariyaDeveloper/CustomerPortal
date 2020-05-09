@@ -9,7 +9,7 @@ import { EZElevation } from "../MobileCard";
 const Basepadding = base_spacing * 0.8;
 const button_height = 45;
 export const Button = styled.button`
-    ${EZElevation};
+${EZElevation};
     font-size: 12px;
     height: ${button_height}px;
     color: ${({ disabled = false }) => (!disabled ? "white" : "#ddd")};
@@ -50,7 +50,7 @@ export const LinearArea = styled.div`
   right: ${Basepadding}px;
   top: ${Basepadding}px;
   bottom: ${({ disabled = false }) => (!disabled ? "12px" : "11px")};
-  width: 10%;
+  width: 25px;
   display: flex;
   justify-content: start;
   align-items: center;

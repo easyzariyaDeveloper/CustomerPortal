@@ -1,6 +1,11 @@
 import styled from "styled-components";
-import { base_spacing, border_color, header_bg_color } from "../../../Assets/style-var";
+import {
+  base_spacing,
+  border_color,
+  header_bg_color,
+} from "../../../Assets/style-var";
 import { alignCenter } from "../../../Assets/common-styled";
+import { Link } from "react-router-dom";
 
 const menu_width = 240;
 export const mobile_header_height = 64;
@@ -63,4 +68,11 @@ export const PageName = styled.p`
   font-size: 20px;
   color: white;
   margin-left: ${base_spacing * 3}px;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  line-height: 24px;
 `;

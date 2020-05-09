@@ -67,93 +67,125 @@ export default function MyProfile() {
     };
     reader.readAsDataURL(file);
   };
+  const variant = "standard";
   return (
     <>
-      <Box className={classes.page}>
-        <Badge
-          overlap="circle"
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "right",
-          }}
-          badgeContent={
-            <div className={classes.badge}>
-              <label htmlFor="file-input">
-                <EditTwoToneIcon />
-              </label>
-              <input
-                id="file-input"
-                type="file"
-                onChange={handleImageUpload}
-                style={{ display: "none" }}
-              />
-            </div>
-          }
-        >
-          <Avatar
-            alt="PF"
-            className={classes.profile_pic}
-            src={profile.profile_img}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(profile);
+        }}
+      >
+        <Box className={classes.page}>
+          <Badge
+            overlap="circle"
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+            badgeContent={
+              <div className={classes.badge}>
+                <label htmlFor="file-input">
+                  <EditTwoToneIcon />
+                </label>
+                <input
+                  id="file-input"
+                  type="file"
+                  onChange={handleImageUpload}
+                  style={{ display: "none" }}
+                />
+              </div>
+            }
+          >
+            <Avatar
+              alt="PF"
+              className={classes.profile_pic}
+              src={profile.profile_img}
+            />
+          </Badge>
+        </Box>
+        <TextField
+          name="name"
+          autoFocus={true}
+          fullWidth
+          variant={variant}
+          placeholder="Add a name"
+          error={false}
+          autoComplete="name"
+          required
+          value={profile.name}
+          onChange={onChange}
+          label="Name"
+          className={classes.textInput}
+        />
+        <TextField
+          name="email"
+          fullWidth
+          required
+          placeholder="Add a Email ID"
+          variant={variant}
+          autoComplete="email"
+          value={profile.email}
+          onChange={onChange}
+          label="Email ID"
+          className={classes.textInput}
+        />
+        <TextField
+          name="phone"
+          fullWidth
+          variant={variant}
+          autoComplete="mobile"
+          required
+          placeholder="Add a Mobile Number"
+          value={profile.phone}
+          onChange={onChange}
+          label="Mobile Number"
+          helperText="Add with country code"
+          className={classes.textInput}
+        />
+        <Button onClick={handleExpandClick}> Change Password</Button>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <TextField
+            name="old_password"
+            fullWidth
+            variant={variant}
+            placeholder="Enter Current Password"
+            value={profile.old_password}
+            onChange={onChange}
+            label="Old Password"
+            type="password"
+            autoComplete="current-password"
+            className={classes.textInput}
           />
-        </Badge>
-      </Box>
-      <TextField
-        name="name"
-        fullWidth
-        value={profile.name}
-        onChange={onChange}
-        label="Name"
-        className={classes.textInput}
-      />
-      <TextField
-        name="email"
-        fullWidth
-        value={profile.email}
-        onChange={onChange}
-        label="Email ID"
-        className={classes.textInput}
-      />
-      <TextField
-        name="phone"
-        fullWidth
-        value={profile.phone}
-        onChange={onChange}
-        label="Mobile Number"
-        className={classes.textInput}
-      />
-      <Button onClick={handleExpandClick}> Change Password</Button>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <TextField
-          name="old_password"
-          fullWidth
-          value={profile.old_password}
-          onChange={onChange}
-          label="Old Password"
-          type="password"
-          className={classes.textInput}
-        />
-        <TextField
-          name="new_passsword"
-          fullWidth
-          value={profile.new_password}
-          onChange={onChange}
-          label="New Password"
-          type="password"
-          className={classes.textInput}
-        />
-        <TextField
-          name="confirm_password"
-          fullWidth
-          value={profile.confirm_password}
-          onChange={onChange}
-          label="Confirm New Password"
-          type="password"
-          className={classes.textInput}
-        />
-      </Collapse>
-      <Box className={classes.buttonWrapper}>
-        <ActionButton label="save" use="phone" size="full-width" />
-      </Box>
+          <TextField
+            name="new_passsword"
+            fullWidth
+            placeholder="Enter New Password"
+            value={profile.new_password}
+            onChange={onChange}
+            label="New Password"
+            type="password"
+            variant={variant}
+            autoComplete="new-password"
+            className={classes.textInput}
+          />
+          <TextField
+            placeholder="Re-enter New Password"
+            name="confirm_password"
+            fullWidth
+            variant={variant}
+            value={profile.confirm_password}
+            onChange={onChange}
+            label="Confirm New Password"
+            type="password"
+            autoComplete="new-password"
+            className={classes.textInput}
+          />
+        </Collapse>
+        <Box className={classes.buttonWrapper}>
+          <ActionButton label="save" use="phone" size="full-width" />
+        </Box>
+      </form>
     </>
   );
 }
