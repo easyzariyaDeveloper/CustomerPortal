@@ -3,15 +3,13 @@ import backgroundBanner from "../../Assets/img/services_page_bg.jpg";
 
 const dark_font_color = "#02133C";
 const base_spacing = "10";
-
+import { flexColumn, alignCenter } from "../../Assets/common-styled";
 export const ServicePageWrapper = styled.div`
   background: url(${backgroundBanner});
   background-size: cover;
   min-height: 750px;
   position: relative;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+  ${alignCenter};
   justify-content: space-around;
 `;
 
@@ -27,15 +25,13 @@ export const ServicePageHeader = styled.h1`
 `;
 
 export const ServiceData = styled.section`
-  max-width: 320px;
+  max-width: 400px;
   background: white;
   line-height: 1.75em;
   padding: ${base_spacing * 2.5}px;
   float: left;
-  display: flex;
-  justify-items: center;
-  flex-direction: column;
-  justify-content: space-around;
+  ${flexColumn};
+  height: 346px;
   text-align: center;
 `;
 

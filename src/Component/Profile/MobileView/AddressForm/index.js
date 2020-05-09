@@ -41,11 +41,13 @@ export default function index({ location }) {
       ? addressModel
       : Addresses.find((addressObj) => addressObj.id === parseInt(params[2]))
   );
+  const pageName =
+    path === "add-address" ? "Add a new address" : "Edit Address";
   console.log(address);
   const onChange = ({ target }) =>
     setAddress({ ...address, [target.name]: target.value });
   return (
-    <MobilePageLayout>
+    <MobilePageLayout pageName={pageName}>
       <Card className={classes.root}>
         <TextField
           name="pincode"
@@ -59,7 +61,6 @@ export default function index({ location }) {
 
         <TextField
           className={classes.textInput}
-          id="standard-basic"
           name="line1"
           required
           fullWidth
@@ -137,13 +138,13 @@ export default function index({ location }) {
           <br />
           <RadioGroup name="label" value={address.label} onChange={onChange}>
             <FormControlLabel
-              value="home"
-              control={<Radio />}
+              value="Home"
+              control={<Radio color="primary" />}
               label="Home Address"
             />
             <FormControlLabel
-              value="work"
-              control={<Radio />}
+              value="Work"
+              control={<Radio color="primary" />}
               label="Work/Office Address"
             />
           </RadioGroup>

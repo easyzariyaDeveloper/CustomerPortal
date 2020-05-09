@@ -7,23 +7,26 @@ import {
   ServiceData,
 } from "./styles";
 import ActionButton from "../../Component/Common/ActionButton";
-
+import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
+import CallIcon from "@material-ui/icons/Call";
 export default function Header() {
   return (
     <HeaderWrapper>
       <Logo />
       <ServiceInformationWrapper>
         <ServiceData>
-          <ServiceInformationText>Service Hours</ServiceInformationText>
-          <br />
+          <QueryBuilderIcon />
           <ServiceInformationText>
+            Service Hours <br />
             Mon - Sat: 7:00 am - 6:00 pm{" "}
           </ServiceInformationText>
         </ServiceData>
         <ServiceData>
-          <ServiceInformationText>Call Us</ServiceInformationText>
-          <br />
-          <ServiceInformationText>(555) Car-Repair</ServiceInformationText>
+          <CallIcon />
+          <ServiceInformationText>
+            Call Us <br />
+            (555) Car-Repair
+          </ServiceInformationText>
         </ServiceData>
         <ServiceData>
           <ActionButton
