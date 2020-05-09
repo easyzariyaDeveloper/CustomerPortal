@@ -3,7 +3,7 @@ import PageLayout from "../../Layout";
 import { CartPageWrapper, CartHeader, Overlay} from "./style";
 import Services from "./BuyServices/Services";
 import { ServiceCart } from "./mockCartData";
-import Map from "./SelectAddress";
+import Map from "./Map";
 
 
 export default function Cart() {

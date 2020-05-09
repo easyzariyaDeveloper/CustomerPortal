@@ -3,7 +3,7 @@ import { base_spacing, border_color, header_bg_color } from "../../../Assets/sty
 import { alignCenter } from "../../../Assets/common-styled";
 
 const menu_width = 240;
-const mobile_header_height = 64;
+export const mobile_header_height = 64;
 
 export const HeaderWrapper = styled.div`
   height: ${mobile_header_height}px;
@@ -57,4 +57,10 @@ export const Overlay = styled.div`
   visibility: ${(props) => (props.active ? "visible" : "hidden")};
   transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   z-index: 1;
+`;
+
+export const PageName = styled.p`
+  font-size: 20px;
+  color: white;
+  margin-left: ${base_spacing * 3}px;
 `;

@@ -5,7 +5,7 @@ import Geocode from "react-geocode";
 import { MapWrapper, CenterHeader, AddressLabel, ConfirmButton, SubHeader, CloseButton } from "./style"
 
 
-Geocode.setApiKey("AIzaSyCvTl6eSIExZE4yRZi-5cy9X_szomThq4c");
+Geocode.setApiKey("AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8");
 Geocode.enableDebug();
 
 
@@ -103,7 +103,12 @@ function AsyncLoadMap({ props, onPlaceSelected, state, onMarkerDragEnd, onInfoWi
           <div>
             <AddressLabel> Address : {`${state.area}, ${state.address}, ${state.city}, ${state.state}`}</AddressLabel>
           </div>
-          <ConfirmButton>Confirm</ConfirmButton>
+          <ConfirmButton onClick = {() => {
+            props.setAddress(state);
+            props.setVisibilityForOverlay(false);
+          }}
+          label = "Confirm"
+          ></ConfirmButton>
         </GoogleMap>
       )
     )
@@ -117,12 +122,12 @@ export default function Map(props) {
     area: '',
     state: '',
     mapPosition: {
-      lat: props.center.lat,
-      lng: props.center.lng
+      lat: props.center ? props.center.lat : "",
+      lng: props.center ? props.center.lng : ""
     },
     markerPosition: {
-      lat: props.center.lat,
-      lng: props.center.lng
+      lat: props.center ? props.center.lat : "",
+      lng: props.center ? props.center.lng : ""
     }
   });
   const initialRender = useRef(true);
@@ -226,15 +231,13 @@ export default function Map(props) {
   };
 
   const AsyncMap = AsyncLoadMap({ props, onPlaceSelected, state, onMarkerDragEnd, onInfoWindowClose });
-  let map;
-  if (props.center.lat !== undefined) {
-    map = <MapWrapper>
+  const map = <MapWrapper>
       <div>
         <CloseButton onClick = {() => props.setVisibilityForOverlay(false)}> &#x274C; </CloseButton>
         <CenterHeader>Select Center</CenterHeader>
         <SubHeader>Locate On Google Maps</SubHeader>
         <AsyncMap
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvTl6eSIExZE4yRZi-5cy9X_szomThq4c&libraries=places&region=IN"
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8&libraries=places&region=IN"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ margin: `0 auto`, height: props.height, width: props.width }} />}
           mapElement={<div style={{ height: `100%` }} />}
@@ -242,10 +245,6 @@ export default function Map(props) {
       </div>
 
     </MapWrapper>
-  } else {
-    map = <div style={{ height: props.height }} />
-  }
-
   return map;
 
 }

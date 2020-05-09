@@ -14,7 +14,7 @@ import {DateStyling,TimeStyling} from "./style";
 
 export default function MaterialUIPickers() {
   // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedDate, setSelectedDate] = React.useState(null);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
