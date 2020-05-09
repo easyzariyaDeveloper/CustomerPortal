@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddressItem from "./AddressItem";
 import { Typography, Card, makeStyles } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { StyledLink } from "./styles";
+import { Addresses } from "../../MockData";
 const useStyles = makeStyles({
   root: {
     padding: "10px",
@@ -15,13 +16,14 @@ const useStyles = makeStyles({
     margin: "20px 10px 10px 10px",
   },
 });
-export default function AddressList({ Addresses }) {
-  const [addresses, setAddresses] = useState(
-    Addresses.map((address) => ({ ...address, isEdit: false }))
-  );
+export default function AddressList() {
+  const [addresses, setAddresses] = useState([]);
   const onDelete = (id) => {
     setAddresses(addresses.filter((address) => address.id !== id));
   };
+  useEffect(() => {
+    setAddresses(Addresses.map((address) => ({ ...address, isEdit: false })));
+  }, []);
   const classes = useStyles();
   return (
     <div className={classes.root}>

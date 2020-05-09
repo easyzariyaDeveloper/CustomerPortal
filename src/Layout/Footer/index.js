@@ -12,12 +12,16 @@ import {
 import Left from "./Left/index";
 import Middle from "./Middle/index";
 import Right from "./Right/index";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import StayCurrentPortraitIcon from "@material-ui/icons/StayCurrentPortrait";
+import EmailIcon from "@material-ui/icons/Email";
+import TimerIcon from "@material-ui/icons/Timer";
 export default function Footer() {
   const contacts = [
-    { img: "", text: "321 Pikes Place Parkaway Seattle, WA 54321" },
-    { img: "", text: "(555) 765-4321" },
-    { img: "", text: "Info@company.com" },
-    { img: "", text: "Mon - Sat: 7:00am - 6:00pm" },
+    { img: LocationOnIcon, text: "321 Pikes Place Parkaway Seattle, WA 54321" },
+    { img: StayCurrentPortraitIcon, text: "(555) 765-4321" },
+    { img: EmailIcon, text: "Info@company.com" },
+    { img: TimerIcon, text: "Mon - Sat: 7:00am - 6:00pm" },
   ];
   const rows = [
     [
@@ -40,11 +44,11 @@ export default function Footer() {
   return (
     <FooterContainer>
       <FooterWrapper>
-      <FooterSection>
-        <Left logo={logo} icons={icons} blurb_text={blurb_text} />
-        <Middle rows_link={rows} />
-        <Right contacts={contacts} />
-      </FooterSection>
+        <FooterSection>
+          <Left logo={logo} icons={icons} blurb_text={blurb_text} />
+          <Middle rows_link={rows} />
+          <Right contacts={contacts} />
+        </FooterSection>
       </FooterWrapper>
       <SubFooter>
         <TagLine>
