@@ -13,7 +13,7 @@ export default function Select2({ options, name, defaultValue, ...props }) {
       name={name}
       options={options}
       value={selected}
-      disabled={props.disabled}
+      isDisabled = {props.disabled}
       className = "EZ-select"
       styles = {styles}
       placeholder = {props.placeholder || "Select" }

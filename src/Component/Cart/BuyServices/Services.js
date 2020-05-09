@@ -1,29 +1,16 @@
-import React, { useState } from "react";
-import {
-    ServiceCartWrapper, CartServicePara, CartPricePara,
+import React from "react";
+import { 
+    ServiceCartWrapper, CartServicePara, CartPricePara, 
     ServiceLabel, ServiceListItem, DeleteButton,
-    InputTextCart, SubTotal, TotalPrice, CouponSubmitButton,
-    CouponWrapper, DiscountAmount, DiscountLabel, CalculateDiv,
-    PayableDiv, PayableAmt, SelectAddressLabel
+    SubTotal, TotalPrice, CouponSubmitButton, 
+    CouponWrapper, DiscountAmount, DiscountLabel, CalculateDiv, 
+    PayableDiv, PayableAmt,SelectAddressLabel
 } from "../style"
 import { CouponCodes } from "../mockCartData";
 
 import MaterialUIPickers from "../../Common/DateTimePicker";
 import getPrice from "../util";
-
-// function getPrice(ServiceCart = []) {
-//     const ServicePrice = [];
-//     ServiceCart.map((serviceName) => {
-//         const { price } = serviceName;
-//         ServicePrice.push({ price });
-//     });
-
-//     const TotalPrice = ServicePrice.reduce((accumulator, currentValue) => {
-//         accumulator += currentValue["price"]
-//         return accumulator
-//     }, 0);
-//     return TotalPrice;
-// }
+import { TextField } from "@material-ui/core";
 
 export default function Services(props) {
     console.log(props.address);
@@ -52,9 +39,11 @@ export default function Services(props) {
         ></SelectAddressLabel>
 
         <CouponWrapper>
-            <InputTextCart
-                type="text"
-                placeholder="Enter Coupon Code"
+            <TextField
+                name = "couponcode"
+                value = ""
+                onChange={() => console.log("Hello")}
+                label="Enter Coupon Code"
             />
             <CouponSubmitButton label='Apply' />
         </CouponWrapper>

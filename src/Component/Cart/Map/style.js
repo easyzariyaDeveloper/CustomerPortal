@@ -30,7 +30,9 @@ export const AddressLabel = styled.p`
 `;
 
 export const ConfirmButton = styled(ActionButton)`
-    
+    width: 200px;
+    marging-top: 20px;
+    float: right;
 `;
 
 export const CloseButton = styled.button`

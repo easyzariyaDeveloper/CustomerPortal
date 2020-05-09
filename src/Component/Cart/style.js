@@ -75,9 +75,9 @@ export const SelectAddressLabel = styled.input`
     margin: ${base_spacing * 2}px 0;
     padding: ${base_spacing / 2}px;
     clear: both;
-    border:none;
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
+    border:none;
 
     ::placeholder{
         color: #2F7EE8;

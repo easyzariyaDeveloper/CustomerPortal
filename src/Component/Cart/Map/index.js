@@ -108,7 +108,7 @@ function AsyncLoadMap({ props, onPlaceSelected, state, onMarkerDragEnd, onInfoWi
             props.setVisibilityForOverlay(false);
           }}
           label = "Confirm"
-          ></ConfirmButton>
+          />
         </GoogleMap>
       )
     )
