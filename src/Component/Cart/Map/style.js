@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { base_spacing } from "../../../Assets/style-var";
+import { base_spacing, secondary_font_color } from "../../../Assets/style-var";
 import ActionButton from "../../Common/ActionButton";
 
 export const MapWrapper = styled.div`
@@ -14,14 +14,14 @@ export const CenterHeader = styled.h1`
     text-align: center;
     font-size: ${base_spacing * 3}px;
     font-weight: bold;
-    color: #4B4B4B;;
+    color: ${secondary_font_color};
     padding: ${base_spacing * 1.5}px 0;
 `;
 
 export const SubHeader = styled.h1`
     text-align: center;
     font-size: ${base_spacing * 2}px;
-    color: #4B4B4B;;
+    color: ${secondary_font_color};
     padding: ${base_spacing * 1.5}px 0;
 `;
 

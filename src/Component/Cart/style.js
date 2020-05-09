@@ -2,14 +2,15 @@ import styled from "styled-components";
 import { border_color, base_spacing, header_bg_color } from "../../Assets/style-var";
 import { InputForm } from "../Common/InputText/style";
 import ActionButton from "../Common/ActionButton";
+import { EZElevation } from "../Common/MobileCard";
 
 export const CartPageWrapper = styled.div`
     background: #FFFFFF;
-    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2), 0px 2px 4px rgba(38, 38, 38, 0.24);
     width: 1068px;
     height: auto;
     margin: 30px auto;
     padding:30px;
+    ${EZElevation}
 `;
 
 export const CartHeader = styled.h1`
@@ -67,14 +68,20 @@ export const DeleteButton = styled.button`
     cursor: pointer;
 `;
 
-export const SelectAddressLabel = styled.p`
-    color: ${header_bg_color};
+export const SelectAddressLabel = styled.input`
+    display: block;
+    color: #2F7EE8;
     width: fit-content;
     margin: ${base_spacing * 2}px 0;
     padding: ${base_spacing / 2}px;
     clear: both;
     font-size: 20px;
     cursor: pointer;
+    border:none;
+
+    ::placeholder{
+        color: #2F7EE8;
+    }
 `;
 
 export const InputTextCart= styled(InputForm)`
