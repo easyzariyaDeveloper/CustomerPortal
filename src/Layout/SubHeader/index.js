@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import {
   SubHeaderWrapper,
-  StyledLink,
+  Link,
   SubHeaderLinks,
   SubHeaderRightSection,
   Cart,
@@ -12,19 +12,19 @@ import {
 export default function SubHeader() {
   return (
     <SubHeaderWrapper>
-      <StyledLink active={"true"} to="add-car">
+      <Link active={"true"} to="add-car">
         Add Car
-      </StyledLink>
+      </Link>
 
       <SubHeaderLinks>
         {" "}
-        <StyledLink to="home">Home</StyledLink>
-        <StyledLink to="about">About us</StyledLink>
-        <StyledLink to="services">Services</StyledLink>
-        <StyledLink to="franchise">Franchise</StyledLink>
+        <Link to="home">Home</Link>
+        <Link to="about">About us</Link>
+        <Link to="services">Services</Link>
+        <Link to="franchise">Franchise</Link>
       </SubHeaderLinks>
       <SubHeaderRightSection>
-        <StyledLink to="login">Login</StyledLink>
+        <Link to="login">Login</Link>
 
         <Search></Search>
         <Cart></Cart>

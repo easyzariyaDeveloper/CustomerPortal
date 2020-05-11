@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AddressItem from "./AddressItem";
 import { Typography, Card, makeStyles } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import { StyledLink } from "./styles";
+import { Link } from "./styles";
 import { Addresses } from "../../MockData";
 const useStyles = makeStyles({
   root: {
@@ -28,10 +28,10 @@ export default function AddressList() {
   return (
     <div className={classes.root}>
       <Card className={classes.card}>
-        <StyledLink to="add-address">
+        <Link to="add-address">
           <AddIcon color="primary" />
           Add a new address
-        </StyledLink>
+        </Link>
       </Card>
       <br />
       <Typography className={classes.address}>

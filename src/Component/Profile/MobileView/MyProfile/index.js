@@ -67,6 +67,67 @@ export default function MyProfile() {
     };
     reader.readAsDataURL(file);
   };
+  const field_profile = [
+    {
+      name: "name",
+      autoFocus: true,
+      fullWidth: true,
+      placeholder: "Add a name",
+      error: false,
+      autoComplete: "name",
+      required: true,
+      label: "Name",
+    },
+    {
+      name: "email",
+      fullWidth: true,
+      placeholder: "Add a Email ID",
+      error: false,
+      autoComplete: "email",
+      required: true,
+      label: "Email ID",
+    },
+    {
+      name: "phone",
+      fullWidth: true,
+      placeholder: "Add a Mobile Number",
+      error: false,
+      autoComplete: "mobile",
+      required: true,
+      label: "Mobile Number",
+      helperText: "Add with country code",
+    },
+  ];
+  const password_field = [
+    {
+      name: "old_password",
+      fullWidth: true,
+      placeholder: "Enter Current Password",
+      autoComplete: "current-password",
+      required: true,
+      label: "Old Password",
+      type: "password",
+    },
+    {
+      name: "new_password",
+      fullWidth: true,
+      placeholder: "Enter New Password",
+      autoComplete: "new-password",
+      required: true,
+      label: "Old Password",
+      type: "password",
+    },
+    {
+      name: "confirm_password",
+      autoFocus: true,
+      fullWidth: true,
+      placeholder: "Re-enter New Password",
+      type: "password",
+      autoComplete: "new-password",
+      required: true,
+      label: "Confirm New Password",
+    },
+  ];
   const variant = "standard";
   return (
     <>
@@ -104,86 +165,50 @@ export default function MyProfile() {
             />
           </Badge>
         </Box>
-        <TextField
-          name="name"
-          autoFocus={true}
-          fullWidth
-          variant={variant}
-          placeholder="Add a name"
-          error={false}
-          autoComplete="name"
-          required
-          value={profile.name}
-          onChange={onChange}
-          label="Name"
-          className={classes.textInput}
-        />
-        <TextField
-          name="email"
-          fullWidth
-          required
-          placeholder="Add a Email ID"
-          variant={variant}
-          autoComplete="email"
-          value={profile.email}
-          onChange={onChange}
-          label="Email ID"
-          className={classes.textInput}
-        />
-        <TextField
-          name="phone"
-          fullWidth
-          variant={variant}
-          autoComplete="mobile"
-          required
-          placeholder="Add a Mobile Number"
-          value={profile.phone}
-          onChange={onChange}
-          label="Mobile Number"
-          helperText="Add with country code"
-          className={classes.textInput}
-        />
+        {field_profile.map((field) => (
+          <TextField
+            key={field.name}
+            name={field.name}
+            autoFocus={field.autoFocus || false}
+            fullWidth={field.fullWidth || false}
+            placeholder={field.placeholder || ""}
+            error={field.error || false}
+            autoComplete={field.autoComplete}
+            required={field.required || false}
+            label={field.label}
+            value={profile[name]}
+            helperText={field.helperText || ""}
+            className={classes.textInput}
+            onChange={onChange}
+            type={field.type || "text"}
+            variant={variant}
+          />
+        ))}
+
         <Button onClick={handleExpandClick}> Change Password</Button>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <TextField
-            name="old_password"
-            fullWidth
-            variant={variant}
-            placeholder="Enter Current Password"
-            value={profile.old_password}
-            onChange={onChange}
-            label="Old Password"
-            type="password"
-            autoComplete="current-password"
-            className={classes.textInput}
-          />
-          <TextField
-            name="new_passsword"
-            fullWidth
-            placeholder="Enter New Password"
-            value={profile.new_password}
-            onChange={onChange}
-            label="New Password"
-            type="password"
-            variant={variant}
-            autoComplete="new-password"
-            className={classes.textInput}
-          />
-          <TextField
-            placeholder="Re-enter New Password"
-            name="confirm_password"
-            fullWidth
-            variant={variant}
-            value={profile.confirm_password}
-            onChange={onChange}
-            label="Confirm New Password"
-            type="password"
-            autoComplete="new-password"
-            className={classes.textInput}
-          />
+          {password_field.map((field) => (
+            <TextField
+              key={field.name}
+              name={field.name}
+              autoFocus={field.autoFocus || false}
+              fullWidth={field.fullWidth || false}
+              placeholder={field.placeholder || ""}
+              error={field.error || false}
+              autoComplete={field.autoComplete}
+              required={field.required || false}
+              label={field.label}
+              value={profile[name]}
+              helperText={field.helperText || ""}
+              className={classes.textInput}
+              onChange={onChange}
+              type={field.type || "text"}
+              variant={variant}
+            />
+          ))}
         </Collapse>
         <Box className={classes.buttonWrapper}>
-          <ActionButton label="save" use="phone" size="full-width" />
+          <ActionButton label="save" use="phone" />
         </Box>
       </form>
     </>

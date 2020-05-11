@@ -28,12 +28,11 @@ export default function Header() {
             (555) Car-Repair
           </ServiceInformationText>
         </ServiceData>
-        <ServiceData>
-          <ActionButton
-            label="Make an Appointment"
-            onClick={() => console.log("making an appointment button")}
-          />
-        </ServiceData>
+
+        <ActionButton
+          label="Make an Appointment"
+          onClick={() => console.log("making an appointment button")}
+        />
       </ServiceInformationWrapper>
     </HeaderWrapper>
   );

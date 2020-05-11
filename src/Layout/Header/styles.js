@@ -16,7 +16,7 @@ export const ServiceInformationWrapper = styled.section`
   font-weight: bold;
   font-size: 12px;
   color: grey;
-  margin-right: 15%;
+  margin-right: ${base_spacing * 2}px;
   display: flex;
   width: 50%;
   align-items: center;

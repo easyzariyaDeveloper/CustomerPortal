@@ -4,8 +4,7 @@ import {
   border_color,
   header_bg_color,
 } from "../../../Assets/style-var";
-import { alignCenter } from "../../../Assets/common-styled";
-import { Link } from "react-router-dom";
+import { StyledLink } from "../../../Assets/common-styled";
 
 const menu_width = 240;
 export const mobile_header_height = 64;
@@ -70,7 +69,7 @@ export const PageName = styled.p`
   margin-left: ${base_spacing * 3}px;
 `;
 
-export const StyledLink = styled(Link)`
+export const Link = styled(StyledLink)`
   text-decoration: none;
   color: black;
   font-size: 16px;

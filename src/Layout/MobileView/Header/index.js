@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HeaderWrapper, Hamburger, PageName, StyledLink } from "./styles";
+import { HeaderWrapper, Hamburger, PageName, Link } from "./styles";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import {
@@ -81,9 +81,7 @@ export default function Header(props) {
           <List className={classes.links}>
             {links.map((link, key) => (
               <ListItem className={classes.listItem} key={key}>
-                <ListItemText
-                  primary={<StyledLink to={link.to}>{link.text}</StyledLink>}
-                />
+                <ListItemText primary={<Link to={link.to}>{link.text}</Link>} />
               </ListItem>
             ))}
           </List>

@@ -4,12 +4,11 @@ import {
   ContactBoxHeader,
   ContactColumn,
   ContactInfo,
-  ContactIcon,
   ContactHead,
 } from "./styles";
 import PropTypes from "prop-types";
 
-export default function index({ contacts }) {
+export default function Right({ contacts }) {
   const col = contacts.map((contact) => {
     const Image = contact.img;
     return (
@@ -27,6 +26,6 @@ export default function index({ contacts }) {
   );
 }
 
-index.propTypes = {
+Right.propTypes = {
   contacts: PropTypes.array.isRequired,
 };

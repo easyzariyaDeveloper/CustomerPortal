@@ -11,18 +11,15 @@ export default function ActionButton(props) {
     <ButtonWrapper
       onClick={props.onClick}
       disabled={props.disabled}
-      size={props.size}
       use={props.use}
     >
-      <Button disabled={props.disabled} size={props.size}>
-        {props.label}
-      </Button>
+      <Button disabled={props.disabled}>{props.label}</Button>
       {props.use === "phone" ? (
         ""
       ) : (
         <>
-          <RotatedArea disabled={props.disabled} size={props.size} />
-          <LinearArea disabled={props.disabled} size={props.size}>
+          <RotatedArea disabled={props.disabled} />
+          <LinearArea disabled={props.disabled}>
             <Arrow>&#x2192;</Arrow>
           </LinearArea>
         </>
