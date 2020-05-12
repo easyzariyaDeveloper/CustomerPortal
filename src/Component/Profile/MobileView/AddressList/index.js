@@ -26,7 +26,7 @@ export default function AddressList({ Addresses }) {
   return (
     <div className={classes.root}>
       <Card className={classes.card}>
-        <StyledLink to="add-address">
+        <StyledLink to="/add-address">
           <AddIcon color="primary" />
           Add a new address
         </StyledLink>

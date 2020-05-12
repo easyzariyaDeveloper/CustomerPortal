@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import MenuBox from "./Menu/index";
 import { ProfilePageWrapper } from "./styles";
 import PageLayout from "../../Layout";
@@ -8,25 +8,23 @@ import AddressList from "./AddressList";
 import OrderHistory from "./OrderHistory";
 export default function index({ location }) {
   const params = location.pathname.split("/");
-  const [page, setPage] = useState(parseInt(params.pop()) || 1);
+  const page = params.pop();
   const currentDisplay = () => {
     switch (page) {
-      case 1:
-        return <MyProfile />;
-      case 2:
+      case "cars":
         return <MyCars />;
-      case 3:
+      case "addresses":
         return <AddressList />;
-      case 4:
+      case "orders":
         return <OrderHistory />;
       default:
-        return <h1>You reached wrong place</h1>;
+        return  <MyProfile />;
     }
   };
   return (
     <PageLayout>
       <ProfilePageWrapper>
-        <MenuBox active_page={page} onClick={(id) => setPage(id)} />
+        <MenuBox active_page={location.pathname} />
         {currentDisplay()}
       </ProfilePageWrapper>
     </PageLayout>

@@ -1,23 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { MenuBox, MenuHeader, StyledLink } from "./styles";
-export default function index({ active_page, onClick }) {
+export default function index({ active_page }) {
   const links = [
-    { to: "profile/1", text: "My Profile" },
-    { to: "profile/2", text: "My Cars" },
-    { to: "profile/3", text: "Address List" },
-    { to: "/profile/4", text: "Order History" },
+    { to: "/profile", text: "My Profile" },
+    { to: "/profile/cars", text: "My Cars" },
+    { to: "/profile/addresses", text: "Address List" },
+    { to: "/profile/orders", text: "Order History" },
   ];
   return (
     <MenuBox>
       <MenuHeader>MENU</MenuHeader>
       <ul>
-        {links.map((link, ind) => (
+        {links.map((link) => (
           <StyledLink
-            active={ind + 1 === active_page ? "true" : "false"}
+            active={active_page === link["to"]}
             key={link.to}
-            to={"#"}
-            onClick={() => onClick(ind + 1)}
+            to={link.to}
           >
             {link.text}
           </StyledLink>
