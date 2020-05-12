@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { base_spacing } from "../../../Assets/style-var";
-import { Link } from "react-router-dom";
+import { StyledLink } from "../../../Assets/common-styled";
 
 export const MenuHeader = styled.h2`
   font-size: 18px;
@@ -22,19 +22,11 @@ export const MenuBox = styled.div`
 export const List_Item = styled.a`
   color: ${({ active }) => (active ? "#4B4B4B" : "#959595")};
 `;
-export const StyledLink = styled(Link)`
-  color: ${({ active }) => (active === "true" ? "#4B4B4B" : "#959595")};
+export const Link = styled(StyledLink)`
+  color: ${({ active }) => (active ? "#4B4B4B" : "#959595")};
   border-bottom: 1px solid
-    ${({ active }) => (active === "true" ? "#959595" : "#D5D5D5")};
+    ${({ active }) => (active ? "#959595" : "#D5D5D5")};
   margin: ${base_spacing}px 0;
   padding-bottom: 5px;
   display: block;
-  text-decoration: none;
-  &:hover {
-    text-decoration: none;
-    cursor: pointer;
-  }
-  &[data-active] {
-    color: red;
-  }
 `;

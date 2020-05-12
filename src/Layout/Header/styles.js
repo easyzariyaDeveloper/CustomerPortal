@@ -16,7 +16,7 @@ export const ServiceInformationWrapper = styled.section`
   font-weight: bold;
   font-size: 12px;
   color: grey;
-  margin-right: 15%;
+  margin-right: ${base_spacing * 2}px;
   display: flex;
   width: 50%;
   align-items: center;
@@ -24,11 +24,16 @@ export const ServiceInformationWrapper = styled.section`
 `;
 
 export const ServiceData = styled.div`
-  display: inline-block;
+  display: flex;
   margin-left: ${base_spacing * 2}px;
+  justify-content: space-between;
+  width
 `;
 
 export const ServiceInformationText = styled.p`
-  margin-bottom: ${base_spacing};
+  margin-bottom: ${base_spacing}px;
+  letter-spacing: 0.15px;
+  line-height: 22px;
+  margin-left: ${base_spacing}px;
   text-transform: uppercase;
 `;
