@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { base_spacing } from "../../../Assets/style-var";
+import { StyledLink } from "../../../Assets/common-styled";
 
 export const AboutCompany = styled.div`
   flex: 1;
@@ -20,6 +22,7 @@ export const CompanyConnect = styled.div`
   flex: display;
   justify-content: space-around;
 `;
-export const ConnectIcon = styled.img`
-  ${({ img }) => img}
+export const Link = styled(StyledLink)`
+  color: white;
+  padding: 0 ${base_spacing}px;
 `;

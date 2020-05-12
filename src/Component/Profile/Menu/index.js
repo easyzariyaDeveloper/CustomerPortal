@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuBox, MenuHeader, StyledLink } from "./styles";
+import { MenuBox, MenuHeader, Link } from "./styles";
 export default function index({ active_page }) {
   const links = [
     { to: "/profile", text: "My Profile" },
@@ -12,13 +12,13 @@ export default function index({ active_page }) {
       <MenuHeader>MENU</MenuHeader>
       <ul>
         {links.map((link) => (
-          <StyledLink
+          <Link
             active={active_page === link["to"]}
             key={link.to}
             to={link.to}
           >
             {link.text}
-          </StyledLink>
+          </Link>
         ))}
       </ul>
     </MenuBox>
