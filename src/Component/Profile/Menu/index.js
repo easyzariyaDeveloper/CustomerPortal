@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { MenuBox, MenuHeader, StyledLink } from "./styles";
+import { MenuBox, MenuHeader, Link } from "./styles";
 export default function index({ active_page, onClick }) {
   const links = [
     { to: "profile/1", text: "My Profile" },
@@ -13,14 +12,14 @@ export default function index({ active_page, onClick }) {
       <MenuHeader>MENU</MenuHeader>
       <ul>
         {links.map((link, ind) => (
-          <StyledLink
+          <Link
             active={ind + 1 === active_page ? "true" : "false"}
             key={link.to}
             to={"#"}
             onClick={() => onClick(ind + 1)}
           >
             {link.text}
-          </StyledLink>
+          </Link>
         ))}
       </ul>
     </MenuBox>

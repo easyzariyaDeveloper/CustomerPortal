@@ -15,10 +15,10 @@ import {
 import ActionButton from "../../../Common/ActionButton";
 const useStyles = makeStyles({
   root: {
-    padding: "8px",
     margin: "10px 0",
+    padding: "10px 0",
   },
-  textInput: { margin: "10px 0" },
+  textInput: { margin: "10px 8px" },
 });
 export default function index({ location }) {
   const classes = useStyles();
@@ -41,117 +41,103 @@ export default function index({ location }) {
       ? addressModel
       : Addresses.find((addressObj) => addressObj.id === parseInt(params[2]))
   );
-  console.log(address);
+  const pageName =
+    path === "add-address" ? "Add a new address" : "Edit Address";
   const onChange = ({ target }) =>
     setAddress({ ...address, [target.name]: target.value });
-  return (
-    <MobilePageLayout>
-      <Card className={classes.root}>
-        <TextField
-          name="pincode"
-          required
-          fullWidth
-          value={address.pincode}
-          onChange={onChange}
-          label="Pincode"
-          className={classes.textInput}
-        />
 
-        <TextField
-          className={classes.textInput}
-          id="standard-basic"
-          name="line1"
-          required
-          fullWidth
-          value={address.line1}
-          onChange={onChange}
-          label="House No., Building name"
-        />
-        <TextField
-          className={classes.textInput}
-          name="line2"
-          required
-          fullWidth
-          value={address.line2}
-          onChange={onChange}
-          label="Road Name, Area, Colony"
-        />
-        <Box display="flex" justifyContent="space-between">
-          <TextField
-            className={classes.textInput}
-            name="city"
-            required
-            value={address.city}
-            onChange={onChange}
-            label="City"
-          />
-          <TextField
-            className={classes.textInput}
-            name="state"
-            required
-            value={address.state}
-            onChange={onChange}
-            label="State"
-          />
-        </Box>
-        <TextField
-          className={classes.textInput}
-          name="landmark"
-          fullWidth
-          value={address.landmark}
-          onChange={onChange}
-          label="Landmark (Optional)"
-        />
-      </Card>
+  const cards = [
+    [
+      {
+        name: "pincode",
+        required: true,
+        fullWidth: true,
+        label: "Pincode",
+        type: "number",
+      },
+      {
+        name: "line1",
+        required: true,
+        fullWidth: true,
+        label: "House No., Building name",
+      },
+      {
+        name: "line2",
+        required: true,
+        fullWidth: true,
+        label: "Road Name, Area, Colony",
+      },
+      { name: "city", required: true, label: "City" },
+      { name: "State", required: true, label: "State" },
+      {
+        name: "landmark",
+        required: false,
+        fullWidth: true,
+        label: "Landmark (Optional)",
+      },
+    ],
+    [
+      {
+        label: "Name",
+        name: "name",
+        required: true,
+        fullWidth: true,
+      },
+      {
+        name: "phone",
+        required: true,
+        fullWidth: true,
+        label: "10-digit mobile number",
+        type: "number",
+      },
+      {
+        name: "altphone",
+        required: false,
+        fullWidth: true,
+        label: "Alternate Phone Number (Optional)",
+        type: "number",
+      },
+    ],
+  ];
+
+  return (
+    <MobilePageLayout pageName={pageName}>
+      {cards.map((card, key) => (
+        <Card key={key} className={classes.root}>
+          {card.map((field) => (
+            <TextField
+              key={field.name}
+              name={field.name}
+              required={field.required}
+              fullWidth={field.fullWidth}
+              className={classes.textInput}
+              value={address[field.name]}
+              label={field.label}
+              onChange={onChange}
+              type={field.type || "text"}
+            />
+          ))}
+        </Card>
+      ))}
       <Card className={classes.root}>
-        <TextField
-          name="name"
-          required
-          fullWidth
-          value={address.name}
-          onChange={onChange}
-          label="Name"
-          className={classes.textInput}
-        />
-        <TextField
-          name="phone"
-          required
-          fullWidth
-          value={address.phone}
-          onChange={onChange}
-          label="10-digit mobile number"
-          className={classes.textInput}
-        />
-        <TextField
-          name="altphone"
-          fullWidth
-          value={address.altphone}
-          onChange={onChange}
-          label="Alternate Phone Number (Optional)"
-          className={classes.textInput}
-        />
-      </Card>
-      <Card className={classes.root}>
-        <FormControl component="fieldset">
+        <FormControl component="fieldset" className={classes.textInput}>
           <FormLabel component="legend">Address Type</FormLabel>
           <br />
           <RadioGroup name="label" value={address.label} onChange={onChange}>
             <FormControlLabel
-              value="home"
-              control={<Radio />}
+              value="Home"
+              control={<Radio color="primary" />}
               label="Home Address"
             />
             <FormControlLabel
-              value="work"
-              control={<Radio />}
+              value="Work"
+              control={<Radio color="primary" />}
               label="Work/Office Address"
             />
           </RadioGroup>
         </FormControl>
       </Card>
-      <Box display="flex" justifyContent="center">
-        <ActionButton label="Save" />
-      </Box>
+      <ActionButton label="Save" use="phone" />
     </MobilePageLayout>
   );
 }

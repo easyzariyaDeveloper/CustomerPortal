@@ -59,13 +59,14 @@ export default function AddCar() {
         </SideAreaWrapper>
         <ImageWrapper>
           {carObj.brand !== "0" ? <CenterImage src={center_img} /> : ""}
-          {carObj.car !== "0" ? (
-            <ColorBoxWrapper>
+
+          <ColorBoxWrapper>
+            {carObj.car !== "0" ? (
               <ColorPallete>{colorsContent}</ColorPallete>
-            </ColorBoxWrapper>
-          ) : (
-            ""
-          )}
+            ) : (
+              ""
+            )}
+          </ColorBoxWrapper>
         </ImageWrapper>
 
         <ButtonWrapper>

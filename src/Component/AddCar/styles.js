@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import {
-  flexColumn,
   PageHeader,
   PageWrapper,
   alignCenter,
@@ -14,10 +13,11 @@ export const AddCarPageWrapper = styled.div`
   ${alignHorizontally};
   ${PageWrapper};
   background: url(${backgroundBanner});
-  justify-content: flex-start;
+  justify-content: space-around;
   background-size: contain;
-  align-items: flex-start;
-  padding: 6% 10%;
+  align-items: flex-center;
+  padding: 8% 10%;
+  padding-right: ${base_spacing * 10}px;
   min-height: 450px;
 `;
 
@@ -33,12 +33,12 @@ export const AddCarPageHeader = styled.h1`
 
 export const ButtonWrapper = styled.div`
   position: absolute;
-  bottom: 5%;
-  right: 20%;
+  bottom: 80px;
+  right: 200px;
 `;
 export const CenterImage = styled.img`
-  width: 80%;
-  height: 80%;
+  width: 60%;
+  height: 60%;
 `;
 export const ColorPallete = styled.div`
   margin-top: ${base_spacing}px;
@@ -56,14 +56,13 @@ export const ColorSquare = styled.div`
   cursor: pointer;
 `;
 export const ImageWrapper = styled.div`
-  padding-top: ${base_spacing * 2}px;
   ${alignCenter}
-  margin-left:15%;
-  margin-top: 10%;
+  margin: auto;
+  margin-left: 20%;
   display: flex;
   width: 400px;
   height: 400px;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
 `;
 export const SideAreaWrapper = styled.div`

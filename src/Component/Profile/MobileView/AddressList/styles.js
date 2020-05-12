@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import {
-  alignHorizontally,
-  alignCenter,
-} from "../../../../Assets/common-styled";
 
-export const StyledLink = styled(Link)`
+import { alignCenter, StyledLink } from "../../../../Assets/common-styled";
+
+export const Link = styled(StyledLink)`
   text-decoration: none;
   ${alignCenter}
 `;
