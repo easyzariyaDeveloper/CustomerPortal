@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
-import {CartPageMWrapper,MCard, CartMHeader, ServiceMLabel, DateTimeMPicker,SelectAddressMLabel,CouponInputText,OverlayCard} from "./style";
-import {ServiceLabel,SubTotal,TotalPrice,PayableDiv,PayableAmt} from "../style";
+import {CartPageMWrapper,MCard, DateTimeMPicker,SelectAddressMLabel,OverlayCard,CouponButton,CouponAlignment, CheckoutBtn,ServiceMLabel, MCalculateDiv} from "./style";
+import {ServiceLabel,SubTotal,TotalPrice,PayableDiv,PayableAmt,DiscountLabel,DiscountAmount} from "../style";
 import MaterialUIPickers from "../../Common/DateTimePicker";
 import MServices from "./MServices";
 import getPrice from "../util";
 import {ServiceCart} from "../mockCartData";
 import { CouponCodes } from "../mockCartData";
 import ActionButton from "../../Common/ActionButton";
+import { TextField } from "@material-ui/core";
+import MobileMap from "./MobileMap";
+import Map from "../Map";
 
 
 
 export default function Cart(){
     const [cardVisible, setCardVisibility] = useState(false);
+    const [address, setAddress] = useState("");
+    const [appliedCoupon,setAppliedCoupon] = useState("");
 
 
     return <MobilePageLayout pageName = "Cart">
@@ -25,36 +30,64 @@ export default function Cart(){
                <SelectAddressMLabel
                     placeholder = "Select Center"
                     onClick = {() => setCardVisibility(true)}
+                    address ={address}
                />
             </MCard>
-            <MCard>
-            <ServiceLabel>
-                <SubTotal>Subtotal</SubTotal>
-                <TotalPrice>Rs {getPrice(ServiceCart)} </TotalPrice>
-            </ServiceLabel>
-
-            <CouponInputText
-                type="text"
-                placeholder="Enter Coupon Code"
-            />
-             {
+            {
                  cardVisible ? <OverlayCard>
                      <MCard>
-                        <h1>Select Center</h1>
+                        {/* <TextField
+                            name = "Select Center"
+                            value = " "
+                            onChange={(event) => event.target.value}
+                            label="Select Center"
+                        /> */}
+                        <Map 
+                            visibleElm = {{
+                                "autoComplete": false
+                            }}
+                        />
+                        
                      </MCard>
                  </OverlayCard>: null
                          
              }
 
+            <MCard>
+                <CouponAlignment>
+                    <TextField
+                        name = "couponcode"
+                        value = {appliedCoupon}
+                        onChange={(event) => setAppliedCoupon(event.target.value)}
+                        label="Coupon Code"
+                    />
+                    <CouponButton>Apply</CouponButton>
+                </CouponAlignment>
+            </MCard>
 
+        
+        <MCard>
+            <h1>Order Summary</h1>
+            <MCalculateDiv>
+            <ServiceMLabel>
+                <SubTotal>Subtotal</SubTotal>
+                <TotalPrice>Rs {getPrice(ServiceCart)} </TotalPrice>
+            </ServiceMLabel>
 
-            <ServiceLabel>
+            <ServiceMLabel>
+                <DiscountLabel>Discount</DiscountLabel>
+                <DiscountAmount>Rs {CouponCodes[0].newUser}</DiscountAmount>
+            </ServiceMLabel>
+            </MCalculateDiv>
+            <ServiceMLabel>
                 <PayableDiv>Total</PayableDiv>
                 <PayableAmt>Rs {(getPrice(ServiceCart) - CouponCodes[0].newUser)}</PayableAmt>
-            </ServiceLabel>
-            
+            </ServiceMLabel>    
         </MCard>
-        <ActionButton label = "Proceed To CheckOut"/>
+
+        <CheckoutBtn>
+            <ActionButton label = "Proceed To CheckOut"/>
+        </CheckoutBtn>
         </CartPageMWrapper>
     </MobilePageLayout>
 }

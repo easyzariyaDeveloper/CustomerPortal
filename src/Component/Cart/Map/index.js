@@ -63,56 +63,74 @@ function getState(addressArray) {
 };
 
 function AsyncLoadMap({ props, onPlaceSelected, state, onMarkerDragEnd, onInfoWindowClose }) {
-  return withScriptjs(
-    withGoogleMap(
-      response => (
-        <GoogleMap google={response.google}
-          defaultZoom={props.zoom}
-          defaultCenter={{ lat: state.mapPosition.lat, lng: state.mapPosition.lng }}
-        >
-          {/* For Auto complete Search Box */}
-          <Autocomplete
-            style={{
-              width: '100%',
-              height: '40px',
-              paddingLeft: '16px',
-              marginTop: '15px',
-              marginBottom: '15px',
-              display: 'block',
-            }}
-            onPlaceSelected={onPlaceSelected}
-            //types={['IN']}
-          />
-          {/*Marker*/}
-          <Marker google={response.google}
-            name={'Dolores park'}
-            draggable={true}
-            onDragEnd={onMarkerDragEnd}
-            position={{ lat: state.markerPosition.lat, lng: state.markerPosition.lng }}
-          />
-          <Marker />
-          {/* InfoWindow on top of marker */}
-          <InfoWindow
-            onClose={onInfoWindowClose}
-            position={{ lat: (state.markerPosition.lat + 0.0018), lng: state.markerPosition.lng }}
+  const { visibleElm : {autoComplete = true} = {} } = props;
+  if(autoComplete){
+    return withScriptjs(
+      withGoogleMap(
+        response => (
+          <GoogleMap google={response.google}
+            defaultZoom={props.zoom}
+            defaultCenter={{ lat: state.mapPosition.lat, lng: state.mapPosition.lng }}
           >
+            {/* For Auto complete Search Box */}
+            <Autocomplete
+              style={{
+                width: '100%',
+                height: '40px',
+                paddingLeft: '16px',
+                marginTop: '15px',
+                marginBottom: '15px',
+                display: 'block',
+              }}
+              onPlaceSelected={onPlaceSelected}
+              //types={['IN']}
+            />
+            {/*Marker*/}
+            <Marker google={response.google}
+              name={'Dolores park'}
+              draggable={true}
+              onDragEnd={onMarkerDragEnd}
+              position={{ lat: state.markerPosition.lat, lng: state.markerPosition.lng }}
+            />
+            <Marker />
+            {/* InfoWindow on top of marker */}
+            <InfoWindow
+              onClose={onInfoWindowClose}
+              position={{ lat: (state.markerPosition.lat + 0.0018), lng: state.markerPosition.lng }}
+            >
+              <div>
+                <span style={{ padding: 0, margin: 0 }}>{state.address}</span>
+              </div>
+            </InfoWindow>
             <div>
-              <span style={{ padding: 0, margin: 0 }}>{state.address}</span>
+              <AddressLabel> Address : {`${state.area}, ${state.address}, ${state.city}, ${state.state}`}</AddressLabel>
             </div>
-          </InfoWindow>
-          <div>
-            <AddressLabel> Address : {`${state.area}, ${state.address}, ${state.city}, ${state.state}`}</AddressLabel>
-          </div>
-          <ConfirmButton onClick = {() => {
-            props.setAddress(state);
-            props.setVisibilityForOverlay(false);
-          }}
-          label = "Confirm"
-          />
-        </GoogleMap>
+            <ConfirmButton onClick = {() => {
+              props.setAddress(state);
+              props.setVisibilityForOverlay(false);
+            }}
+            label = "Confirm"
+            />
+          </GoogleMap>
+        )
       )
-    )
-  );
+    ); 
+    } else {
+      return withScriptjs(
+        <Autocomplete
+          style={{
+            width: '100%',
+            height: '40px',
+            paddingLeft: '16px',
+            marginTop: '15px',
+            marginBottom: '15px',
+            display: 'block',
+          }}
+          onPlaceSelected={onPlaceSelected}
+          //types={['IN']}
+        />
+      );
+    } 
 }
 
 export default function Map(props) {

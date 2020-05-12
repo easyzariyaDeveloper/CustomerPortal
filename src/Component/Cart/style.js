@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { border_color, base_spacing, header_bg_color } from "../../Assets/style-var";
+import { border_color, base_spacing, header_bg_color, borderVariable, secondary_font_color } from "../../Assets/style-var";
 import { InputForm } from "../Common/InputText/style";
 import ActionButton from "../Common/ActionButton";
 import { EZElevation } from "../Common/MobileCard";
@@ -30,9 +30,8 @@ export const ServiceCartWrapper = styled.div``;
 export const ServiceLabel = styled.div`
     display: flex;
     justify-content: space-between;
-    color: #959595;
+    color: ${secondary_font_color};
     letter-spacing: 2.5px;
-    text-transform: uppercase;
     padding-top: 10px;
 `;
 
@@ -44,13 +43,13 @@ export const ServiceListItem = styled.div`
 
 export const CartServicePara = styled.p`
     display:inline-block;
-    color: #959595;
+    color: black;
 `;
 
 export const CartPricePara = styled.p`
     float: right;
     display:inline-block;
-    color: #959595;
+    color: black;
 `;
 
 
@@ -131,11 +130,19 @@ export const PayableDiv = styled(CartServicePara)`
 `;
 
 export const PayableAmt =styled(CartPricePara)`
-    color: #4B4B4B;
+    color: black;
     font-weight : bold;   
     font-size: 18px;
 `;
 
+export const CarInCart = styled.p`
+    color: ${secondary_font_color};
+    border-bottom: ${borderVariable};
+    padding: 4px;
+    padding-bottom: 5px;
+    padding-top: 0px;
+    font-size: 12px;
+`;
 
 export const Overlay = styled.div`
     position: fixed;

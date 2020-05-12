@@ -5,8 +5,11 @@ import {
   header_font_color,
   white_color,
   login_bg_color,
+  header_bg_color
 } from "./style-var";
 import { Link } from "react-router-dom";
+import Card from '@material-ui/core/Card';
+import SignInBackgroundImg from "./img/SignInBackgroundImg.jpg";
 
 export const alignHorizontally = css`
   display: flex;
@@ -42,23 +45,18 @@ export const Margin_10 = css`
 `;
 
 export const Login_SignUp_Button = styled.button`
-  width: 300px;
-  color: ${white_color};
-  text-align: center;
-  height: ${base_spacing * 4}px;
-  border: 0;
-  border-radius: 2px;
-  margin-bottom: ${base_spacing * 2}px;
-  margin-left: ${base_spacing * 3}px;
-  cursor: pointer;
-  background: linear-gradient(
-    79.5deg,
-    #62b58f 0.29%,
-    #29c3be 52.74%,
-    #03b3ad 100%
-  );
-  opacity: 0.5;
-  margin-top: inherit;
+    width : 300px;
+    color: ${white_color};
+    text-align: center;
+    height: ${base_spacing*4}px;
+    border:0;
+    border-radius: 2px;
+    margin-bottom: ${base_spacing *2}px;
+    margin-left: ${base_spacing *3}px;
+    cursor: pointer;
+    background: ${header_bg_color};
+    opacity: 0.5;
+    margin-top: inherit;
 `;
 
 export const LoginWrapper = styled.div`
@@ -104,4 +102,45 @@ export const StyledLink = styled(Link)`
   &[data-active] {
     color: black;
   }
+`;
+
+export const MCard = styled(Card)`
+    margin:${base_spacing}px;
+    padding: ${base_spacing * 0.8}px;
+`;
+
+
+export const LogInSignupPageMWrapper = styled.div`
+    background: url(${SignInBackgroundImg});
+    background-size: cover;
+    position: relative;
+    height: calc(100vh - 64px);
+`;
+
+export const LoginSignupOverlay = styled.div`
+    position: fixed;
+    top: 63px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(86, 204, 242, 0.8);;
+`;
+
+export const LogoDiv = styled.div`
+    text-align: center;
+    margin: ${base_spacing*2}px;
+`;
+
+export const EZLogo = styled.img`
+    border-radius:50%;
+`;
+
+export const EZHeader = styled.h1`
+    display: inline-block;
+    padding-left :${base_spacing}px;
+    font-size: ${base_spacing*3.5}px;
+    vertical-align: 15px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    color: ${secondary_font_color};
 `;

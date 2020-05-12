@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import {DeleteBinButton, MCard, ServiceMListItem} from "./style";
+import {DeleteBinButton, MCard, ServiceMListItem,CartServiceMPara,CartPriceMPara} from "./style";
 import { ServiceCart } from "../mockCartData";
-import {CartServicePara,CartPricePara } from "../style";
+import {CarInCart} from "../style";
 
 
 
@@ -19,13 +19,12 @@ export default function MServices (props){
                 const{name,id,price} = serviceObject;
                 return<MCard>
                     <ServiceMListItem>
-                        <CartServicePara>{name}
-                        <p>Hyundai Creta(Diesel)</p>
-                        </CartServicePara>
+                        <CartServiceMPara>{name}</CartServiceMPara>
                         <DeleteBinButton onClick = {()=> deleteItem(id)} />
                     </ServiceMListItem>
-                <h2>Amount</h2>
-                <CartPricePara>Rs. {price}</CartPricePara>
+                    <CarInCart>Hyundai Creta(Diesel)</CarInCart>
+                <h2 style={{display: "inline-block", padding: "10px", fontSize: "14px", paddingLeft: "4px", paddingBottom: "5px"}}>Amount</h2>
+                <CartPriceMPara>Rs. {price}</CartPriceMPara>
                 </MCard>
             })
         }
@@ -33,3 +32,5 @@ export default function MServices (props){
     </>
 
 }
+
+
