@@ -8,5 +8,5 @@ export const PageWrapper = styled.div`
 export const Content = styled.div`
   min-height: calc(100vh - ${mobile_header_height}px);
   background: white;
-  padding: 16px;
+  
 `;

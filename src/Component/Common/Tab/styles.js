@@ -1,30 +1,20 @@
 import styled from "styled-components";
-import { base_spacing, header_bg_color, white_color, borderVariable } from "../../../Assets/style-var";
+import { base_spacing, header_bg_color, white_color, borderVariable, secondary_font_color } from "../../../Assets/style-var";
 import { alignHorizontally, AlignItems } from "../../../Assets/common-styled";
-const ActiveBackgroundColor = "#D5D5D5"; //"#B67EB3";
-const NonActiveBGColor = "#FFF"; // "#F8F6F3";
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
 
 //${alignHorizontally}
 export const TabWrapper = styled.div`
     text-align: center;
     margin-bottom: ${base_spacing *3}px;
+    flexGrow: 1,
+    width: '100%',
+    background-color: ${secondary_font_color}
 `;
 
-export const Tabs = styled.div`
-    margin-bottom: ${base_spacing * 2}px;
-    background-color: ${white_color};
+export const MAppBar = styled(AppBar)`
 `;
+export const MTabs = styled(Tabs)`
 
-export const TabItem = styled.p`
-    ${AlignItems}
-    display: inline-block;
-    padding: ${base_spacing}px ${base_spacing * 2}px;
-    cursor: pointer;
-    border: 1px solid #959595;
-    min-width:180px;
-    font-weight: ${(props) => props.active ? "bolder" : "initial"};
-    background-color: ${(props) => props.active ? NonActiveBGColor: ActiveBackgroundColor};
-    border: ${borderVariable};
-    color: black;
-`
-
+`;

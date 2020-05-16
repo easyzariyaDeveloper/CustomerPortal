@@ -11,10 +11,8 @@ const ButtonStyle = css`
     height: 40px;
     border:0;
     border-radius: 2px;
-    margin-bottom: ${base_spacing *2}px;
-    margin-left: 30px;
     cursor: pointer;
-   
+    margin: ${base_spacing *2}px auto;
 `;
 
 export const PaneWrapper = styled.section`

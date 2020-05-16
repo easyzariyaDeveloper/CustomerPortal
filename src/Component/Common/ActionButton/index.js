@@ -6,6 +6,7 @@ import {
   LinearArea,
   Arrow,
 } from "./styles";
+import { PHONE } from "../../../Constants";
 export default function ActionButton(props) {
   return (
     <ButtonWrapper
@@ -14,7 +15,7 @@ export default function ActionButton(props) {
       use={props.use}
     >
       <Button disabled={props.disabled}>{props.label}</Button>
-      {props.use === "phone" ? (
+      {props.use === PHONE ? (
         ""
       ) : (
         <>

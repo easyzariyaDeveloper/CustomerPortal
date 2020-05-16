@@ -6,6 +6,7 @@ import {
 } from "../../../Assets/style-var";
 import { EZElevation } from "../MobileCard";
 import { alignCenter } from "../../../Assets/common-styled";
+import { PHONE } from "../../../Constants";
 
 export const Button = styled.button`
     font-size: 12px;
@@ -20,7 +21,7 @@ export const Button = styled.button`
     font-weight: 600;
     outline: transparent;
     float:left;
-    width: ${({ use }) => (use === "phone" ? "100%" : "fit-content")};
+    width: ${({ use }) => (use === PHONE ? "100%" : "fit-content")};
     min-width: 160px;
     flex:2;
 `;
@@ -29,7 +30,7 @@ export const ButtonWrapper = styled.div`
   ${EZElevation};
   cursor: ${({ disabled = false }) => (disabled ? "not-allowed" : "pointer")};
   text-align: initial;
-  width: ${({ use }) => (use === "phone" ? "100%" : "un-set")};
+  width: ${({ use }) => (use === PHONE ? "100%" : "un-set")};
   height: 45px;
   display: flex;
   align-items: flex-start;

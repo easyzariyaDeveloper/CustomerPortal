@@ -14,10 +14,6 @@ export const CartPageMWrapper = styled(CartPageWrapper)`
     box-shadow: initial;
     font-size:16px;
 `;
-export const MCard = styled(Card)`
-    margin:${base_spacing}px;
-    padding: ${base_spacing * 0.8}px;
-`;
 
 export const DateTimeMPicker = styled.div`
     display: flex;

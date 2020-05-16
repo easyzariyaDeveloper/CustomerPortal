@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
-import {CartPageMWrapper,MCard, DateTimeMPicker,SelectAddressMLabel,OverlayCard,CouponButton,CouponAlignment, CheckoutBtn,ServiceMLabel, MCalculateDiv} from "./style";
+import {CartPageMWrapper, DateTimeMPicker,SelectAddressMLabel,OverlayCard,CouponButton,CouponAlignment, CheckoutBtn,ServiceMLabel, MCalculateDiv} from "./style";
 import {ServiceLabel,SubTotal,TotalPrice,PayableDiv,PayableAmt,DiscountLabel,DiscountAmount} from "../style";
 import MaterialUIPickers from "../../Common/DateTimePicker";
 import MServices from "./MServices";
@@ -11,6 +11,7 @@ import ActionButton from "../../Common/ActionButton";
 import { TextField } from "@material-ui/core";
 import MobileMap from "./MobileMap";
 import Map from "../Map";
+import { MCard } from "../../../Assets/common-styled";
 
 
 

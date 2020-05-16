@@ -5,7 +5,8 @@ import {
   header_font_color,
   white_color,
   login_bg_color,
-  header_bg_color
+  header_bg_color,
+  secondary_font_color
 } from "./style-var";
 import { Link } from "react-router-dom";
 import Card from '@material-ui/core/Card';
@@ -105,8 +106,8 @@ export const StyledLink = styled(Link)`
 `;
 
 export const MCard = styled(Card)`
-    margin:${base_spacing}px;
-    padding: ${base_spacing * 0.8}px;
+    margin:${base_spacing * 1.6}px;
+    padding: ${base_spacing }px ${base_spacing * 1.6}px;
 `;
 
 

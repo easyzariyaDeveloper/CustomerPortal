@@ -9,4 +9,5 @@ export const Wrapper = styled.div`
 
 export const TextInput = styled(TextField)`
     width: 100%; 
+    margin: 5px 0px !important;
 `;

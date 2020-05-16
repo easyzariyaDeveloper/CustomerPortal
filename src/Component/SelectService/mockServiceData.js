@@ -1,23 +1,28 @@
 import React from "react";
 import TabularData from "./TabularData";
 import CardData from "./CardData";
+import MCardData from "./MobileView/MCardData";
 
 export const Tabs = [
   {
     label: "General Services",
     id: "general",
     Component: TabularData,
+    MComponent: MCardData
   },
   {
     label: "AC & Electrical",
     id: "acAndElectrical",
     Component: CardData,
+    MComponent: MCardData
   },
   {
     label: "Car Care",
     id: "carCare",
     Component: TabularData,
-  },
+    MComponent: MCardData
+  }
+  
 ];
 
 export const Packages = {

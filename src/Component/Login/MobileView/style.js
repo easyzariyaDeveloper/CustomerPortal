@@ -7,43 +7,45 @@ import { MCard } from "../../../Assets/common-styled";
 export const SocialLogIn = styled.div`
     margin: ${base_spacing *2}px 0px;
     border-bottom: ${borderVariable};
-    padding-bottom: 20px;
+    padding-bottom: ${base_spacing*2}px;
 `;
 
 export const OrDiv = styled.div`
-    position: relative
+    position: relative;
 `;
 
 export const OrPara = styled.p`
     background-color: ${white_color};
-    font-size: 16px;
-    padding: ${base_spacing/2}px;
+    font-size: 14px;
+    padding: ${base_spacing}px;
     position: absolute;
     border-radius: 50%;
-    left: 45%;
+    left: 50%;
     top:-35px;
-    margin-bottom:10px;
+    margin-bottom:${base_spacing}px;
+    transform: translate3d(-50%,0,0);
+
 `;
 
 export const TextInput = styled(TextField)`
     width: 100%; 
+    margin: 5px 0px !important;
 `;
 
 export const LoginCard = styled(MCard)`
-    margin-top:40px;
+    margin-top:${base_spacing*4}px;
 `;
 export const PasswordLink = styled.div`
-    text-align: center;    
-    margin: 10px ;
-    margin-bottom: 40px;
+    text-align: center;  
+    margin: ${base_spacing*3.5}px  0;  
 `;
 
 export const LoginButton = styled.div`
     text-align: -webkit-center;
-    margin : 20px 0px;
+    margin : ${base_spacing*2}px 0px;
 `;
 
 export const SignUpText = styled.div`
     text-align: center;
-    margin: 15px;
+    margin: ${base_spacing*1.5}px;
 `;

@@ -1,7 +1,8 @@
 import React, {useState} from "react";
-import {DeleteBinButton, MCard, ServiceMListItem,CartServiceMPara,CartPriceMPara} from "./style";
+import {DeleteBinButton, ServiceMListItem,CartServiceMPara,CartPriceMPara} from "./style";
 import { ServiceCart } from "../mockCartData";
 import {CarInCart} from "../style";
+import { MCard } from "../../../Assets/common-styled";
 
 
 

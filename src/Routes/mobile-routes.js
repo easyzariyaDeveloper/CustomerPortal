@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import SelectService from "../Component/SelectService/MobileView";
 import AddCar from "../Component/AddCar/MobileView";
 import Cart from "../Component/Cart/MobileView";
 import Profile from "../Component/Profile/MobileView";
@@ -8,6 +7,8 @@ import AddressForm from "../Component/Profile/MobileView/AddressForm";
 import Service from "../Component/Service/MobileView";
 import Login from "../Component/Login/MobileView";
 import SignUp from "../Component/SignUp/MobileView";
+import SelectService from "../Component/SelectService/MobileView";
+import Otp from "../Component/OtpPage";
 
 
 export default () => {
@@ -23,6 +24,7 @@ export default () => {
       <Route path= "/service" component={Service}/>
       <Route path = "/login" component={Login}/>
       <Route path = "/signup" component={SignUp}/>
+      <Route path = "/otp" component={Otp} />
       {/* <Route component = {NotFound} /> */}
     </>
   );

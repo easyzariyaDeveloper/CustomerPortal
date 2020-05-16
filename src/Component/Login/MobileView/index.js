@@ -7,6 +7,7 @@ import GoogleLogin from "../RightPane/SocialLogin/GoogleLoginButton";
 import ActionButton from "../../Common/ActionButton";
 import { LogInSignupPageMWrapper, LoginSignupOverlay, LogoDiv, EZHeader, EZLogo } from "../../../Assets/common-styled";
 import PasswordWrapper from "../../Common/PasswordWrapper";
+import { PHONE } from "../../../Constants";
 
 export default function Login() {
 
@@ -16,7 +17,7 @@ export default function Login() {
             <LoginSignupOverlay>
                 <LogoDiv>
                     <EZLogo src={EasyZariaLogo} alt="Logo" />
-                    <EZHeader>Easyzaria</EZHeader>
+                    <EZHeader>EasyZaria</EZHeader>
                 </LogoDiv>
 
                 <SocialLogIn>
@@ -39,7 +40,7 @@ export default function Login() {
                     </PasswordLink>
 
                     <LoginButton>
-                        <ActionButton label = "LOGIN"/> 
+                        <ActionButton label = "LOGIN" use = {PHONE} /> 
                     </LoginButton>
                     <SignUpText>
                         Don't have an account? <a href = "#" className = "link">Sign Up</a>

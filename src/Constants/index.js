@@ -1,5 +1,7 @@
 const DEV = "development";
+const PHONE = "phone";
 
 export {
-    DEV
+    DEV,
+    PHONE
 }
