@@ -2,28 +2,33 @@ import styled from "styled-components";
 import {
   base_spacing,
   border_color,
-  header_bg_color,
+  white_color,
+  ez_primary_theme_color,
 } from "../../../Assets/style-var";
 import { StyledLink } from "../../../Assets/common-styled";
+import { EZElevation } from "../../../Component/Common/MobileCard";
 
 const menu_width = 240;
-export const mobile_header_height = 64;
+export const mobile_header_height = 40;
 
 export const HeaderWrapper = styled.div`
   height: ${mobile_header_height}px;
   padding: ${base_spacing}px;
   border-bottom: 1px solid ${border_color};
-  background: ${header_bg_color};
+  background: ${white_color};
   position: relative;
   line-height: ${mobile_header_height}px;
   display: flex;
   color: white;
   align-items: center;
+  flex-direction: row-reverse;
+  ${EZElevation}
 `;
 
 export const Hamburger = styled.div`
   color: white;
-  font-size: 18px;
+  font-size: 21px;
+  color: ${ez_primary_theme_color};
 `;
 
 export const MenuWrapper = styled.section`

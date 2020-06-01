@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
-import { ServiceMPageWrapper, MTab } from "./style";
-import { Tabs } from "../mockServiceData";
+import { ServiceMPageWrapper, MTab, MServiceHeader } from "./style";
+import { MobileTab,Tabs} from "../mockServiceData";
 
 export default function SelectService() {
     return<MobilePageLayout>
+        <MServiceHeader>Our Services</MServiceHeader>
         <ServiceMPageWrapper>
             <MTab 
-            tabs = {Tabs} />
+            tabs = {MobileTab}
+            cardInfo = {Tabs}
+            />
         </ServiceMPageWrapper>
     </MobilePageLayout>
 }

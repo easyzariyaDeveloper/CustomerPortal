@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { base_spacing, white_color } from "../../../Assets/style-var";
 
 export const EZElevation = css`
-    box-shadow : 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+    box-shadow : 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const EZCard = styled.div`

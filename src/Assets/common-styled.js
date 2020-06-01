@@ -5,7 +5,6 @@ import {
   header_font_color,
   white_color,
   login_bg_color,
-  header_bg_color,
   secondary_font_color
 } from "./style-var";
 import { Link } from "react-router-dom";
@@ -55,7 +54,6 @@ export const Login_SignUp_Button = styled.button`
     margin-bottom: ${base_spacing *2}px;
     margin-left: ${base_spacing *3}px;
     cursor: pointer;
-    background: ${header_bg_color};
     opacity: 0.5;
     margin-top: inherit;
 `;

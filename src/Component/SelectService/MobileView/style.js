@@ -1,41 +1,20 @@
 import styled from "styled-components";
 import ScrollTab from "../../Common/Tab";
-import { MCard } from "../../../Assets/common-styled";
-import { secondary_font_color, button_bg_color } from "../../../Assets/style-var";
-
+import { Mfont_color, base_spacing } from "../../../Assets/style-var";
 
 export const ServiceMPageWrapper = styled.div``;
 
-export const MTab = styled(ScrollTab)``;
-
-export const ServiceCard = styled(MCard)``;
-
-export const CardImage = styled.img`
-    padding: 0px;
-    width:100%;
-`;
-
-export const ServiceHeader = styled.h1`
-    color: ${secondary_font_color};
-    font-weight: 700;
-    font-size: 18px;
-`;
-export const PriceHeader = styled.h2`
-    color: ${button_bg_color};
-    font-weight: 700;
-    font-size: 18px;
-`;
-
-export const ServicePriceDiv = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top:10px;
-`;
-
-export const ServiceDescription = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
+export const MServiceHeader = styled.h1`
+    font-family: Source Sans Pro;
+    color: ${Mfont_color};
+    font-weight: bold;
+    font-size: ${base_spacing*1.4}px;
+    text-align: center;
+    padding: ${base_spacing}px 0;
+    text-transform: uppercase;
 `;
 
 
+export const MTab = styled(ScrollTab)`
+    background: rgba(30, 62, 108, 0.04);
+`;

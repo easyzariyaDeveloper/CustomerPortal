@@ -62,7 +62,7 @@ export default function Header(props) {
         </MenuWrapper>
         <Overlay onClick = {toggleMenu} active = {slideMenu} />  */}
       <SwipeableDrawer
-        anchor={"left"}
+        anchor={"right"}
         open={slideMenu}
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}

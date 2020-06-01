@@ -1,26 +1,46 @@
 import React from "react";
 import TabularData from "./TabularData";
 import CardData from "./CardData";
-import MCardData from "./MobileView/MCardData";
+import General from "../../Assets/img/General.png";
+import AcElectrical from "../../Assets/img/AcElectrical.png";
+import Car from "../../Assets/img/Car.png";
 
 export const Tabs = [
   {
     label: "General Services",
     id: "general",
     Component: TabularData,
-    MComponent: MCardData
+    ServiceImg: General
   },
   {
     label: "AC & Electrical",
     id: "acAndElectrical",
     Component: CardData,
-    MComponent: MCardData
+    ServiceImg: AcElectrical
   },
   {
     label: "Car Care",
     id: "carCare",
     Component: TabularData,
-    MComponent: MCardData
+    ServiceImg: Car
+  },
+  {
+    label: "General Services",
+    id: "general",
+    Component: TabularData,
+    ServiceImg: General
+  },
+  {
+    label: "AC & Electrical",
+    id: "acAndElectrical",
+    Component: CardData,
+    ServiceImg: AcElectrical
+  },
+  {
+    label: "Car Care",
+    id: "carCare",
+    Component: TabularData,
+    ServiceImg: Car
   }
   
 ];
@@ -237,3 +257,8 @@ export const ElectricalServices = [
     id: "HTBR",
   },
 ];
+
+
+
+export const MobileTab = ["EZ Autocare", "Doorstep"];
+

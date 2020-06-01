@@ -1,72 +1,85 @@
-import React, { useState } from "react";
-import { TabWrapper,MAppBar} from "./styles";
+import React from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import {withStyles } from '@material-ui/core/styles';
+import SwipeableViews from 'react-swipeable-views';
+import {TabDiv, ServiceCard, ServiceImage, LabelLink, ServiceCardWrapper} from './styles';
+import {Mfont_color} from "../../../Assets/style-var";
+
+
+//https://react-swipeable-views.com/demos/demos/
 
 const AntTabs = withStyles({
-    root: {
-      borderBottom: '1px solid #e8e8e8',
-    },
-    indicator: {
-      backgroundColor: '#1890ff',
-    },
-  })(Tabs);
-  
-  const AntTab = withStyles((theme) => ({
-    root: {
-        // maxWidth:120,
-      '&:hover': {
-        color: '#40a9ff',
-        opacity: 1,
-      },
-      color: 'white',
-      fontSize: '16px',
-      '&:selected': {
-        color: '#1890ff',
-      },
-      '&:focus': {
-        color: 'black',
-      },
-    },
-    selected: {},
-  }))((props) => <Tab disableRipple {...props} />);
+  indicator: {
+    backgroundColor: '#1890ff',
+  },
+})(Tabs);
 
-  const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-      },
-    demo1: {
-      backgroundColor: '#56CCF2',
-    }
-  }));
+const AntTab = withStyles((theme) => ({
+  root: {
+    minWidth: 72,
+    width: '50%',
+    // width: 'calc(100% / 2)',
+    // maxWidth: 'inherit',
+    '&:hover': {
+      color: '#40a9ff',
+      opacity: 1,
+    },
+    '&$selected': {
+      color: Mfont_color,
+      fontWeight:'bold'
+    },
+    '&:focus': {
+      color: '#40a9ff',
+    },
+  },
+  selected: {},
+}))((props) => <Tab disableRipple {...props} />);
 
 export default function ScrollTab(props) {
-    if (!props["tabs"] || !Array.isArray(props["tabs"]) || Array.isArray(props["tabs"]) && props["tabs"].length <= 0) {
-        return "";
-    }
-    const { tabs = [] } = props;
-    const [activeTab, setActiveTab] = useState(tabs[0]);
-    const classes = useStyles();
+  const [state,setState] = React.useState({index:0})
 
-    return <div className={classes.root}>
-        <div className={classes.demo1}>
-        <AntTabs variant="scrollable"  value={activeTab} onChange={(e, index) => setActiveTab(tabs[index])} >
-            {tabs.map(({ label, id }, index) => {
-                return <AntTab
-                    onClick={() => setActiveTab(tabs[index])}
-                    //active={activeTab.id === id}
-                    label = {label}
-                >        
-                </AntTab>
+
+const handleChange = (event, value) => {
+    setState({
+      index: value,
+    });
+  };
+
+  const handleChangeIndex = index => {
+    setState({
+      index,
+    });
+  };
+  const {tabs =[]} = props;
+  const { index } = state;
+  
+    return (
+      <div>
+        <TabDiv>
+          <AntTabs value={index} onChange={handleChange}>
+            {tabs.map(tab => <AntTab label= {tab} />)}
+          </AntTabs>
+        </TabDiv>
+        
+        <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
+          <div style={{padding: "30px 20px"}}>
+          <ServiceCardWrapper>
+            {props["cardInfo"].map(({label, ServiceImg}) => {
+              return <ServiceCard>
+                  <ServiceImage src = {ServiceImg} />
+                  <LabelLink href = "#">{label}</LabelLink> 
+                </ServiceCard>
+              
             })
             }
-        </AntTabs>
-        </div> 
-        {activeTab.MComponent ? <activeTab.MComponent activeId={activeTab.id} /> : null}
-    </div>
-}
-  
-  
+            </ServiceCardWrapper>
+          </div>
+          <div>slide n°2</div>
+        </SwipeableViews>
+      </div>
+    );
+  }
 
-  
+
+

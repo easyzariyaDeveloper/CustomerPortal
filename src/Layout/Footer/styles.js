@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { white_color, header_bg_color, base_spacing } from "../../Assets/style-var";
+import { white_color, base_spacing } from "../../Assets/style-var";
 
 export const FooterContainer = styled.div`
-  background-color: ${header_bg_color};
   height: fit-content;
   color: ${white_color};
 `;
@@ -30,7 +29,6 @@ export const SubFooter = styled.div`
   height: 40px;
   display: flex;
   justify-content: space-between;
-  color: ${header_bg_color};
   font-size: 12px;
   padding: 15px 15%;
   align-items: center;
