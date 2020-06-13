@@ -1,40 +1,27 @@
 import React, { useState } from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
-import EasyZariaLogo from "../../../Assets/img/EasyZariaLogo.jpg";
-import ActionButton from "../../Common/ActionButton";
-import { LogInSignupPageMWrapper, LoginSignupOverlay, LogoDiv, EZHeader, EZLogo } from "../../../Assets/common-styled";
-import { SignUpCard, SignUpButton, LoginText, SignupTextField } from "./style";
-import PasswordWrapper from "../../Common/PasswordWrapper";
-import { PHONE } from "../../../Constants";
+import { AccountBackgroundImg, AccountImgOverlay,MAccountWrapper, MAccountCard, FbLoginButton, GoogleLoginButton } from "./style";
+import MSignUpTab from "./MSignUpTab";
+import Google from "../../../Assets/img/google.jpg";
+import FacebookIcon from '@material-ui/icons/Facebook';
 
+export default function Account() {
+    return<MobilePageLayout>
+            <AccountBackgroundImg><AccountImgOverlay /></AccountBackgroundImg>
+            <MAccountWrapper>
+                <MAccountCard>
+                    <MSignUpTab />
 
-export default function SignUp() {
-    return <MobilePageLayout>
-        <LogInSignupPageMWrapper>
-            <LoginSignupOverlay>
-                
-                <LogoDiv>
-                    <EZLogo src={EasyZariaLogo} alt="Logo" />
-                    <EZHeader>EasyZaria</EZHeader>
-                </LogoDiv>
-            
-                <SignUpCard>
-                    <SignupTextField label="Name" />
-                    <SignupTextField label="Email Id" />
-                    <SignupTextField type ="number" label = "Phone No."/>
-                    <PasswordWrapper name = "Password"/>
-                    <PasswordWrapper name = "Confirm Password" />
+                    <div style= {{display:"flex", justifyContent: "space-evenly", padding: "20px 0"}}>
+                        <FbLoginButton><FacebookIcon style= {{verticalAlign: "middle", paddingRight: "10px", fontSize: "30px", paddingBottom: "2px"}}  />
+                            Facebook
+                        </FbLoginButton>
+                        <GoogleLoginButton><img style= {{verticalAlign: "sub", paddingRight: "10px"}} src = {Google}/>
+                            Google
+                        </GoogleLoginButton>
+                    </div>
 
-                    <SignUpButton>
-                        <ActionButton label = "Sign Up" use = {PHONE}/>
-                    </SignUpButton>
-                    
-                    <LoginText>
-                        Already have an account? <a href = "#" className = "link">Login</a>
-                    </LoginText>
-                </SignUpCard>
-               
-            </LoginSignupOverlay>
-        </LogInSignupPageMWrapper>
+                </MAccountCard>
+        </MAccountWrapper>
     </MobilePageLayout>
 }

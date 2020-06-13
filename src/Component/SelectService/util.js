@@ -21,6 +21,8 @@ export function formatBodyData(id, servicesArray){
         return accumlator;
     }, {});
 
+
+
     const packageInfo = Object.entries(Packages[id]);
     console.log(packageInfo);
     const packageGrouped = packageInfo.map((packageItem) =>{

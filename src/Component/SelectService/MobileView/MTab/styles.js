@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { base_spacing } from "../../../Assets/style-var";
+import { base_spacing } from "../../../../Assets/style-var";
+
 
 export const TabDiv = styled.div`
     display:flex;
@@ -11,6 +12,8 @@ export const TabDiv = styled.div`
     }
 `;
 
+//https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout
+ 
 export const ServiceCardWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -19,7 +22,7 @@ export const ServiceCardWrapper = styled.div`
 `;
 
 export const ServiceCard = styled.div`
-    width: ${base_spacing*12}px;
+    width: ${base_spacing*13}px;
     height: ${base_spacing*12}px;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -35,11 +38,17 @@ export const ServiceImage = styled.img`
     padding-bottom: ${base_spacing}px;
 `;
 
-export const LabelLink = styled.a`
+export const Label = styled.p`
     color:#1E3E6C;
     font-weight: bold;
     font-size: ${base_spacing*1.3}px;
-    text-decoration: none;
     display: flex;
     justify-content: center;
+`;
+
+export const ServiceLink = styled.a`
+    cursor:pointer;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
 `;

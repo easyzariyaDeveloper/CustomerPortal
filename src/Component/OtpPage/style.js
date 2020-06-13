@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
 export const OtpPageWrapper = styled.div`
-    background-color: #56CCF2;
+    background:linear-gradient(89.02deg, #1DA0BC 0.88%, #1DE3B6 89%);
     padding:20px;
     height: calc(100vh - 64px);
 
     .otp-field{
         width: 50px;
         background-color: #56CCF2;
-        font-size: 12px;
         border-bottom: 2px solid white;
         color: white;
         outline: none;

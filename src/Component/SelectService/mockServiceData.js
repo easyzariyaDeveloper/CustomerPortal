@@ -4,6 +4,14 @@ import CardData from "./CardData";
 import General from "../../Assets/img/General.png";
 import AcElectrical from "../../Assets/img/AcElectrical.png";
 import Car from "../../Assets/img/Car.png";
+import titanium from "../../Assets/img/titanium.jpg";
+import gold from "../../Assets/img/gold.jpg";
+import silver from "../../Assets/img/silver.jpg";
+import bronze from "../../Assets/img/bronze.jpg";
+import serviceImage from "../../Assets/img/serviceImage.jpg";
+import carServiceImg from "../../Assets/img/carServiceImg.jpg";
+
+
 
 export const Tabs = [
   {
@@ -24,24 +32,24 @@ export const Tabs = [
     Component: TabularData,
     ServiceImg: Car
   },
-  {
-    label: "General Services",
-    id: "general",
-    Component: TabularData,
-    ServiceImg: General
-  },
-  {
-    label: "AC & Electrical",
-    id: "acAndElectrical",
-    Component: CardData,
-    ServiceImg: AcElectrical
-  },
-  {
-    label: "Car Care",
-    id: "carCare",
-    Component: TabularData,
-    ServiceImg: Car
-  }
+  // {
+  //   label: "General Services",
+  //   id: "general",
+  //   Component: TabularData,
+  //   ServiceImg: General
+  // },
+  // {
+  //   label: "AC & Electrical",
+  //   id: "acAndElectrical",
+  //   Component: CardData,
+  //   ServiceImg: AcElectrical
+  // },
+  // {
+  //   label: "Car Care",
+  //   id: "carCare",
+  //   Component: TabularData,
+  //   ServiceImg: Car
+  // }
   
 ];
 
@@ -52,17 +60,8 @@ export const Packages = {
       cost: 3299,
       duration: 360,
       id: "titanium",
-      services: [
-        "EOR",
-        "OFR",
-        "FFC",
-        "AFR",
-        "CEWC",
-        "RBPS",
-        "FBPS",
-        "CC",
-        "BWT",
-      ],
+      services: ["EOR","OFR","FFC","AFR","CEWC","RBPS","FBPS","CC","BWT"],
+      ServiceListImg: titanium
     },
     gold: {
       name: "Gold Pack",
@@ -70,6 +69,7 @@ export const Packages = {
       duration: 240,
       id: "gold",
       services: ["EOR", "OFR", "FFC", "AFR", "CEWC", "RBPS"],
+      ServiceListImg: gold
     },
     silver: {
       name: "Silver Pack",
@@ -77,13 +77,15 @@ export const Packages = {
       duration: 180,
       id: "silver",
       services: ["EOR", "OFR", "FFC", "AFR", "CC"],
+      ServiceListImg: silver
     },
     bronze: {
       name: "Bronze Pack",
       cost: 899,
       duration: 120,
       id: "bronze",
-      services: ["EOR", "OFR", "FFC"],
+      services: ["EOR", "OFR", "CC"],
+      ServiceListImg: bronze
     },
   },
   carCare: {
@@ -93,6 +95,7 @@ export const Packages = {
       duration: 180,
       id: "interior",
       services: ["IV", "UCP", "SR", "OR", "FSOC"],
+      ServiceListImg: titanium
     },
     polishing: {
       name: "buffing and polishing",
@@ -100,6 +103,7 @@ export const Packages = {
       duration: 120,
       id: "polishing",
       services: ["IV", "UCP", "SR", "PCR"],
+      ServiceListImg: titanium
     },
     teflon: {
       name: "Teflon Coating",
@@ -107,6 +111,7 @@ export const Packages = {
       duration: 90,
       id: "teflon",
       services: ["IV", "UCP", "SR"],
+      ServiceListImg: titanium
     },
     waxing: {
       name: "Car Waxing",
@@ -114,6 +119,7 @@ export const Packages = {
       duration: 60,
       id: "teflon",
       services: ["UCP"],
+      ServiceListImg: titanium
     },
   },
   acAndElectrical: {
@@ -123,6 +129,7 @@ export const Packages = {
       duration: 240,
       id: "fullService",
       services: ["AGF", "CCC", "COT", "CC", "AI"],
+      ServiceListImg: titanium
     },
     generalAcService: {
       name: "General AC Services",
@@ -130,6 +137,7 @@ export const Packages = {
       duration: 180,
       id: "generalAcService",
       services: ["AGF", "CCC", "COT"],
+      ServiceListImg: titanium
     },
     electrical: {
       name: "General Electrical Services",
@@ -137,15 +145,19 @@ export const Packages = {
       duration: 240,
       id: "electrical",
       services: ["FWC", "WR", "HTBR"],
+      ServiceListImg: titanium
     },
-    dentReplacement: {
-      name: "Denting & Replacement",
-      id: "dentReplacement",
-    },
-    batteryReplacement: {
-      name: "Battery Replacement",
-      id: "batteryReplacement",
-    },
+    // dentReplacement: {
+    //   name: "Denting & Replacement",
+    //   id: "dentReplacement",
+    //   ServiceListImg: titanium
+    // },
+    // batteryReplacement: {
+    //   name: "Battery Replacement",
+    //   id: "batteryReplacement",
+    //   ServiceListImg: titanium
+    // },
+    
   },
 };
 
@@ -260,5 +272,16 @@ export const ElectricalServices = [
 
 
 
-export const MobileTab = ["EZ Autocare", "Doorstep"];
+// export const MobileTab = ["EZ Autocare", "Doorstep"];
 
+export const ServiceTabs = [{
+  id: "autocare",
+  label: "EZ Autocare"
+},{
+  id: "doorstep",
+  label: "Doorstep"
+}]
+
+
+
+export const images = [serviceImage,carServiceImg];

@@ -10,7 +10,7 @@ export default function OtpBox() {
           value ={OTP}
           onChange={setOTP}
           numInputs={4}
-          inputStyle = {{marginLeft:"50px", fontSize: "20px", background: "#56CCF2", border: "none", borderBottom: "2px solid white", color: "white",width:"40px"}}
+          inputStyle = {{marginLeft:"30px", fontSize: "20px", background: "#56CCF2", border: "none", borderBottom: "2px solid white", color: "white",width:"40px"}}
         />
       </OtpBoxWrapper>
     );

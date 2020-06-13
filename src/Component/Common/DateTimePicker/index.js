@@ -3,8 +3,6 @@ import React from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
   DatePicker,
   TimePicker
 } from '@material-ui/pickers';
@@ -28,7 +26,7 @@ export default function MaterialUIPickers() {
             format="d MMM yyyy"
             onChange={handleDateChange}
             id="date-picker-inline"
-            label="Select Date"
+            label="DD/MM/YYYY"
             value={selectedDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{
@@ -50,3 +48,5 @@ export default function MaterialUIPickers() {
     </MuiPickersUtilsProvider>
   );
 }
+
+

@@ -3,7 +3,7 @@ import {SelectServicePageHeader} from "./styles";
 import PageLayout from "../../Layout";
 
 import {Tabs} from "./mockServiceData";
-import Tab from "../Common/Tab";
+import Tab from "./Tab";
 
 
 export default function Services(){

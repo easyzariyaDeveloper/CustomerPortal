@@ -1,23 +1,58 @@
 import styled from "styled-components";
-import { MCard } from "../../../Assets/common-styled";
-import { TextField } from "@material-ui/core";
+import AccountImg from "../../../Assets/img/accountImg.jpg"
 
 
-export const SignUpCard = styled(MCard)`
+export const AccountBackgroundImg = styled.div`
+    background: url(${AccountImg});
+    background-size: cover;
+    height:230px; 
+    position:relative;
+`; 
+
+export const AccountImgOverlay = styled.div`
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    height: 230px;
+    background-color: blue;
+    opacity: 0.2;
 `;
 
-export const SignUpButton =styled.div`
-    text-align: -webkit-center;
-    margin: 40px 0;
-    margin-bottom: 20px;
+
+export const MAccountWrapper= styled.div`
+    position: relative;
+    width:90%;
+    margin: auto;
+    top: -80px;
+}
+`;
+export const MAccountCard = styled.div`
+    background:white;
+    border-radius: 10px;
 `;
 
-export const LoginText = styled.div`
-    text-align: center;
-    margin: 20px;
+
+export const FbLoginButton = styled.button`
+    border: none;
+    color: white;
+    background: #3B5999;
+    border-radius: 5px;
+    height: 35px;
+    width: 115px;
+    font-size:300;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
-export const SignupTextField = styled(TextField)`
-    margin: 5px 0px !important;
-    width: 100%;
+export const GoogleLoginButton = styled.button`
+    border: none;
+    color: black;
+    background: white;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    font-size:300;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
+
+  

@@ -1,94 +1,92 @@
 import React, { useState } from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
-import {CartPageMWrapper, DateTimeMPicker,SelectAddressMLabel,OverlayCard,CouponButton,CouponAlignment, CheckoutBtn,ServiceMLabel, MCalculateDiv} from "./style";
-import {ServiceLabel,SubTotal,TotalPrice,PayableDiv,PayableAmt,DiscountLabel,DiscountAmount} from "../style";
-import MaterialUIPickers from "../../Common/DateTimePicker";
+import { CartMCard, SelectedCar, ServicePriceHeader, DateTimeMPicker, CouponCodeButton,OverlayCard, CouponTextField,CouponCardCloseButton, SubTotalDiv, DiscountDiv, TotalDiv,DateTimeDiv, DateTimeGrid, CheckOutButton, MCartPageWrapper} from "./style";
 import MServices from "./MServices";
+import MaterialUIPickers from "../../Common/DateTimePicker";
+import Coupon from "../../../Assets/img/coupon.png";
+import { ServiceCart, CouponCodes } from "../mockCartData";
 import getPrice from "../util";
-import {ServiceCart} from "../mockCartData";
-import { CouponCodes } from "../mockCartData";
-import ActionButton from "../../Common/ActionButton";
-import { TextField } from "@material-ui/core";
-import MobileMap from "./MobileMap";
-import Map from "../Map";
-import { MCard } from "../../../Assets/common-styled";
-
 
 
 export default function Cart(){
-    const [cardVisible, setCardVisibility] = useState(false);
-    const [address, setAddress] = useState("");
-    const [appliedCoupon,setAppliedCoupon] = useState("");
+    const [couponCardVisibility, setCouponCardVisibility] = useState(false);
+    const [couponCode, setCouponCode]  = useState("");
+    const [mServiceList, setMServiceList] = useState(ServiceCart);
+
+    const Car = "Hyundai Creta (Diesel)"
+
+    const deleteItem = (id) => {
+        const mFilteredList = mServiceList.filter(serviceObj => serviceObj["id"] != id);
+        setMServiceList(mFilteredList);
+    }
 
 
-    return <MobilePageLayout pageName = "Cart">
-        <CartPageMWrapper>
-            <MServices/>
-            <MCard>
-                <DateTimeMPicker><MaterialUIPickers/></DateTimeMPicker>
-            </MCard>
-            <MCard>
-               <SelectAddressMLabel
-                    placeholder = "Select Center"
-                    onClick = {() => setCardVisibility(true)}
-                    address ={address}
-               />
-            </MCard>
+    return <MobilePageLayout >
+        <MCartPageWrapper>
+        <CartMCard>
+            <SelectedCar>{Car}</SelectedCar>
+            <ServicePriceHeader>
+                <h1>Service</h1>
+                <h1>Price</h1>
+            </ServicePriceHeader>
+
+            <MServices
+                mServiceList = {mServiceList}
+                deleteItem = {deleteItem}
+            />
+
+            <DateTimeGrid>
+                <DateTimeDiv>
+                    <p style = {{padding: "42px 0"}}>Select Date: </p>
+                    <p style = {{padding: "12px 0"}}>Select Time: </p>
+                </DateTimeDiv>
+
+                <DateTimeMPicker><MaterialUIPickers/></DateTimeMPicker> 
+            </DateTimeGrid>
+
+            <CouponCodeButton onClick = {() => setCouponCardVisibility(true)}>
+                <img style = {{paddingRight: "10px", verticalAlign: "middle"}} src = {Coupon} />
+                Apply Coupon >
+            </CouponCodeButton>
+
             {
-                 cardVisible ? <OverlayCard>
-                     <MCard>
-                        {/* <TextField
-                            name = "Select Center"
-                            value = " "
-                            onChange={(event) => event.target.value}
-                            label="Select Center"
-                        /> */}
-                        <Map 
-                            visibleElm = {{
-                                "autoComplete": false
-                            }}
-                        />
+                couponCardVisibility ? <OverlayCard> 
+                    <CartMCard style = {{width: "65%", margin: "auto", height: "100px"}}> 
+                        <CouponCardCloseButton onClick = {() => setCouponCardVisibility(false)}>X</CouponCardCloseButton> <br></br>
+                        <p style = {{textAlign: "center", padding: "15px"}}>Apply Coupon</p>
                         
-                     </MCard>
-                 </OverlayCard>: null
-                         
-             }
+                        <div style = {{border:"1px solid #BDBDBD", borderRadius: "5px"}}>
+                        <CouponTextField 
+                            name = "Enter Coupon Code"
+                            value = {couponCode}
+                            onChange={(event) => setCouponCode(event.target.value)}
+                            label="Enter Coupon Code"
+                        />
+                        <button style = {{border:"none", background: "white", float:"right"}}>Apply</button>
+                        </div>  
+                        <p style = {{textAlign: "center", padding: "15px"}}>No Coupons Available</p>
+                    </CartMCard>
+                </OverlayCard> : null
+            }
 
-            <MCard>
-                <CouponAlignment>
-                    <TextField
-                        name = "couponcode"
-                        value = {appliedCoupon}
-                        onChange={(event) => setAppliedCoupon(event.target.value)}
-                        label="Coupon Code"
-                    />
-                    <CouponButton>Apply</CouponButton>
-                </CouponAlignment>
-            </MCard>
+            <SubTotalDiv>
+                <h1 style = {{fontWeight:"normal"}}>Subtotal:</h1>
+                <h1>Rs.{getPrice(mServiceList)}</h1>
+            </SubTotalDiv>
+            <DiscountDiv>
+                <h1 style = {{fontWeight:"normal"}}>Discount:</h1>
+                <h1>Rs {CouponCodes[0].newUser}</h1>
+            </DiscountDiv>
+            
+            <TotalDiv>
+                <h1 style = {{fontWeight:"normal"}}>Total:</h1>
+                <h1>Rs {(getPrice(mServiceList) - CouponCodes[0].newUser)}</h1>
+            </TotalDiv>
 
-        
-        <MCard>
-            <h1>Order Summary</h1>
-            <MCalculateDiv>
-            <ServiceMLabel>
-                <SubTotal>Subtotal</SubTotal>
-                <TotalPrice>Rs {getPrice(ServiceCart)} </TotalPrice>
-            </ServiceMLabel>
+            <div style = {{padding: "20px 0"}}><CheckOutButton>Checkout</CheckOutButton></div>
+            
+        </CartMCard> 
 
-            <ServiceMLabel>
-                <DiscountLabel>Discount</DiscountLabel>
-                <DiscountAmount>Rs {CouponCodes[0].newUser}</DiscountAmount>
-            </ServiceMLabel>
-            </MCalculateDiv>
-            <ServiceMLabel>
-                <PayableDiv>Total</PayableDiv>
-                <PayableAmt>Rs {(getPrice(ServiceCart) - CouponCodes[0].newUser)}</PayableAmt>
-            </ServiceMLabel>    
-        </MCard>
-
-        <CheckoutBtn>
-            <ActionButton label = "Proceed To CheckOut"/>
-        </CheckoutBtn>
-        </CartPageMWrapper>
+        </MCartPageWrapper>
     </MobilePageLayout>
 }

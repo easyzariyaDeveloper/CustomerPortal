@@ -3,8 +3,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
-import {TabDiv, ServiceCard, ServiceImage, LabelLink, ServiceCardWrapper} from './styles';
-import {Mfont_color} from "../../../Assets/style-var";
+import {TabDiv, ServiceCard, ServiceImage, Label, ServiceCardWrapper, ServiceLink} from './styles';
+import {Mfont_color} from "../../../../Assets/style-var";
 
 
 //https://react-swipeable-views.com/demos/demos/
@@ -58,17 +58,19 @@ const handleChange = (event, value) => {
       <div>
         <TabDiv>
           <AntTabs value={index} onChange={handleChange}>
-            {tabs.map(tab => <AntTab label= {tab} />)}
+            {tabs.map(({label, id}) => <AntTab label= {label} key = {id}/>)}
           </AntTabs>
         </TabDiv>
         
         <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
           <div style={{padding: "30px 20px"}}>
           <ServiceCardWrapper>
-            {props["cardInfo"].map(({label, ServiceImg}) => {
+            {props["cardInfo"].map(({label, ServiceImg, id}) => {
               return <ServiceCard>
-                  <ServiceImage src = {ServiceImg} />
-                  <LabelLink href = "#">{label}</LabelLink> 
+                  <ServiceLink href = {`/service/${tabs[index]["id"]}/${id}`}>
+                    <ServiceImage src = {ServiceImg} />
+                    <Label>{label}</Label>
+                  </ServiceLink> 
                 </ServiceCard>
               
             })

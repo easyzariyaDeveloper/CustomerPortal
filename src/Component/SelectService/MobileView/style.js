@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ScrollTab from "../../Common/Tab";
+import ScrollTab from "./MTab";
 import { Mfont_color, base_spacing } from "../../../Assets/style-var";
 
 export const ServiceMPageWrapper = styled.div``;
