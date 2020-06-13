@@ -8,6 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import HistoryIcon from '@material-ui/icons/History';
+import { AddCarDiv, AddCarButton } from "./style";
 
 
 const useStyles = makeStyles(theme => ({
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     }
   }));
   
-  const carDetails = [['Car','car'],['Fuel Type','fuelType'],['Number Plate','numberPlate']];
+const carDetails = [['Car','car'],['Fuel Type','fuelType'],['Number Plate','numberPlate']];
 
 export default function MyCars(){
     const classes = useStyles();
@@ -85,15 +86,9 @@ export default function MyCars(){
             />
           </FormControl>
 
-          <div style = {{textAlign:"center", padding: "50px 0"}}>
-            <button style = {{width: "115px",
-                height: "35px",
-                borderRadius: "5px",
-                border: "none",
-                background: "#1DA0BC",
-                color: "white"}}>
-            Add Car</button>
-      </div>
+          <AddCarDiv>
+            <AddCarButton>Add Car</AddCarButton>
+      </AddCarDiv>
         
       </div>
     </form>

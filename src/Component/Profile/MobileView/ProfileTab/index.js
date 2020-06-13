@@ -5,7 +5,8 @@ import {withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
 import MyProfile from '../MyProfile';
 import MyCars from '../MyCars';
-import AddressList from '../AddressList';
+import AddressList from '../AddressList/AddressList';
+import { AddressListDiv } from '../style';
 
 
 
@@ -81,9 +82,9 @@ const handleChange = (event, value) => {
             <MyCars/>
           </div>
 
-          <div style= {{position: "absolute", left: "20px", right: "20px", top: "20px", width: "100%"}}>
+          <AddressListDiv>
             <AddressList/>
-          </div>
+          </AddressListDiv>
 
           <div>
             slide 4

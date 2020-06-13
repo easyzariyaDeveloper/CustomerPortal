@@ -15,6 +15,7 @@ export const secondary_font_color = "#4B4B4B";
 export const page_bg_color = "#F6F5F5";
 export const ez_primary_theme_color = "#1E3E6C";
 export const ez_secondary_theme_color = "#5E7AA3";
+export const ez_button_color = "#1DA0BC";
 
 
 export const Mfont_color = "#1E3E6C";

@@ -9,6 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import EditIcon from "@material-ui/icons/Edit";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { ChangePasswordDiv, SaveProfileButton, SaveDiv } from "./style";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -100,7 +101,7 @@ export default function MyProfile() {
         })}
       </div>
 
-      <div style= {{textAlign: "center",paddingTop: "25px"}}>Change Password</div>
+      <ChangePasswordDiv>Change Password</ChangePasswordDiv>
 
       <div>
         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
@@ -175,15 +176,9 @@ export default function MyProfile() {
         </FormControl>
       </div>
     </div>
-      <div style = {{textAlign:"center", padding: "20px 0"}}>
-        <button style = {{width: "100px",
-                height: "30px",
-                borderRadius: "5px",
-                border: "none",
-                background: "#1DA0BC",
-                color: "white"}}>
-          Save</button>
-      </div>
+      <SaveDiv>
+        <SaveProfileButton>Save</SaveProfileButton>
+      </SaveDiv>
     </div>
   );
   
