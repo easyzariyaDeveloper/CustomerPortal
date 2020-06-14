@@ -7,5 +7,6 @@ ADD package.json /usr/src/easyzariya-docker/package.json
 
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run build-together
 ENTRYPOINT ["node","server.js"]
+#ENTRYPOINT ["npm","start"]

@@ -47,8 +47,8 @@ export default (mode) => {
     ...config,
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: mode === DEV ? `[name].bundle.js` : `[name].[hash].js`,
-      chunkFilename: `[name].[hash].js`,
+      filename: mode === DEV ? `[name].bundle.js` : `[name].[Contenthash].js`,
+      chunkFilename: `[name].[Contenthash].js`,
       publicPath: "/",
     },
   };
@@ -112,17 +112,26 @@ export default (mode) => {
     plugins.push(new webpack.NoEmitOnErrorsPlugin());
     plugins.push(new webpack.HotModuleReplacementPlugin());
   }
+
   plugins.push(
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(mode),
       __DEV__: mode === DEV ? true : false,
       "mobile": process.env.device === MOBILE
-    }),
-    new HtmlWebpackPlugin({
-      filename: path.resolve(__dirname, "dist/index.html"),
-      template: path.resolve(__dirname, "src", "index.html"),
     })
   );
+  
+  if(process.env.device === MOBILE){
+    plugins.push(new HtmlWebpackPlugin({
+      filename: path.resolve(__dirname, "dist/mobile/index.html"),
+      template: path.resolve(__dirname, "src", "m-index.html"),
+    }));
+  } else {
+    plugins.push(new HtmlWebpackPlugin({
+      filename: path.resolve(__dirname, "dist/desktop/index.html"),
+      template: path.resolve(__dirname, "src", "index.html"),
+    }))
+  }
 
   config = {
     ...config,
