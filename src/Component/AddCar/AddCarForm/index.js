@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import { StyledForm } from "./styles";
-import SelectBox from "../../common/SelectBox";
-import Select2 from "../../common/Select2";
+import SelectBox from "../../Common/SelectBox";
+import Select2 from "../../Common/Select2";
 
 export default function index({ Brands, Car, onChangeListener = null }) {
   const [car_obj, setCarObj] = useState({

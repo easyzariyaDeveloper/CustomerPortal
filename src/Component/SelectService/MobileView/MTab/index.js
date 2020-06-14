@@ -9,11 +9,15 @@ import {Mfont_color} from "../../../../Assets/style-var";
 
 //https://react-swipeable-views.com/demos/demos/
 
-const AntTabs = withStyles({
+const AntTabs = withStyles((theme) => ({
+  root:{
+      width: "100vw"
+  },
   indicator: {
     backgroundColor: '#1890ff',
   },
-})(Tabs);
+}))((props) => <Tabs disableRipple {...props} />)
+
 
 const AntTab = withStyles((theme) => ({
   root: {
@@ -63,6 +67,7 @@ const handleChange = (event, value) => {
         </TabDiv>
         
         <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
+
           <div style={{padding: "30px 20px"}}>
           <ServiceCardWrapper>
             {props["cardInfo"].map(({label, ServiceImg, id}) => {
@@ -77,7 +82,22 @@ const handleChange = (event, value) => {
             }
             </ServiceCardWrapper>
           </div>
-          <div>slide n°2</div>
+
+          <div style={{padding: "30px 20px"}}>
+          <ServiceCardWrapper>
+            {props["cardInfo"].map(({label, ServiceImg, id}) => {
+              return <ServiceCard>
+                  <ServiceLink href = {`/service/${tabs[index]["id"]}/${id}`}>
+                    <ServiceImage src = {ServiceImg} />
+                    <Label>{label}</Label>
+                  </ServiceLink> 
+                </ServiceCard>
+              
+            })
+            }
+            </ServiceCardWrapper>
+          </div>
+
         </SwipeableViews>
       </div>
     );

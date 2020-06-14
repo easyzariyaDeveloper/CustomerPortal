@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import {desktop_gradient} from "../../Assets/style-var"
 
 const header_bg_color = "#FFFFFF";
 const base_spacing = 10;
 
 export const HeaderWrapper = styled.div`
   height: 75px;
-  background: ${header_bg_color};
+  background: ${desktop_gradient};
   padding-top: 10px;
 `;
 

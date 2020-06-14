@@ -19,3 +19,5 @@ export const ez_button_color = "#1DA0BC";
 
 
 export const Mfont_color = "#1E3E6C";
+
+export const desktop_gradient = "linear-gradient(85.44deg, #1DA0BC 0.88%, #1DE3B6 89%)";

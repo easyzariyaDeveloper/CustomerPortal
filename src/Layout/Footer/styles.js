@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { white_color, base_spacing } from "../../Assets/style-var";
+import { white_color, base_spacing, ez_button_color, desktop_gradient } from "../../Assets/style-var";
 
 export const FooterContainer = styled.div`
   height: fit-content;
   color: ${white_color};
+  background: ${desktop_gradient}
 `;
 
 export const FooterWrapper = styled.div`
@@ -25,7 +26,7 @@ export const Link = styled.a`
 `;
 
 export const SubFooter = styled.div`
-  background: ${white_color};
+  background: ${ez_button_color};
   height: 40px;
   display: flex;
   justify-content: space-between;
