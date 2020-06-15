@@ -121,14 +121,19 @@ export default (mode) => {
     })
   );
   
-  if(process.env.device === MOBILE){
+  if(process.env.device === MOBILE && mode != DEV){
     plugins.push(new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, "dist/mobile/index.html"),
       template: path.resolve(__dirname, "src", "m-index.html"),
     }));
-  } else {
+  } else if (process.env.device !== MOBILE && mode != DEV) {
     plugins.push(new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, "dist/desktop/index.html"),
+      template: path.resolve(__dirname, "src", "index.html"),
+    }))
+  } else {
+    plugins.push(new HtmlWebpackPlugin({
+      filename: path.resolve(__dirname, "dist/index.html"),
       template: path.resolve(__dirname, "src", "index.html"),
     }))
   }
