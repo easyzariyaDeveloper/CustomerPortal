@@ -1,10 +1,12 @@
 import path from "path";
 import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import UglifyJsPlugin from "uglifyjs-webpack-plugin";
 import devServer from "./webpack-devserver.config";
 
 const DEV = "development";
 const MOBILE = "mobile";
+const PROD = "production";
 
 export default (mode) => {
   let config = {};
@@ -14,7 +16,7 @@ export default (mode) => {
    * Webpack
    */
   config = {
-    mode: DEV,
+    mode,
     entry: {
       index: "./src/index.js",
       vendor: [
@@ -156,6 +158,18 @@ export default (mode) => {
       ...config,
       devtool: "inline-source-map", // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
     };
+  }
+
+  /**
+   * Attaching minifer
+   */
+  if(mode === PROD){
+    config = {
+      ...config,
+      optimization: {
+        minimizer: [new UglifyJsPlugin()],
+      }
+    }
   }
   return config;
 };
