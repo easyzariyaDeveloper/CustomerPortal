@@ -1,5 +1,5 @@
 const defaultPackagesState = {
-    inProgess: false,
+    inProgress: false,
     packages:  {
         "autocare": [],
         "doorstep": []
