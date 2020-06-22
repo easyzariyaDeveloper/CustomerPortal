@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router";
 import MobilePageLayout from "../../../../Layout/MobileView";
-import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv } from "./style";
+import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv,ListImg } from "./style";
 import { Packages, GeneralServices, CarCareServices, ElectricalServices } from "../../mockServiceData";
 import TimerIcon from '@material-ui/icons/Timer';
+
 
 import { useHistory } from "react-router-dom";
 
@@ -80,7 +81,7 @@ function ServiceList(props){
                             </PackagesDetails>
                         </RightDiv>
                         <ButtonDiv>  
-                            <p>=</p>   
+                            
                             <AddButton onClick={() =>{
                                 addPackage(name)
                                 history.push('/login')

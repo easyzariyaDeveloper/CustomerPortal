@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { base_spacing } from "../../../../Assets/style-var";
 
+
 export const MServiceListWrapper= styled.div`
     padding-top:40px;
 `;
@@ -69,3 +70,4 @@ export const ButtonDiv = styled.div`
     bottom: 15px;
     right: 20px;
 `;
+

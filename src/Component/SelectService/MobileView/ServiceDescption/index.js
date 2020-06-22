@@ -7,6 +7,7 @@ import { ObjectList } from "../ServiceList";
 import { FeatureHeader, IndividualService, BottomDiv, AddServiceButton } from "./style";
 import TimerIcon from '@material-ui/icons/Timer';
 
+
 function ServiceDescription(props){
     const {match : {params = {}} = {}} = props;
     console.log(params["mode"], params["type"]);
@@ -28,7 +29,7 @@ function ServiceDescription(props){
         <ImageSlideShow cost={cost} name= {name}/>
         <FeatureHeader>What is included?</FeatureHeader>
         {
-            FullListOfService.map(service => <IndividualService>{service}</IndividualService>)
+            FullListOfService.map(service =><IndividualService>{service}</IndividualService>)
         }
         <BottomDiv>
             <div>

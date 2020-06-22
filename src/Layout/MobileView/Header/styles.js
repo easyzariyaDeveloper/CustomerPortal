@@ -4,18 +4,19 @@ import {
   border_color,
   white_color,
   ez_primary_theme_color,
+  desktop_gradient,
 } from "../../../Assets/style-var";
 import { StyledLink } from "../../../Assets/common-styled";
 import { EZElevation } from "../../../Component/Common/MobileCard";
 
 const menu_width = 240;
-export const mobile_header_height = 40;
+export const mobile_header_height = 55;
 
 export const HeaderWrapper = styled.div`
   height: ${mobile_header_height}px;
   padding: ${base_spacing}px;
   border-bottom: 1px solid ${border_color};
-  background: ${white_color};
+  background: ${desktop_gradient};
   position: relative;
   line-height: ${mobile_header_height}px;
   display: flex;
@@ -28,7 +29,7 @@ export const HeaderWrapper = styled.div`
 export const Hamburger = styled.div`
   color: white;
   font-size: 21px;
-  color: ${ez_primary_theme_color};
+  color: ${white_color};
 `;
 
 export const MenuWrapper = styled.section`
@@ -71,7 +72,7 @@ export const Overlay = styled.div`
 export const PageName = styled.p`
   font-size: 20px;
   color: white;
-  margin-left: ${base_spacing * 3}px;
+  margin: 0 auto;
 `;
 
 export const Link = styled(StyledLink)`
