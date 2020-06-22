@@ -1,8 +1,7 @@
 import { combineReducers } from "redux"
-import ExampleReducer from "./example";
-
+import PackagesReducer from "../Component/SelectService/Data/reducer";
 
 const rootReducer = combineReducers({
-    example: ExampleReducer
+    packages: PackagesReducer
 });
 export default rootReducer;

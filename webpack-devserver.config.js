@@ -1,3 +1,5 @@
+import { API_ENDPOINT } from './src/constant';
+
 const path = require('path');
 
 const devServer = {
@@ -13,6 +15,17 @@ const devServer = {
     //  open: true,
     hot: true,
     publicPath: "/",
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+        "/api/": {
+          target: API_ENDPOINT,
+          secure: false,
+          changeOrigin: true,
+          pathRewrite: function(path){
+              console.log(path, path.replace("/api", ""));
+              return path.replace("/api", "");
+          },
+        },
+    },
 };
 export default devServer;
