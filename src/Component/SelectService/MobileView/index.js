@@ -9,7 +9,7 @@ import { fetchPackages } from "../Data/action";
 function SelectService(props) {
 
     useEffect(() => {
-        props.fetchPackages();
+        props.fetchPackages(props.selectedCarId);
     }, []);
     return<MobilePageLayout>
         <MServiceHeader>Our Services</MServiceHeader>
@@ -24,7 +24,8 @@ function SelectService(props) {
 
 const mapStateToProps = (state) => {
     return {
-        packages: state["packages"]
+        packages: state["packages"],
+        selectedCarId: state?.profile?.selectedCarId,
     }
 };
 

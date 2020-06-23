@@ -19,7 +19,7 @@ export function* fetchPackages({payload}) {
 
 async function getPackages(...args) {
     try {
-        const response = await fetch(`${BASE_API_ENDPOINT}/packages/`);
+        const response = await fetch(`${BASE_API_ENDPOINT}/packages/active?carId=${args}`);
         return response.json()
     } catch (error) {
         console.log(error);
