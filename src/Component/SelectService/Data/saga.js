@@ -1,10 +1,10 @@
 import { call, put } from "redux-saga/effects";
 import { BASE_API_ENDPOINT } from "../../../constant";
 
-export function* fetchPackages({ carId = "" }) {
+export function* fetchPackages({payload}) {
     yield put({ type: "FETCH_PACKAGES" });
     try {
-        const { data } = yield call(getPackages, carId);
+        const { data } = yield call(getPackages, payload?.carId);
         yield put({
             type: 'FETCH_PACKAGES_SUCCESS',
             data: formatPackageResponse(data)

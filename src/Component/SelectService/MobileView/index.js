@@ -11,7 +11,6 @@ function SelectService(props) {
     useEffect(() => {
         props.fetchPackages();
     }, []);
-    
     return<MobilePageLayout>
         <MServiceHeader>Our Services</MServiceHeader>
         <ServiceMPageWrapper>

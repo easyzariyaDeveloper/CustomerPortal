@@ -1,6 +1,9 @@
 
 export function fetchPackages(carId){
     return {
-        type: "REQUEST_PACKAGES_DATA"
+        type: "REQUEST_PACKAGES_DATA",
+        payload:{
+            carId
+        }
     }
 }
