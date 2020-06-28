@@ -37,8 +37,19 @@ function AddCar(props) {
     }, []);
     
 
-    const handleChange = (prop) => (event) => {
-        setVehicle({ ...vehicle, [prop]: event.target.value });
+    const handleChange = (prop) => (event) => { 
+        if(prop == "model"){
+            const selectedCars = props?.models.find(({id}) =>  id  === event.target.value);
+            let updateVehicleData =  {
+                ...vehicle,
+                [prop]: event.target.value,
+                colorPalletes: selectedCars.colours,
+                selectedImage: selectedCars?.colours.length > 0 ? selectedCars.colours[0]?.file :  ""
+            }
+            setVehicle(updateVehicleData);
+        } else {
+            setVehicle({ ...vehicle, [prop]: event.target.value });
+        }
     };
 
     return <MobilePageLayout pageName="Select Your Car">
@@ -49,15 +60,17 @@ function AddCar(props) {
 
             <div style ={{width: "80%", margin: "0 auto"}}>
             <MCarCard>
-                {/* <ColorMPallete>
-                   {
-                       vehicle.model!==""? Car[vehicle.brand].map(carBrand => {
-                        return carBrand.id == vehicle.model ? carBrand.colorvariant.map(carColor =>{
-                            return <ColorSpan color = {carColor.id} onClick = {()=> setVehicle({...vehicle,carColor: carColor.id})} />
-                        }) :null
-                    }):null
-                   } 
-                </ColorMPallete> */}
+                <ColorMPallete>
+                    {
+                        (vehicle.model != "" && vehicle["colorPalletes"].length > 0) ? 
+                        vehicle["colorPalletes"].map(({colourCode, file}) => {
+                            return <ColorSpan 
+                                color = {colourCode.startsWith("#")  ? `${colourCode}` :  `#${colourCode}`} 
+                                onClick = {() => setVehicle({...vehicle, selectedImage: file})}
+                            />
+                        }) : null
+                    }
+                </ColorMPallete>
 
                 <FormControl className={classes.formControl} >
                     <InputLabel id="demo-simple-select-label">Select Brand</InputLabel>
@@ -154,12 +167,10 @@ function AddCar(props) {
 }
 
 function fetchBannerImage(vehicle){
-    if(vehicle["brand"] !== "" && vehicle["model"] != "" && vehicle?.selectedCarByColourImage){
-        return <CarImg src =  { vehicle["selectedCarByColourImage"]} />;
-    } else if(vehicle["brand"] !== "" && vehicle["model"] != "" && vehicle?.selectedCarModelImage){
-        return <CarImg src =  {vehicle["selectedCarModelImage"]} />;
-    } else if(vehicle["brand"]  != ""){
-        return <LogoImg src = {SelectBrandImage.vehicle["brand"].png} />;
+    if(vehicle["brand"] !== "" && vehicle["model"] == "" && vehicle?.selectedImage){
+        return <CarImg src =  { vehicle["selectedImage"]} />;
+    } else if(vehicle["brand"] !== "" && vehicle["model"] != "" && vehicle?.selectedImage){
+        return <CarImg src =  {`data:image/png;base64,${vehicle["selectedImage"]}`} />;
     } else {
         return null;
     }
