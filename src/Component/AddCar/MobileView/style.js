@@ -57,9 +57,9 @@ export const ColorMPallete = styled.div`
 export const ColorSpan = styled.div`
   background-color: ${({ color }) => color};
   border-radius:50%;
-  width:15px;
-  height:15px;
-  border: 0.01px solid black;
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
   margin: 0 5px;
   cursor: pointer;
 `;
