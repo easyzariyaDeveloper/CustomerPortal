@@ -18,7 +18,7 @@ export default () => {
       <Route path="/services" component={SelectService} />
       <Route path="/add-car" component={AddCar} />
       <Route path="/cart" component={Cart} />
-      <Route path="/cart/address"  component  = {Address} />
+      <Route path="/address"  component  = {Address} />
       {/* <Route path="/profile/:id" component={Profile} /> */}
       <Route path="/profile" component={Profile} />
       {/* <Route exact path="/add-address" component={AddressForm} /> */}

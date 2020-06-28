@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { base_spacing } from "../../../Assets/style-var";
 
 
+
 const useStyles = makeStyles(theme => ({
     formControl: {
         margin: `${base_spacing * 1.5}px ${base_spacing}px`,
@@ -157,8 +158,8 @@ function fetchBannerImage(vehicle){
         return <CarImg src =  { vehicle["selectedCarByColourImage"]} />;
     } else if(vehicle["brand"] !== "" && vehicle["model"] != "" && vehicle?.selectedCarModelImage){
         return <CarImg src =  {vehicle["selectedCarModelImage"]} />;
-    } else if(vehicle["brand"]  != "" && vehicle?.selectedBrandImage){
-        return <LogoImg src = {vehicle["selectedBrandImage"]} />;
+    } else if(vehicle["brand"]  != ""){
+        return <LogoImg src = {SelectBrandImage.vehicle["brand"].png} />;
     } else {
         return null;
     }
