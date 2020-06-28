@@ -1,18 +1,20 @@
 import styled from "styled-components";
-import { ez_button_color } from "../../../../Assets/style-var";
+import { ez_button_color, ez_gradient_secondColor } from "../../../../Assets/style-var";
+import { EZElevation } from "../../../Common/MobileCard";
+import "./style.scss";
 
 export const ImageContentDiv = styled.div`
     display: flex;
     justify-content: space-around;
     background: white;
     padding: 5px; 
-    font-weight: 600
+    font-weight: 600;
 `;
 
 export const FeatureHeader = styled.h1`
     font-style:italic;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 19px;
     margin-left: 30px;
     padding: 10px;
@@ -22,11 +24,11 @@ export const FeatureHeader = styled.h1`
 export const IndividualService = styled.p`
     line-height: 25px;
     margin-left: 30px;
-    font-size: 17px;
+    font-size: 14px;
 `;
 
 export const BottomDiv = styled.div`
-    background: ${ez_button_color};
+    background: ${ez_gradient_secondColor};
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -37,19 +39,24 @@ export const BottomDiv = styled.div`
 `;
 
 export const AddServiceButton = styled.button`
-    color:white;
+    color: white;
+    border: none;
+    border-left: 1px solid white;
     background: ${ez_button_color};
-    border: 1px solid white;
-    border-radius: 5px;
-    width: 55px;
-    height: 25px;
+    height: 100%;
+    width: 50%;
+    font-size: 17px;
+    text-transform: uppercase;
+`;
+
+export const TimeDurationWrapper = styled.div`
+    width: 50%;
+    text-align: center;
 `;
 
 export const TickImage = styled.img`
-border-radius: 50%;
-height: 15px;
-vertical-align: middle;
-padding-right: 5px;
+    vertical-align: middle;
+    margin-right: 5px;
 `;
 
 export const ServiceTimePara =  styled.p`

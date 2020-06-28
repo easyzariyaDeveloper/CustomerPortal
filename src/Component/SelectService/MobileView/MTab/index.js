@@ -67,7 +67,7 @@ const handleChange = (event, value) => {
           </AntTabs>
         </TabDiv>
         
-        <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
+        <SwipeableViews index={index} onChangeIndex={handleChangeIndex} style = {{minHeight: "80vh"}}>
           {
             tabs.map(({id}) => {
               return <div style={{padding: "30px 20px"}}>

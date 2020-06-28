@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { base_spacing, ez_button_color } from "../../../../Assets/style-var";
+import { base_spacing, ez_button_color, secondary_font_color } from "../../../../Assets/style-var";
 
 
 export const MServiceListWrapper= styled.div`
@@ -14,7 +14,7 @@ export const ServiceListCard= styled.div`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: ${base_spacing *1.5}px;
     padding: ${base_spacing}px;
-    margin-bottom: 30px;
+    margin-bottom: ${base_spacing * 1.5}px;
     position: relative;
 `;
 export const ServiceListCardWrapper = styled.a`
@@ -51,17 +51,22 @@ export const PackageName = styled.h1`
 `;
 
 export const ServiceMenu = styled.p`
-    font-size: 14px;
-    padding-top: 2px;
+    font-size: 12px;
+    padding-top: 5px;
 `;
 
 export const AddButton = styled.button`
     background: ${ez_button_color};
     border-radius: 6px;
     color: white;
-    width: 55px;
+    width: 60px;
     border-style: none;
-    height: 25px;
+    height: 30px;
+    margin-left: ${base_spacing / 2}px;
+`;
+
+export const ListImg = styled.img`
+    height: 30px;
 `;
 
 export const ButtonDiv = styled.div`
@@ -72,11 +77,12 @@ export const ButtonDiv = styled.div`
 `;
 
 export const TimerPara= styled.p`
-    color: #4B4B4B;
+    color: ${secondary_font_color};
     display: inline-block;
     padding: 5px;
     vertical-align: baseline;
-    font-size: 15px
+    font-size: 13px;
+    padding-top: 8px;
 `;
 
 export const TickImg = styled.img`
@@ -87,8 +93,4 @@ padding-left: 5px
 export const ServiceCount = styled.p`
 padding-top: 8px;
 font-size: 11px
-`;
-
-export const ListImg = styled.img`
-    height: 28px;
 `;

@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import MobilePageLayout from "../../../../Layout/MobileView";
 import { withRouter } from "react-router";
 import { ImageSlideShow } from "./ImageSlideShow";
-import { FeatureHeader, IndividualService, BottomDiv, AddServiceButton, TickImage, ServiceTimePara } from "./style";
+import { FeatureHeader, IndividualService, BottomDiv, AddServiceButton, TickImage, ServiceTimePara, TimeDurationWrapper } from "./style";
 import TimerIcon from '@material-ui/icons/Timer';
 import { connect } from "react-redux";
 import { fetchPackages} from "../../Data/action";
@@ -39,10 +39,10 @@ function ServiceDescription(props) {
                         }
 
                         <BottomDiv>
-                            <div>
+                            <TimeDurationWrapper>
                                 <TimerIcon style={{ color: "white", fontSize: "25px", verticalAlign: "bottom" }} />
                                 <ServiceTimePara>{subPack.serviceTime > 0 ? subPack.serviceTime / 60 : 0}hour</ServiceTimePara>
-                            </div>
+                            </TimeDurationWrapper>
 
                             <AddServiceButton>Add</AddServiceButton>
 

@@ -17,6 +17,7 @@ export const ez_primary_theme_color = "#1E3E6C";
 export const ez_secondary_theme_color = "#5E7AA3";
 export const ez_button_color = "#1DA0BC";
 export const disabled_button_color = "#BDBDBD";
+export const ez_gradient_secondColor = "#1DE3B6";
 
 
 export const Mfont_color = "#1E3E6C";

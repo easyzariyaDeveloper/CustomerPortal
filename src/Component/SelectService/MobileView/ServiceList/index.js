@@ -49,7 +49,7 @@ console.log(serviceId,serviceKeyId)
                     props.packages[serviceId].map(pack => {
                         return pack.id == serviceKeyId ? pack.packages.map(subPacks => {
                             const { name, serviceTime, images, price, code, services } = subPacks;
-                            return <ServiceListCard>
+                            return <ServiceListCard key = {code}>
                                 <ServiceListCardWrapper href = {`/service-description/${serviceId}/${code}`}>
                                 <LeftDiv>
                                     <ServiceListImages src={images ? images[0] : defaultImg} alt="image" />
@@ -58,8 +58,10 @@ console.log(serviceId,serviceKeyId)
                                 <RightDiv>
                                     <PackagesDetails>
                                         <PackageName>{name}</PackageName>
-                                        <TimerIcon style = {{color: "#4B4B4B", fontSize:"13px"}}/>
-                                        <TimerPara>{serviceTime > 0 ? serviceTime / 60 : 0}hour</TimerPara>
+                                        <TimerPara>
+                                            <TimerIcon style = {{color: "#4B4B4B", fontSize:"12px", marginRight: "5px"}}/>
+                                            {serviceTime > 0 ? serviceTime / 60 : 0}hour
+                                        </TimerPara>
 
                                         
                                         <ServiceMenu>{services[0].name}<TickImg src= {Tick}/></ServiceMenu>
