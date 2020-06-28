@@ -3,7 +3,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
-import {Mfont_color} from "../../../../Assets/style-var";
+import {Mfont_color, ez_button_color} from "../../../../Assets/style-var";
 import Signup from '../TextComponent/Signup';
 import Login from '../TextComponent/Login';
 import { TermsPara,SignupLogInButton } from './style';
@@ -93,7 +93,7 @@ const handleChange = (event, value) => {
               />
               <label>Remember Me</label>
               </div>
-              <a style= {{textDecoration:"none", color: "#1DA0BC"}}href = "#">Forgot Password?</a>
+              <a style= {{textDecoration:"none", color: ez_button_color}}href = "#">Forgot Password?</a>
             </div>
 
             <div style= {{textAlign:"center", margin: "40px 0"}}>

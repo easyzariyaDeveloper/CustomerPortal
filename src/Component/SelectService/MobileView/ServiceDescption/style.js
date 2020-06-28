@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ez_button_color } from "../../../../Assets/style-var";
 
 export const ImageContentDiv = styled.div`
     display: flex;
@@ -25,7 +26,7 @@ export const IndividualService = styled.p`
 `;
 
 export const BottomDiv = styled.div`
-    background: #1DA0BC;
+    background: ${ez_button_color};
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -37,7 +38,7 @@ export const BottomDiv = styled.div`
 
 export const AddServiceButton = styled.button`
     color:white;
-    background: #1DA0BC;
+    background: ${ez_button_color};
     border: 1px solid white;
     border-radius: 5px;
     width: 55px;

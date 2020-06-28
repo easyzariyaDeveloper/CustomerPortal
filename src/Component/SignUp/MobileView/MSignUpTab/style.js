@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ez_button_color } from "../../../../Assets/style-var";
 
 export const TermsPara = styled.p`
 font-style: italic;
@@ -10,7 +11,7 @@ font-weight:300
 export const SignupLogInButton = styled.button`
     border: none;
     color: white;
-    background: #1DA0BC;
+    background: ${ez_button_color};
     border-radius: 5px;
     height: 35px;
     width: 100px;

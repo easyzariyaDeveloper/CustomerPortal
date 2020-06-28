@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { desktop_gradient } from "../../Assets/style-var";
 
 export const OtpPageWrapper = styled.div`
-    background:linear-gradient(89.02deg, #1DA0BC 0.88%, #1DE3B6 89%);
+    background: ${desktop_gradient};
     padding:20px;
     height: calc(100vh - 64px);
 

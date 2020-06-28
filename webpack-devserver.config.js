@@ -16,6 +16,21 @@ const devServer = {
     hot: true,
     publicPath: "/",
     historyApiFallback: true,
+    // before: function (app) {
+    //     app.use(cookieParser());
+    //     app.use(function (req, res, next) {
+    //       if (req.url.includes("assets")) {
+    //         next();
+    //       } else if (
+    //         !["/login"].includes(req.url) &&
+    //         !req.cookies["authorization"]
+    //       ) {
+    //         res.redirect("/login");
+    //       } else {
+    //         next();
+    //       }
+    //     });
+    // },
     proxy: {
         "/api/": {
           target: API_ENDPOINT,

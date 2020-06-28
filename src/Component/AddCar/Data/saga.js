@@ -1,12 +1,13 @@
 import { call, put } from "redux-saga/effects";
-import { BASE_API_ENDPOINT } from "../../../constant";
-import { getDataFromAPI } from "../../../Constants/apiCallWrapper";
+import APIWrapper from "../../../Constants/ApiWrapper";
 
 
 export function* fetchBrandForCars() {
     yield put({ type: "FETCH_BRAND" });
     try {
-        const { data } = yield call(getDataFromAPI, "/cars/brands");
+        const { data } = yield call(APIWrapper, {
+            url: "/cars/brands"
+        });
         yield put({
             type: 'FETCH_BRAND_SUCCESS',
             data: data
@@ -23,7 +24,9 @@ export function* fetchBrandForCars() {
 export function* fetchCarListByBrand({payload}) {
     yield put({ type: "FETCH_CAR_MODEL" });
     try {
-        const { data } = yield call(getDataFromAPI,`/cars/brand?brand=${payload?.brand}`);
+        const { data } = yield call(APIWrapper, {
+            url: `/cars/brand?brand=${payload?.brand}`
+        });
         yield put({
             type: 'FETCH_CAR_MODEL_SUCCESS',
             data: data

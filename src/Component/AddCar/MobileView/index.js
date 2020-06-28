@@ -10,12 +10,14 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { fetchBrandForCars,fetchCarListByBrand } from "../Data/action";
 import { connect } from "react-redux";
+import { base_spacing } from "../../../Assets/style-var";
 
 
 const useStyles = makeStyles(theme => ({
     formControl: {
-        margin: theme.spacing(1),
-        minWidth: 230
+        margin: `${base_spacing * 1.5}px ${base_spacing}px`,
+        minWidth: 230,
+        display: `flex`
     }
 }));
 
@@ -38,22 +40,10 @@ function AddCar(props) {
         setVehicle({ ...vehicle, [prop]: event.target.value });
     };
 
-    console.log(vehicle.carColor)
-
-
     return <MobilePageLayout pageName="Select Your Car">
         <MAddCarPageWrapper>
             <ImageMWrapper>
-               {/* {
-                   vehicle.brand !=="" && vehicle.model == ""?(Brands.map(carBrand=>{
-                    return carBrand.id == vehicle.brand ? <LogoImg src = {carBrand.logo}/> : null
-                   })): vehicle.brand!=="" && vehicle.model!=="" ? (Car[vehicle.brand].map(modelVariant=> {
-                    return vehicle.model == modelVariant.id ? modelVariant.colorvariant.map(carColorOject => {
-                        return carColorOject.id == vehicle.carColor? <CarImg src = {carColorOject.url}/>: 
-                        null
-                    } ):null
-                })):null
-               } */}
+                {fetchBannerImage(vehicle)}
             </ImageMWrapper>
 
             <div style ={{width: "80%", margin: "0 auto"}}>
@@ -81,7 +71,7 @@ function AddCar(props) {
                         autoWidth
                     >   
                     {props.brands? props.brands.map((carBrand) =>{
-                        return <MenuItem value = {carBrand}>{carBrand}</MenuItem>
+                        return <MenuItem value = {carBrand} key = {carBrand}>{carBrand}</MenuItem>
                     }) :null}
                     </Select>
                 </FormControl>
@@ -96,32 +86,18 @@ function AddCar(props) {
                         autoWidth
                     >   
                     {vehicle.brand !=="" && props.models ? props.models.map(modelVariant=>{
-                        return <MenuItem value = {modelVariant.id}>{modelVariant.model}</MenuItem>  
+                        return <MenuItem 
+                            value = {modelVariant.id}
+                            key = {modelVariant.id}
+                            >
+                                {modelVariant.model}
+                            </MenuItem>  
                     })
                     : undefined}
                     </Select>
                 </FormControl>
-
-                <FormControl className={classes.formControl} disabled = {vehicle.model==""}>
-                    <InputLabel id="demo-simple-select-label">Select Type</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={vehicle.type}
-                        onChange={handleChange('type')}
-                        autoWidth
-                    >
-                        {/* {
-                            vehicle.model!=="" && props.models ? Car[vehicle.brand].map(carType=>{
-                                return carType.id == vehicle.model ? carType.fuelvariant.map(type => {
-                                    return <MenuItem value = {type.id}>{type.name}</MenuItem> }):null
-                                
-                            }):undefined
-                        } */}
-                    </Select>
-                </FormControl>
-
-                <FormControl className={classes.formControl} disabled = {vehicle.type==""}>
+                
+                <FormControl className={classes.formControl} disabled = {vehicle.model == ""}>
                     <InputLabel id="demo-simple-select-label">Select Fuel Type</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -131,21 +107,61 @@ function AddCar(props) {
                         autoWidth
                     >   
                     {
-                        vehicle.model!=="" && props.models? props.model.map(carType=>{
+                        vehicle.model!=="" && props.models ? props.models.map(carType => {
                             return carType.id == vehicle.model ? carType.variants.map(variantElement=>{
-                                return <MenuItem value = {variantElement.id}>{variantElement.fuelType}</MenuItem>
+                                return <MenuItem 
+                                    value = {variantElement.id}
+                                    key = {variantElement.id}
+                                    >
+                                        {variantElement.fuelType}
+                                    </MenuItem>
                             }) :null
-                            
                         }):undefined
                     }
                     </Select>
                 </FormControl>
 
-                <ConfirmButton disabled = {vehicle.fuelType==""}>Confirm</ConfirmButton>
+
+                <FormControl className={classes.formControl} disabled ={vehicle.model == ""}>
+                    <InputLabel id="demo-simple-select-label">Select Type</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={vehicle.type}
+                        onChange={handleChange('type')}
+                        autoWidth
+                    >
+                        {
+                            vehicle.fuelType!=="" && props.models ? props.models.map(carType=>{
+                                return carType.id == vehicle.model ? carType.variants.map(variantElement => {
+                                    return variantElement.id == vehicle.fuelType  ?  variantElement.subCategory.map(type=> {
+                                    return <MenuItem value = {type}>{type}</MenuItem> }):null
+                            }):null
+                        }):undefined
+                    }
+                    </Select>
+                </FormControl>
+                
+                <ConfirmButton disabled = {!vehicle["brand"] || !vehicle["model"] || !vehicle["fuelType"] || !vehicle["type"]}
+                onClick = {() => {
+                    console.log(vehicle);
+                }}> Confirm </ConfirmButton>
             </MCarCard>
             </div>
         </MAddCarPageWrapper>
     </MobilePageLayout>
+}
+
+function fetchBannerImage(vehicle){
+    if(vehicle["brand"] !== "" && vehicle["model"] != "" && vehicle?.selectedCarByColourImage){
+        return <CarImg src =  { vehicle["selectedCarByColourImage"]} />;
+    } else if(vehicle["brand"] !== "" && vehicle["model"] != "" && vehicle?.selectedCarModelImage){
+        return <CarImg src =  {vehicle["selectedCarModelImage"]} />;
+    } else if(vehicle["brand"]  != "" && vehicle?.selectedBrandImage){
+        return <LogoImg src = {vehicle["selectedBrandImage"]} />;
+    } else {
+        return null;
+    }
 }
 
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { base_spacing } from "../../../../Assets/style-var";
+import { base_spacing, ez_button_color } from "../../../../Assets/style-var";
 
 
 export const MServiceListWrapper= styled.div`
@@ -56,7 +56,7 @@ export const ServiceMenu = styled.p`
 `;
 
 export const AddButton = styled.button`
-    background: #1DA0BC;
+    background: ${ez_button_color};
     border-radius: 6px;
     color: white;
     width: 55px;

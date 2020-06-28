@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {ez_button_color} from "../../../Assets/style-var";
 
 export const MCartPageWrapper = styled.div`
 padding: 20px;
@@ -127,10 +128,9 @@ font-weight:300;
 
 `;
 
-
 export const CheckOutButton = styled.button`
     height: 40px;
-    background:#1DA0BC;;
+    background:${ez_button_color};
     border-radius: 5px;
     border: none;
     color:white;

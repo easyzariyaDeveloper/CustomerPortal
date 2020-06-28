@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import SelectYourCar from "../../../Assets/img/SelectYourCar.jpg"
-import { base_spacing } from "../../../Assets/style-var";
+import { ez_button_color, disabled_button_color } from "../../../Assets/style-var";
 
 
 export const MAddCarPageWrapper = styled.div`
@@ -25,16 +25,16 @@ export const MCarCard = styled.div`
 `;
 
 export const ConfirmButton = styled.button`
-  background: #BDBDBD;
   border-radius: 6px;
   margin: 20px auto;
   display: block;
   color: white;
-  height: 30px;
-  width: 90px;
+  height: 40px;
+  width: 100%;
   border: none;
   cursor:pointer;
-`; // background-color: ${(disabled == false? blue :red)};
+  background-color: ${({disabled}) => disabled ? disabled_button_color : ez_button_color}
+`;
 
 export const LogoImg = styled.img`
   height:100px;

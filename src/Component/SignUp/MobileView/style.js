@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import AccountImg from "../../../Assets/img/accountImg.jpg"
-import { base_spacing, white_color } from "../../../Assets/style-var";
+import { base_spacing, white_color, desktop_gradient } from "../../../Assets/style-var";
 
 
 export const AccountBackgroundImg = styled.div`
     background: url(${AccountImg});
     background-size: cover;
-    height: ${base_spacing*23}px;
+    height: ${base_spacing * 23}px;
     position:relative;
 `; 
 
@@ -15,8 +15,8 @@ export const AccountImgOverlay = styled.div`
     top: 0px;
     left: 0;
     right: 0;
-    height: ${base_spacing*23}px;
-    background: linear-gradient(89.02deg, #1DA0BC 0.88%, #1DE3B6 89%);
+    height: ${base_spacing * 23}px;
+    background: ${desktop_gradient};
     opacity: 0.7;
 `;
 

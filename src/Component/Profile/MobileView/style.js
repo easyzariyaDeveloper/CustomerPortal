@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { base_spacing, ez_button_color, white_color } from "../../../Assets/style-var";
+import { base_spacing, ez_button_color, white_color, desktop_gradient } from "../../../Assets/style-var";
 
 export const ProfilePicDiv = styled.div`
-    background: linear-gradient(89.02deg, #1DA0BC 0.88%, #1DE3B6 89%);
+    background: ${desktop_gradient};
     height: ${base_spacing * 26.5}px;
     border-bottom-left-radius: ${base_spacing/5}px;
     border-bottom-right-radius:${base_spacing/5}px;
