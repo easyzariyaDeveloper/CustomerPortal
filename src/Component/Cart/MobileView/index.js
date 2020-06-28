@@ -83,7 +83,7 @@ export default function Cart(){
                 <h1>Rs {(getPrice(mServiceList) - CouponCodes[0].newUser)}</h1>
             </TotalDiv>
 
-            <div style = {{padding: "20px 0"}}><CheckOutButton>Checkout</CheckOutButton></div>
+            <div style = {{padding: "20px 0"}}><CheckOutButton href  = "/cart/address">Checkout</CheckOutButton></div>
             
         </CartMCard> 
 

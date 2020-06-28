@@ -128,7 +128,7 @@ font-weight:300;
 
 `;
 
-export const CheckOutButton = styled.button`
+export const CheckOutButton = styled.a`
     height: 40px;
     background:${ez_button_color};
     border-radius: 5px;
@@ -137,4 +137,5 @@ export const CheckOutButton = styled.button`
     position: absolute;
     bottom:10px;
     right:20px;
+    text-decoration:none;
 `;

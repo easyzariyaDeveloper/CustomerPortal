@@ -9,6 +9,7 @@ import ServiceList from "../Component/SelectService/MobileView/ServiceList";
 import ServiceDescription from "../Component/SelectService/MobileView/ServiceDescption";
 import Account from "../Component/SignUp/MobileView";
 import Profile from "../Component/Profile/MobileView";
+import Address from "../Component/Cart/MobileView/Address";
 
 
 export default () => {
@@ -17,6 +18,7 @@ export default () => {
       <Route path="/services" component={SelectService} />
       <Route path="/add-car" component={AddCar} />
       <Route path="/cart" component={Cart} />
+      <Route path="/cart/address"  component  = {Address} />
       {/* <Route path="/profile/:id" component={Profile} /> */}
       <Route path="/profile" component={Profile} />
       {/* <Route exact path="/add-address" component={AddressForm} /> */}
