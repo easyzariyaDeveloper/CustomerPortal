@@ -43,3 +43,17 @@ export const AddServiceButton = styled.button`
     width: 55px;
     height: 25px;
 `;
+
+export const TickImage = styled.img`
+border-radius: 50%;
+height: 15px;
+vertical-align: middle;
+padding-right: 5px;
+`;
+
+export const ServiceTimePara =  styled.p`
+color: white;
+display: inline-block;
+padding: 5px;
+font-size: 16px;
+`;

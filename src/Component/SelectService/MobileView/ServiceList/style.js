@@ -3,7 +3,7 @@ import { base_spacing } from "../../../../Assets/style-var";
 
 
 export const MServiceListWrapper= styled.div`
-    padding-top:40px;
+    padding:40px 0;
 `;
 
 export const ServiceListCard= styled.div`
@@ -25,11 +25,10 @@ export const ServiceListCardWrapper = styled.a`
 `;
 
 export const LeftDiv = styled.div`
-    padding-right: 20px;
+    padding-right: 15px;
 `;
 
 export const RightDiv = styled.div`
-    width:180px;
     padding-right:20px;
 `;
 
@@ -39,6 +38,7 @@ export const CostPara = styled.p`
     text-align: center;
     font-weight:500;
     padding: 10px 5px 5px 5px;
+    font-size:15px;
 
 `;
 
@@ -51,8 +51,8 @@ export const PackageName = styled.h1`
 `;
 
 export const ServiceMenu = styled.p`
-    padding-top: 3px;
-    font-size: 15px;
+    font-size: 14px;
+    padding-top: 2px;
 `;
 
 export const AddButton = styled.button`
@@ -67,7 +67,28 @@ export const AddButton = styled.button`
 export const ButtonDiv = styled.div`
     display:flex;    
     position: absolute;
-    bottom: 15px;
+    bottom: 10px;
     right: 20px;
 `;
 
+export const TimerPara= styled.p`
+    color: #4B4B4B;
+    display: inline-block;
+    padding: 5px;
+    vertical-align: baseline;
+    font-size: 15px
+`;
+
+export const TickImg = styled.img`
+vertical-align: middle;
+padding-left: 5px
+`;
+
+export const ServiceCount = styled.p`
+padding-top: 8px;
+font-size: 11px
+`;
+
+export const ListImg = styled.img`
+    height: 28px;
+`;

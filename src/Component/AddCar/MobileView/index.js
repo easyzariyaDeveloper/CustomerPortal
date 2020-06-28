@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import MobilePageLayout from "../../../Layout/MobileView"
 import { ImageMWrapper, MAddCarPageWrapper, MCarCard, ConfirmButton, LogoImg, ColorMPallete, ColorSpan, CarImg } from "./style";
 import { Brands, Car } from "../mockData";
@@ -8,7 +8,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
+import { fetchBrandForCars,fetchCarListByBrand } from "../Data/action";
+import { connect } from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function AddCar() {
+function AddCar(props) {
     const classes = useStyles();
     const [vehicle, setVehicle] = React.useState({
         brand: "",
@@ -27,6 +28,10 @@ export default function AddCar() {
         fuelType: "",
         carColor:""
     });
+
+    useEffect(() => {
+        props.fetchBrandForCars();
+    }, []);
     
 
     const handleChange = (prop) => (event) => {
@@ -34,23 +39,12 @@ export default function AddCar() {
     };
 
     console.log(vehicle.carColor)
-// vehicle.brand!=="" && vehicle.model!=="" ? (Car[vehicle.brand].map(modelVariant=> {
-//     return vehicle.model==modelVariant.id ? <LogoImg src = {modelVariant.colorvariant[2].url}/>:null
-// })):null
 
-
-// vehicle.brand !==""?(Brands.map(carBrand=>{
-//     return carBrand.id == vehicle.brand ? <LogoImg src = {carBrand.logo}/> : null
-//    })): null
-
-
-// vehicle.model==modelVariant.id && vehicle.carColor == modelVariant[colorvariant.id]?
-//                      <LogoImg src = {modelVariant[colorvariant.url]}/>:null
 
     return <MobilePageLayout pageName="Select Your Car">
         <MAddCarPageWrapper>
             <ImageMWrapper>
-               {
+               {/* {
                    vehicle.brand !=="" && vehicle.model == ""?(Brands.map(carBrand=>{
                     return carBrand.id == vehicle.brand ? <LogoImg src = {carBrand.logo}/> : null
                    })): vehicle.brand!=="" && vehicle.model!=="" ? (Car[vehicle.brand].map(modelVariant=> {
@@ -59,12 +53,12 @@ export default function AddCar() {
                         null
                     } ):null
                 })):null
-               }
+               } */}
             </ImageMWrapper>
 
             <div style ={{width: "80%", margin: "0 auto"}}>
             <MCarCard>
-                <ColorMPallete>
+                {/* <ColorMPallete>
                    {
                        vehicle.model!==""? Car[vehicle.brand].map(carBrand => {
                         return carBrand.id == vehicle.model ? carBrand.colorvariant.map(carColor =>{
@@ -72,7 +66,7 @@ export default function AddCar() {
                         }) :null
                     }):null
                    } 
-                </ColorMPallete>
+                </ColorMPallete> */}
 
                 <FormControl className={classes.formControl} >
                     <InputLabel id="demo-simple-select-label">Select Brand</InputLabel>
@@ -80,12 +74,15 @@ export default function AddCar() {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={vehicle.brand}
-                        onChange={handleChange('brand')}
+                        onChange={(event) => {
+                            setVehicle({...vehicle,brand: event.target.value});
+                            props.fetchCarListByBrand(event.target.value)
+                        }}
                         autoWidth
                     >   
-                    {Brands.map((carBrand) =>{
-                        return <MenuItem value = {carBrand.id}>{carBrand.name}</MenuItem>
-                    })}
+                    {props.brands? props.brands.map((carBrand) =>{
+                        return <MenuItem value = {carBrand}>{carBrand}</MenuItem>
+                    }) :null}
                     </Select>
                 </FormControl>
 
@@ -98,8 +95,8 @@ export default function AddCar() {
                         onChange={handleChange('model')}
                         autoWidth
                     >   
-                    {vehicle.brand!==""? Car[vehicle.brand].map(modelVariant=>{
-                        return <MenuItem value = {modelVariant.id}>{modelVariant.modelname}</MenuItem>  
+                    {vehicle.brand !=="" && props.models ? props.models.map(modelVariant=>{
+                        return <MenuItem value = {modelVariant.id}>{modelVariant.model}</MenuItem>  
                     })
                     : undefined}
                     </Select>
@@ -114,13 +111,13 @@ export default function AddCar() {
                         onChange={handleChange('type')}
                         autoWidth
                     >
-                        {
-                            vehicle.model!==""? Car[vehicle.brand].map(carType=>{
+                        {/* {
+                            vehicle.model!=="" && props.models ? Car[vehicle.brand].map(carType=>{
                                 return carType.id == vehicle.model ? carType.fuelvariant.map(type => {
                                     return <MenuItem value = {type.id}>{type.name}</MenuItem> }):null
                                 
                             }):undefined
-                        }
+                        } */}
                     </Select>
                 </FormControl>
 
@@ -134,9 +131,9 @@ export default function AddCar() {
                         autoWidth
                     >   
                     {
-                        vehicle.type!==""? Car[vehicle.brand].map(carType=>{
-                            return carType.id == vehicle.model ? carType.variant[vehicle.type].map(variantElement=>{
-                                return <MenuItem value = {variantElement}>{variantElement}</MenuItem>
+                        vehicle.model!=="" && props.models? props.model.map(carType=>{
+                            return carType.id == vehicle.model ? carType.variants.map(variantElement=>{
+                                return <MenuItem value = {variantElement.id}>{variantElement.fuelType}</MenuItem>
                             }) :null
                             
                         }):undefined
@@ -152,9 +149,21 @@ export default function AddCar() {
 }
 
 
+const mapStateToProps = (state) => {
+    return {
+        brands: state?.brands?.brands,
+        models: state?.cars?.carModel
+    }
+};
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchBrandForCars: () => { dispatch(fetchBrandForCars()) },
+        fetchCarListByBrand: (brand ="") =>{dispatch(fetchCarListByBrand(brand))}
+    }
+}
 
-
+export default connect(mapStateToProps, mapDispatchToProps)(AddCar);
 
 
 

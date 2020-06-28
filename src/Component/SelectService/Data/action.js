@@ -7,3 +7,20 @@ export function fetchPackages(carId){
         }
     }
 }
+
+export const addSubPackage = (code,subPackage) => {
+    return {
+      type: "ADD_SUBPACKAGE",
+      payload: {
+        code:code,
+        subPackage:subPackage
+      
+      }
+  }
+}
+
+export const removeSubPackage = () => {
+  return {
+    type: "REMOVE_SUBPACKAGE",
+    }
+}

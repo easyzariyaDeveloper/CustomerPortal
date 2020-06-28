@@ -1,99 +1,109 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import MobilePageLayout from "../../../../Layout/MobileView";
-import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv,ListImg } from "./style";
-import { Packages, GeneralServices, CarCareServices, ElectricalServices } from "../../mockServiceData";
+import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg} from "./style";
+import { connect } from "react-redux";
+import { fetchPackages, addSubPackage, removeSubPackage } from "../../Data/action";
+import defaultImg from "../../../../Assets/img/gold.jpg";
+import Tick from "../../../../Assets/img/gradient tick.jpg"
+import Lists from "../../../../Assets/img/lists.jpg"
 import TimerIcon from '@material-ui/icons/Timer';
-
 
 import { useHistory } from "react-router-dom";
 
 
 
 
-export const ObjectList = (array) => array.reduce((accumulator,service) =>{
-    const {name = "", id = ""} = service;
+export const ObjectList = (array) => array.reduce((accumulator, service) => {
+    const { name = "", id = "" } = service;
     accumulator = {
         ...accumulator,
         [id]: name
     };
     return accumulator;
-},{});
+}, {});
 
 
 
 
-function ServiceList(props){
-    const {match : {params = {}} = {}} = props;
+function ServiceList(props) {
+    const { match: { params = {} } = {} } = props;
     console.log(params["mode"], params["type"]);
+
+
+    useEffect(() => {
+        props.fetchPackages(props.selectedCarId);
+    }, []);
 
     const [packageState, addPackage] = useState(null);
 
-    const serviceId = params["type"];
-    const history = useHistory();
+    const serviceId = params["mode"];
+    const serviceKeyId = params["type"]
 
-    if (serviceId) {   
-        const packs = Packages[serviceId];
-        const servicePackage = serviceId == "general" ? GeneralServices : serviceId =="acAndElectrical" ? ElectricalServices : CarCareServices;
-        
-        // const ObjectList = servicePackage.reduce((accumulator,service) =>{
-        //     const {name = "", id = ""} = service;
-        //     accumulator = {
-        //         ...accumulator,
-        //         [id]: name
-        //     };
-        //     return accumulator;
-        // },{});
+console.log(serviceId,serviceKeyId)
+    if (serviceId) {
 
-        ObjectList(servicePackage);
-        
-
-        return<MobilePageLayout>
+        return <MobilePageLayout>
             <MServiceListWrapper>
-                {Object.entries(packs).map(pack => {
-                    const {name,duration,cost,id,ServiceListImg,services} = pack[1];
-                    let serviceNameArray = [];
-                    
-                return <ServiceListCard>
-                    <ServiceListCardWrapper href = {`/service-description/${serviceId}/${id}`}>
-                        <LeftDiv>
-                            <ServiceListImages src={ServiceListImg} alt="image" />
-                            <CostPara>Rs.{cost}</CostPara>
-                        </LeftDiv>
-                        <RightDiv>
-                            <PackagesDetails>
-                                <PackageName>{name}</PackageName>
-                                <TimerIcon style={{ color: "#4B4B4B", fontSize: "13px" }} />
-                                <p style={{ color: "#4B4B4B", display: "inline-block", padding: "5px", verticalAlign: "baseline", fontSize: "15px" }}>{duration / 60}hour</p>
-                                {services.map((service, index) => {
-                                    const fullServiceName = ObjectList(servicePackage)[service];
-                                    serviceNameArray.push(fullServiceName);
+                {
+                    props.packages[serviceId].map(pack => {
+                        return pack.id == serviceKeyId ? pack.packages.map(subPacks => {
+                            const { name, serviceTime, images, price, code, services } = subPacks;
+                            return <ServiceListCard>
+                                <ServiceListCardWrapper href = {`/service-description/${serviceId}/${code}`}>
+                                <LeftDiv>
+                                    <ServiceListImages src={images ? images[0] : defaultImg} alt="image" />
+                                    <CostPara>Rs.{price}</CostPara>
+                                </LeftDiv>
+                                <RightDiv>
+                                    <PackagesDetails>
+                                        <PackageName>{name}</PackageName>
+                                        <TimerIcon style = {{color: "#4B4B4B", fontSize:"13px"}}/>
+                                        <TimerPara>{serviceTime > 0 ? serviceTime / 60 : 0}hour</TimerPara>
 
-                                })}
+                                        
+                                        <ServiceMenu>{services[0].name}<TickImg src= {Tick}/></ServiceMenu>
+                                        <ServiceMenu>{services[1].name}<TickImg src= {Tick}/></ServiceMenu>
+                                        <ServiceMenu>{services[2].name}<TickImg src= {Tick}/></ServiceMenu>
+                                        {services.length - 3 > 0 ? <ServiceCount>+{services.length - 3} more services</ServiceCount> : ""}
+                                    </PackagesDetails>
+                                </RightDiv>
 
-                                
-                                <ServiceMenu>{serviceNameArray[0]} </ServiceMenu>
-                                <ServiceMenu>{serviceNameArray[1]} </ServiceMenu>
-                                <ServiceMenu>{serviceNameArray[2]} </ServiceMenu>
-                                {serviceNameArray.length - 3 > 0 ? <p style= {{paddingTop: "3px", fontSize: "13px"}}>+{serviceNameArray.length - 3} more services</p> : ""}
-                                
-                                
-                            </PackagesDetails>
-                        </RightDiv>
-                        <ButtonDiv>  
-                            
-                            <AddButton onClick={() =>{
-                                addPackage(name)
-                                history.push('/login')
-                            }}>ADD</AddButton>
-                            </ButtonDiv> 
-                    </ServiceListCardWrapper>
-                </ServiceListCard>
-        })}    
+                                <ButtonDiv>
+                                    <ListImg src =  {Lists} />
+                                    {props.subPackages?<AddButton onClick={() => props.removeSubPackage()}>Remove</AddButton>:<AddButton onClick={() => props.addSubPackage({code},{name})}>ADD</AddButton>}
+                                </ButtonDiv>
+                                </ServiceListCardWrapper>
+                            </ServiceListCard>
+                        }) : null
+                    })
+                }
             </MServiceListWrapper>
         </MobilePageLayout>
     }
-   
+
 }
 
-export default withRouter(ServiceList);
+
+
+const mapStateToProps = (state) => {
+    return {
+        inProgress: state?.packages?.["inProgress"],
+        packages: state?.packages?.["packages"],
+        selectedCarId: state?.profile?.selectedCarId,
+        subPackages: state?.subPackages?.subPackageLabel
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchPackages: (carId = "") => { dispatch(fetchPackages(carId)) },
+        addSubPackage: (code = "",subPackage ="") => { dispatch(addSubPackage(code,subPackage)) },
+        removeSubPackage: () => { dispatch(removeSubPackage()) }
+
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ServiceList));
+
+//export default withRouter (ServiceList);

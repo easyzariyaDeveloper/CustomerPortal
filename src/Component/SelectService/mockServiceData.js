@@ -275,10 +275,10 @@ export const ElectricalServices = [
 // export const MobileTab = ["EZ Autocare", "Doorstep"];
 
 export const ServiceTabs = [{
-  id: "autocare",
+  id: "autoCare",
   label: "EZ Autocare"
 },{
-  id: "doorstep",
+  id: "doorStep",
   label: "Doorstep"
 }]
 

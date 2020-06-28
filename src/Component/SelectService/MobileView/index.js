@@ -11,20 +11,23 @@ function SelectService(props) {
     useEffect(() => {
         props.fetchPackages(props.selectedCarId);
     }, []);
+    
     return<MobilePageLayout>
         <MServiceHeader>Our Services</MServiceHeader>
-        <ServiceMPageWrapper>
+        {!props.inProgress ? <ServiceMPageWrapper>
             <MTab 
                 tabs = {ServiceTabs}
-                cardInfo = {Tabs}
+                cardInfo = {props?.packages}
             />
-        </ServiceMPageWrapper>
+        </ServiceMPageWrapper> : null}
+        
     </MobilePageLayout>
 }
 
 const mapStateToProps = (state) => {
     return {
-        packages: state["packages"],
+        inProgress: state?.packages?.["inProgress"],
+        packages: state?.packages?.["packages"],
         selectedCarId: state?.profile?.selectedCarId,
     }
 };

@@ -1,8 +1,8 @@
 const defaultPackagesState = {
     inProgress: false,
     packages:  {
-        "autocare": [],
-        "doorstep": []
+        "autoCare": [],
+        "doorStep": []
     },
     error:  {},
     carId: ""
@@ -32,5 +32,33 @@ export default function PackagesReducer(state = defaultPackagesState, {type, dat
         break;
         default:
             return state
+    }
+}
+
+
+const defaultSubPackageState = {
+    id: "",
+    subPackageLabel :""
+}
+
+export function SubPackageReducer(state = defaultSubPackageState, {type,code,data}) {
+    switch(type){
+        case "ADD_SUBPACKAGE":
+            return{
+                ...state,
+                id: code,
+                subPackageLabel: data
+            }
+        break;
+        case "REMOVE_SUBPACKAGE":
+            return{
+                ...state,
+                id:"",
+                subPackageLabel: ""
+            }
+        break;
+        default:
+            return state
+
     }
 }

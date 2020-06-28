@@ -5,6 +5,7 @@ import {withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
 import {TabDiv, ServiceCard, ServiceImage, Label, ServiceCardWrapper, ServiceLink} from './styles';
 import {Mfont_color} from "../../../../Assets/style-var";
+import DefaultImage from "../../../../Assets/img/General.png";
 
 
 //https://react-swipeable-views.com/demos/demos/
@@ -67,37 +68,24 @@ const handleChange = (event, value) => {
         </TabDiv>
         
         <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
-
-          <div style={{padding: "30px 20px"}}>
-          <ServiceCardWrapper>
-            {props["cardInfo"].map(({label, ServiceImg, id}) => {
-              return <ServiceCard>
-                  <ServiceLink href = {`/service/${tabs[index]["id"]}/${id}`}>
-                    <ServiceImage src = {ServiceImg} />
-                    <Label>{label}</Label>
-                  </ServiceLink> 
-                </ServiceCard>
-              
+          {
+            tabs.map(({id}) => {
+              return <div style={{padding: "30px 20px"}}>
+                <ServiceCardWrapper>
+                  {
+                    props["cardInfo"][id].map(({label, images, id}) => {
+                      return <ServiceCard>
+                        <ServiceLink href = {`/service/${tabs[index]["id"]}/${id}`}>
+                          <ServiceImage src = {images.length > 0 ? images[0] : DefaultImage} />
+                          <Label>{label}</Label>
+                        </ServiceLink> 
+                      </ServiceCard>
+                    })
+                  }
+                </ServiceCardWrapper>
+              </div>
             })
-            }
-            </ServiceCardWrapper>
-          </div>
-
-          <div style={{padding: "30px 20px"}}>
-          <ServiceCardWrapper>
-            {props["cardInfo"].map(({label, ServiceImg, id}) => {
-              return <ServiceCard>
-                  <ServiceLink href = {`/service/${tabs[index]["id"]}/${id}`}>
-                    <ServiceImage src = {ServiceImg} />
-                    <Label>{label}</Label>
-                  </ServiceLink> 
-                </ServiceCard>
-              
-            })
-            }
-            </ServiceCardWrapper>
-          </div>
-
+          }
         </SwipeableViews>
       </div>
     );

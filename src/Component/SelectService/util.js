@@ -2,6 +2,74 @@ import React from 'react';
 import { Packages } from "./mockServiceData";
 import { ServiceName, ServiceInfo, ServiceCostInTable, ServiceDurationInTable } from "./styles";
 
+
+export function formatPackageResponse(response = []) {
+    const formattedResponse = {
+        "autoCare": [],
+        "doorStep": []
+    }
+    if (response.length > 0) {
+        response.forEach((servicePackage = {}) => {
+            if (servicePackage["serviceableAtHome"]) {
+                formattedResponse["doorStep"] = [...formattedResponse["doorStep"], getPackageInfo(servicePackage)];
+            } else {
+                formattedResponse["autoCare"] = [...formattedResponse["autoCare"], getPackageInfo(servicePackage)]
+            }
+        })
+    }
+    return formattedResponse;
+}
+
+function getPackageInfo(servicePackage = {}) {
+    const packageData = {
+        id: servicePackage["id"],
+        images: servicePackage["images"] || [],
+        label: servicePackage["packageName"],
+        code: servicePackage["code"],
+        desc: servicePackage["desc"] || "",
+        serviceMap: servicePackage["services"].reduce((accumulator, currentService) => {
+            const { id = "" } = currentService;
+            if (id) {
+                accumulator = {
+                    ...accumulator,
+                    [id]: currentService
+                }
+            }
+            return accumulator
+        }, {})
+
+    };
+
+    return {
+        ...packageData,
+        packages: servicePackage["subPackages"].reduce((accumulator, subPackageData = {}) => {
+            const { name = "", serviceTime = 0,
+                images = [], price = "",
+                code = "", customInfo = [],
+                serviceIds = []
+            } = subPackageData;
+            accumulator = [
+                ...accumulator,
+                {
+                    name, 
+                    serviceTime,
+                    images,
+                    price,
+                    code,
+                    services : serviceIds.map((id) => packageData["serviceMap"][id] || {})
+                }
+            ]
+            return accumulator;
+        }, [])
+    }
+}
+
+
+
+
+
+
+
 export function formatHeaderData(activeId){
     let servicePackageObj = Packages[activeId];  
     const serviceDataList = Object.values(servicePackageObj);
@@ -97,3 +165,9 @@ export function formatBodyData(id, servicesArray){
     //console.log(response);
     return response;
 }
+
+
+
+
+
+
