@@ -10,11 +10,13 @@ import ServiceDescription from "../Component/SelectService/MobileView/ServiceDes
 import Account from "../Component/SignUp/MobileView";
 import Profile from "../Component/Profile/MobileView";
 import Address from "../Component/Cart/MobileView/Address";
+import Home from "../Component/Home/MobileView/index";
 
 
 export default () => {
   return (
     <>
+      <Route path="/" component={Home} />
       <Route path="/services" component={SelectService} />
       <Route path="/add-car" component={AddCar} />
       <Route path="/cart" component={Cart} />
