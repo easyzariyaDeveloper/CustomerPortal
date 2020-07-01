@@ -59,6 +59,13 @@ function MSignUpTab(props) {
     props.loginUser(userDetail);
   }
 
+  function signUpUser(){
+    /**
+     * 
+     */
+    props.signupUser(userDetail);
+  }
+
   return (
       <div>
         <div>
@@ -83,10 +90,10 @@ function MSignUpTab(props) {
 
           
           <div>
-            <Signup/>
+            <Signup updateValue = {fetchAndSetUserDetail} />
             <div style= {{textAlign:"center"}}>
             <TermsPara>By Signing Up you agree to our &nbsp;<a href="#">terms and conditions</a></TermsPara>
-              <SignupLogInButton>Sign Up</SignupLogInButton>
+              <SignupLogInButton onClick = {signUpUser}>Sign Up</SignupLogInButton>
               <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign Up with</p>
             </div>
           </div>
