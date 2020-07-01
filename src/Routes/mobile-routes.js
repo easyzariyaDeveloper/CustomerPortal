@@ -23,7 +23,8 @@ export default () => {
       <Route path="/profile" component={Profile} />
       {/* <Route exact path="/add-address" component={AddressForm} /> */}
       {/* <Route path="/edit-address/:id" component={AddressForm} /> */}
-      <Route path = "/account" component={Account}/>
+      <Route path = "/login" component={Account}/>
+      <Route path = "/signup" component={Account}/>
       <Route path = "/otp" component={Otp} />
       <Route path = "/service/:mode/:type" component={ServiceList} />
       <Route path = "/service-description/:mode/:type" component={ServiceDescription} />

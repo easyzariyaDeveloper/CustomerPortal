@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }));
   
 
-export default function Login(){
+export default function Login(props){
     const classes = useStyles();
 
     const [values, setValues] = useState({
@@ -41,16 +41,17 @@ export default function Login(){
       showPassword: false,
     });
 
-    const handleChange = (prop) => (event) => {
-      setValues({ ...values, [prop]: event.target.value });
+    const handleChange = (key) => (event) => {
+      setValues({ ...values, [key]: event.target.value });
+      props.updateValue(key, event?.target?.value);
     };
   
-    const handleClickShowPassword = (prop) =>(event)=> {
-      if(prop === 'showPassword'){
-        setValues({ ...values, [prop]: !values.showPassword });
+    const handleClickShowPassword = (key) =>(event)=> {
+      if(key === 'showPassword'){
+        setValues({ ...values, [key]: !values.showPassword });
       }
       else{
-        setValues({ ...values, [prop]: !values.showConfirmPassword });
+        setValues({ ...values, [key]: !values.showConfirmPassword });
       }
     };
 
@@ -94,7 +95,6 @@ export default function Login(){
             labelWidth={70}
           />
         </FormControl>
-
       </div>
     </form>
   );

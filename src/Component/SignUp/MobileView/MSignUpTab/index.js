@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {withStyles } from '@material-ui/core/styles';
@@ -7,6 +7,9 @@ import {Mfont_color, ez_button_color} from "../../../../Assets/style-var";
 import Signup from '../TextComponent/Signup';
 import Login from '../TextComponent/Login';
 import { TermsPara,SignupLogInButton } from './style';
+import { withRouter } from 'react-router-dom';
+import { loginUserByCredential } from '../../Data/action';
+import { connect } from 'react-redux';
 
 
 //https://react-swipeable-views.com/demos/demos/
@@ -38,75 +41,70 @@ const AntTab = withStyles((theme) => ({
   selected: {},
 }))((props) => <Tab disableRipple {...props} />);
 
-export default function MSignUpTab(props) {
-  const [state,setState] = React.useState({index:0});
-
-  const [check, setCheck] = React.useState(true);
-
-const handleChange = (event, value) => {
-    setState({
-      index: value,
-    });
-  };
-
-  const handleChangeIndex = index => {
-    setState({
-      index,
-    });
-  };
+function MSignUpTab(props) {
+  const [activeTabIndex, setActiveTabIndex] = React.useState({index: props?.location?.pathname.toLowerCase().includes("signup") ? 1 : 0});
+  const handleChange = (event, value) => setActiveTabIndex({index: value});
+  const handleChangeIndex = index => setActiveTabIndex({index: index});
+  const userDetail = useRef({});
   
-  const { index } = state;
-  
-    return (
+  function fetchAndSetUserDetail(key, value){
+    userDetail.current[key] = value;
+  }
+
+  function loginUser(){
+    // if(true){
+
+    // }
+    console.log(userDetail);
+    props.loginUser(userDetail);
+  }
+
+  return (
       <div>
         <div>
-          <AntTabs value={index} onChange={handleChange}>
+          <AntTabs value={activeTabIndex?.index} onChange={handleChange}>
+            <AntTab label= "Sign in"/>
             <AntTab label= "Sign up"/>
-            <AntTab label= "Login"/>
           </AntTabs>
         </div>
-        
-        <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
+        <SwipeableViews index={activeTabIndex?.index} onChangeIndex={handleChangeIndex}>
+          
+          <div>
+            <Login updateValue = {fetchAndSetUserDetail} />  
+            <div style= {{display:"flex", justifyContent: "space-around", margin: "25px 0"}}>
+            <a style= {{textDecoration:"none", color: ez_button_color}}href = "#">Forgot Password?</a>
+            </div>
 
+            <div style= {{textAlign:"center", margin: "40px 0"}}>
+              <SignupLogInButton onClick = {loginUser}>Login</SignupLogInButton>
+              <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign In with</p>
+            </div>
+          </div>
+
+          
           <div>
             <Signup/>
-
             <div style= {{textAlign:"center"}}>
             <TermsPara>By Signing Up you agree to our &nbsp;<a href="#">terms and conditions</a></TermsPara>
               <SignupLogInButton>Sign Up</SignupLogInButton>
               <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign Up with</p>
             </div>
           </div>
+      </SwipeableViews>
+    </div>
+)};
 
-          
-
-          <div>
-            <Login/>  
-
-            <div style= {{display:"flex", justifyContent: "space-around", margin: "25px 0"}}>
-              <div>
-              <input
-              name="Remember me"
-              type="checkbox"
-              checked={check}
-              onChange={(e) => setCheck(!check)} 
-              />
-              <label>Remember Me</label>
-              </div>
-              <a style= {{textDecoration:"none", color: ez_button_color}}href = "#">Forgot Password?</a>
-            </div>
-
-            <div style= {{textAlign:"center", margin: "40px 0"}}>
-              <SignupLogInButton>Login</SignupLogInButton>
-              <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign In with</p>
-            </div>
-          </div>
-
-        </SwipeableViews>
-        </div>
-     
-    );
+const mapStateToProps = (state) => {
+  return {
   }
+}
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser: (userDetail) => {dispatch(loginUserByCredential(userDetail?.current))}
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MSignUpTab));
 
 

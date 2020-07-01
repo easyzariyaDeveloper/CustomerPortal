@@ -3,6 +3,9 @@ import { Box, Header, Button } from "../styles";
 import { Addresses } from "../MockData";
 import { AddressList } from "./styles";
 import AddressItem from "./AddressItem";
+
+
+
 export default function Address() {
   const [addresses, setAddresses] = useState(
     Addresses.map((address) => ({ ...address, disabled: true }))
