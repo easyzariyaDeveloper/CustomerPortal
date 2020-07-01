@@ -8,8 +8,8 @@ export const HomeFooterWrapper = styled.div`
 
 export const LinkWrapperA = styled.div`
     padding-top: ${base_spacing}px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    justify-content: space-evenly;
     text-align: center;
 `;
 
@@ -21,7 +21,7 @@ export const LinkWrapperB = styled.div`
 export const FooterLink = styled.a`
     text-decoration: none;
     color: white;
-    padding:${base_spacing}px;
+    padding:${base_spacing}px 0;
 `;
 
 export const BorderDiv= styled.div`
@@ -55,12 +55,12 @@ export const SocialDiv = styled.div`
 `;
 
 export const SocialIcon= styled.img`
-border: 1px solid #FFFFFF;
-border-radius:50%;
-margin:10px;
-padding:7px;
-height:40px;
-width:40px;
+    border: 1px solid #FFFFFF;
+    border-radius:50%;
+    margin:10px;
+    padding:7px;
+    height:40px;
+    width:40px;
 
 `;
 

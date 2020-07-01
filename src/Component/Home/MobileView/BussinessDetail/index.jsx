@@ -16,7 +16,7 @@ const settings = {
     slidesToShow: 1,
     speed: 500,
     swipe: true,
-    autoplay: true
+    autoplay: true,
 };
 
 //https://www.npmjs.com/package/react-ios-switch

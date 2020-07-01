@@ -46,7 +46,7 @@ export default function HomeFooter (props){
         </SocialDiv>
 
         <RightsDiv>
-            © 2018 Company - All rights reserved | Powered by DiodeCode
+            © {new Date().getFullYear()} Company - All rights reserved
         </RightsDiv>
     </HomeFooterWrapper>
 }
