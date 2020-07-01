@@ -52,10 +52,10 @@ function MSignUpTab(props) {
   }
 
   function loginUser(){
-    // if(true){
-
-    // }
-    console.log(userDetail);
+    /**
+     * 1. Email Regex check
+     * 2. Empty value check either of (Email / Password)
+     */
     props.loginUser(userDetail);
   }
 

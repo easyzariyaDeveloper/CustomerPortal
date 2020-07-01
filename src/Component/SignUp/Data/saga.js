@@ -1,5 +1,5 @@
 import {call, put} from "redux-saga/effects";
-import { BASE_API_ENDPOINT } from "../../../constant";
+import qs from "querystring";
 import APIWrapper from "../../../Constants/ApiWrapper";
 
 export function* loginUser({payload}){
@@ -7,12 +7,15 @@ export function* loginUser({payload}){
     try {
         const { data } = yield call(APIWrapper, {
             method: "POST",
-            url: `${BASE_API_ENDPOINT}/oauth/token`,
-            data: {
-                ...payload
-            },
+            url: `oauth/token`,
+            data: qs.stringify({
+                username: payload?.email,
+                password: payload?.password,
+                grant_type: "password"
+            }),
             headers : {
-                "Authorization": "Basic ZWFzeXphcml5YTpzZWNyZXQ="
+                "Authorization": "Basic ZWFzeXphcml5YTpzZWNyZXQ=",
+                "Content-Type":'application/x-www-form-urlencoded'  
             }
         });
 
