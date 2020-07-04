@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
-import Autocomplete from 'react-google-autocomplete';
+import { withGoogleMap, GoogleMap, withScriptjs, Marker } from "react-google-maps";
 import Geocode from "react-geocode";
-import { MapWrapper, SubHeader } from './style';
+import { MapWrapper } from './style';
 import { getArea, getCity, getState } from './util';
+import GooglePlacesAutocomplete, {geocodeByPlaceId} from 'react-google-places-autocomplete';
+import 'react-google-places-autocomplete/dist/index.min.css';
 
 const API_KEY = "AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8";
 Geocode.setApiKey(API_KEY);
@@ -82,36 +83,37 @@ export default function Map(props) {
     getPlaceBasedOnLatLng(latitude, longitude);
   }
   
-  function onPlaceSelected(place) {
-    const addressArray = place.address_components;
-    // Set these values in the state.
-    setAddress({
-      address: place.formatted_address,
-      area: getArea(addressArray),
-      city: getCity(addressArray),
-      state: getState(addressArray),
-    });
-    setMapPosition({
-      markerPosition: {
-        lat: place?.geometry?.location?.lat(),
-        lng: place?.geometry?.location?.lng()
-      },
-      mapPosition: {
-        lat: place?.geometry?.location?.lat(),
-        lng: place?.geometry?.location?.lng()
-      }
-    })
+  function onPlaceSelected(response) {
+    if(response["place_id"]){
+      return  geocodeByPlaceId(response["place_id"]).then(((response, results) => {
+        const place = results[0];
+        const addressArray = place.address_components;
+        setAddress({
+          address: response["description"],
+          area: getArea(addressArray),
+          city: getCity(addressArray),
+          state: getState(addressArray),
+        });
+        setMapPosition({
+          markerPosition: {
+            lat: place?.geometry?.location?.lat(),
+            lng: place?.geometry?.location?.lng()
+          },
+          mapPosition: {
+            lat: place?.geometry?.location?.lat(),
+            lng: place?.geometry?.location?.lng()
+          }
+        });
+      }).bind(null, response));
+    }
   }
 
-  function onInfoWindowClose(event){
-
-  }
 
   function getAsyncMap(){
     if(mapPosition.markerPosition && mapPosition.markerPosition.lat){
-      const AsyncMap = AsyncLoadMap({ props, onPlaceSelected, mapPosition, address , onMarkerDragEnd, onInfoWindowClose });
+      const AsyncMap = AsyncLoadMap({ props, onPlaceSelected, mapPosition, address , onMarkerDragEnd });
       return <AsyncMap
-        googleMapURL= {`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places&region=IN`}
+        googleMapURL= {`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places&region=in`}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ margin: `0 auto`, height: props.height, width: props.width }} />}
         mapElement={<div style={{ height: `100%` }} />}
@@ -127,7 +129,7 @@ export default function Map(props) {
 }
 
 
-function AsyncLoadMap({ props, onPlaceSelected, mapPosition, address, onMarkerDragEnd, onInfoWindowClose }) {
+function AsyncLoadMap({ props, onPlaceSelected, mapPosition, address ,onMarkerDragEnd }) {
   const { visibleElm : {autoComplete = true} = {} } = props;
   if(autoComplete){
     return withScriptjs(
@@ -139,19 +141,14 @@ function AsyncLoadMap({ props, onPlaceSelected, mapPosition, address, onMarkerDr
           >
             {/* For Auto complete Search Box */}
             { !props?.selfDrop ?
-              <Autocomplete
-              style={{
-                width: '100%',
-                height: '40px',
-                paddingLeft: '16px',
-                marginTop: '15px',
-                marginBottom: '15px',
-                display: 'block',
-              }}
-              onPlaceSelected={onPlaceSelected}
-            /> : null
+              <GooglePlacesAutocomplete
+              onSelect={onPlaceSelected}
+              componentRestrictions={{country: ["IN"]}}
+              types={['(regions)']} 
+              initialValue = {address?.address}
+            /> : ""
             }
-
+        
             {/*Marker*/}
             <Marker google={response.google}
               draggable={true}
@@ -164,18 +161,12 @@ function AsyncLoadMap({ props, onPlaceSelected, mapPosition, address, onMarkerDr
     ); 
     } else {
       return withScriptjs(
-        <Autocomplete
-          style={{
-            width: '100%',
-            height: '40px',
-            paddingLeft: '16px',
-            marginTop: '15px',
-            marginBottom: '15px',
-            display: 'block',
-          }}
-          onPlaceSelected={onPlaceSelected}
-          //types={['IN']}
-        />
+        <GooglePlacesAutocomplete
+          onSelect={onPlaceSelected}
+          componentRestrictions={{country: ["IN"]}}
+          types={['(regions)']}
+          initialValue = {address?.address}
+        />  
       );
     } 
 }
