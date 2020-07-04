@@ -18,6 +18,7 @@ export default function Map(props) {
   });
   const [mapPosition, setMapPosition] = useState({});
   const initialRender = useRef(true);
+
  
   useEffect(() => {
     if (initialRender.current) {
@@ -137,7 +138,8 @@ function AsyncLoadMap({ props, onPlaceSelected, mapPosition, address, onMarkerDr
             defaultCenter={{ lat: mapPosition?.mapPosition?.lat, lng: mapPosition?.mapPosition?.lng }}
           >
             {/* For Auto complete Search Box */}
-            <Autocomplete
+            { !props?.selfDrop ?
+              <Autocomplete
               style={{
                 width: '100%',
                 height: '40px',
@@ -147,7 +149,8 @@ function AsyncLoadMap({ props, onPlaceSelected, mapPosition, address, onMarkerDr
                 display: 'block',
               }}
               onPlaceSelected={onPlaceSelected}
-            />
+            /> : null
+            }
 
             {/*Marker*/}
             <Marker google={response.google}

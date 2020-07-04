@@ -7,6 +7,8 @@ import Tab from '@material-ui/core/Tab';
 import { withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
 import Map from "./Map";
+import DoorstepPickup from "./DoorstepPickup";
+import SelfDrop from "./SelfDrop";
 
 /*For Tabs*/
 const AntTabs = withStyles({
@@ -45,7 +47,7 @@ function getPickUpLocation(){
       height='300px'
       width='95%'
     />
-
+    <DoorstepPickup/>
     
   </>
 }
@@ -56,7 +58,9 @@ function getSelfDropLocation(){
     //google={props.google}
     height='300px'
     width='95%'
+    selfDrop = {true}
     />
+    <SelfDrop/>
   </>
 }
 

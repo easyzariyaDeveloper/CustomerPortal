@@ -5,7 +5,8 @@ import {
   header_font_color,
   white_color,
   login_bg_color,
-  secondary_font_color
+  secondary_font_color,
+  ez_button_color
 } from "./style-var";
 import { Link } from "react-router-dom";
 import Card from '@material-ui/core/Card';
@@ -142,4 +143,16 @@ export const EZHeader = styled.h1`
     font-weight: 600;
     letter-spacing: 5px;
     color: ${secondary_font_color};
+`;
+
+
+export const MobileActionButton = styled.button`
+    width: 100%;
+    height: ${base_spacing * 4.5}px; 
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    background: ${ez_button_color};
+    color: ${white_color};
+    font-size: 18px;
 `;

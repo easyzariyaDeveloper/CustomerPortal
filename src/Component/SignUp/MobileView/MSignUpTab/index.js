@@ -54,6 +54,7 @@ function MSignUpTab(props) {
   }
 
   function loginUser(){
+
     const validCredentials = isValidUserDetail(userDetail.current.user) && isValidPassword(userDetail.current.password);
     if (validCredentials){
       props.loginUser(userDetail);
