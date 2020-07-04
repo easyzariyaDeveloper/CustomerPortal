@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
 import { AccountBackgroundImg, AccountImgOverlay,MAccountWrapper, MAccountCard, FbLoginButton, GoogleLoginButton, SocialButtonDiv } from "./style";
 import MSignUpTab from "./MSignUpTab";

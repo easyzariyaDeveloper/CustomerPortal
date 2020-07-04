@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import { Tagdiv, ButtonDiv, SubmitButton } from "../Map/style";
+import { ButtonDiv, SubmitButton } from "./Map/style";
 
 
 const useStyles = makeStyles((theme) => ({

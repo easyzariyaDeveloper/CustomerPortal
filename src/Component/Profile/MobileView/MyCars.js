@@ -8,7 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import HistoryIcon from '@material-ui/icons/History';
-import { AddCarDiv, AddCarButton } from "./style";
+import { ProfileActionButton, ProfileButtonWrapper } from "./style";
 
 
 const useStyles = makeStyles(theme => ({
@@ -86,9 +86,9 @@ export default function MyCars(){
             />
           </FormControl>
 
-          <AddCarDiv>
-            <AddCarButton>Add Car</AddCarButton>
-      </AddCarDiv>
+          <ProfileButtonWrapper>
+            <ProfileActionButton>Add Car</ProfileActionButton>
+          </ProfileButtonWrapper>
         
       </div>
     </form>

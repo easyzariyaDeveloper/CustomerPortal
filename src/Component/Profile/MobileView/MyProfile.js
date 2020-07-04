@@ -9,7 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import EditIcon from "@material-ui/icons/Edit";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { ChangePasswordDiv, SaveProfileButton, SaveDiv } from "./style";
+import { ChangePasswordDiv, SaveProfileButton, ProfileButtonWrapper, ProfileActionButton } from "./style";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -176,9 +176,9 @@ export default function MyProfile() {
         </FormControl>
       </div>
     </div>
-      <SaveDiv>
-        <SaveProfileButton>Save</SaveProfileButton>
-      </SaveDiv>
+      <ProfileButtonWrapper>
+        <ProfileActionButton> Save </ProfileActionButton>
+      </ProfileButtonWrapper>
     </div>
   );
   

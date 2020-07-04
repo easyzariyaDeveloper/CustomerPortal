@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { base_spacing, secondary_font_color, ez_button_color } from "../../../../Assets/style-var";
+import { base_spacing, secondary_font_color, ez_button_color } from "../../../Assets/style-var";
 
 export const MapWrapper = styled.div`
     margin: 0 auto;
     background-color: white;  
-    height: 700px;
+    height: 350px;
     position: relative;
 `;
 

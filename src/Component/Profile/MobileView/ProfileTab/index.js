@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {withStyles } from '@material-ui/core/styles';
@@ -6,8 +6,9 @@ import SwipeableViews from 'react-swipeable-views';
 import MyProfile from '../MyProfile';
 import MyCars from '../MyCars';
 import AddressList from '../AddressList/AddressList';
-import { AddressListDiv } from '../style';
-
+import { ProfileTabWrapper } from '../style';
+import {URLToIndexMap} from "./config";
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -22,10 +23,6 @@ const AntTabs = withStyles({
 const AntTab = withStyles((theme) => ({
   root: {
     color: "white",
-    // minWidth: 72,
-    // width: "fit-content",
-    // width: 'calc(100% / 2)',
-    // maxWidth: 'inherit',
     '&:hover': {
       color: '#40a9ff',
       opacity: 1,
@@ -43,58 +40,35 @@ const AntTab = withStyles((theme) => ({
 
 
 
-export default function ProfileTab(props) {
-  const [state,setState] = React.useState({index:0});
+function ProfileTab(props) {
+  const [activeTabIndex, setActiveTabIndex] = useState(URLToIndexMap[props?.match?.params?.type.toLowerCase()] || 0);
+  const handleChange = (event, index) => setActiveTabIndex(index);
+  const handleChangeIndex = index => setActiveTabIndex(index);
 
-
-const handleChange = (event, value) => {
-    setState({
-      index: value,
-    });
-  };
-
-  const handleChangeIndex = index => {
-    setState({
-      index,
-    });
-  };
-  
-  const { index } = state;
-  
-    return (
-      <div>
+  return (
+    <>
+      <ProfileTabWrapper>
+        <AntTabs value={activeTabIndex} onChange={handleChange}>
+          <AntTab label ="My Profile"/>
+          <AntTab label= "My Cars"/>
+          <AntTab label= "Address List"/>
+          <AntTab label= "Order History"/>
+        </AntTabs>
+      </ProfileTabWrapper>
+      
+      <SwipeableViews index={activeTabIndex} onChangeIndex={handleChangeIndex} slideStyle = {{position: "relative"}}>
+        <MyProfile/>
+        <MyCars/>
+        <AddressList />
         <div>
-          <AntTabs value={index} onChange={handleChange}>
-            <AntTab label ="My Profile"/>
-            <AntTab label= "My Cars"/>
-            <AntTab label= "Address List"/>
-            <AntTab label= "Order History"/>
-          </AntTabs>
+          slide 4
         </div>
-        
-        <SwipeableViews index={index} onChangeIndex={handleChangeIndex} slideStyle = {{position: "relative"}}>
+      </SwipeableViews>
+    </>
+  );
+}
 
-          <div>
-            <MyProfile/>
-          </div>
-
-          <div>
-            <MyCars/>
-          </div>
-
-          <AddressListDiv>
-            <AddressList/>
-          </AddressListDiv>
-
-          <div>
-            slide 4
-          </div>
-
-        </SwipeableViews>
-      </div>
-     
-    );
-  }
+export default withRouter(ProfileTab);
 
 
 

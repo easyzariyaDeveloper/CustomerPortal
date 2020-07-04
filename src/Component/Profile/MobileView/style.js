@@ -10,20 +10,11 @@ export const ProfilePicDiv = styled.div`
 `;
 
 export const ProfileWrapper = styled.div`
-position: absolute;
-top: ${base_spacing * 25.6}px;
+    position: relative;
 
-.MuiTabs-centered{
-    centerd: true;
-}
-`;
-
-export const AddressListDiv = styled.div`
-    position: absolute; 
-    left: ${base_spacing*2}px;
-    right: ${base_spacing*2}px; 
-    top: ${base_spacing*2}px;
-    width: 100%;
+    .MuiTabs-centered{
+        centerd: true;
+    }
 `;
 
 export const ChangePasswordDiv = styled.div`
@@ -31,30 +22,28 @@ export const ChangePasswordDiv = styled.div`
     padding-top: ${base_spacing*2.5}px;
 `;
 
-export const SaveDiv = styled.div`
+export const ProfileButtonWrapper = styled.div`
     text-align: center;
-    padding: ${base_spacing*2}px 0;
+    padding: ${base_spacing * 2}px 0;
+    width: 50%;
+    margin: 0 auto;
 `;
 
-export const SaveProfileButton = styled.button`
-    width: ${base_spacing*10}px;
-    height: ${base_spacing*3}px; 
-    border-radius: ${base_spacing/2}px;
+export const ProfileActionButton = styled.button`
+    width: 100%;
+    height: ${base_spacing * 4.5}px; 
     border: none;
+    border-radius: 5px;
+    text-align: center;
     background: ${ez_button_color};
     color: ${white_color};
+    font-size: 18px;
 `;
 
-export const AddCarDiv = styled.div`
-    text-align: center;
-    padding: ${base_spacing*5}px 0;
+export const ProfileTabWrapper = styled.div`
+    position: absolute;
+    top: -${base_spacing * 4.5}px;
 `;
-
-export const AddCarButton = styled(SaveProfileButton)`
-    width: ${base_spacing*11.5}px;
-    height: ${base_spacing*3.5}px; 
-`;
-
 
 
 
