@@ -9,6 +9,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { MOBILE_NUMBER_LENGTH, isValidEmailOrPhone } from "../../utils";
 
 
 
@@ -36,14 +37,18 @@ export default function Login(props){
     const classes = useStyles();
 
     const [values, setValues] = useState({
-      email:'',
+      user:'',
       password: '',
       showPassword: false,
     });
 
     const handleChange = (key) => (event) => {
-      setValues({ ...values, [key]: event.target.value });
-      props.updateValue(key, event?.target?.value);
+      let value =  event?.target?.value;
+      if(key === 'user' && !isValidEmailOrPhone(value)){
+        value = value.length > MOBILE_NUMBER_LENGTH ? value.substring(0,MOBILE_NUMBER_LENGTH) : value;
+      }
+      setValues({ ...values, [key]: value });
+      props.updateValue(key, value);
     };
   
     const handleClickShowPassword = (key) =>(event)=> {
@@ -67,9 +72,9 @@ export default function Login(props){
         <TextField
           required
           id="outlined-required"
-          label="Email"
-          value= {values.email}
-          onChange={handleChange('email')}
+          label="Email/Phone"
+          value= {values.user}
+          onChange={handleChange('user')}
           variant="outlined"
           margin="dense"
         />

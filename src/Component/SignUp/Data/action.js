@@ -4,3 +4,10 @@ export function loginUserByCredential(userDetail){
         payload: userDetail
     }
 }
+
+export function createSignup(signupDetails){
+    return{
+        type: "SIGNUP_USER_DETAILS",
+        payload: signupDetails
+    }
+}

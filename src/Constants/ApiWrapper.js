@@ -14,6 +14,7 @@ export default function APIWrapper(options) {
     const newOptions = {
         ...options,
         headers: {
+            "Content-Type":'application/json',
             traceId,
             ...options["headers"]
         },
@@ -22,13 +23,13 @@ export default function APIWrapper(options) {
     return AxiosClient({ ...newOptions })
     .then((response) => {
         console.log(`Successfully retrieved the response ${traceId}`);
-        return response.data;
+        return {data: response?.data, status: response?.status};
     })
     .catch((error) => {
-        console.error("Request Failed", JSON.stringify(error));
+        //console.error("Request Failed", JSON.stringify(error));
         /**
          * Handle Error Alert through this
          */
-        return error.message;
+        throw error;
     });
 }

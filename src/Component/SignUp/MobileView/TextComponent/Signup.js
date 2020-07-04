@@ -9,6 +9,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { MOBILE_NUMBER_LENGTH, isValidEmailOrPhone, isValidEmail, isValidContactNumber } from "../../utils";
+import { ValidationPara } from "../style";
 
 
 
@@ -38,6 +40,7 @@ export default function Signup(props){
     const [values, setValues] = useState({
       name:'',
       email:'',
+      phone: '',
       password: '',
       confirmPassword: '',
       showPassword: false,
@@ -45,9 +48,14 @@ export default function Signup(props){
     });
 
     const handleChange = (key) => (event) => {
-      setValues({ ...values, [key]: event.target.value });
-      props.updateValue(key, event?.target?.value);
+      let value = event?.target?.value;
+      if(key == 'phone'){
+        value = value.length >MOBILE_NUMBER_LENGTH ? value.substring(0,MOBILE_NUMBER_LENGTH) :value;
+      }
+      setValues({ ...values, [key]: value });
+      props.updateValue(key, value);
     };
+
   
     const handleClickShowPassword = (key) =>(event)=> {
       if(key === 'showPassword'){
@@ -58,7 +66,6 @@ export default function Signup(props){
       }
     };
 
-    
   
     const handleMouseDownPassword = (event) => {
       event.preventDefault();
@@ -76,6 +83,7 @@ export default function Signup(props){
           variant="outlined"
           margin="dense"
         />
+        {props?.errorObj?.name ? <ValidationPara>{props?.errorObj?.name}</ValidationPara> : null}
 
         <TextField
           required
@@ -86,6 +94,21 @@ export default function Signup(props){
           variant="outlined"
           margin="dense"
         />
+        {props?.errorObj?.email ? <ValidationPara>{props?.errorObj?.email}</ValidationPara> : null}
+        
+        <TextField
+          type="number"
+          required
+          id="outlined-required"
+          label="Phone"
+          value= {values.phone}
+          onChange={handleChange('phone')}
+          variant="outlined"
+          margin="dense"
+          inputProps={{ maxLength: 10 }}
+        />
+       {props?.errorObj?.phone ? <ValidationPara>{props?.errorObj?.phone}</ValidationPara> : null}
+
         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size = "small">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
@@ -108,6 +131,7 @@ export default function Signup(props){
             labelWidth={70}
           />
         </FormControl>
+        {props?.errorObj?.password ? <ValidationPara>{props?.errorObj?.password}</ValidationPara> : null}
 
         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size = "small">
           <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
@@ -132,7 +156,7 @@ export default function Signup(props){
             
           />
         </FormControl>
-
+        {props?.errorObj?.confirmPassword ? <ValidationPara>{props?.errorObj?.confirmPassword}</ValidationPara> : null}
       </div>
     </form>
   );

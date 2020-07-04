@@ -11,7 +11,12 @@ import TimerIcon from '@material-ui/icons/Timer';
 
 import { useHistory } from "react-router-dom";
 
-
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { base_spacing } from "../../../../Assets/style-var";
 
 
 export const ObjectList = (array) => array.reduce((accumulator, service) => {
@@ -24,6 +29,13 @@ export const ObjectList = (array) => array.reduce((accumulator, service) => {
 }, {});
 
 
+const useStyles = makeStyles(theme => ({
+    formControl: {
+        margin: `0px ${base_spacing }px ${base_spacing}px`,
+        minWidth: 120,
+        display: `flex`
+    }
+}));
 
 
 function ServiceList(props) {
@@ -37,6 +49,12 @@ function ServiceList(props) {
 
     const [packageState, addPackage] = useState(null);
 
+
+    const classes = useStyles();
+    const [vehicleModel, setVehicleModel] = React.useState({
+        model: "",
+    });
+
     const serviceId = params["mode"];
     const serviceKeyId = params["type"]
 
@@ -44,6 +62,27 @@ console.log(serviceId,serviceKeyId)
     if (serviceId) {
 
         return <MobilePageLayout>
+            <FormControl className={classes.formControl} >
+                <InputLabel id="demo-simple-select-label">Select Model</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={vehicleModel.model}
+                    onChange={(event) => {setVehicleModel({model: event.target.value})}}
+                    autoWidth
+                >
+                    {props.models ? props.models.map(modelVariant => {
+                        return <MenuItem
+                            value={modelVariant.id}
+                            key={modelVariant.id}
+                        >
+                            {modelVariant.model}
+                        </MenuItem>
+                    })
+                        : undefined}
+                </Select>
+            </FormControl>
+
             <MServiceListWrapper>
                 {
                     props.packages[serviceId].map(pack => {
@@ -93,7 +132,8 @@ const mapStateToProps = (state) => {
         inProgress: state?.packages?.["inProgress"],
         packages: state?.packages?.["packages"],
         selectedCarId: state?.profile?.selectedCarId,
-        subPackages: state?.subPackages?.subPackageLabel
+        subPackages: state?.subPackages?.subPackageLabel,
+        models: state?.carsInServices?.carModel,
     }
 };
 

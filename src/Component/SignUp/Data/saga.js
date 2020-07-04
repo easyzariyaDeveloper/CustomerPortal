@@ -9,7 +9,7 @@ export function* loginUser({payload}){
             method: "POST",
             url: `oauth/token`,
             data: qs.stringify({
-                username: payload?.email,
+                username: payload?.user,
                 password: payload?.password,
                 grant_type: "password"
             }),
@@ -26,6 +26,37 @@ export function* loginUser({payload}){
         console.log(error);
         yield put({
             type: 'USER_LOGGEDIN_SUCCESSFULLY_FAILED',
+            error
+        });
+    }
+}
+
+
+export function* userSignup({payload}){
+    yield put({type: "SHOW_LOADER"});
+    
+    try {
+        const { data, status } = yield call(APIWrapper, {
+            method: "POST",
+            url: `/customer/signup`,
+            data: {
+                userName: payload?.name,
+                email: payload?.email,
+                primaryPhone: payload?.phone,
+                password: payload?.password,
+            }
+        });
+        yield put({
+            type: 'USER_SIGNEDUP_SUCCESSFULLY'
+        });
+        if(status === 201){
+            sessionStorage.setItem("otpMobileNumber", payload?.phone);
+            window.location.href = "/otp";
+        }
+    } catch (error) {
+        console.log(error);
+        yield put({
+            type: 'USER_SIGNEDUP_SUCCESSFULLY_FAILED',
             error
         });
     }
