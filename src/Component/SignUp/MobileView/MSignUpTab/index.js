@@ -68,7 +68,9 @@ function MSignUpTab(props) {
 
     if(Object.keys(loginError).length == 0){
       props.loginUser(userDetail);
-      location.href = "/";
+      setTimeout(() => {
+        location.href = "/";
+      }, 5 * 1000);
     }
 
     // const validCredentials = isValidUserDetail(userDetail.current.user) && isValidPassword(userDetail.current.password);

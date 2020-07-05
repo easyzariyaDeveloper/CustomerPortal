@@ -1,6 +1,5 @@
 import { API_ENDPOINT } from './src/constant';
 const cookieParser = require("cookie-parser");
-
 const path = require('path');
 
 // function skipLogin(req){
@@ -46,9 +45,7 @@ const devServer = {
         "/api/": {
           target: API_ENDPOINT,
           changeOrigin: true,
-          pathRewrite: function(path){
-              return path.replace("/api", "");
-          },
+          pathRewrite: { "^/api": "" },
         },
     },
 };
