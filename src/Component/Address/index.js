@@ -40,25 +40,25 @@ const AntTab = withStyles((theme) => ({
   selected: {},
 }))((props) => <Tab centered disableRipple {...props} />);
 
-function getPickUpLocation(){
+function getPickUpLocation(setAddress, address){
   return <>
     <Map
-    //google={props.google}
       height='300px'
-      width='95%'
+      width='100%'
+      setAddress = {setAddress}
     />
-    <DoorstepPickup/>
-    
+    <DoorstepPickup
+      address = {address}
+    />
   </>
 }
 
 function getSelfDropLocation(){
   return <>
     <Map
-    //google={props.google}
-    height='300px'
-    width='95%'
-    selfDrop = {true}
+      height='300px'
+      width='100%'
+      selfDrop = {true}
     />
     <SelfDrop/>
   </>
@@ -67,6 +67,7 @@ function getSelfDropLocation(){
 
 function Address(props) {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [address, setAddress] = useState({});
   const handleChange = (event, value) => setActiveTabIndex(value);
   const handleChangeIndex = index => { setActiveTabIndex(index) };
   const enableTabs = useRef(false);
@@ -87,8 +88,8 @@ function Address(props) {
           enableTabs?.current ? 
           <SwipeableViews index={activeTabIndex} onChangeIndex={handleChangeIndex} slideStyle={{ position: "relative" }}>
               {getSelfDropLocation()}
-              {getPickUpLocation()}
-          </SwipeableViews> : getPickUpLocation()
+              {getPickUpLocation(setAddress, address)}
+          </SwipeableViews> : getPickUpLocation(setAddress, address)
         } 
       </AdderessCard>
     </AddressCardWrapper>

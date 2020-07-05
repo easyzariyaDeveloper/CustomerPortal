@@ -41,7 +41,7 @@ const AntTab = withStyles((theme) => ({
 
 
 function ProfileTab(props) {
-  const [activeTabIndex, setActiveTabIndex] = useState(URLToIndexMap[props?.match?.params?.type.toLowerCase()] || 0);
+  const [activeTabIndex, setActiveTabIndex] = useState(URLToIndexMap[props?.match?.params?.type?.toLowerCase()] || 0);
   const handleChange = (event, index) => setActiveTabIndex(index);
   const handleChangeIndex = index => setActiveTabIndex(index);
 

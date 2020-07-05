@@ -34,3 +34,13 @@ export function getState(addressArray) {
     }
 }
 
+export function getPostalCode(addressArray){
+  let postalCode = '';
+    for (let i = 0; i < addressArray.length; i++) {
+      if (addressArray[i].types[0] && 'postal_code' === addressArray[i].types[0]) {
+        postalCode = addressArray[i].long_name;
+        return postalCode;
+      }
+    }
+}
+

@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { withGoogleMap, GoogleMap, withScriptjs, Marker } from "react-google-maps";
 import Geocode from "react-geocode";
 import { MapWrapper } from './style';
-import { getArea, getCity, getState } from './util';
+import { getArea, getCity, getState, getPostalCode } from './util';
 import GooglePlacesAutocomplete, {geocodeByPlaceId} from 'react-google-places-autocomplete';
 import 'react-google-places-autocomplete/dist/index.min.css';
+import { border_color, desktop_gradient } from '../../../Assets/style-var';
 
 const API_KEY = "AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8";
 Geocode.setApiKey(API_KEY);
@@ -15,7 +16,8 @@ export default function Map(props) {
     city: "",
     state: "",
     area: "",
-    address: ""
+    address: "",
+    postalCode: ""
   });
   const [mapPosition, setMapPosition] = useState({});
   const initialRender = useRef(true);
@@ -43,7 +45,7 @@ export default function Map(props) {
           lng: location?.coords?.longitude
         }
       });
-      getPlaceBasedOnLatLng(location?.coords?.latitude, location?.coords?.longitude);
+      getPlaceBasedOnLatLng(location?.coords?.latitude, location?.coords?.longitude, false);
     }
   }
 
@@ -51,17 +53,26 @@ export default function Map(props) {
     //Error: The Geolocation service failed.'
   }
 
-  function getPlaceBasedOnLatLng(latitude, longitude){
+  function sendAddressToParent({enableInputComponent = true, address}){
+    props.setAddress && props.setAddress({
+      address,
+      enableInputComponent
+    })
+  }
+
+  function getPlaceBasedOnLatLng(latitude, longitude, enableInputComponent){
     return Geocode.fromLatLng(latitude, longitude)
     .then(response => {
       const addressArray = response.results[0].address_components; 
-      setAddress({
+      const address = {
         area: getArea(addressArray) || "",
         city: getCity(addressArray) || "",
         state: getState(addressArray) || "",
-        address:  response?.results[0]?.formatted_address
-      });
-
+        address:  response?.results[0]?.formatted_address,
+        postalCode: getPostalCode(addressArray)
+      }
+      setAddress(address);
+      sendAddressToParent({enableInputComponent, address});
     }, (error) => {
       // Logic to handle Error Case
     });
@@ -80,7 +91,7 @@ export default function Map(props) {
         lng: longitude
       }
     })
-    getPlaceBasedOnLatLng(latitude, longitude);
+    getPlaceBasedOnLatLng(latitude, longitude, true);
   }
   
   function onPlaceSelected(response) {
@@ -88,13 +99,14 @@ export default function Map(props) {
       return  geocodeByPlaceId(response["place_id"]).then(((response, results) => {
         const place = results[0];
         const addressArray = place.address_components;
-        setAddress({
+        const address = {
           address: response["description"],
           area: getArea(addressArray),
           city: getCity(addressArray),
           state: getState(addressArray),
-        });
-        setMapPosition({
+          postalCode: getPostalCode(addressArray)
+        };
+        const mapPosition = {
           markerPosition: {
             lat: place?.geometry?.location?.lat(),
             lng: place?.geometry?.location?.lng()
@@ -103,6 +115,13 @@ export default function Map(props) {
             lat: place?.geometry?.location?.lat(),
             lng: place?.geometry?.location?.lng()
           }
+        }
+        setAddress(address);
+        setMapPosition(mapPosition);
+
+        sendAddressToParent({
+          enableInputComponent: true,
+          address
         });
       }).bind(null, response));
     }
@@ -146,6 +165,7 @@ function AsyncLoadMap({ props, onPlaceSelected, mapPosition, address ,onMarkerDr
               componentRestrictions={{country: ["IN"]}}
               types={['(regions)']} 
               initialValue = {address?.address}
+              inputStyle = {getStyleForGooglePlaceInputBox()}
             /> : ""
             }
         
@@ -166,7 +186,17 @@ function AsyncLoadMap({ props, onPlaceSelected, mapPosition, address ,onMarkerDr
           componentRestrictions={{country: ["IN"]}}
           types={['(regions)']}
           initialValue = {address?.address}
+          inputStyle = {getStyleForGooglePlaceInputBox()}
         />  
       );
     } 
+}
+
+function getStyleForGooglePlaceInputBox(){
+  return {
+    "width": "100%",
+    "margin": "10px 0",
+    "border": `1px solid ${border_color}`,
+    "box-shadow": `${desktop_gradient}`
+  }
 }
