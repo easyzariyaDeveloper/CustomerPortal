@@ -25,6 +25,7 @@ export default () => {
       <Route path="/address/edit-address/:id"  component  = {Address} />
       {/* <Route path="/profile/:id" component={Profile} /> */}
       <Route path="/profile/:type" component={Profile} />
+      <Route path="/profile" component={Profile} />
       <Route path = "/login" component={Account}/>
       <Route path = "/signup" component={Account}/>
       <Route path = "/otp" component={Otp} />

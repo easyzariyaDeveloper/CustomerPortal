@@ -12,8 +12,7 @@ export const AdderessCard= styled.div`
 
 export const DoorstepTextWrapper = styled.div`
     width: 90%;
-    margin: 0 5%;
-    padding: ${base_spacing * 4.5}px 0;
+    margin: 0 auto;
 `;
 
 export const RadioWrapper = styled.div`
