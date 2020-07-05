@@ -35,7 +35,7 @@ export default function DoorstepPickup(props) {
     <DoorstepTextWrapper>
         <form className={classes.root} noValidate autoComplete="off">
             <div>
-                <TextField required size="small" id="standard-name" label="Address" value={userAddress.address} onChange={onChange('address')} />
+                <TextField required  size="small" id="standard-name" label="Address" value={userAddress.address} onChange={onChange('address')} />
             </div>
 
             <div>

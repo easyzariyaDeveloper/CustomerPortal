@@ -1,31 +1,32 @@
 import styled from "styled-components";
-import {ez_button_color} from "../../../Assets/style-var";
+import {base_spacing} from "../../../Assets/style-var";
+import { MobileActionButton } from "../../../Assets/common-styled";
 
 export const MCartPageWrapper = styled.div`
-padding: 20px;
+    padding: ${base_spacing*2}px;
 `;
 
 export const CartMCard = styled.div`
     background:white;
     min-height:625px;
-    border-radius: 15px;
-    padding: 20px;
+    border-radius: ${base_spacing*1.5}px;
+    padding: ${base_spacing*2}px;
     position:relative
 `;
 
 export const SelectedCar = styled.h1`
     border-bottom: 1px solid #E3E3E3;
     text-align: center;
-    padding-bottom: 15px;
-    font-size: 18px;
+    padding-bottom: ${base_spacing*1.5}px;
+    font-size: ${base_spacing*1.8}px;;
     font-weight:300;
 `;
 
 export const ServicePriceHeader = styled.div`
     display: flex;
     justify-content: space-around;
-    padding: 5px 0px;
-    font-size: 18px;
+    padding: ${base_spacing/2}px; 0px;
+    font-size: ${base_spacing*1.8}px;;
 `;
 
 
@@ -34,20 +35,26 @@ border-bottom: 1px solid #E3E3E3;
 `;
 
 export const ServiceMListItem = styled.div`
-display: flex;
-justify-content: space-between;
-line-height: 40px;
-font-weight:300;
+    display: flex;
+    justify-content: space-between;
+    line-height: ${base_spacing*4}px;
+    font-weight:300;
 
 `;
 
-export const DeleteBinButton = styled.button`
-    margin-left:8px;
-    border: none;
-    color: white;
-    background: #1A91AB;
-    border-radius:50%;
+export const DeleteBinButton = styled.img`
+    height: ${base_spacing*1.5}px;
+    margin-left: ${base_spacing*0.7}px;
+    vertical-align: middle;
+}
+
 `;
+//     margin-left:8px;
+//     border: none;
+//     color: white;
+//     background: #1A91AB;
+//     border-radius:50%;
+// `;
 
 export const ServiceMPara = styled.p`
     text-align: left;
@@ -59,27 +66,35 @@ export const CartPriceMPara = styled.p`
    
 `;
 export const DateTimeGrid = styled.div`
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-row-gap: 30px;
-margin: auto;
-border-bottom: 1px solid #E3E3E3;
-padding-bottom:10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: ${base_spacing*3}px;
+    margin: auto;
+    border-bottom: 1px solid #E3E3E3;
+    padding-bottom:${base_spacing}px;
 `;
 
 export const DateTimeDiv = styled.div``;
 
+export const DatePara = styled.p`
+    padding: ${base_spacing *4.2}px 0;
+`;
+
+export const TimePara = styled.p`
+    padding: ${base_spacing*1.2}px 0
+`;
+
 export const DateTimeMPicker = styled.div`
-display: grid;
+    display: grid;
 `;
 
 export const CouponCodeButton = styled.button`
-margin:10px 0;
-width:150px;
-height: 40px;
-background: #F6F5F5;
-border-radius: 5px;
-border: none;
+    margin:10px 0;
+    width:150px;
+    height: ${base_spacing*4}px;
+    background: #F6F5F5;
+    border-radius: ${base_spacing/2}px;
+    border: none;
 `;
 
 export const OverlayCard = styled.div`
@@ -93,49 +108,74 @@ export const OverlayCard = styled.div`
 
 export const CouponTextField = styled.input`
     border: none;
+    width:80%
 `;
 
-export const CouponCardCloseButton = styled.button`
+export const CouponCardCloseButton = styled.img`
     float:right;
     border-radius: 50%;
     background:white;
 `;
 
 export const SubTotalDiv = styled.div`
-border-top: 1px solid #E3E3E3;
-display:flex;
-justify-content: space-between;
-padding-top: 15px;
+    border-top: 1px solid #E3E3E3;
+    display:flex;
+    justify-content: space-between;
+    padding-top: ${base_spacing*1.5}px;
     padding-bottom: 8px;
     font-weight:300;
 `;
 
 export const DiscountDiv = styled.div`
-border-bottom: 1px solid #E3E3E3;
-display:flex;
-justify-content: space-between;
-padding-bottom: 15px;
+    border-bottom: 1px solid #E3E3E3;
+    display:flex;
+    justify-content: space-between;
+    padding-bottom: ${base_spacing*1.5}px;
     padding-top: 8px;
     font-weight:300;
 `;
 
 export const TotalDiv = styled.div`
-border-bottom: 1px solid #E3E3E3;
-display:flex;
-justify-content: space-between;
-padding: 15px 0;
-font-weight:300;
+    border-bottom: 1px solid #E3E3E3;
+    display:flex;
+    justify-content: space-between;
+    padding: ${base_spacing*1.5}px 0;
+    font-weight:300;
 
 `;
 
-export const CheckOutButton = styled.a`
-    height: 40px;
-    background:${ez_button_color};
-    border-radius: 5px;
-    border: none;
-    color:white;
+export const MCouponImage = styled.img`
+    padding-right: ${base_spacing}px;
+    vertical-align: middle;
+`;
+
+export const CheckOutButton = styled(MobileActionButton)``;
+
+export const MCouponCard = styled.div`
+    width: 70%;
+    min-height: ${base_spacing*20}px;
+    padding: ${base_spacing*2}px;
+    background: white;
     position: absolute;
-    bottom:10px;
-    right:20px;
-    text-decoration:none;
+    top: 40%;
+    left: 15%;
+    border-radius: ${base_spacing*1.5}px;
+    
+`;
+
+export const CouponTextDiv = styled.div`
+    border:1px solid #BDBDBD;
+    border-radius: ${base_spacing/2}px;
+`;
+
+export const MCouponPara = styled.p`
+    text-align: center; 
+    padding: ${base_spacing*1.5}px;
+
+`;
+
+export const MApplyCouponButton = styled.button`
+    border:none;
+    background: white; 
+    float:right;
 `;

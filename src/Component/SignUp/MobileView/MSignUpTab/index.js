@@ -10,7 +10,7 @@ import { TermsPara,SignupLogInButton } from './style';
 import { withRouter } from 'react-router-dom';
 import { loginUserByCredential, createSignup } from '../../Data/action';
 import { connect } from 'react-redux';
-import { isValidUserDetail, isValidPassword, isValidEmail, isValidContactNumber, isPasswordMatching } from '../../utils';
+import { isValidUserDetail, isValidPassword, isValidEmail, isValidContactNumber, isPasswordMatching, isValidEmailOrPhone } from '../../utils';
 
 
 //https://react-swipeable-views.com/demos/demos/
@@ -45,6 +45,7 @@ const AntTab = withStyles((theme) => ({
 function MSignUpTab(props) {
   const [activeTabIndex, setActiveTabIndex] = useState({index: props?.location?.pathname.toLowerCase().includes("signup") ? 1 : 0});
   const [error, setError] = useState({});
+  const [loginError, setLoginError] = useState({});
   const handleChange = (event, value) => setActiveTabIndex({index: value});
   const handleChangeIndex = index => setActiveTabIndex({index: index});
   const userDetail = useRef({});
@@ -54,11 +55,25 @@ function MSignUpTab(props) {
   }
 
   function loginUser(){
+    const loginError = {};
 
-    const validCredentials = isValidUserDetail(userDetail.current.user) && isValidPassword(userDetail.current.password);
-    if (validCredentials){
+    if(!isValidUserDetail(userDetail?.current?.user)){
+        loginError["user"] = "Invalid User";
+    }
+      
+    if (!isValidPassword(userDetail?.current?.password)){
+      loginError["password"] = "Invalid Password";
+    }
+    setLoginError(loginError);
+
+    if(Object.keys(loginError).length == 0){
       props.loginUser(userDetail);
     }
+
+    // const validCredentials = isValidUserDetail(userDetail.current.user) && isValidPassword(userDetail.current.password);
+    // if (validCredentials){
+    //   props.loginUser(userDetail);
+    // }
   }
 
   function signUpUser(){
@@ -95,12 +110,15 @@ function MSignUpTab(props) {
 
         <SwipeableViews index={activeTabIndex?.index} onChangeIndex={handleChangeIndex}> 
           <div>
-            <Login updateValue = {fetchAndSetUserDetail} />  
+            <Login 
+              updateValue = {fetchAndSetUserDetail}
+              loginErrorObj = {loginError}
+            />  
             <div style= {{display:"flex", justifyContent: "space-around", margin: "25px 0"}}>
             <a style= {{textDecoration:"none", color: ez_button_color}}href = "#">Forgot Password?</a>
             </div>
             <div style= {{textAlign:"center", margin: "40px 0"}}>
-              <SignupLogInButton onClick = {loginUser}>Login</SignupLogInButton>
+              <SignupLogInButton onClick = {() => loginUser()}>Login</SignupLogInButton>
               <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign In with</p>
             </div>
           </div>

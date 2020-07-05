@@ -10,6 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { MOBILE_NUMBER_LENGTH, isValidEmailOrPhone } from "../../utils";
+import { ValidationPara } from "../style";
 
 
 
@@ -78,6 +79,8 @@ export default function Login(props){
           variant="outlined"
           margin="dense"
         />
+        {props?.loginErrorObj?.user ? <ValidationPara>{props?.loginErrorObj?.user}</ValidationPara> : null}
+
         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size = "small">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
@@ -100,6 +103,7 @@ export default function Login(props){
             labelWidth={70}
           />
         </FormControl>
+        {props?.loginErrorObj?.password ? <ValidationPara>{props?.loginErrorObj?.password}</ValidationPara> : null}
       </div>
     </form>
   );
