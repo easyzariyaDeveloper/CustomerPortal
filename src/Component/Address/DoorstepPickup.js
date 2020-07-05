@@ -41,23 +41,17 @@ export default function DoorstepPickup(props) {
         setUserAddress({ ...userAddress, [prop]: event.target.value });
     };
 
-    return <div>
+    return <>
         {
             !props?.address?.enableInputComponent ?
             <div></div> : null
         }
         <DoorstepTextWrapper>
         <form className={classes.root} noValidate autoComplete="off">
-            <div>
-                <TextField required size="small" id="standard-name" label="Address" value={userAddress.address} onChange={onChange('address')} />
-            </div>
-
-            <div>
-                <TextField size="small" id="standard-name" label="Landmark" value={userAddress.landmark} onChange={onChange('landmark')} />
-            </div>
+            <TextField required size="small" id="standard-name" label="Address" value={userAddress.address} onChange={onChange('address')} />
+            <TextField size="small" id="standard-name" label="Landmark" value={userAddress.landmark} onChange={onChange('landmark')} />
         </form>
         </DoorstepTextWrapper>
-
         <RadioWrapper>
             <FormControl>
                 <RadioGroup row value={radio} onChange={(event)=> setRadio(event.target.value)}>
@@ -68,7 +62,5 @@ export default function DoorstepPickup(props) {
             </FormControl>
         </RadioWrapper>
         <SaveButton>Submit</SaveButton>
-        
-    </div>
-
+    </>
 }
