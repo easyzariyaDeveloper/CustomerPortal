@@ -35,7 +35,7 @@ const devServer = {
                 req.headers["access_token"] = "bearer " + req.cookies["access_token"];
             }
             if((req.url.includes("profile")) && !req.cookies["access_token"]){
-                return res.redirect("/login");
+                return res.redirect(`/login`)
             } else {
                 next();
             }
