@@ -49,7 +49,7 @@ export default (mode) => {
     ...config,
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: mode === DEV ? `[name].bundle.js` : `[name].[Contenthash].js`,
+      filename: mode === DEV ? `assets/[name].bundle.js` : `assets/[name].[Contenthash].js`,
       chunkFilename: `[name].[Contenthash].js`,
       publicPath: "/",
     },
