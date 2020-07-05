@@ -108,7 +108,10 @@ export const OverlayCard = styled.div`
 
 export const CouponTextField = styled.input`
     border: none;
-    width:80%
+    width:80%;
+    font-size: ${base_spacing*2}px;
+    height: ${base_spacing*4}px;
+    padding: ${base_spacing/2}px;
 `;
 
 export const CouponCardCloseButton = styled.img`
@@ -177,5 +180,5 @@ export const MCouponPara = styled.p`
 export const MApplyCouponButton = styled.button`
     border:none;
     background: white; 
-    float:right;
+    cursor:pointer;
 `;
