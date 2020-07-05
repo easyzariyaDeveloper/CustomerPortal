@@ -30,3 +30,17 @@ export const SelfDropWrapper = styled.div`
     display: grid;
     margin: ${base_spacing*2}px;
 `;
+
+export const TextOverlay = styled.div`
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom:0;
+    right:0;
+    left:0;
+    top:0;
+    z-index:2;
+`;
+
+export const DoorstepWrapper = styled.div`
+    position: relative;
+`;

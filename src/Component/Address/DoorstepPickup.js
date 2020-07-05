@@ -5,7 +5,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
-import { DoorstepTextWrapper, RadioWrapper,SaveButton } from "./style";
+import { DoorstepTextWrapper, RadioWrapper,SaveButton, TextOverlay, DoorstepWrapper } from "./style";
 
 
 
@@ -41,10 +41,10 @@ export default function DoorstepPickup(props) {
         setUserAddress({ ...userAddress, [prop]: event.target.value });
     };
 
-    return <>
+    return <DoorstepWrapper>
         {
             !props?.address?.enableInputComponent ?
-            <div></div> : null
+            <TextOverlay></TextOverlay> : null
         }
         <DoorstepTextWrapper>
         <form className={classes.root} noValidate autoComplete="off">
@@ -62,5 +62,5 @@ export default function DoorstepPickup(props) {
             </FormControl>
         </RadioWrapper>
         <SaveButton>Submit</SaveButton>
-    </>
+    </DoorstepWrapper>
 }
