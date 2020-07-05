@@ -1,11 +1,12 @@
 import {call, put} from "redux-saga/effects";
 import qs from "querystring";
 import APIWrapper from "../../../Constants/ApiWrapper";
+import {getProfile}  from "../../Profile/Data/saga";
 
 export function* loginUser({payload}){
     yield put({type: "SHOW_LOADER"});
     try {
-        const { data } = yield call(APIWrapper, {
+        const { data, status } = yield call(APIWrapper, {
             method: "POST",
             url: `oauth/token`,
             data: qs.stringify({
@@ -18,10 +19,12 @@ export function* loginUser({payload}){
                 "Content-Type":'application/x-www-form-urlencoded'  
             }
         });
-
-        yield put({
-            type: 'USER_LOGGEDIN_SUCCESSFULLY'
-        });
+        if(status === 200){
+            yield getProfile();
+            yield put({
+                type: 'USER_LOGGEDIN_SUCCESSFULLY'
+            });
+        }
     } catch (error) {
         console.log(error);
         yield put({
@@ -61,3 +64,6 @@ export function* userSignup({payload}){
         });
     }
 }
+
+
+

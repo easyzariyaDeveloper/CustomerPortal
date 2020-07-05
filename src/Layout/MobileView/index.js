@@ -1,9 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { PageWrapper, Content } from "../styles";
 import Header from "./Header";
+import { readCookie } from "../../util";
+import { connect } from "react-redux";
+import { fetchProfile } from "../../Component/Profile/Data/action";
 
 
-export default function PageLayout(props) {
+function PageLayout(props) {
+  
+  useEffect(() => {
+    const userId = readCookie("userUUId");
+    if(userId){
+      props.fetchProfile()
+    }
+  },[]);
+  
   return (
     <PageWrapper className="container">
       <Header pageName = {props.pageName}/>
@@ -13,3 +24,19 @@ export default function PageLayout(props) {
     </PageWrapper>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    profile: state.profile
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProfile: () => {dispatch(fetchProfile())},
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageLayout);
+
+

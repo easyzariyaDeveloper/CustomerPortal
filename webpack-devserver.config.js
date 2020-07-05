@@ -32,7 +32,7 @@ const devServer = {
         app.use(cookieParser());
         app.use(function (req, res, next) {
             if (req.cookies["access_token"] && !req.cookies["access_token"].includes("bearer")) {
-                req.headers["access_token"] = "bearer " + req.cookies["access_token"];
+                req.headers["Authorization"] = "Bearer " + req.cookies["access_token"];
             }
             if((req.url.includes("profile")) && !req.cookies["access_token"]){
                 return res.redirect(`/login`)

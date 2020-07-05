@@ -10,6 +10,7 @@ import {
   ListItem,
   ListItemText,
 } from "@material-ui/core";
+import { readCookie } from "../../../util";
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -43,14 +44,24 @@ export default function Header(props) {
     }
     setSlideMenu(open);
   };
+
+  const userId = readCookie("userUUId");
   const links = [
-    { text: "Home", to: "/home" },
+    { text: "Home", to: "/" },
     { text: "Services", to: "/services" },
-    { text: "Profile", to: "/profile" },
-    { text: "My Cars", to: "/my-car" },
-    { text: "Address List", to: "/address-list" },
-    { text: "Service History", to: "/service-history" },
   ];
+
+  if(userId){
+    links.push(
+      { text: "Profile", to: "/profile" },
+      { text: "My Cars", to: "/profile/cars" },
+      { text: "Address List", to: "/profile/address" },
+      { text: "Service History", to: "/profile/orders" },
+      { text: "Logout", to: "/" }
+    );
+  } else {
+    links.push({ text: "Login", to: "/login" },)
+  }
   return (
     <>
       <HeaderWrapper>

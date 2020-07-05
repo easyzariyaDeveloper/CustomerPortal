@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
@@ -10,6 +10,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { ChangePasswordDiv, SaveProfileButton, ProfileButtonWrapper, ProfileActionButton } from "./style";
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,7 +36,7 @@ const profileDetails = { 'Name': 'name', 'Email': 'email', 'Phone Number': 'phon
 const profileDetailsArray = Object.entries(profileDetails);
 
 
-export default function MyProfile() {
+function MyProfile(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     name: "",
@@ -48,6 +49,16 @@ export default function MyProfile() {
     showNewPassword: false,
     showConfirmNewPassword: false,
   });
+
+  useEffect(()=> {
+
+    setValues({
+      name: props?.profile?.userName,
+      email: props?.profile?.email,
+      phone: props?.profile?.primaryPhone
+    });
+
+  },[props?.profile.customerId]);
 
 
   const handleChange = (prop) => (event) => {
@@ -85,7 +96,7 @@ export default function MyProfile() {
             <OutlinedInput
               id="outlined-adornment-name"
               type={element[0] === "Phone Number" ? "number" : "text"}
-              value={values["element[1]"]}
+              value={values[element[1]]}
               onChange={handleChange(element[1])}
               endAdornment={
                 <InputAdornment position="end">
@@ -183,3 +194,11 @@ export default function MyProfile() {
   );
   
 }
+
+const mapStateToProps = (state) => {
+  return {
+    profile: state.profile
+  }
+}
+
+export default connect(mapStateToProps, null)(MyProfile);
