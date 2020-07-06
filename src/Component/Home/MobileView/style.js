@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
+export const BannerComponentHeight = 200;
+
 export const BannerComponent = styled.div`
-    height: 200px;
+    height: ${BannerComponentHeight}px;
     background-size: cover;
 `;
 

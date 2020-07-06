@@ -8,7 +8,7 @@ export const EZElevation = css`
 export const EZCard = styled.div`
     ${EZElevation}
     width: 100%;
-    margin: ${base_spacing * 1.6}px auto;
+    margin: ${base_spacing * 2}px auto;
     transition : box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     background: ${white_color};
     padding: ${base_spacing * 1.6}px;

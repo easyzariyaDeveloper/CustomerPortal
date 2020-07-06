@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
@@ -6,31 +6,17 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
-import EditIcon from "@material-ui/icons/Edit";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { ChangePasswordDiv, SaveProfileButton, ProfileButtonWrapper, ProfileActionButton } from "./style";
+import { ChangePasswordButton, ProfileButtonWrapper, 
+  ProfileActionButton, CollapseLabel,
+  ProfileCard, ChangePasswordDiv,PasswordSaveButton,CancelIcon,
+  useStyles
+ } from "./style";
 import { connect } from 'react-redux';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    "& .MuiTextField-root": {
-      width: "80%",
-      marginLeft: "9%",
-      marginTop: "30px",
-
-    }
-  },
-  margin: {
-    marginLeft: "9%",
-    marginTop: "30px"
-  },
-  textField: {
-    width: "80%",
-    size: "small"
-  }
-}));
-
+import { base_spacing } from "../../../Assets/style-var";
+import Collapse from "@material-ui/core/Collapse";
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const profileDetails = { 'Name': 'name', 'Email': 'email', 'Phone Number': 'phone' };
 const profileDetailsArray = Object.entries(profileDetails);
@@ -38,7 +24,7 @@ const profileDetailsArray = Object.entries(profileDetails);
 
 function MyProfile(props) {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     name: "",
     email: "",
     phone: "",
@@ -50,7 +36,9 @@ function MyProfile(props) {
     showConfirmNewPassword: false,
   });
 
-  useEffect(()=> {
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
 
     setValues({
       name: props?.profile?.userName,
@@ -58,7 +46,7 @@ function MyProfile(props) {
       phone: props?.profile?.primaryPhone
     });
 
-  },[props?.profile.customerId]);
+  }, [props?.profile.customerId]);
 
 
   const handleChange = (prop) => (event) => {
@@ -70,10 +58,10 @@ function MyProfile(props) {
     if (prop === 'showOldPassword') {
       setValues({ ...values, [prop]: !values.showOldPassword });
     }
-    else if(prop === 'showNewPassword') {
+    else if (prop === 'showNewPassword') {
       setValues({ ...values, [prop]: !values.showNewPassword });
     }
-    else{
+    else {
       setValues({ ...values, [prop]: !values.showConfirmNewPassword });
     }
   };
@@ -84,115 +72,129 @@ function MyProfile(props) {
   };
 
   return (
-    <div>
     <div className={classes.root}>
-      <div>{
-        profileDetailsArray.map(element => {
-          return (<FormControl
-            className={clsx(classes.margin, classes.textField)}
-            variant="outlined" size="small"
-          >
-            <InputLabel htmlFor="outlined-adornment-name">{element[0]}</InputLabel>
+      
+        {props?.profile?.inProgress?
+        <Skeleton animation="wave" height={250} width="100%"/>:<Collapse in={!collapsed} collapsedHeight={0}>
+        <ProfileCard> 
+        <div>{
+          profileDetailsArray.map(element => {
+            return (<FormControl
+              className={clsx(classes.margin, classes.textField)}
+              variant="outlined" size="small"
+            >
+              <InputLabel htmlFor="outlined-adornment-name">{element[0]}</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-name"
+                type={element[0] === "Phone Number" ? "number" : "text"}
+                value={values[element[1]]}
+                onChange={handleChange(element[1])}
+                labelWidth={element[0].length * 9}
+              />
+            </FormControl>
+            )
+          })}
+        </div>
+        <ProfileButtonWrapper>
+          <ProfileActionButton> Save </ProfileActionButton>
+        </ProfileButtonWrapper>
+      </ProfileCard>
+      </Collapse>}
+      
+      
+
+      <Collapse in={collapsed} collapsedHeight={80}>
+        <ProfileCard>
+          <ChangePasswordDiv>
+            {
+              collapsed ? <CollapseLabel>
+                Change Password
+                  <CancelIcon onClick = {() => setCollapsed(!collapsed)}/>
+              </CollapseLabel> : 
+              <ChangePasswordButton onClick={() => setCollapsed(!collapsed)}> Change Password</ChangePasswordButton>
+            }
+          </ChangePasswordDiv>
+          <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
+            <InputLabel htmlFor="outlined-adornment-password">Old Password</InputLabel>
             <OutlinedInput
-              id="outlined-adornment-name"
-              type={element[0] === "Phone Number" ? "number" : "text"}
-              value={values[element[1]]}
-              onChange={handleChange(element[1])}
+              id="outlined-adornment-password"
+              type={values.showOldPassword ? 'text' : 'password'}
+              value={values.oldPassword}
+              onChange={handleChange('oldPassword')}
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton edge="end">
-                    <EditIcon />
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword('showOldPassword')}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {values.showOldPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               }
-              labelWidth={element[0].length * 9}
+              labelWidth={100}
             />
           </FormControl>
-          )
-        })}
-      </div>
 
-      <ChangePasswordDiv>Change Password</ChangePasswordDiv>
+          <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
+            <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={values.showNewPassword ? 'text' : 'password'}
+              value={values.newPassword}
+              onChange={handleChange('newPassword')}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword('showNewPassword')}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {values.showNewPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={100}
 
-      <div>
-        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
-          <InputLabel htmlFor="outlined-adornment-password">Old Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            type={values.showOldPassword ? 'text' : 'password'}
-            value={values.oldPassword}
-            onChange={handleChange('oldPassword')}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword('showOldPassword')}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {values.showOldPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-            labelWidth={100}
-          />
-        </FormControl>
+            />
+          </FormControl>
 
-        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
-          <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            type={values.showNewPassword ? 'text' : 'password'}
-            value={values.newPassword}
-            onChange={handleChange('newPassword')}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword('showNewPassword')}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {values.showNewPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-            labelWidth={100}
+          <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
+            <InputLabel htmlFor="outlined-adornment-password">Confirm New Password</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={values.showConfirmNewPassword ? 'text' : 'password'}
+              value={values.ConfirmNewPassword}
+              onChange={handleChange('ConfirmNewPassword')}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword('showConfirmNewPassword')}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {values.showConfirmNewPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={155}
 
-          />
-        </FormControl>
-
-        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
-          <InputLabel htmlFor="outlined-adornment-password">Confirm New Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            type={values.showConfirmNewPassword ? 'text' : 'password'}
-            value={values.ConfirmNewPassword}
-            onChange={handleChange('ConfirmNewPassword')}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword('showConfirmNewPassword')}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {values.showConfirmNewPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-            labelWidth={155}
-
-          />
-        </FormControl>
-      </div>
+            />
+          </FormControl>
+          <ProfileButtonWrapper>
+            <PasswordSaveButton onClick={() => setCollapsed(!collapsed)}
+            disabled = {values.oldPassword=="" && values.newPassword=="" && values.confirmNewPassword==""}
+            > Save </PasswordSaveButton>
+          </ProfileButtonWrapper>
+        </ProfileCard>
+      </Collapse>
     </div>
-      <ProfileButtonWrapper>
-        <ProfileActionButton> Save </ProfileActionButton>
-      </ProfileButtonWrapper>
-    </div>
+    
   );
-  
+
 }
 
 const mapStateToProps = (state) => {

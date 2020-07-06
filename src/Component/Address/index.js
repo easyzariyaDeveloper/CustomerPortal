@@ -70,7 +70,7 @@ function Address(props) {
   const [address, setAddress] = useState({});
   const handleChange = (event, value) => setActiveTabIndex(value);
   const handleChangeIndex = index => { setActiveTabIndex(index) };
-  const enableTabs = useRef(false);
+  const enableTabs = useRef(true);
 
   return <MobilePageLayout>
     <AddressCardWrapper>

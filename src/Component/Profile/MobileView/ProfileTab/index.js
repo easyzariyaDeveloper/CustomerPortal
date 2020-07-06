@@ -9,6 +9,7 @@ import AddressList from '../AddressList/AddressList';
 import { ProfileTabWrapper } from '../style';
 import {URLToIndexMap} from "./config";
 import { withRouter } from 'react-router-dom';
+import { EZFontMediumSize } from '../../../../Assets/style-var';
 
 
 
@@ -23,6 +24,17 @@ const AntTabs = withStyles({
 const AntTab = withStyles((theme) => ({
   root: {
     color: "white",
+    // padding: '0 20px',
+    fontSize: `${EZFontMediumSize}`,
+    
+    '&:first-child': {
+      paddingLeft: '20px'
+    },
+
+    '&:last-child': {
+      paddingRight: '20px'
+    },
+
     '&:hover': {
       color: '#40a9ff',
       opacity: 1,
