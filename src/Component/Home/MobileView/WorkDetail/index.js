@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Switch from 'react-ios-switch';
-import { Header, Label, SwitchWrapper } from "../BussinessDetail/style";
+import { Header, Label, SwitchWrapper, Wrapper } from "../BussinessDetail/style";
 import { HomeCard, HomeCardDetail, HomeScreenImage, HomeCardWrapper, WorkDetailHeader,WorkDetailSubheader } from "./style";
 import { WorkshopIcon, DoorstepIcon } from "../../Images";
 
@@ -8,7 +8,7 @@ import { WorkshopIcon, DoorstepIcon } from "../../Images";
 
 export default function BussinessDetail(){
     const [howItWorkSwitch, setHowItWorkSwitch] = useState(false);
-    return <>
+    return <Wrapper>
         <Header>How it works?</Header>
         <SwitchWrapper>
             <Label>Workshop</Label>
@@ -18,7 +18,7 @@ export default function BussinessDetail(){
                 offColor = {"#FFFFFF"}
                 onColor = {"#FFFFFF"}
                 style = {{
-                    "boxShadow" : "0px 7px 20px rgba(0, 0, 0, 0.07)"
+                    "boxShadow" : "0 1px 6px rgba(32, 33, 36, 0.28)"
                 }}
                 onChange={() => setHowItWorkSwitch(!howItWorkSwitch)}
             />
@@ -87,5 +87,5 @@ export default function BussinessDetail(){
                 </HomeCard> 
             </HomeCardWrapper>       
         }
-    </>
+    </Wrapper>
 }

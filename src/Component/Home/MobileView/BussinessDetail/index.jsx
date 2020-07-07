@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import Switch from 'react-ios-switch';
-
 import Slider from "react-slick";
-
-import { Header, Label, ContentWrapper, Content, SwitchWrapper, CenterImage, CenterHeader,SubHeader } from "./style";
+import { Header, Label, ContentWrapper, Content, 
+    SwitchWrapper, CenterImage, CenterHeader,
+    SubHeader, Wrapper
+ } from "./style";
 import {CustomerIcon,BusinessIcon} from "../../Images"
-
 
 
 const settings = {
@@ -14,7 +14,7 @@ const settings = {
     infinite: true,
     centerPadding: "100px",
     slidesToShow: 1,
-    speed: 500,
+    speed: 400,
     swipe: true,
     autoplay: true,
 };
@@ -23,7 +23,7 @@ const settings = {
 
 export default function BussinessDetail(){
     const [customerSwitch, setCustomerSwitch] = useState(false);
-    return <>
+    return <Wrapper>
         <Header>Why EZ?</Header>
         <SwitchWrapper>
             <Label>Customers</Label>
@@ -33,7 +33,7 @@ export default function BussinessDetail(){
                 offColor = {"#FFFFFF"}
                 onColor = {"#FFFFFF"}
                 style = {{
-                    "boxShadow" : "0px 7px 20px rgba(0, 0, 0, 0.07)"
+                    "boxShadow" : "0 1px 6px rgba(32, 33, 36, 0.28)"
                 }}
                 onChange={() => setCustomerSwitch(!customerSwitch)}
             />
@@ -116,5 +116,5 @@ export default function BussinessDetail(){
             </Slider>
                     
         }
-    </>
+    </Wrapper>
 }

@@ -11,6 +11,7 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import { readCookie } from "../../../util";
+import { border_color, anchor_link_color, EZFontMediumSize } from "../../../Assets/style-var";
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -23,11 +24,17 @@ const useStyles = makeStyles({
     height: "55px",
   },
   listItem: {
-    paddingLeft: "40px",
+    borderBottom: `1px solid  ${border_color}`
   },
-  links: {
-    marginTop: "30px",
-  },
+  link: {
+    padding: "20px",
+    width: "100%",
+    display: "inline-block",
+    margin: "0",
+    padding: "0 10px",
+    color: `${anchor_link_color}`,
+    fontSize: `${EZFontMediumSize}`
+  }
 });
 
 export default function Header(props) {
@@ -89,14 +96,14 @@ export default function Header(props) {
           onKeyDown={toggleDrawer(false)}
         >
           <Box className={classes.brand}>
-            EasyZaria
+            EasyZariya
             <Avatar alt="Image" />
           </Box>
           <Divider />
           <List className={classes.links}>
             {links.map((link, key) => (
               <ListItem className={classes.listItem} key={key}>
-                <ListItemText primary={<Link to={link.to}>{link.text}</Link>} />
+                <ListItemText primary={<Link to={link.to} className = {classes.link}>{link.text}</Link>} />
               </ListItem>
             ))}
           </List>

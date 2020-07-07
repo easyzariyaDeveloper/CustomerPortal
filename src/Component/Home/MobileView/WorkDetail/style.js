@@ -1,17 +1,22 @@
 import styled from "styled-components";
+import { CommonBoxShadow, base_spacing } from "../../../../Assets/style-var";
 
 export const HomeCardWrapper= styled.div`
-    padding:20px;
+    padding: 0 ${base_spacing *2}px;s
 `;
 
 export const HomeCard = styled.div`
     background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     padding:10px;
     display: grid;
     grid-template-columns: 1fr 3.5fr ;
     margin: 20px 0;
+    ${CommonBoxShadow}
+
+    &:last-child{
+        margin-bottom: 0;
+    }
 `;
 
 export const HomeScreenImage = styled.img`

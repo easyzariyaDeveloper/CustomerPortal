@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { base_spacing } from "../../../Assets/style-var";
+import { base_spacing, CommonBoxShadow } from "../../../Assets/style-var";
 
 export const BannerComponentHeight = 250;
 
@@ -15,6 +15,8 @@ export const BannerImage = styled.img`
 
 export const SlideContainer = styled.div`
     position: relative;
+    background: white;
+    ${CommonBoxShadow}
 `;
 
 export const SliderItem = styled.div`

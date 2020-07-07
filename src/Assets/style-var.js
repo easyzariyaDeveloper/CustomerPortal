@@ -9,7 +9,8 @@ export const header_font_color = "#fff";
 export const font_color = "#333";
 export const button_bg_color = "#5D62B5";
 export const disabled_button_bg_color = "#959595";
-export const secondary_font_color = "#4B4B4B";
+export const secondary_font_color = "#424553";
+export const anchor_link_color = "#282c3f";
 
 
 export const page_bg_color = "#F6F5F5";
@@ -26,3 +27,6 @@ export const EZFontMediumSize = "17px";
 
 export const Skeleton_background_primary_theme = "#FFF2DF";
 export const Skeleton_background_secondary_theme = "#FFEDF3";
+
+//box-shadow : 0px 4px 4px rgba(0, 0, 0, 0.25);
+export const CommonBoxShadow = "box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);"

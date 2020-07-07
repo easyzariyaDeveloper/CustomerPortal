@@ -15,7 +15,7 @@ const properties = {
   infinite: true,
   centerPadding: "30px",
   slidesToShow: 1,
-  speed: 800,
+  speed: 400,
   swipe: true,
   autoplay: true,
 };

@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import { base_spacing } from "../../../../Assets/style-var";
 
-export const TestimonialHeader= styled.h1`
-    letter-spacing: 0.15px;
-    text-align: center;
-    padding-bottom: ${base_spacing*1.2}px;
-    font-weight: 600;
-    font-size: ${base_spacing*2.2}px;
-`;
-
 export const QuotationImage= styled.img`
     float: right;
     width: 40px;
