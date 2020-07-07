@@ -1,9 +1,11 @@
 import React from 'react';
 import {PageLink} from "./style";
-import { ProfileButtonWrapper, ProfileActionButton } from '../style';
+import { ProfileButtonWrapper, ProfileActionButton, ProfileCard } from '../style';
+import { withRouter } from 'react-router-dom';
 
-export default function AddressList(props) {
-  return <>
+function AddressList(props) {
+
+  return <ProfileCard>
     <ProfileButtonWrapper>
       <ProfileActionButton>
         <PageLink href = "/address/add-address">
@@ -11,8 +13,11 @@ export default function AddressList(props) {
         </PageLink>
       </ProfileActionButton>
     </ProfileButtonWrapper>
-  </>
+  </ProfileCard>
 }
+
+
+export default withRouter(AddressList);
 
 
 

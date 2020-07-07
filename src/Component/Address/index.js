@@ -70,9 +70,9 @@ function Address(props) {
   const [address, setAddress] = useState({});
   const handleChange = (event, value) => setActiveTabIndex(value);
   const handleChangeIndex = index => { setActiveTabIndex(index) };
-  const enableTabs = useRef(true);
+  const enableTabs = useRef(props?.location?.search.includes("selfDrop=true"));
 
-  return <MobilePageLayout>
+  return <MobilePageLayout pageName = "Address" backButton = {true}>
     <AddressCardWrapper>
       <AdderessCard>
         {

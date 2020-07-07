@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HeaderWrapper, Hamburger, PageName, Link } from "./styles";
+import { HeaderWrapper, Hamburger, PageName, Link, BackButton } from "./styles";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import {
@@ -65,7 +65,11 @@ export default function Header(props) {
   return (
     <>
       <HeaderWrapper noborder = {props.noborder}>
-        <Hamburger onClick={toggleDrawer(true)}>&#x2630;</Hamburger>
+        { props.backButton ? <BackButton onClick={() => history?.go(-1)}>
+          <svg viewBox="0 0 24 24">
+            <path fill="#FFFFFF" fillrule="evenodd" d="M20.25 11.25H5.555l6.977-6.976a.748.748 0 000-1.056.749.749 0 00-1.056 0L3.262 11.43A.745.745 0 003 12a.745.745 0 00.262.57l8.214 8.212a.75.75 0 001.056 0 .748.748 0 000-1.056L5.555 12.75H20.25a.75.75 0 000-1.5"></path>
+          </svg>
+        </BackButton> : <Hamburger onClick={toggleDrawer(true)}>&#x2630;</Hamburger> }
         <PageName>{props["pageName"]}</PageName>
       </HeaderWrapper>
       {/* <MenuWrapper active = {slideMenu}>

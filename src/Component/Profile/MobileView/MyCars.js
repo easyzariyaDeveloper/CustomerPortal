@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import clsx from 'clsx';
 import { connect } from 'react-redux';
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -10,8 +8,9 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import HistoryIcon from '@material-ui/icons/History';
 import Skeleton from '@material-ui/lab/Skeleton';
+import {useStyles} from "../../../Assets/common-styled";
 
-import { ProfileActionButton, ProfileButtonWrapper, ProfileCard, useStyles } from "./style";
+import { ProfileActionButton, ProfileButtonWrapper, ProfileCard } from "./style";
 const carDetails = [['Car', 'car'], ['Fuel Type', 'fuelType'], ['Number Plate', 'numberPlate']];
 
 function MyCars(props) {
@@ -34,48 +33,47 @@ function MyCars(props) {
         props?.profile?.inProgress ?
           <Skeleton animation="wave" height={300} width="100%" /> :
           <ProfileCard>
-            <form className={classes.root} noValidate autoComplete="off">
-              <div>
-                {
-                  carDetails.map(carElement => {
-                    return <TextField
+            {
+              carDetails.map(carElement => {
+                return (
+                  <FormControl className={clsx(classes.textField)} variant="outlined" size="small">
+                    <InputLabel htmlFor="outlined-adornment-name">{carElement[0]}</InputLabel>
+                    <OutlinedInput
                       required
-                      id="outlined-required"
+                      id="outlined-adornment-name"
                       label={carElement[0]}
                       value={values["carElement[1]"]}
                       onChange={handleChange(carElement[1])}
-                      variant="outlined"
-                      margin="dense"
                     />
+                  </FormControl>
 
-                  })
+                )
+              })
+            }
+
+          <FormControl className={clsx(classes.textField)} variant="outlined" size="small">
+            <InputLabel htmlFor="outlined-adornment-name">Last Service</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-lastService"
+                type="text"
+                value={values.lastService}
+                onChange={handleChange('lastService')}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton edge="end">
+                      <HistoryIcon />
+                    </IconButton>
+                  </InputAdornment>
                 }
+                labelWidth={100}
+              />
+          </FormControl>
 
-                <FormControl className={classes.root} variant="outlined" size="small">
-                  <InputLabel htmlFor="outlined-adornment-name">Last Service</InputLabel>
-                  <OutlinedInput
-                    id="outlined-adornment-lastService"
-                    type="text"
-                    value={values.lastService}
-                    onChange={handleChange('lastService')}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton edge="end">
-                          <HistoryIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    labelWidth={100}
-                  />
-                </FormControl>
+          <ProfileButtonWrapper>
+            <ProfileActionButton>Add Car</ProfileActionButton>
+          </ProfileButtonWrapper>
 
-                <ProfileButtonWrapper>
-                  <ProfileActionButton>Add Car</ProfileActionButton>
-                </ProfileButtonWrapper>
-
-              </div>
-            </form>
-          </ProfileCard>
+        </ProfileCard>
       }
     </div>
   );

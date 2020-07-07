@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import SignInBackgroundImg from "./img/SignInBackgroundImg.jpg";
+import { makeStyles } from "@material-ui/core";
 
 export const alignHorizontally = css`
   display: flex;
@@ -156,3 +157,20 @@ export const MobileActionButton = styled.button`
     color: ${white_color};
     font-size: 18px;
 `;
+
+
+export const useStyles = makeStyles(theme => ({
+  root: {
+    "& .MuiTextField-root": {
+      width: "80%"
+    },
+  //   "&:first-child": {
+  //     margin: `${base_spacing * 2}px`
+  //   }
+
+  },
+  textField: {
+    width: `calc(100% - ${base_spacing * 6}px)`,
+    margin: `${base_spacing * 1.5}px ${base_spacing * 3}px`
+  }
+}));

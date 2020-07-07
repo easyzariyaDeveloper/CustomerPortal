@@ -1,26 +1,26 @@
 import React, { useEffect } from "react";
-import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { makeStyles } from '@material-ui/core/styles';
-import { DoorstepTextWrapper, RadioWrapper,SaveButton, TextOverlay, DoorstepWrapper } from "./style";
+import { RadioWrapper,SaveButton, DoorstepWrapper } from "./style";
+import clsx from 'clsx';
+import { connect } from 'react-redux';
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputLabel from "@material-ui/core/InputLabel";
+import { EZCard } from "../Common/MobileCard";
+import {useStyles} from "../../Assets/common-styled";
 
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: '15px auto',
-            width: '100%',
-        },
-    },
-}));
+const textAddressArray = [["Flat/House No.","house"],["Address","address"],["Landmark","landmark"]];
+
+
 
 export default function DoorstepPickup(props) {
     const classes = useStyles();
     const [userAddress, setUserAddress] = React.useState({
+        house:"",
         address: "",
         landmark: "",
         addressObj: {}
@@ -37,22 +37,28 @@ export default function DoorstepPickup(props) {
 
     const [radio, setRadio] = React.useState('home');
 
-    const onChange = (prop) => (event) => {
+    const handleChange = (prop) => (event) => {
         setUserAddress({ ...userAddress, [prop]: event.target.value });
     };
 
     return <DoorstepWrapper>
-        {
-            !props?.address?.enableInputComponent ?
-            <TextOverlay></TextOverlay> : null
-        }
-        <DoorstepTextWrapper>
-        <form className={classes.root} noValidate autoComplete="off">
-            <TextField required size="small" id="standard-name" label="Address" value={userAddress.address} onChange={onChange('address')} />
-            <TextField size="small" id="standard-name" label="Landmark" value={userAddress.landmark} onChange={onChange('landmark')} />
-        </form>
-        </DoorstepTextWrapper>
-        <RadioWrapper>
+        <EZCard>
+            {textAddressArray.map(textField => {
+                return (
+                    <FormControl className={clsx(classes.textField)} variant="outlined" size="small" disabled = {!props?.address?.enableInputComponent}>
+                      <InputLabel htmlFor="outlined-adornment-name">{textField[0]}</InputLabel>
+                      <OutlinedInput
+                        required
+                        id="outlined-adornment-name"
+                        label={textField[0]}
+                        value={userAddress["textField[1]"]}
+                        onChange={handleChange(textField[1])}
+                      />
+                    </FormControl>
+  
+                  )
+            })}
+            <RadioWrapper>
             <FormControl>
                 <RadioGroup row value={radio} onChange={(event)=> setRadio(event.target.value)}>
                     <FormControlLabel value="home" control={<Radio />} label="Home" />
@@ -62,5 +68,7 @@ export default function DoorstepPickup(props) {
             </FormControl>
         </RadioWrapper>
         <SaveButton>Submit</SaveButton>
+        </EZCard>
+        
     </DoorstepWrapper>
 }

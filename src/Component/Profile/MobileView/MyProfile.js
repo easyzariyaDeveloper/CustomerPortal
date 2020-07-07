@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -10,9 +9,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { ChangePasswordButton, ProfileButtonWrapper, 
   ProfileActionButton, CollapseLabel,
-  ProfileCard, ChangePasswordDiv,PasswordSaveButton,CancelIcon,
-  useStyles
- } from "./style";
+  ProfileCard, ChangePasswordDiv,PasswordSaveButton,CancelIcon} from "./style";
+import {useStyles} from "../../../Assets/common-styled";
 import { connect } from 'react-redux';
 import Collapse from "@material-ui/core/Collapse";
 import Skeleton from '@material-ui/lab/Skeleton';

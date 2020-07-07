@@ -44,6 +44,17 @@ export const MenuWrapper = styled.section`
   padding: ${base_spacing}px;
 `;
 
+export const BackButton = styled.div`
+  font-size: 21px;
+  color: ${white_color};
+  position: absolute;
+  left: ${base_spacing/2}px;
+  top: ${base_spacing/2}px;
+  bottom: 0;
+  width: ${base_spacing*3}px;
+  text-align: center;
+`;
+
 export const Close = styled.label`
   position: absolute;
   right: 0;
