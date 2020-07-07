@@ -26,6 +26,10 @@ const AntTab = withStyles((theme) => ({
     color: "white",
     // padding: '0 20px',
     fontSize: `${EZFontMediumSize}`,
+
+    '& .MuiTab-wrapper':{
+      textTransform : "capitalize"
+    },
     
     '&:first-child': {
       paddingLeft: '20px'

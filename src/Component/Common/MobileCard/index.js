@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
 import { base_spacing, white_color } from "../../../Assets/style-var";
 
+//box-shadow : 0px 4px 4px rgba(0, 0, 0, 0.25);
 export const EZElevation = css`
-    box-shadow : 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
 `;
 
 export const EZCard = styled.div`

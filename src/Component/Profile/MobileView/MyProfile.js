@@ -14,13 +14,11 @@ import { ChangePasswordButton, ProfileButtonWrapper,
   useStyles
  } from "./style";
 import { connect } from 'react-redux';
-import { base_spacing } from "../../../Assets/style-var";
 import Collapse from "@material-ui/core/Collapse";
 import Skeleton from '@material-ui/lab/Skeleton';
 
 const profileDetails = { 'Name': 'name', 'Email': 'email', 'Phone Number': 'phone' };
 const profileDetailsArray = Object.entries(profileDetails);
-
 
 function MyProfile(props) {
   const classes = useStyles();
@@ -39,7 +37,6 @@ function MyProfile(props) {
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
-
     setValues({
       name: props?.profile?.userName,
       email: props?.profile?.email,
@@ -75,7 +72,7 @@ function MyProfile(props) {
     <div className={classes.root}>
       
         {props?.profile?.inProgress?
-        <Skeleton animation="wave" height={250} width="100%"/>:<Collapse in={!collapsed} collapsedHeight={0}>
+        <Skeleton animation="wave" height={250} width="100%"  />:<Collapse in={!collapsed} collapsedHeight={0}>
         <ProfileCard> 
         <div>{
           profileDetailsArray.map(element => {
@@ -103,7 +100,7 @@ function MyProfile(props) {
       
       
 
-      <Collapse in={collapsed} collapsedHeight={80}>
+      <Collapse in={collapsed} collapsedHeight={60}>
         <ProfileCard>
           <ChangePasswordDiv>
             {

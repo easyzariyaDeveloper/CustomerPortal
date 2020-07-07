@@ -66,6 +66,7 @@ export const ProfileDiv = styled.div`
 export const ProfileCard = styled(EZCard)`
     padding: ${base_spacing}px;
     border-radius: ${base_spacing/2}px;
+    margin-top: 0;
 `;
 
 export const ChangePasswordDiv = styled.div`

@@ -64,7 +64,7 @@ export default function Header(props) {
   }
   return (
     <>
-      <HeaderWrapper>
+      <HeaderWrapper noborder = {props.noborder}>
         <Hamburger onClick={toggleDrawer(true)}>&#x2630;</Hamburger>
         <PageName>{props["pageName"]}</PageName>
       </HeaderWrapper>

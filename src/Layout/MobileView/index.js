@@ -17,7 +17,7 @@ function PageLayout(props) {
   
   return (
     <PageWrapper className="container">
-      <Header pageName = {props.pageName}/>
+      <Header pageName = {props.pageName} noborder = {props.noborder || false}/>
       <Content>
         {props.children}
       </Content>
