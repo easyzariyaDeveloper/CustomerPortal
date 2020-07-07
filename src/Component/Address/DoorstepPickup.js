@@ -10,14 +10,10 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import { EZCard } from "../Common/MobileCard";
 import {useStyles} from "../../Assets/common-styled";
-
-
-
+import { addAddress } from "./Data/action";
 const textAddressArray = [["Flat/House No.","house"],["Address","address"],["Landmark","landmark"]];
 
-
-
-export default function DoorstepPickup(props) {
+function DoorstepPickup(props) {
     const classes = useStyles();
     const [userAddress, setUserAddress] = React.useState({
         house:"",
@@ -25,6 +21,20 @@ export default function DoorstepPickup(props) {
         landmark: "",
         addressObj: {}
     });
+
+    function addAddress(){
+        const addressObj = {
+            "addressLabel": radio,
+            "city": userAddress?.addressObj?.address?.city,
+            "firstLine": userAddress?.house,
+            "landmark": userAddress["landmark"] || "",
+            "pinCode": parseInt(userAddress?.addressObj?.address?.postalCode),
+            "secondLine": userAddress?.address,
+            "state": userAddress?.addressObj?.address?.state
+        }
+        console.log(userAddress, radio, addressObj);
+        props.addAddress(addressObj);
+    }
 
     useEffect(()  => {
         if(props?.address?.enableInputComponent){
@@ -51,11 +61,10 @@ export default function DoorstepPickup(props) {
                         required
                         id="outlined-adornment-name"
                         label={textField[0]}
-                        value={userAddress["textField[1]"]}
+                        value={userAddress[textField[1]]}
                         onChange={handleChange(textField[1])}
                       />
                     </FormControl>
-  
                   )
             })}
             <RadioWrapper>
@@ -67,8 +76,22 @@ export default function DoorstepPickup(props) {
                 </RadioGroup>
             </FormControl>
         </RadioWrapper>
-        <SaveButton>Submit</SaveButton>
+        <SaveButton onClick = {addAddress}>Submit</SaveButton>
         </EZCard>
         
     </DoorstepWrapper>
 }
+
+const mapStateToProps = (state) => {
+    return {
+        inProgress: state?.profile?.inProgress
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addAddress:(addressObj) => {dispatch(addAddress(addressObj))}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DoorstepPickup);

@@ -3,6 +3,7 @@ import { fetchPackages, addRemoveSubPackage } from "../Component/SelectService/D
 import { fetchBrandForCars, fetchCarListByBrand } from "../Component/AddCar/Data/saga";
 import { loginUser, userSignup } from "../Component/SignUp/Data/saga";
 import { getProfile } from "../Component/Profile/Data/saga";
+import { addAddressByUser } from "../Component/Address/Data/saga";
 
 export default function* appSaga() {
     yield takeLatest("REQUEST_PACKAGES_DATA", fetchPackages);
@@ -15,4 +16,5 @@ export default function* appSaga() {
     yield takeLatest("SIGNUP_USER_DETAILS", userSignup);
 
     yield takeLatest("FETCH_PROFILE", getProfile);
+    yield takeLatest("CUSTOMER_ADD_ADDRESS", addAddressByUser);
 }
