@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { base_spacing, ez_button_color, white_color, desktop_gradient, disabled_button_color } from "../../../Assets/style-var";
 import { EZCard } from "../../Common/MobileCard";
 import CloseIcon from '@material-ui/icons/Close';
-import { makeStyles } from "@material-ui/core";
+
 
 export const ProfilePicDiv = styled.div`
     background: ${desktop_gradient};
@@ -66,7 +66,6 @@ export const ProfileDiv = styled.div`
 export const ProfileCard = styled(EZCard)`
     padding: ${base_spacing}px;
     border-radius: ${base_spacing/2}px;
-    margin-top: 0;
 `;
 
 export const ChangePasswordDiv = styled.div`
@@ -106,19 +105,3 @@ export const CancelIcon = styled(CloseIcon)`
     float:right;
 `;
 
-
-export const useStyles = makeStyles(theme => ({
-    root: {
-      "& .MuiTextField-root": {
-        width: "80%"
-      },
-      "&:first-child": {
-        margin: `${base_spacing * 2}px`
-      }
-  
-    },
-    textField: {
-      width: `calc(100% - ${base_spacing * 6}px)`,
-      margin: `${base_spacing * 1.5}px ${base_spacing * 3}px`
-    }
-}));

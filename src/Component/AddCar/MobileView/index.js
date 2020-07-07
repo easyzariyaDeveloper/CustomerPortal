@@ -35,7 +35,7 @@ function AddCar(props) {
     useEffect(() => {
         props.fetchBrandForCars();
     }, []);
-    
+    console.log(props.brands)
 
     const handleChange = (prop) => (event) => { 
         if(prop == "model"){
@@ -84,7 +84,7 @@ function AddCar(props) {
                         }}
                         autoWidth
                     >   
-                    {props.brands? props.brands.map((carBrand) =>{
+                    {!props.inProgress && props.brands? props.brands.map((carBrand) =>{
                         return <MenuItem value = {carBrand} key = {carBrand}>{carBrand}</MenuItem>
                     }) :null}
                     </Select>
@@ -179,6 +179,7 @@ function fetchBannerImage(vehicle){
 
 const mapStateToProps = (state) => {
     return {
+        inProgress: state?.brands?.inProgress,
         brands: state?.brands?.brands,
         models: state?.cars?.carModel
     }
