@@ -6,4 +6,3 @@ export const OtpBoxWrapper = styled.div`
     margin: 15px 0;
     text-align: center;
 `;
-

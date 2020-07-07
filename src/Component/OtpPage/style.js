@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { desktop_gradient } from "../../Assets/style-var";
+import { desktop_gradient, base_spacing } from "../../Assets/style-var";
 
 export const OtpPageWrapper = styled.div`
     background: ${desktop_gradient};
     padding:20px;
     height: calc(100vh - 64px);
+    text-align: center;
 
     .otp-field{
         width: 50px;
@@ -17,11 +18,6 @@ export const OtpPageWrapper = styled.div`
         font-size:20px;
     }
 `;
-export const BackButtonDiv = styled.div`
-    color: white;
-    disply:flex;
-    align-items: center;
-`;
 
 export const AnchorButton = styled.a`
     vertical-align: middle;
@@ -31,6 +27,7 @@ export const AnchorButton = styled.a`
 
 export const OtpImg = styled.img`
     display: block;
+    padding-left: ${base_spacing*3}px;
 `;
 
 export const MessagePara = styled.p`
@@ -42,9 +39,5 @@ export const MessagePara = styled.p`
 `;
 
 
-export const VerifyButton = styled.div`
-   position: absolute;
-   width: 300px;
-
-`;
+export const VerifyButton = styled.div``;
 
