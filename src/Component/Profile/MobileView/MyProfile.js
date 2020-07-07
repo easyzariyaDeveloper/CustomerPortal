@@ -98,7 +98,7 @@ function MyProfile(props) {
       
       
 
-      <Collapse in={collapsed} collapsedHeight={60}>
+      <Collapse in={collapsed} collapsedHeight={80}>
         <ProfileCard>
           <ChangePasswordDiv>
             {

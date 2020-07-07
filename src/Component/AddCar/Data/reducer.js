@@ -16,7 +16,7 @@ export default function BrandsReducer(state = defaultBrandState, {type, data, er
             return {
                 ...state,
                 inProgress: false,
-                brands: data,  
+                brands: data.data,  
             }
         break;
         case "FETCH_BRAND_FAILED":
@@ -51,7 +51,7 @@ export function CarModelsReducer(state = defaultCarModelState, {type, data, erro
             return {
                 ...state,
                 inProgress: false,
-                carModel: data,  
+                carModel: data.data,  
             }
         break;
         case "FETCH_CAR_MODEL_FAILED":
