@@ -1,6 +1,5 @@
 import React from 'react';
-import {PageLink} from "./style";
-import { ProfileButtonWrapper, ProfileActionButton, ProfileCard } from '../style';
+import { ProfileButtonWrapper, ProfileActionButton, ProfileCard, PageLink } from './style';
 import { withRouter } from 'react-router-dom';
 
 function AddressList(props) {

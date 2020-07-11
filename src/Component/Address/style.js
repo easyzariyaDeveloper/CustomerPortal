@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { base_spacing } from "../../Assets/style-var";
+import { base_spacing, disabled_button_color, ez_button_color } from "../../Assets/style-var";
 import { MobileActionButton } from "../../Assets/common-styled";
 
 export const AddressCardWrapper = styled.div`
@@ -18,6 +18,7 @@ export const RadioWrapper = styled.div`
 export const SaveButton = styled(MobileActionButton)`
     width:80%;
     margin:${base_spacing*2}px 10%;
+    background: ${({disabled})=> disabled ? disabled_button_color : ez_button_color}
 `;
 
 

@@ -1,5 +1,6 @@
 import { call, put } from "redux-saga/effects";
 import APIWrapper from "../../../Constants/ApiWrapper";
+import { readCookie } from "../../../util";
 
 
 export function* fetchBrandForCars() {
@@ -38,6 +39,32 @@ export function* fetchCarListByBrand({payload}) {
             error
         });
     }
+}
+
+
+
+export function* addCarByUser({payload}) {
+    yield put({ type: "CUSTOMER_ADD_CAR_INPROGESS" });
+    try {
+        const { data } = yield call(APIWrapper, {
+            url: `/customer/car`,
+            method: "POST",
+            data: {
+                ...payload
+            }
+        });
+        yield put({
+            type: 'CUSTOMER_ADD_CAR_SUCCESS',
+            data: data
+        });
+    } catch (error) {
+        console.log(error);
+        yield put({
+            type: 'CUSTOMER_ADD_CAR_FAILED',
+            error
+        });
+    }
+
 }
 
 

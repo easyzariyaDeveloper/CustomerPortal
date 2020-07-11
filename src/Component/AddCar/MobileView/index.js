@@ -1,36 +1,60 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useRef} from "react";
 import MobilePageLayout from "../../../Layout/MobileView"
 import { ImageMWrapper, MAddCarPageWrapper, MCarCard, ConfirmButton, LogoImg, ColorMPallete, ColorSpan, CarImg } from "./style";
-import { Brands, Car } from "../mockData";
-
+import clsx from 'clsx';
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { fetchBrandForCars,fetchCarListByBrand } from "../Data/action";
+import { fetchBrandForCars,fetchCarListByBrand, addCar } from "../Data/action";
 import { connect } from "react-redux";
 import { base_spacing } from "../../../Assets/style-var";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import{useStyles} from "../../../Assets/common-styled";
 
 
-
-const useStyles = makeStyles(theme => ({
+const useStylesForDropDown = makeStyles(theme => ({
     formControl: {
-        margin: `${base_spacing * 1.5}px ${base_spacing}px`,
+        margin: `${base_spacing * 1.5}px ${base_spacing*3}px`,
         minWidth: 230,
         display: `flex`
     }
 }));
 
 function AddCar(props) {
-    const classes = useStyles();
+    const classes = useStylesForDropDown();
+    const classForText = useStyles();
+
     const [vehicle, setVehicle] = React.useState({
         brand: "",
         model:"",
+        carName:"",
         type:"",
         fuelType: "",
-        carColor:""
+        carColor:"",
+        registration:"",
+        makeYear:"",
     });
+    console.log(vehicle);
+    // const enableAddCarForProfile = useRef(props?.location?.search.includes("referral=profile"));
+    const enableAddCarForProfile = true;
+
+    function addCar (){
+        const carDetails = {
+            "brand": vehicle?.brand,
+            "carId": vehicle?.model,
+            "carName":vehicle?.carName,
+            "color":vehicle?.carColor,
+            "fuelVariantId": vehicle?.fuelType,
+            "variantName":vehicle?.type,
+            // "registration":vehicle?.registration,
+            // "makeYear":vehicle?.makeYear,
+        }
+        // props.addCar(carDetails);
+    }
+
 
     useEffect(() => {
         props.fetchBrandForCars();
@@ -44,7 +68,9 @@ function AddCar(props) {
                 ...vehicle,
                 [prop]: event.target.value,
                 colorPalletes: selectedCars.colours,
-                selectedImage: selectedCars?.colours.length > 0 ? selectedCars.colours[0]?.file :  ""
+                selectedImage: selectedCars?.colours.length > 0 ? selectedCars.colours[0]?.file :  "",
+                carName: selectedCars?.model,
+                
             }
             setVehicle(updateVehicleData);
         } else {
@@ -83,20 +109,20 @@ function AddCar(props) {
                             props.fetchCarListByBrand(event.target.value)
                         }}
                         autoWidth
-                    >   
-                    {!props.inProgress && props.brands? props.brands.map((carBrand) =>{
-                        return <MenuItem value = {carBrand} key = {carBrand}>{carBrand}</MenuItem>
-                    }) :null}
+                        >   
+                        {props.inProgress? <CircularProgress style={{size: 10}}/>: !props.inProgress && props.brands? props.brands.map((carBrand) =>{
+                            return <MenuItem value = {carBrand} key = {carBrand}>{carBrand}</MenuItem>
+                        }) :null}
                     </Select>
                 </FormControl>
-
+                
                 <FormControl className={classes.formControl} disabled = {vehicle.brand==""}>
                     <InputLabel id="demo-simple-select-label">Select Model</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={vehicle.model}
-                        onChange={handleChange('model')}
+                        onChange= {handleChange('model')}
                         autoWidth
                     >   
                     {vehicle.brand !=="" && props.models ? props.models.map(modelVariant=>{
@@ -155,11 +181,33 @@ function AddCar(props) {
                     }
                     </Select>
                 </FormControl>
+
+                {
+                    enableAddCarForProfile? <div>
+                    <FormControl className={clsx(classForText.textField)} variant="outlined" size="small">
+                      <InputLabel htmlFor="outlined-adornment-name">Registration Number</InputLabel>
+                      <OutlinedInput
+                        required
+                        id="outlined-adornment-name"
+                        label= "Registration Number"
+                        value={vehicle.registration}
+                        onChange={handleChange('registration')}
+                      />
+                    </FormControl>
+                    <FormControl className={clsx(classForText.textField)} variant="outlined" size="small">
+                    <InputLabel htmlFor="outlined-adornment-name">Make Year</InputLabel>
+                    <OutlinedInput
+                      required
+                      id="outlined-adornment-name"
+                      label= "Make Year"
+                      value={vehicle.makeYear}
+                      onChange={handleChange('makeYear')}
+                    />
+                  </FormControl> </div>:null
+                }
                 
                 <ConfirmButton disabled = {!vehicle["brand"] || !vehicle["model"] || !vehicle["fuelType"] || !vehicle["type"]}
-                onClick = {() => {
-                    console.log(vehicle);
-                }}> Confirm </ConfirmButton>
+                onClick = {addCar}> Confirm </ConfirmButton>
             </MCarCard>
             </div>
         </MAddCarPageWrapper>
@@ -188,11 +236,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchBrandForCars: () => { dispatch(fetchBrandForCars()) },
-        fetchCarListByBrand: (brand ="") =>{dispatch(fetchCarListByBrand(brand))}
+        fetchCarListByBrand: (brand ="") =>{dispatch(fetchCarListByBrand(brand))},
+        addCar: (cardDetails) => {dispatch(addCar(cardDetails))}
     }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCar);
-
 
 

@@ -11,3 +11,11 @@ export function fetchCarListByBrand(brand){
         payload: {brand}
     }
 }
+
+
+export function addCar(carDetails){
+    return{
+        type:"CUSTOMER_ADD_CAR",
+        payload: carDetails
+    }
+}

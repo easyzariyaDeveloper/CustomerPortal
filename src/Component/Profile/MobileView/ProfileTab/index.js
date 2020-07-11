@@ -5,7 +5,7 @@ import {withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
 import MyProfile from '../MyProfile';
 import MyCars from '../MyCars';
-import AddressList from '../AddressList/AddressList';
+import AddressList from '../AddressList';
 import { ProfileTabWrapper } from '../style';
 import {URLToIndexMap} from "./config";
 import { withRouter } from 'react-router-dom';

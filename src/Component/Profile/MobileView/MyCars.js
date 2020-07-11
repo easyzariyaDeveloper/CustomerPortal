@@ -1,17 +1,13 @@
 import React, { useState } from "react";
-import clsx from 'clsx';
 import { connect } from 'react-redux';
-import IconButton from "@material-ui/core/IconButton";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import HistoryIcon from '@material-ui/icons/History';
 import Skeleton from '@material-ui/lab/Skeleton';
 import {useStyles} from "../../../Assets/common-styled";
 
-import { ProfileActionButton, ProfileButtonWrapper, ProfileCard } from "./style";
-const carDetails = [['Car', 'car'], ['Fuel Type', 'fuelType'], ['Number Plate', 'numberPlate']];
+import { ProfileActionButton, ProfileButtonWrapper, ProfileCard, PageLink } from "./style";
+import { withRouter } from "react-router-dom";
+
+import {deleteCar} from "../Data/action"
+
 
 function MyCars(props) {
   const classes = useStyles();
@@ -26,54 +22,35 @@ function MyCars(props) {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  function deleteCar(car){
+    /* deleteCar to be Called onClick */
+  }
 
   return (
     <div className={classes.root}>
       {
         props?.profile?.inProgress ?
           <Skeleton animation="wave" height={300} width="100%" /> :
+          <div>
           <ProfileCard>
-            {
-              carDetails.map(carElement => {
-                return (
-                  <FormControl className={clsx(classes.textField)} variant="outlined" size="small">
-                    <InputLabel htmlFor="outlined-adornment-name">{carElement[0]}</InputLabel>
-                    <OutlinedInput
-                      required
-                      id="outlined-adornment-name"
-                      label={carElement[0]}
-                      value={values["carElement[1]"]}
-                      onChange={handleChange(carElement[1])}
-                    />
-                  </FormControl>
-
-                )
-              })
-            }
-
-          <FormControl className={clsx(classes.textField)} variant="outlined" size="small">
-            <InputLabel htmlFor="outlined-adornment-name">Last Service</InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-lastService"
-                type="text"
-                value={values.lastService}
-                onChange={handleChange('lastService')}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton edge="end">
-                      <HistoryIcon />
-                    </IconButton>
-                  </InputAdornment>
-                }
-                labelWidth={100}
-              />
-          </FormControl>
-
-          <ProfileButtonWrapper>
-            <ProfileActionButton>Add Car</ProfileActionButton>
-          </ProfileButtonWrapper>
-
+            <ProfileButtonWrapper>
+            <ProfileActionButton>
+              <PageLink href = "/add-car?referral=profile">
+                Add Car
+              </PageLink>
+            </ProfileActionButton>
+            </ProfileButtonWrapper>
         </ProfileCard>
+        
+        {
+          props?.profile?.carList.map(car =>{
+            return <ProfileCard>
+              {car.carId}
+              <button onClick={deleteCar}>Remove Car</button>
+            </ProfileCard>
+          })
+        }
+        </div>
       }
     </div>
   );
@@ -85,7 +62,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(MyCars);
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    deleteCar:(car) =>{dispatch(deleteCar(car))}
+  }
+}
+
+export default withRouter(connect(mapStateToProps, null)(MyCars));
 
 
 

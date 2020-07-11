@@ -105,3 +105,8 @@ export const CancelIcon = styled(CloseIcon)`
     float:right;
 `;
 
+
+export const PageLink = styled.a`
+    color: white;
+    text-decoration: none;
+`;
