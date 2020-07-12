@@ -3,6 +3,7 @@ import APIWrapper from "../../../Constants/ApiWrapper";
 import { setCookie, readCookie } from "../../../util";
 
 export function*  getProfile(){
+    yield put({ type: "FETCH_PROFILE_INPROGRESS" });
     try{
         const {data: profileResponse} = yield call(APIWrapper, {
             method: "GET",

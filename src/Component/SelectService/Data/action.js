@@ -1,11 +1,23 @@
 
-export function fetchPackages(carId){
+export function fetchPackages(filter){
     return {
         type: "REQUEST_PACKAGES_DATA",
         payload:{
-            carId
+            filter
         }
     }
+}
+
+export function fetchCar(){
+  return {
+      type: "REQUEST_CAR",
+  }
+}
+
+export function fetchCities(){
+  return {
+      type: "REQUEST_CITY",
+  }
 }
 
 

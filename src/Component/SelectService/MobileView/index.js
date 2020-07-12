@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
-import { ServiceMPageWrapper, MTab, MServiceHeader } from "./style";
+import { ServiceMPageWrapper, MTab, DropDrownWrapper,MServiceCard } from "./style";
 import { ServiceTabs,Tabs} from "../mockServiceData";
 import { connect } from "react-redux";
-import { fetchPackages } from "../Data/action";
+import { fetchPackages, fetchCar } from "../Data/action";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { base_spacing } from "../../../Assets/style-var";
-import { fetchBrandForCars, fetchCarListByBrand } from "../../AddCar/Data/action";
+import CarList from "./ServiceDropdown/carList";
+import CityList from "./ServiceDropdown/cityList";
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -19,12 +21,30 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SelectService(props) {
+    const [filter, setFilter] = useState({});
+
+    function getServicePackage(type = "", value = ""){
+        const latestFilter = {
+            ...filter,
+            [type]: value
+        };
+        setFilter(latestFilter);
+        props.fetchPackages(latestFilter);
+    }
+
     useEffect(() => {
         props.fetchPackages(props.selectedCarId);
+        props.fetchCar();
     }, []);
 
-    return<MobilePageLayout>
-        <MServiceHeader>Our Services</MServiceHeader>
+    return<MobilePageLayout pageName = "Our Services">
+        <DropDrownWrapper>
+            <MServiceCard>
+                <CarList onChange = {value => {getServicePackage("carId", value)}}/>
+                <CityList onChange = {value => {getServicePackage("cityId", value)}}/>
+            </MServiceCard>
+        </DropDrownWrapper>
+        
         {!props.inProgress ? <ServiceMPageWrapper>
             <MTab 
                 tabs = {ServiceTabs}
@@ -39,16 +59,15 @@ const mapStateToProps = (state) => {
     return {
         inProgress: state?.packages?.["inProgress"],
         packages: state?.packages?.["packages"],
-        selectedCarId: state?.profile?.selectedCarId,
+        selectedCarId: state?.profile?.["selectedCarId"],
         brands: state?.brandsInServices?.brands,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchPackages: (carId = "") => { dispatch(fetchPackages(carId)) },
-        fetchBrandForCars: () => { dispatch(fetchBrandForCars())},
-        fetchCarModels: (carBrand = "") => {dispatch(fetchCarListByBrand(carBrand))}
+        fetchPackages: (filter = {}) => { dispatch(fetchPackages(filter))},
+        fetchCar: () => {dispatch(fetchCar())},
     }
 }
 

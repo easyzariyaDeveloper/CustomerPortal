@@ -1,17 +1,16 @@
 import styled from "styled-components";
 import ScrollTab from "./MTab";
 import { Mfont_color, base_spacing } from "../../../Assets/style-var";
+import { EZCard } from "../../Common/MobileCard";
 
 export const ServiceMPageWrapper = styled.div``;
 
-export const MServiceHeader = styled.h1`
-    font-family: Source Sans Pro;
-    color: ${Mfont_color};
-    font-weight: bold;
-    font-size: ${base_spacing*1.4}px;
-    text-align: center;
-    padding: ${base_spacing}px 0;
-    text-transform: uppercase;
+export const DropDrownWrapper = styled.div`
+    padding:10px;
+`;
+
+export const MServiceCard = styled(EZCard)`
+    margin:0
 `;
 
 
