@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {useStyles} from './style';
+import { readCookie } from "../../../../util";
 
 
 
@@ -18,25 +19,42 @@ function CarList(props) {
     const [carSwitch, setCarSwitch] = useState(false);
     const [carList, setCarList] = useState([]);
 
-    console.log(carList)
+    const userId = readCookie("userUUId");
 
     useEffect(() => {
         props.fetchCar();
     }, []);
 
     useEffect(() => {
-        if(props.cars.length > 0 && carSwitch) {
-            setCarList(props.cars.map((car) => {
-                return { name: car.model, value: car.id }
-            }));
-        } else if(props?.profileCars.length > 0 && !carSwitch){
-            setCarList(props.profileCars.map(({carName, carId}) => {
-                return {name: carName, value: carId}
+            if(props.cars.length > 0 && carSwitch) {
+                setCarList(props.cars.map((car) => {
+                    return { name: car.model, value: car.id }
+                }));
+            } else if(props?.profileCars.length > 0 && !carSwitch){
+                setCarList(props.profileCars.map(({carName, carId}) => {
+                    return {name: carName, value: carId}
             }));
         }
     },[carSwitch, props.cars.length, props.profileCars.length]);
+    
 
     return <CarListWrapper>
+        {/* {userId ? <SwitchWrapper >
+            <Label>Your Car</Label>
+            <Switch
+                checked={carSwitch}
+                handleColor={"#1DA0BC"}
+                offColor={"#FFFFFF"}
+                onColor={"#FFFFFF"}
+                style={{
+                    "boxShadow": "0 1px 6px rgba(32, 33, 36, 0.28)"
+                }}
+                onChange={() => {setCarSwitch(!carSwitch)
+                    setCar('')}
+                }
+            />
+            <Label>All Cars</Label>
+        </SwitchWrapper> : null} */}
         <SwitchWrapper >
             <Label>Your Car</Label>
             <Switch
@@ -72,7 +90,8 @@ function CarList(props) {
       </FormControl>  
            
     </CarListWrapper>
-}     
+}   
+
 
 const mapStateToProps = (state) => {
     return {
