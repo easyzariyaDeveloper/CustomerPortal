@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Switch from 'react-ios-switch';
-import { SwitchWrapper, Label, CarListWrapper} from "./style";
+import { SwitchWrapper, CarListWrapper} from "./style";
+
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 
 import { connect } from "react-redux";
 import { fetchCar } from "../../Data/action";
@@ -10,14 +14,18 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {useStyles} from './style';
 import { readCookie } from "../../../../util";
+import { Label } from "../style";
 
 
 
 function CarList(props) {
     const classes = useStyles();
-    const [car, setCar] = useState('');
-    const [carSwitch, setCarSwitch] = useState(false);
+    const [car, setCar] = useState(props.value);
+
+    const[radio, setRadio] = useState("personal");
     const [carList, setCarList] = useState([]);
+
+    console.log(car)
 
     const userId = readCookie("userUUId");
 
@@ -25,69 +33,58 @@ function CarList(props) {
         props.fetchCar();
     }, []);
 
-    useEffect(() => {
-            if(props.cars.length > 0 && carSwitch) {
+    if(userId){
+        useEffect(() => {
+            if(props.cars.length > 0 && radio == "all") {
                 setCarList(props.cars.map((car) => {
                     return { name: car.model, value: car.id }
                 }));
-            } else if(props?.profileCars.length > 0 && !carSwitch){
+            } else if(props?.profileCars.length > 0 && radio == "personal"){
                 setCarList(props.profileCars.map(({carName, carId}) => {
                     return {name: carName, value: carId}
             }));
         }
-    },[carSwitch, props.cars.length, props.profileCars.length]);
+    },[radio, props.cars.length, props.profileCars.length]);
+    }
+    else{
+        useEffect(()=>{
+            if(props.cars.length > 0){
+                setCarList(props.cars.map((car) => {
+                    return { name: car.model, value: car.id }
+                }));
+            }
+            
+        },[props.cars.length]);
+    }
+
+    
     
 
     return <CarListWrapper>
-        {/* {userId ? <SwitchWrapper >
-            <Label>Your Car</Label>
-            <Switch
-                checked={carSwitch}
-                handleColor={"#1DA0BC"}
-                offColor={"#FFFFFF"}
-                onColor={"#FFFFFF"}
-                style={{
-                    "boxShadow": "0 1px 6px rgba(32, 33, 36, 0.28)"
-                }}
-                onChange={() => {setCarSwitch(!carSwitch)
-                    setCar('')}
-                }
-            />
-            <Label>All Cars</Label>
-        </SwitchWrapper> : null} */}
-        <SwitchWrapper >
-            <Label>Your Car</Label>
-            <Switch
-                checked={carSwitch}
-                handleColor={"#1DA0BC"}
-                offColor={"#FFFFFF"}
-                onColor={"#FFFFFF"}
-                style={{
-                    "boxShadow": "0 1px 6px rgba(32, 33, 36, 0.28)"
-                }}
-                onChange={() => {setCarSwitch(!carSwitch)
-                    setCar('')}
-                }
-            />
-            <Label>All Cars</Label>
-        </SwitchWrapper>
+        <Label>Car:</Label>
 
+        {userId ? (props.profileCars ? <RadioGroup row value={radio} onChange={(event)=> setRadio(event.target.value)}>
+            <FormControlLabel value="personal" control={<Radio/>} label="Personal" />
+            <FormControlLabel value="all" control={<Radio/>} label="All" />
+        </RadioGroup> : null) : null}
+        
+            
         <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Select Car</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={car}
-          onChange={(event)=> {
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={car}
+            onChange={(event)=> {
             setCar(event.target.value)
             props?.onChange(event.target.value)}
-          }
+            }
         >
-          {carList.map(car =>{
-              return <MenuItem value ={car.value}>{car.name}</MenuItem>
-          })}
+            {carList.map(car =>{
+                return <MenuItem value ={car.value}>{car.name}</MenuItem>
+            })}
         </Select>
-      </FormControl>  
+        </FormControl> 
            
     </CarListWrapper>
 }   

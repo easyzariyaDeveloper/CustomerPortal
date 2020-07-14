@@ -30,6 +30,7 @@ export const ServiceCard = styled.div`
     padding: ${base_spacing}px;
     align-self: center;
     justify-self: center;
+    pointer-events: ${({disabled}) => disabled ? "none" : "auto"}
 `;
 
 export const ServiceImage = styled.img`

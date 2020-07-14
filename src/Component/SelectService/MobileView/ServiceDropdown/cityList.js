@@ -6,17 +6,21 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {useStyles, CityListWrapper} from './style';
 import { fetchCities } from "../../Data/action";
+import { Label } from "../style";
 
 
 function CityList(props) {
     const classes = useStyles();
-    const [city, setCity] = useState("");
+    const [city, setCity] = useState(props.value);
+
+    console.log(city)
 
     useEffect(()=>{
         props.fetchCities();
     },[]);
 
     return <CityListWrapper>
+        <Label>City :</Label>
         <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Select City</InputLabel>
         <Select

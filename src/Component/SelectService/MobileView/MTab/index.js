@@ -74,7 +74,12 @@ const handleChange = (event, value) => {
                 <ServiceCardWrapper>
                   {
                     props["cardInfo"][id].map(({label, images, id}) => {
-                      return <ServiceCard>
+                      const isDisabled = !(props.filter["carId"] && props.filter["cityId"]);
+                      return <ServiceCard disabled = {isDisabled}
+                        onClick = {() => {
+                          isDisabled && alert("Hello");
+                        }}
+                      >
                         <ServiceLink href = {`/service/${tabs[index]["id"]}/${id}`}>
                           <ServiceImage src = {images.length > 0 ? images[0] : DefaultImage} />
                           <Label>{label}</Label>

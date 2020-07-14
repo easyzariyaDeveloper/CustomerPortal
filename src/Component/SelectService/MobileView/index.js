@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import MobilePageLayout from "../../../Layout/MobileView";
-import { ServiceMPageWrapper, MTab, DropDrownWrapper,MServiceCard } from "./style";
+import { ServiceMPageWrapper, MTab, DropDrownWrapper, ResetButton } from "./style";
 import { ServiceTabs,Tabs} from "../mockServiceData";
 import { connect } from "react-redux";
 import { fetchPackages, fetchCar } from "../Data/action";
@@ -10,7 +15,7 @@ import { base_spacing } from "../../../Assets/style-var";
 import CarList from "./ServiceDropdown/carList";
 import CityList from "./ServiceDropdown/cityList";
 
-
+import { FilterWrapper } from "./ServiceDropdown/style";
 
 const useStyles = makeStyles(theme => ({
     formControl: {
@@ -22,6 +27,8 @@ const useStyles = makeStyles(theme => ({
 
 function SelectService(props) {
     const [filter, setFilter] = useState({});
+
+    const [collapsed, setCollapsed] = useState(false);
 
     function getServicePackage(type = "", value = ""){
         const latestFilter = {
@@ -38,17 +45,31 @@ function SelectService(props) {
     }, []);
 
     return<MobilePageLayout pageName = "Our Services">
+
+        
         <DropDrownWrapper>
-            <MServiceCard>
-                <CarList onChange = {value => {getServicePackage("carId", value)}}/>
-                <CityList onChange = {value => {getServicePackage("cityId", value)}}/>
-            </MServiceCard>
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >Filter
+                </AccordionSummary>
+                <AccordionDetails style={{display: "grid"}}>
+                <FilterWrapper>
+                    <CarList onChange = {value => {getServicePackage("carId", value)}} value={filter.carId} />
+                    <CityList onChange = {value => {getServicePackage("cityId", value)}} value={filter.cityId}/>
+                    </FilterWrapper>
+                <ResetButton onClick={()=> setFilter({carId:"",cityId:""})}>Reset</ResetButton>
+                </AccordionDetails>    
+            </Accordion>
         </DropDrownWrapper>
         
         {!props.inProgress ? <ServiceMPageWrapper>
             <MTab 
                 tabs = {ServiceTabs}
                 cardInfo = {props?.packages}
+                filter = {filter}
             />
         </ServiceMPageWrapper> : null}
         
