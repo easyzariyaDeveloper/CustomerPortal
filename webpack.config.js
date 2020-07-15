@@ -1,7 +1,7 @@
 import path from "path";
 import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
-import UglifyJsPlugin from "uglifyjs-webpack-plugin";
+import TerserPlugin from 'terser-webpack-plugin';
 import devServer from "./webpack-devserver.config";
 
 const DEV = "development";
@@ -167,7 +167,8 @@ export default (mode) => {
     config = {
       ...config,
       optimization: {
-        minimizer: [new UglifyJsPlugin()],
+        minimize: true,
+        minimizer: [new TerserPlugin()],
       }
     }
   }

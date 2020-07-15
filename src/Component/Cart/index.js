@@ -3,7 +3,7 @@ import PageLayout from "../../Layout";
 import { CartPageWrapper, CartHeader, Overlay} from "./style";
 import Services from "./BuyServices/Services";
 import { ServiceCart } from "./mockCartData";
-import Map from "./Map";
+// import Map from "./Map";
 
 
 export default function Cart() {
@@ -27,7 +27,7 @@ export default function Cart() {
                 address= {address}
             />
         </CartPageWrapper>
-        {
+        {/* {
             overlayVisible ? <Overlay>
                 <Map 
                     setVisibilityForOverlay = {setOverlayVisibility}
@@ -39,6 +39,6 @@ export default function Cart() {
                     zoom={15}
                 />
             </Overlay> : null
-        }
+        } */}
     </PageLayout>
 }
