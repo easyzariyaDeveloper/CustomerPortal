@@ -28,8 +28,6 @@ const useStyles = makeStyles(theme => ({
 function SelectService(props) {
     const [filter, setFilter] = useState({});
 
-    const [collapsed, setCollapsed] = useState(false);
-
     function getServicePackage(type = "", value = ""){
         const latestFilter = {
             ...filter,
@@ -40,7 +38,7 @@ function SelectService(props) {
     }
 
     useEffect(() => {
-        props.fetchPackages(props.selectedCarId);
+        props.fetchPackages();
         props.fetchCar();
     }, []);
 
@@ -80,7 +78,7 @@ const mapStateToProps = (state) => {
     return {
         inProgress: state?.packages?.["inProgress"],
         packages: state?.packages?.["packages"],
-        selectedCarId: state?.profile?.["selectedCarId"],
+        //selectedCarId: state?.profile?.["selectedCarId"],
         brands: state?.brandsInServices?.brands,
     }
 };
