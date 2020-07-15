@@ -11,7 +11,7 @@ import CarRepair from "./car-repair.jpg";
 import Calendar from "./calendar.jpg";
 import Report from "./report.jpg";
 import Payment from "./payment.jpg";
-import Spare from "./Spare.jpg";
+import Spare from "./spare.jpg";
 import TimeUpdate from "./timeUpdate.jpg";
 import Doorstep from "./doorstep.jpg";
 

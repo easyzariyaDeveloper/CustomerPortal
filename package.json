@@ -32,6 +32,7 @@
     "cookie-parser": "^1.4.5",
     "date-fns": "^2.13.0",
     "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.5",
     "material-ui-image": "^3.2.3",
     "mobile-detect": "^1.4.4",
     "react": "^16.13.1",
