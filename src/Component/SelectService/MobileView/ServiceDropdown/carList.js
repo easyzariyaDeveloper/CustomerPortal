@@ -61,7 +61,6 @@ function CarList(props) {
     
 
     return <CarListWrapper>
-        <Label>Car:</Label>
 
         {userId ? (props.profileCars ? <RadioGroup row value={radio} onChange={(event)=> setRadio(event.target.value)}>
             <FormControlLabel value="personal" control={<Radio/>} label="Personal" />

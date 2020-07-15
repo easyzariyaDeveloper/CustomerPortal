@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import MobilePageLayout from "../../../../Layout/MobileView";
 import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg} from "./style";
 import { connect } from "react-redux";
-import { fetchPackages, addSubPackage, removeSubPackage } from "../../Data/action";
+import { fetchPackageById, addSubPackage, removeSubPackage } from "../../Data/action";
 import defaultImg from "../../../../Assets/img/gold.jpg";
 import Tick from "../../../../Assets/img/gradient tick.jpg"
 import Lists from "../../../../Assets/img/lists.jpg"
@@ -33,19 +33,15 @@ const useStyles = makeStyles(theme => ({
 
 function ServiceList(props) {
     const { match: { params = {} } = {} } = props;
-    console.log(params["mode"], params["type"]);
 
     useEffect(() => {
-        props.fetchPackages(props.selectedCarId);
+        props.fetchPackageById(params["type"]);
     }, []);
 
     const [packageState, addPackage] = useState(null);
     const serviceId = params["mode"];
     const serviceKeyId = params["type"]
-
-console.log(serviceId,serviceKeyId)
     if (serviceId) {
-
         return <MobilePageLayout>
             <MServiceListWrapper>
                 {
@@ -89,8 +85,6 @@ console.log(serviceId,serviceKeyId)
 
 }
 
-
-
 const mapStateToProps = (state) => {
     return {
         inProgress: state?.packages?.["inProgress"],
@@ -102,7 +96,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchPackages: (carId = "") => { dispatch(fetchPackages(carId)) },
+        fetchPackageById: (packageId = "") => { dispatch(fetchPackageById(packageId)) },
         addSubPackage: (code = "",subPackage ="") => { dispatch(addSubPackage(code,subPackage)) },
         removeSubPackage: () => { dispatch(removeSubPackage()) }
 

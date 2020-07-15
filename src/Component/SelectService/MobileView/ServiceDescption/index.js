@@ -7,6 +7,7 @@ import TimerIcon from '@material-ui/icons/Timer';
 import { connect } from "react-redux";
 import { fetchPackages} from "../../Data/action";
 import Tick from "../../../../Assets/img/gradient tick.jpg"
+import { EZCard } from "../../../Common/MobileCard";
 
 
 
@@ -18,7 +19,7 @@ function ServiceDescription(props) {
     const codeId = params["type"];
 
     useEffect(() => {
-        props.fetchPackages(props.selectedCarId);
+        props.fetchPackages();
     }, []);
 
 
@@ -30,13 +31,15 @@ function ServiceDescription(props) {
             return pack.packages.map(subPack => {
                 return subPack.code == codeId ? (<div>
                     <ImageSlideShow price={subPack.price} name={subPack.name} />
-                    <FeatureHeader>What is included?</FeatureHeader>
+                    <EZCard>
+                        <FeatureHeader>What is included?</FeatureHeader>
 
-                        {
-                            subPack.services.map(seviceId => {
-                                return <IndividualService><TickImage src = {Tick}/> {seviceId.name}</IndividualService>
-                            })
-                        }
+                            {
+                                subPack.services.map(seviceId => {
+                                    return <IndividualService><TickImage src = {Tick}/> {seviceId.name}</IndividualService>
+                                })
+                            }
+                    </EZCard>
 
                         <BottomDiv>
                             <TimeDurationWrapper>

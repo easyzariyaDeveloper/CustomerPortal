@@ -27,18 +27,6 @@ export default function Cart() {
                 address= {address}
             />
         </CartPageWrapper>
-        {/* {
-            overlayVisible ? <Overlay>
-                <Map 
-                    setVisibilityForOverlay = {setOverlayVisibility}
-                    setAddress = {setAddress}
-                    //google={props.google}
-                    center={{lat: 12.9716, lng: 77.5946}}
-                    height='400px'
-                    width = '80%'
-                    zoom={15}
-                />
-            </Overlay> : null
-        } */}
+        {/* ] */}
     </PageLayout>
 }

@@ -8,6 +8,14 @@ export function fetchPackages(filter){
     }
 }
 
+export function fetchPackageById(packageId){
+  return {
+    type: "REQUEST_PACKAGES_DATA_BY_ID",
+    payload:{
+        packageId
+    }
+  }
+}
 export function fetchCar(){
   return {
       type: "REQUEST_CAR",

@@ -20,7 +20,6 @@ function CityList(props) {
     },[]);
 
     return <CityListWrapper>
-        <Label>City :</Label>
         <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Select City</InputLabel>
         <Select

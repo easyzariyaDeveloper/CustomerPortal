@@ -20,7 +20,6 @@ export function* fetchPackages({payload}) {
     }
 }
 
-
 async function getPackages(...args) {
     let URL = `${BASE_API_ENDPOINT}/packages`;
     if(args.length > 0){
@@ -79,10 +78,24 @@ export function* fetchCities() {
     }
 }
 
-
-
-
-
+export function* fetchPackageById({payload}) {
+    yield put({ type: "FETCH_PACKAGES" });
+    try {
+        const { data } = yield call(APIWrapper, {
+            url: `/packages/${payload?.packageId}`  
+        });
+        yield put({
+            type: 'FETCH_PACKAGES_SUCCESS',
+            data: formatPackageResponse(data)
+        });
+    } catch (error) {
+        console.log(error);
+        yield put({
+            type: 'FETCH_PACKAGES_FAILED',
+            error
+        });
+    }
+}
 
 
 export function* addRemoveSubPackage({payload}){
