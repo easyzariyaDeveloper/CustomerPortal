@@ -3,18 +3,17 @@ import { base_spacing, ez_button_color, secondary_font_color } from "../../../..
 
 
 export const MServiceListWrapper= styled.div`
-    padding:40px 0;
+    padding: ${base_spacing * 2}px 0;
 `;
 
 export const ServiceListCard= styled.div`
-    width: 90%;
     height: auto;
     margin: auto;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: ${base_spacing *1.5}px;
     padding: ${base_spacing}px;
-    margin-bottom: ${base_spacing * 1.5}px;
+    margin: 0 ${base_spacing * 2}px ${base_spacing * 2}px ${base_spacing * 2}px;
     position: relative;
 `;
 export const ServiceListCardWrapper = styled.a`

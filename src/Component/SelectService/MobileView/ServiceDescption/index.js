@@ -5,7 +5,7 @@ import { ImageSlideShow } from "./ImageSlideShow";
 import { FeatureHeader, IndividualService, BottomDiv, AddServiceButton, TickImage, ServiceTimePara, TimeDurationWrapper } from "./style";
 import TimerIcon from '@material-ui/icons/Timer';
 import { connect } from "react-redux";
-import { fetchPackages} from "../../Data/action";
+import { fetchPackageById} from "../../Data/action";
 import Tick from "../../../../Assets/img/gradient tick.jpg"
 import { EZCard } from "../../../Common/MobileCard";
 
@@ -13,17 +13,16 @@ import { EZCard } from "../../../Common/MobileCard";
 
 function ServiceDescription(props) {
     const { match: { params = {} } = {} } = props;
-    console.log(params["mode"], params["type"]);
+    console.log(params["mode"], params["packageCode"]);
 
     const serviceId = params["mode"];
-    const codeId = params["type"];
+    const codeId = params["packageCode"];
 
     useEffect(() => {
-        props.fetchPackages();
+        props.fetchPackageById(params["packageId"]);
     }, []);
 
-
-   // const packSelected = pack == "general" ? GeneralServices : pack == "acAndElectrical" ? ElectricalServices : CarCareServices;
+    const packageData = props?.packages[serviceId];
 
     if (serviceId) {
         return <MobilePageLayout>
@@ -61,14 +60,13 @@ function ServiceDescription(props) {
 const mapStateToProps = (state) => {
     return {
         inProgress: state?.packages?.["inProgress"],
-        packages: state?.packages?.["packages"],
-        selectedCarId: state?.profile?.selectedCarId,
+        packages: state?.packages?.["packages"]
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchPackages: (carId = "") => { dispatch(fetchPackages(carId)) },
+        fetchPackageById: (packageId = "") => { dispatch(fetchPackageById(packageId)) },
     }
 }
 

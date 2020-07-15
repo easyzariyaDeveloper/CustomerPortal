@@ -30,7 +30,7 @@ export function* fetchCarListByBrand({payload}) {
         });
         yield put({
             type: 'FETCH_CAR_MODEL_SUCCESS',
-            data: data
+            data
         });
     } catch (error) {
         console.log(error);
@@ -55,7 +55,7 @@ export function* addCarByUser({payload}) {
         });
         yield put({
             type: 'CUSTOMER_ADD_CAR_SUCCESS',
-            data: data
+            data
         });
     } catch (error) {
         console.log(error);

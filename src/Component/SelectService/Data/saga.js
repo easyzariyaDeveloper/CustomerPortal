@@ -47,7 +47,7 @@ export function* fetchCars() {
         });
         yield put({
             type: 'FETCH_CAR_SUCCESS',
-            data: data["data"]
+            data: data
         });
     } catch (error) {
         console.log(error);
@@ -67,7 +67,7 @@ export function* fetchCities() {
         });
         yield put({
             type: 'FETCH_CITY_SUCCESS',
-            data: data["data"]
+            data: data
         });
     } catch (error) {
         console.log(error);
@@ -86,7 +86,7 @@ export function* fetchPackageById({payload}) {
         });
         yield put({
             type: 'FETCH_PACKAGES_SUCCESS',
-            data: formatPackageResponse(data)
+            data: formatPackageResponse([data])
         });
     } catch (error) {
         console.log(error);

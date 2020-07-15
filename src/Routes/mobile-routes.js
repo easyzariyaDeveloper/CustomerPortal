@@ -30,7 +30,7 @@ export default () => {
       <Route path = "/signup" component={Account}/>
       <Route path = "/otp" component={Otp} />
       <Route path = "/service/:mode/:type" component={ServiceList} />
-      <Route path = "/service-description/:mode/:type" component={ServiceDescription} />
+      <Route path = "/service-description/:mode/:packageId/:packageCode" component={ServiceDescription} />
       {/* <Route component = {NotFound} /> */}
     </>
   );

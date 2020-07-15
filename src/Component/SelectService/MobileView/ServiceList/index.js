@@ -40,16 +40,18 @@ function ServiceList(props) {
 
     const [packageState, addPackage] = useState(null);
     const serviceId = params["mode"];
-    const serviceKeyId = params["type"]
+    const serviceKeyId = params["type"];
+    const packageData = props?.packages[serviceId];
+
     if (serviceId) {
-        return <MobilePageLayout>
+        return <MobilePageLayout pageName = {packageData[0] && packageData[0]["label"]}>
             <MServiceListWrapper>
                 {
                     props.packages[serviceId].map(pack => {
                         return pack.id == serviceKeyId ? pack.packages.map(subPacks => {
                             const { name, serviceTime, images, price, code, services } = subPacks;
                             return <ServiceListCard key = {code}>
-                                <ServiceListCardWrapper href = {`/service-description/${serviceId}/${code}`}>
+                                <ServiceListCardWrapper href = {`/service-description/${serviceId}/${serviceKeyId}/${code}`}>
                                 <LeftDiv>
                                     <ServiceListImages src={images ? images[0] : defaultImg} alt="image" />
                                     <CostPara>Rs.{price}</CostPara>
@@ -89,7 +91,6 @@ const mapStateToProps = (state) => {
     return {
         inProgress: state?.packages?.["inProgress"],
         packages: state?.packages?.["packages"],
-        selectedCarId: state?.profile?.selectedCarId,
         subPackages: state?.subPackages?.subPackageLabel
     }
 };

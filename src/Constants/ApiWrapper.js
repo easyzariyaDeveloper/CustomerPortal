@@ -23,7 +23,7 @@ export default function APIWrapper(options) {
     return AxiosClient({ ...newOptions })
     .then((response) => {
         console.log(`Successfully retrieved the response ${traceId}`);
-        return {data: response?.data, status: response?.status};
+        return {data: response?.data?.data, status: response?.status};
     })
     .catch((error) => {
         //console.error("Request Failed", JSON.stringify(error));
