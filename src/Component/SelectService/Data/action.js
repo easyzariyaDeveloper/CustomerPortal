@@ -8,11 +8,12 @@ export function fetchPackages(filter){
     }
 }
 
-export function fetchPackageById(packageId){
+export function fetchPackageById(packageId, filter){
   return {
     type: "REQUEST_PACKAGES_DATA_BY_ID",
     payload:{
-        packageId
+        packageId,
+        filter
     }
   }
 }

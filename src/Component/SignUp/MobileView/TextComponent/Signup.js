@@ -79,7 +79,7 @@ export default function Signup(props){
           id="outlined-required"
           label="name"
           value= {values.name}
-          onChange={handleChange('name')}
+          onChange={handleChange('Name')}
           variant="outlined"
           margin="dense"
         />

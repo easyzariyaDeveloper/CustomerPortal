@@ -69,7 +69,13 @@ function MSignUpTab(props) {
     if(Object.keys(loginError).length == 0){
       props.loginUser(userDetail);
       setTimeout(() => {
-        location.href = "/";
+        const {search = ""} = location;
+        const referrerArray = search.split("referrer=");
+        if(referrerArray.length > 0){
+          location.href = referrerArray[1] || "/";
+        } else {
+          location.href = "/";
+        }
       }, 5 * 1000);
     }
 

@@ -12,6 +12,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { base_spacing } from "../../../../Assets/style-var";
 import { readCookie } from "../../../../util";
 
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 export const ObjectList = (array) => array.reduce((accumulator, service) => {
     const { name = "", id = "" } = service;
@@ -32,23 +38,73 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const userId = readCookie("userUUId");
-
-
 function ServiceList(props) {
     const { match: { params = {} } = {} } = props;
+    const [showCarMisMatchWarning, setShowCarMisMatchWarning] = useState(false);
+    const [filter, setFilter] = useState({});
+
+    function carMisMatchWarningPopup(){
+        return <Dialog
+            open={showCarMisMatchWarning}
+            disableBackdropClick = {true}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+        >
+        <DialogTitle id="alert-dialog-title">{"Car Mismatch - Reselecting the Car from Profile"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+           We found mismatch the car
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick = {() => {
+              const {carId, fuelVariantId} = props?.profile?.carList[0];
+              if(carId && fuelVariantId){
+                setFilter({
+                    carId: carId,
+                    variantId: fuelVariantId,
+                    cityId: sessionStorage.getItem("selectedCityId")
+                  });
+              }
+              sessionStorage.removeItem("carSelectedPackage");
+              sessionStorage.removeItem("selectedCityId");
+              setShowCarMisMatchWarning(false);
+            }} color="primary">
+            Revert
+          </Button>
+        </DialogActions>
+      </Dialog>
+    }
 
     useEffect(() => {
-        props.fetchPackageById(params["type"]);
-    }, []);
+        props.fetchPackageById(params["type"], filter);
+    }, [filter?.carId]);
+
+    useEffect(() => {
+        const {carList = []} = props.profile;
+        const carSelectedAnonymously = sessionStorage.getItem("carSelectedPackage");
+        if(
+            carList.length > 0 &&  
+            carSelectedAnonymously && 
+            carList[0]["carId"] !== carSelectedAnonymously
+        ){
+            setShowCarMisMatchWarning(true);
+        } else if(carList.length > 0 && carList[0]["carId"] === carSelectedAnonymously){
+            const {carId, fuelVariantId } = carList[0];
+            setFilter({
+                carId: carId,
+                variantId: fuelVariantId,
+                cityId: sessionStorage.getItem("selectedCityId")
+            });
+            sessionStorage.removeItem("carSelectedPackage");
+            sessionStorage.removeItem("selectedCityId");
+        }
+    }, [props?.profile?.customerId])
 
     const [packageState, addPackage] = useState(null);
     const serviceId = params["mode"];
     const serviceKeyId = params["type"];
     const packageData = props?.packages[serviceId];
-
-
-    const bool = props?.carsInprofile[3] == sessionStorage.getItem("carSelectedPackage");
-    console.log(bool);
 
     if (serviceId) {
         return <MobilePageLayout pageName = {packageData[0] && packageData[0]["label"]}>
@@ -83,7 +139,7 @@ function ServiceList(props) {
                                     <ListImg src =  {Lists} />
                                     <AddButton onClick ={() => {
                                         // console.log({userId})
-                                        userId ? props.addSubPackage() : location.href = "/login"
+                                        userId ? props.addSubPackage() : location.href = `/login?referrer=${location.pathname}`
                                     }}>
                                     Add</AddButton>
                                 </ButtonDiv>
@@ -91,24 +147,26 @@ function ServiceList(props) {
                         }) : null
                     })
                 }
+                {showCarMisMatchWarning && carMisMatchWarningPopup()}
             </MServiceListWrapper>
         </MobilePageLayout>
     }
 
 }
 
+
 const mapStateToProps = (state) => {
     return {
         inProgress: state?.packages?.["inProgress"],
         packages: state?.packages?.["packages"],
         subPackages: state?.subPackages?.subPackageLabel,
-        carsInprofile: state?.profile?.carList || []
+        profile: state?.profile,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchPackageById: (packageId = "") => { dispatch(fetchPackageById(packageId)) },
+        fetchPackageById: (packageId = "", filter = {}) => { dispatch(fetchPackageById(packageId, filter)) },
         addSubPackage: (code = "",subPackage ="") => { dispatch(addSubPackage(code,subPackage)) },
         removeSubPackage: () => { dispatch(removeSubPackage()) }
 

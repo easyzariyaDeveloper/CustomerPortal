@@ -78,11 +78,18 @@ export function* fetchCities() {
     }
 }
 
-export function* fetchPackageById({payload}) {
+export function* fetchPackageById({payload, filter = {}}) {
     yield put({ type: "FETCH_PACKAGES" });
+
+    let URL = `/packages/${payload?.packageId}`;
+    if(Object.values(filter).length > 0){
+        for(const[type, value] of Object.entries(args[0])){
+            URL = URL.includes("?") ? `${URL}&${type}=${value}` : `${URL}?${type}=${value}`;
+        }
+    }
     try {
         const { data } = yield call(APIWrapper, {
-            url: `/packages/${payload?.packageId}`  
+            url: URL  
         });
         yield put({
             type: 'FETCH_PACKAGES_SUCCESS',

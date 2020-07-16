@@ -9,6 +9,6 @@ export default function SignUp(){
         <LoginWrapper>
             <LeftPane />
             <SignUpRight />
-        </LoginWrapper>>
+        </LoginWrapper>
     </PageLayout>
 }
