@@ -10,12 +10,12 @@ export function*  getProfile(){
             url: '/customer/profile',
         });
 
-        if(profileResponse?.data?.customerId && !readCookie("userUUId")){
-            setCookie("userUUId",  profileResponse?.data?.customerId);
+        if(profileResponse?.customerId && !readCookie("userUUId")){
+            setCookie("userUUId",  profileResponse?.customerId);
         }
         yield put({
             type: 'FETCH_PROFILE_SUCCESS',
-            data: profileResponse?.data
+            data: profileResponse
         })
     console.log(profileResponse);
     }catch(error){

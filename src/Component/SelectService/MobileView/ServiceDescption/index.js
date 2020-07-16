@@ -22,6 +22,7 @@ function ServiceDescription(props) {
         props.fetchPackageById(params["packageId"]);
     }, []);
 
+
     const packageData = props?.packages[serviceId];
 
     if (serviceId) {

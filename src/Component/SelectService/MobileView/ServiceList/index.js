@@ -10,6 +10,7 @@ import Lists from "../../../../Assets/img/lists.jpg"
 import TimerIcon from '@material-ui/icons/Timer';
 import { makeStyles } from "@material-ui/core/styles";
 import { base_spacing } from "../../../../Assets/style-var";
+import { readCookie } from "../../../../util";
 
 
 export const ObjectList = (array) => array.reduce((accumulator, service) => {
@@ -30,6 +31,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const userId = readCookie("userUUId");
+
 
 function ServiceList(props) {
     const { match: { params = {} } = {} } = props;
@@ -42,6 +45,10 @@ function ServiceList(props) {
     const serviceId = params["mode"];
     const serviceKeyId = params["type"];
     const packageData = props?.packages[serviceId];
+
+
+    const bool = props?.carsInprofile[3] == sessionStorage.getItem("carSelectedPackage");
+    console.log(bool);
 
     if (serviceId) {
         return <MobilePageLayout pageName = {packageData[0] && packageData[0]["label"]}>
@@ -71,12 +78,15 @@ function ServiceList(props) {
                                         {services.length - 3 > 0 ? <ServiceCount>+{services.length - 3} more services</ServiceCount> : ""}
                                     </PackagesDetails>
                                 </RightDiv>
-
+                                </ServiceListCardWrapper>
                                 <ButtonDiv>
                                     <ListImg src =  {Lists} />
-                                    {props.subPackages?<AddButton onClick={() => props.removeSubPackage()}>Remove</AddButton>:<AddButton onClick={() => props.addSubPackage({code},{name})}>ADD</AddButton>}
+                                    <AddButton onClick ={() => {
+                                        // console.log({userId})
+                                        userId ? props.addSubPackage() : location.href = "/login"
+                                    }}>
+                                    Add</AddButton>
                                 </ButtonDiv>
-                                </ServiceListCardWrapper>
                             </ServiceListCard>
                         }) : null
                     })
@@ -91,7 +101,8 @@ const mapStateToProps = (state) => {
     return {
         inProgress: state?.packages?.["inProgress"],
         packages: state?.packages?.["packages"],
-        subPackages: state?.subPackages?.subPackageLabel
+        subPackages: state?.subPackages?.subPackageLabel,
+        carsInprofile: state?.profile?.carList || []
     }
 };
 

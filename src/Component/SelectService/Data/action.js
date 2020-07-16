@@ -29,13 +29,11 @@ export function fetchCities(){
 }
 
 
-export const addSubPackage = (code,subPackage) => {
+export const addSubPackage = (code) => {
     return {
       type: "ADD_SUBPACKAGE",
       payload: {
         code:code,
-        subPackage:subPackage
-      
       }
   }
 }

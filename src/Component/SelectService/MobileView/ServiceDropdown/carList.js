@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { SwitchWrapper, CarListWrapper} from "./style";
 
 import Radio from '@material-ui/core/Radio';
@@ -25,7 +25,10 @@ function CarList(props) {
     const[radio, setRadio] = useState("personal");
     const [carList, setCarList] = useState([]);
 
-    console.log(car)
+    if(car) {
+        sessionStorage.setItem("carSelectedPackage", car);
+    }
+
 
     const userId = readCookie("userUUId");
 
@@ -57,8 +60,7 @@ function CarList(props) {
         },[props.cars.length]);
     }
 
-    
-    
+
 
     return <CarListWrapper>
 
