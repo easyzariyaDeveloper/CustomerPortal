@@ -6,18 +6,24 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {useStyles, CityListWrapper} from './style';
 import { fetchCities } from "../../Data/action";
-import { Label } from "../style";
+import { readCookie } from "../../../../util";
 
 
 function CityList(props) {
     const classes = useStyles();
     const [city, setCity] = useState(props.value);
 
-    console.log(city)
+    const userId = readCookie("userUUId");
 
     useEffect(()=>{
         props.fetchCities();
     },[]);
+
+    if(city) {
+        sessionStorage.setItem("citySelectedPackage", city);
+    }
+    console.log(sessionStorage.getItem("citySelectedPackage"))
+
 
     return <CityListWrapper>
         <FormControl className={classes.formControl}>
@@ -27,13 +33,24 @@ function CityList(props) {
           id="demo-simple-select"
           value={city}
           onChange={(event) => {
-              setCity(event.target.value)
+              setCity(props.value)
               props?.onChange(event.target.value);
             }
         }>
-          {!props.inProgress && props.cities? props.cities.map(city =>{
-              return <MenuItem value ={city.cityId}>{city.cityName}</MenuItem>
-          }):null}
+
+        {
+            !props.inProgress && props.cities? props.cities.map(city =>{
+                return <MenuItem value ={city.cityId}>{city.cityName}</MenuItem>
+            }):null
+        }
+            
+        {/* {
+            userId ? props.profileAddress.map(({city}) =>{
+            return <MenuItem value ={city}>{city}</MenuItem>
+            }) : (!props.inProgress && props.cities? props.cities.map(city =>{
+                return <MenuItem value ={city.cityId}>{city.cityName}</MenuItem>
+            }):null)
+        } */}
         </Select>
       </FormControl>   
     </CityListWrapper>
@@ -42,7 +59,8 @@ function CityList(props) {
 const mapStateToProps = (state) => {
     return {
         inProgress: state?.cityList?.inProgress,
-        cities: state?.cityList?.cities
+        cities: state?.cityList?.cities,
+        profileAddress: state?.profile?.addressList
     }
 };
 

@@ -19,6 +19,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+
 export const ObjectList = (array) => array.reduce((accumulator, service) => {
     const { name = "", id = "" } = service;
     accumulator = {
@@ -40,6 +41,12 @@ const useStyles = makeStyles(theme => ({
 const userId = readCookie("userUUId");
 function ServiceList(props) {
     const { match: { params = {} } = {} } = props;
+    const [packageState, addPackage] = useState(null);
+    const serviceId = params["mode"];
+    const serviceKeyId = params["type"];
+    const packageData = props?.packages[serviceId];
+
+
     const [showCarMisMatchWarning, setShowCarMisMatchWarning] = useState(false);
     const [filter, setFilter] = useState({});
 
@@ -72,8 +79,21 @@ function ServiceList(props) {
             }} color="primary">
             Revert
           </Button>
+          <Button onClick = {() => {
+              const carId = sessionStorage.getItem("carSelectedPackage");
+              sessionStorage.removeItem("carSelectedPackage");
+              setShowCarMisMatchWarning(false);
+              window.location.href = `/add-car?carId=${carId}&referrer=${location.pathname}`;
+            }} color="primary">
+            Add Car
+          </Button>
         </DialogActions>
       </Dialog>
+    }
+
+
+    function addSubPackage(){
+        props.addPackage(serviceKeyId,code)
     }
 
     useEffect(() => {
@@ -100,11 +120,6 @@ function ServiceList(props) {
             sessionStorage.removeItem("selectedCityId");
         }
     }, [props?.profile?.customerId])
-
-    const [packageState, addPackage] = useState(null);
-    const serviceId = params["mode"];
-    const serviceKeyId = params["type"];
-    const packageData = props?.packages[serviceId];
 
     if (serviceId) {
         return <MobilePageLayout pageName = {packageData[0] && packageData[0]["label"]}>
@@ -138,7 +153,6 @@ function ServiceList(props) {
                                 <ButtonDiv>
                                     <ListImg src =  {Lists} />
                                     <AddButton onClick ={() => {
-                                        // console.log({userId})
                                         userId ? props.addSubPackage() : location.href = `/login?referrer=${location.pathname}`
                                     }}>
                                     Add</AddButton>
@@ -167,7 +181,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchPackageById: (packageId = "", filter = {}) => { dispatch(fetchPackageById(packageId, filter)) },
-        addSubPackage: (code = "",subPackage ="") => { dispatch(addSubPackage(code,subPackage)) },
+        addSubPackage: (packageId = "",code ="") => { dispatch(addSubPackage(packageId,code)) },
         removeSubPackage: () => { dispatch(removeSubPackage()) }
 
     }

@@ -30,10 +30,11 @@ export function fetchCities(){
 }
 
 
-export const addSubPackage = (code) => {
+export const addSubPackage = (packageId, code) => {
     return {
       type: "ADD_SUBPACKAGE",
       payload: {
+        packageId:packageId,
         code:code,
       }
   }

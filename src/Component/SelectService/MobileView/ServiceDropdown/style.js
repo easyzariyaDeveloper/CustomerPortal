@@ -9,6 +9,7 @@ export const CarListWrapper= styled.div`
 `;
 
 export const CityListWrapper= styled.div`
+    align-self: end;
 `;
 
 

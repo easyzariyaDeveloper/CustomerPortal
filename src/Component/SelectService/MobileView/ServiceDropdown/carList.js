@@ -25,6 +25,7 @@ function CarList(props) {
     const[radio, setRadio] = useState("personal");
     const [carList, setCarList] = useState([]);
 
+
     if(car) {
         sessionStorage.setItem("carSelectedPackage", car);
     }
@@ -77,7 +78,7 @@ function CarList(props) {
             id="demo-simple-select"
             value={car}
             onChange={(event)=> {
-            setCar(event.target.value)
+            setCar(props.value)
             props?.onChange(event.target.value)}
             }
         >

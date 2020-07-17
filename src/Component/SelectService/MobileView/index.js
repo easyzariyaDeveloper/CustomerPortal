@@ -44,7 +44,6 @@ function SelectService(props) {
 
     return<MobilePageLayout pageName = "Our Services">
 
-        
         <DropDrownWrapper>
             <Accordion>
                 <AccordionSummary
@@ -57,8 +56,8 @@ function SelectService(props) {
                 <FilterWrapper>
                     <CarList onChange = {value => {getServicePackage("carId", value)}} value={filter.carId} />
                     <CityList onChange = {value => {getServicePackage("cityId", value)}} value={filter.cityId}/>
-                    </FilterWrapper>
-                <ResetButton onClick={()=> setFilter({carId:"",cityId:""})}>Reset</ResetButton>
+                </FilterWrapper>
+                <ResetButton onClick={()=> setFilter({"carId":"","cityId":""})}>Reset</ResetButton>
                 </AccordionDetails>    
             </Accordion>
         </DropDrownWrapper>
