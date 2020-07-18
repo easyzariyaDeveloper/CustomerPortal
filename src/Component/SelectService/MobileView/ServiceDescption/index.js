@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect, useRef } from "react";
 import MobilePageLayout from "../../../../Layout/MobileView";
 import { withRouter } from "react-router";
 import { ImageSlideShow } from "./ImageSlideShow";
@@ -18,6 +18,22 @@ function ServiceDescription(props) {
     const serviceId = params["mode"];
     const codeId = params["packageCode"];
     const packageId = params["packageId"];
+
+    const selectedCityId = new URLSearchParams(window.location.search).get("cityId") || sessionStorage.getItem("citySelectedPackage"); 
+    const selectedCarId = sessionStorage.getItem("carSelectedPackage");
+    const itemIdObj = {
+        itemId: packageId,
+        subPackageName: codeId,
+        quantity:1,
+        "itemType": "PACKAGE"
+    }
+    
+    const matchedCarData = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
+
+    function addSubPackage(){
+        props.addSubPackage(matchedCarData,selectedCityId,itemIdObj)
+    }
+    
 
     useEffect(() => {
         props.fetchPackageById(params["packageId"]);
@@ -47,7 +63,7 @@ function ServiceDescription(props) {
                             </TimeDurationWrapper>
 
                             <AddServiceButton onClick={()=> {
-                                props.addSubPackage(packageId,codeId)}}>Add</AddServiceButton>
+                                addSubPackage()}}>Add</AddServiceButton>
 
                         </BottomDiv>
                         </div> ):null   
@@ -61,14 +77,15 @@ function ServiceDescription(props) {
 const mapStateToProps = (state) => {
     return {
         inProgress: state?.packages?.["inProgress"],
-        packages: state?.packages?.["packages"]
+        packages: state?.packages?.["packages"],
+        profile: state?.profile
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchPackageById: (packageId = "") => { dispatch(fetchPackageById(packageId)) },
-        addSubPackage: (packageId = "",code ="") => { dispatch(addSubPackage(packageId,code))},
+        addSubPackage: (car = {},city="", itemIdObj ={}) => { dispatch(addSubPackage(car,city,itemIdObj))},
     }
 }
 

@@ -113,9 +113,9 @@ export function* addSubPackage({payload}){
             method: "POST",
             url: `/cart/additem`,
             data: {
-                itemId: payload?.packageId,
-                quantity: 1,
-                subPackageName: payload?.code
+                car: payload?.car,
+                cityId: payload?.cityId,
+                itemIdObj: payload?.itemIdObj
             }
         });
         yield put({

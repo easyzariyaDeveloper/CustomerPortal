@@ -121,8 +121,9 @@ function ServiceList(props) {
     }
 
 
-    function addSubPackage(){
-        props.addPackage(serviceKeyId,code)
+    function addSubPackage(code, packageId){
+        console.log(code, packageId);
+        //props.addPackage(code, packageId)
     }
 
     useEffect(() => {
@@ -181,7 +182,8 @@ function ServiceList(props) {
                                 <ButtonDiv>
                                     <ListImg src =  {Lists} />
                                     <AddButton onClick ={() => {
-                                        userId ? addSubPackage() : location.href = `/login?referrer=${location.pathname}?carId=${sessionStorage.getItem("carSelectedPackage")}&cityId=${sessionStorage.getItem("citySelectedPackage")}`
+                                        userId ? addSubPackage(code, serviceKeyId) : 
+                                        location.href = `/login?referrer=${location.pathname}?carId=${sessionStorage.getItem("carSelectedPackage")}&cityId=${sessionStorage.getItem("citySelectedPackage")}`
                                     }}>
                                     Add</AddButton>
                                 </ButtonDiv>
