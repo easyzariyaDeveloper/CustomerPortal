@@ -7,7 +7,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { fetchBrandForCars,fetchCarListByBrand, addCar } from "../Data/action";
+import { fetchBrandForCars,fetchCarListByBrand, addCar, getCarById } from "../Data/action";
 import { connect } from "react-redux";
 import { base_spacing } from "../../../Assets/style-var";
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -26,6 +26,7 @@ const useStylesForDropDown = makeStyles(theme => ({
 function AddCar(props) {
     const classes = useStylesForDropDown();
     const classForText = useStyles();
+    const preSelectCarId = useRef(new URLSearchParams(window.location.search).get("carId"));
 
     const [vehicle, setVehicle] = React.useState({
         brand: "",
@@ -37,7 +38,6 @@ function AddCar(props) {
         registration:"",
         makeYear:"",
     });
-    console.log(vehicle);
     // const enableAddCarForProfile = useRef(props?.location?.search.includes("referral=profile"));
     const enableAddCarForProfile = true;
 
@@ -51,15 +51,29 @@ function AddCar(props) {
             "variantName":vehicle?.type,
             // "registration":vehicle?.registration,
             // "makeYear":vehicle?.makeYear,
-        }
-        // props.addCar(carDetails);
+        };
+        props.addCar(carDetails, () => {
+            const redirectURL = new URLSearchParams(window.location.search).get("redirect");
+            if(redirectURL){
+                window.location.href = redirectURL;
+            }
+        });
     }
 
-
     useEffect(() => {
-        props.fetchBrandForCars();
+        if(preSelectCarId.current) {
+            props.getCarById(preSelectCarId.current, (vehicleData) => {
+                setVehicle({
+                    brand: vehicleData?.brand,
+                    model: vehicleData?.id,
+                    carName: vehicleData?.model,
+                    colorPalletes: vehicleData?.colours
+                });
+            });
+        } else {
+            props.fetchBrandForCars();
+        }
     }, []);
-    console.log(props.brands)
 
     const handleChange = (prop) => (event) => { 
         if(prop == "model"){
@@ -88,7 +102,7 @@ function AddCar(props) {
             <MCarCard>
                 <ColorMPallete>
                     {
-                        (vehicle.model != "" && vehicle["colorPalletes"].length > 0) ? 
+                        (vehicle.model != "" && vehicle["colorPalletes"] && vehicle["colorPalletes"].length > 0) ? 
                         vehicle["colorPalletes"].map(({colourCode, file}) => {
                             return <ColorSpan 
                                 color = {colourCode.startsWith("#")  ? `${colourCode}` :  `#${colourCode}`} 
@@ -98,7 +112,7 @@ function AddCar(props) {
                     }
                 </ColorMPallete>
 
-                <FormControl className={classes.formControl} >
+                <FormControl className={classes.formControl} disabled = {preSelectCarId.current}>
                     <InputLabel id="demo-simple-select-label">Select Brand</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -116,7 +130,7 @@ function AddCar(props) {
                     </Select>
                 </FormControl>
                 
-                <FormControl className={classes.formControl} disabled = {vehicle.brand==""}>
+                <FormControl className={classes.formControl} disabled = {vehicle.brand=="" || preSelectCarId.current}>
                     <InputLabel id="demo-simple-select-label">Select Model</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -236,8 +250,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchBrandForCars: () => { dispatch(fetchBrandForCars()) },
-        fetchCarListByBrand: (brand ="") =>{dispatch(fetchCarListByBrand(brand))},
-        addCar: (cardDetails) => {dispatch(addCar(cardDetails))}
+        fetchCarListByBrand: (brand ="") => { dispatch(fetchCarListByBrand(brand)) },
+        addCar: (cardDetails, callback) => {dispatch(addCar(cardDetails, callback))},
+        getCarById: (carId = "", callBack) => { dispatch(getCarById(carId, callBack))}
     }
 }
 

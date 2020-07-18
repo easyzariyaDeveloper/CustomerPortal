@@ -8,7 +8,7 @@ const defaultProfileState = {
     userName: "",
     addressList: [],
     primaryPhone: "",
-    carList: ""
+    carList: []
 }
 
 export default function ProfileReducer(state = defaultProfileState, {type, data, error}){

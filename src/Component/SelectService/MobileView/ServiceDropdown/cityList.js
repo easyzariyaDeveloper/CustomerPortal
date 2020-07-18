@@ -19,12 +19,6 @@ function CityList(props) {
         props.fetchCities();
     },[]);
 
-    if(city) {
-        sessionStorage.setItem("citySelectedPackage", city);
-    }
-    console.log(sessionStorage.getItem("citySelectedPackage"))
-
-
     return <CityListWrapper>
         <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Select City</InputLabel>
@@ -34,23 +28,23 @@ function CityList(props) {
           value={city}
           onChange={(event) => {
               setCity(props.value)
-              props?.onChange(event.target.value);
-            }
-        }>
+              sessionStorage.setItem("citySelectedPackage", event.target.value);
+              props.onChange(event.target.value);
+        }}>
 
-        {
+        {/* {
             !props.inProgress && props.cities? props.cities.map(city =>{
                 return <MenuItem value ={city.cityId}>{city.cityName}</MenuItem>
             }):null
-        }
+        } */}
             
-        {/* {
-            userId ? props.profileAddress.map(({city}) =>{
-            return <MenuItem value ={city}>{city}</MenuItem>
+        {
+            userId ? props.profileAddress.map(({cityId, city}) =>{
+            return <MenuItem value ={cityId}>{city}</MenuItem>
             }) : (!props.inProgress && props.cities? props.cities.map(city =>{
                 return <MenuItem value ={city.cityId}>{city.cityName}</MenuItem>
             }):null)
-        } */}
+        }
         </Select>
       </FormControl>   
     </CityListWrapper>

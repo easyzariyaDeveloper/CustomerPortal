@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { base_spacing, ez_button_color, secondary_font_color } from "../../../../Assets/style-var";
-
+import Collapse from '@material-ui/core/Collapse';
 
 export const MServiceListWrapper= styled.div`
     padding: ${base_spacing * 2}px 0;
@@ -80,16 +80,25 @@ export const TimerPara= styled.p`
     display: inline-block;
     padding: 5px;
     vertical-align: baseline;
-    font-size: 13px;
-    padding-top: 8px;
+    font-size: ${base_spacing*1.3}px;
+    padding-top: ${base_spacing*0.8}px;
 `;
 
 export const TickImg = styled.img`
-vertical-align: middle;
-padding-left: 5px
+    vertical-align: middle;
+    padding-left: 5px
 `;
 
 export const ServiceCount = styled.p`
-padding-top: 8px;
-font-size: 11px
+    padding-top: 8px;
+    font-size: 11px
 `;
+
+export const CollapseInDialogDiv = styled.div`
+    text-align:center;
+`;
+
+ export const CarCollapseInDialog = styled(Collapse)`
+    padding: ${base_spacing}px;
+ `;
+

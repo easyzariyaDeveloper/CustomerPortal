@@ -13,9 +13,18 @@ export function fetchCarListByBrand(brand){
 }
 
 
-export function addCar(carDetails){
+export function addCar(carDetails, callback){
     return{
         type:"CUSTOMER_ADD_CAR",
-        payload: carDetails
+        payload: carDetails,
+        callback: callback
+    }
+}
+
+export function getCarById(carId, callBack){
+    return{
+        type: "FETCH_CAR_BY_ID",
+        payload:carId,
+        callBack: callBack
     }
 }
