@@ -146,8 +146,6 @@ function ServiceList(props) {
                 variantId: fuelVariantId,
                 cityId: sessionStorage.getItem("citySelectedPackage")
             });
-            sessionStorage.removeItem("carSelectedPackage");
-            sessionStorage.removeItem("citySelectedPackage");
         }
     }, [props?.profile?.customerId])
 
