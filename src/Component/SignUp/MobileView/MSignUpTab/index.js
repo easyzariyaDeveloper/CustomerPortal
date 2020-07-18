@@ -11,7 +11,7 @@ import { withRouter } from 'react-router-dom';
 import { loginUserByCredential, createSignup } from '../../Data/action';
 import { connect } from 'react-redux';
 import { isValidUserDetail, isValidPassword, isValidEmail, isValidContactNumber, isPasswordMatching, isValidEmailOrPhone } from '../../utils';
-import { SocialButtonDiv,FbLoginButton, GoogleLoginButton ,MAccountCard} from '../style';
+import { SocialButtonDiv,FbLoginButton, GoogleLoginButton } from '../style';
 import Google from "../../../../Assets/img/google.jpg";
 import FacebookIcon from '@material-ui/icons/Facebook';
 
@@ -176,7 +176,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loginUser: (userDetail) => {dispatch(loginUserByCredential(userDetail?.current))},
-    signUpUser: (signupDetails) => {dispatch(createSignup(signupDetails?.current))}
+    signUpUser: (signupDetails) => {dispatch(createSignup(signupDetails?.current))},
+    
   }
 }
 

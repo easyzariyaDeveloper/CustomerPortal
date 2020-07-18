@@ -25,11 +25,6 @@ export const HomeScreenImage = styled.img`
 `;
 
 export const WorkDetailHeader = styled.h1`
-letter-spacing: 0.15px;
-color: #1DA0BC;
-`;
-
-export const WorkDetailSubheader = styled.h3`
-padding-top: 10px;
     letter-spacing: 0.15px;
+    color: #1DA0BC;
 `;

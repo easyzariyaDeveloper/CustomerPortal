@@ -35,7 +35,7 @@ function MyCars(props) {
           <ProfileCard>
             <ProfileButtonWrapper>
             <ProfileActionButton>
-              <PageLink href = "/add-car?referral=profile">
+              <PageLink href = "/add-car?redirect=/profile">
                 Add Car
               </PageLink>
             </ProfileActionButton>

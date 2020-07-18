@@ -105,13 +105,28 @@ export function* fetchPackageById({payload, filter = {}}) {
 }
 
 
-export function* addRemoveSubPackage({payload}){
-    yield put  ({
-        type: "ADD_SUBPACKAGE",
-        data : payload?.subPackage,
-        code: payload?.code
-    })
-    yield put({
-        type: "REMOVE_SUBPACKAGE",
-    })
+export function* addSubPackage({payload}){
+    yield put({type: "SHOW_LOADER"});
+    
+    try {
+        const { data, status } = yield call(APIWrapper, {
+            method: "POST",
+            url: `/cart/additem`,
+            data: {
+                itemId: payload?.packageId,
+                quantity: 1,
+                subPackageName: payload?.code
+            }
+        });
+        yield put({
+            type: 'ADDED_TO_CART'
+        });
+
+    } catch (error) {
+        console.log(error);
+        yield put({
+            type: 'ADDED_CART_FAILED',
+            error
+        });
+    }
 }

@@ -5,7 +5,7 @@ import { ImageSlideShow } from "./ImageSlideShow";
 import { FeatureHeader, IndividualService, BottomDiv, AddServiceButton, TickImage, ServiceTimePara, TimeDurationWrapper } from "./style";
 import TimerIcon from '@material-ui/icons/Timer';
 import { connect } from "react-redux";
-import { fetchPackageById} from "../../Data/action";
+import { fetchPackageById, addSubPackage} from "../../Data/action";
 import Tick from "../../../../Assets/img/gradient tick.jpg"
 import { EZCard } from "../../../Common/MobileCard";
 
@@ -17,13 +17,12 @@ function ServiceDescription(props) {
 
     const serviceId = params["mode"];
     const codeId = params["packageCode"];
+    const packageId = params["packageId"];
 
     useEffect(() => {
         props.fetchPackageById(params["packageId"]);
     }, []);
 
-
-    const packageData = props?.packages[serviceId];
 
     if (serviceId) {
         return <MobilePageLayout>
@@ -47,7 +46,8 @@ function ServiceDescription(props) {
                                 <ServiceTimePara>{subPack.serviceTime > 0 ? subPack.serviceTime / 60 : 0}hour</ServiceTimePara>
                             </TimeDurationWrapper>
 
-                            <AddServiceButton>Add</AddServiceButton>
+                            <AddServiceButton onClick={()=> {
+                                props.addSubPackage(packageId,codeId)}}>Add</AddServiceButton>
 
                         </BottomDiv>
                         </div> ):null   
@@ -68,6 +68,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchPackageById: (packageId = "") => { dispatch(fetchPackageById(packageId)) },
+        addSubPackage: (packageId = "",code ="") => { dispatch(addSubPackage(packageId,code))},
     }
 }
 

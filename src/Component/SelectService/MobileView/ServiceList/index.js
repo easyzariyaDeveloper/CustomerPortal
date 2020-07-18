@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import MobilePageLayout from "../../../../Layout/MobileView";
-import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg} from "./style";
+import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg, CarListInDialog, CarCollapseInDialog, CollapseInDialogDiv} from "./style";
 import { connect } from "react-redux";
 import { fetchPackageById, addSubPackage, removeSubPackage } from "../../Data/action";
 import defaultImg from "../../../../Assets/img/gold.jpg";
@@ -19,6 +19,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 export const ObjectList = (array) => array.reduce((accumulator, service) => {
     const { name = "", id = "" } = service;
@@ -41,12 +46,12 @@ const useStyles = makeStyles(theme => ({
 const userId = readCookie("userUUId");
 function ServiceList(props) {
     const { match: { params = {} } = {} } = props;
-    const [packageState, addPackage] = useState(null);
     const serviceId = params["mode"];
     const serviceKeyId = params["type"];
     const packageData = props?.packages[serviceId];
 
-
+    const [collapse, setCollapse] = useState(false);
+    const[car, setCar] = useState("");
     const [showCarMisMatchWarning, setShowCarMisMatchWarning] = useState(false);
     const [filter, setFilter] = useState({});
 
@@ -70,12 +75,12 @@ function ServiceList(props) {
                 setFilter({
                     carId: carId,
                     variantId: fuelVariantId,
-                    cityId: sessionStorage.getItem("selectedCityId")
+                    cityId: sessionStorage.getItem("citySelectedPackage")
                   });
               }
               sessionStorage.removeItem("carSelectedPackage");
-              sessionStorage.removeItem("selectedCityId");
-              setShowCarMisMatchWarning(false);
+              sessionStorage.removeItem("citySelectedPackage");
+              setCollapse(!collapse);
             }} color="primary">
             Revert
           </Button>
@@ -83,11 +88,35 @@ function ServiceList(props) {
               const carId = sessionStorage.getItem("carSelectedPackage");
               sessionStorage.removeItem("carSelectedPackage");
               setShowCarMisMatchWarning(false);
-              window.location.href = `/add-car?carId=${carId}&referrer=${location.pathname}`;
+              window.location.href = `/add-car?carId=${carId}&redirect=${location.pathname}`;
             }} color="primary">
             Add Car
           </Button>
         </DialogActions>
+    
+        <CollapseInDialogDiv>
+        <CarCollapseInDialog in={collapse} collapsedHeight={1}>
+            <FormControl style = {{width:200}}>
+            <InputLabel id="demo-simple-select-label">Your Car</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={car}
+                    onChange= {(event)=>{
+                        setCar(event.target.value)
+                        sessionStorage.setItem("carSelectedPackage",event.target.value)
+                        setShowCarMisMatchWarning(false);
+                    }}
+            >
+                {
+                    props?.profile.carList.map(({carName,carId})=>{
+                        return <MenuItem value = {carId}>{carName}</MenuItem>
+                    })   
+                }
+            </Select>
+        </FormControl>
+        </CarCollapseInDialog>
+        </CollapseInDialogDiv>
       </Dialog>
     }
 
@@ -103,21 +132,20 @@ function ServiceList(props) {
     useEffect(() => {
         const {carList = []} = props.profile;
         const carSelectedAnonymously = sessionStorage.getItem("carSelectedPackage");
+        const matchedCarData = carList.find((car) => car["carId"] === carSelectedAnonymously);
         if(
             carList.length > 0 &&  
             carSelectedAnonymously && 
-            carList[0]["carId"] !== carSelectedAnonymously
+            matchedCarData?.["carId"] !== carSelectedAnonymously
         ){
             setShowCarMisMatchWarning(true);
-        } else if(carList.length > 0 && carList[0]["carId"] === carSelectedAnonymously){
-            const {carId, fuelVariantId } = carList[0];
+        } else if(carList.length > 0 && matchedCarData?.["carId"] === carSelectedAnonymously){
+            const {carId, fuelVariantId } = matchedCarData;
             setFilter({
                 carId: carId,
                 variantId: fuelVariantId,
-                cityId: sessionStorage.getItem("selectedCityId")
+                cityId: sessionStorage.getItem("citySelectedPackage")
             });
-            sessionStorage.removeItem("carSelectedPackage");
-            sessionStorage.removeItem("selectedCityId");
         }
     }, [props?.profile?.customerId])
 
@@ -153,7 +181,7 @@ function ServiceList(props) {
                                 <ButtonDiv>
                                     <ListImg src =  {Lists} />
                                     <AddButton onClick ={() => {
-                                        userId ? props.addSubPackage() : location.href = `/login?referrer=${location.pathname}`
+                                        userId ? addSubPackage() : location.href = `/login?referrer=${location.pathname}?carId=${sessionStorage.getItem("carSelectedPackage")}&cityId=${sessionStorage.getItem("citySelectedPackage")}`
                                     }}>
                                     Add</AddButton>
                                 </ButtonDiv>

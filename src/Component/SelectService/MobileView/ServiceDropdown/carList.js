@@ -24,15 +24,7 @@ function CarList(props) {
 
     const[radio, setRadio] = useState("personal");
     const [carList, setCarList] = useState([]);
-
-
-    if(car) {
-        sessionStorage.setItem("carSelectedPackage", car);
-    }
-
-
     const userId = readCookie("userUUId");
-
     useEffect(() => {
         props.fetchCar();
     }, []);
@@ -78,10 +70,10 @@ function CarList(props) {
             id="demo-simple-select"
             value={car}
             onChange={(event)=> {
-            setCar(props.value)
-            props?.onChange(event.target.value)}
-            }
-        >
+                setCar(props.value)
+                sessionStorage.setItem("carSelectedPackage", event.target.value);
+                props.onChange(event.target.value);
+        }}>
             {carList.map(car =>{
                 return <MenuItem value ={car.value}>{car.name}</MenuItem>
             })}

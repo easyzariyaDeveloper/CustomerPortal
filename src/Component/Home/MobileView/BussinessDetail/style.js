@@ -24,19 +24,23 @@ export const Content = styled.div`
 `;
 
 export const CenterImage = styled.img`
-    width: 76px;
-    height: 76px;
+    width: 60px;
+    height: 60px;
     margin: ${base_spacing}px auto;
 `;
 
 export const CenterHeader = styled.h1`
     text-align: center;
     color: #1DA0BC;
+    padding: ${base_spacing}px 0;
 `;
 
-export const SubHeader = styled.h3`
+export const SubHeader = styled.p`
     padding: 10px;
-    text-align: center;
+    font-weight: 300;
+    letter-spacing: 0.35px;
+    font-size: 13px;
+    line-height: 14px;
 `;
 
 export const Label = styled.label`

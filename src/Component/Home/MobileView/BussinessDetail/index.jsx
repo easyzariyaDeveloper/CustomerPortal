@@ -16,7 +16,6 @@ const settings = {
     slidesToShow: 1,
     speed: 400,
     swipe: true,
-    autoplay: true,
 };
 
 //https://www.npmjs.com/package/react-ios-switch
@@ -46,42 +45,42 @@ export default function BussinessDetail(){
                     <Content>
                         <CenterImage src= {CustomerIcon["Fun"]}/>
                         <CenterHeader>User Friendly</CenterHeader>
-                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
+                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
                         <CenterImage src= {CustomerIcon["Worker"]}/>
                         <CenterHeader>In-House Trained Technician</CenterHeader>
-                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
+                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
                         <CenterImage src= {CustomerIcon["Award"]}/>
                         <CenterHeader>Genuine Spare Parts</CenterHeader>
-                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
+                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
                         <CenterImage src= {CustomerIcon["Green"]}/>
                         <CenterHeader>Sustainable</CenterHeader>
-                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
+                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
                         <CenterImage src= {CustomerIcon["Insurance"]}/>
                         <CenterHeader>Unique Car Health Report</CenterHeader>
-                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
+                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
                         <CenterImage src= {CustomerIcon["Transparency"]}/>
                         <CenterHeader>Transparency</CenterHeader>
-                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
+                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
                     </Content>
                 </ContentWrapper>
             </Slider> : <Slider {...settings}>
