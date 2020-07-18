@@ -34,9 +34,12 @@ export const CenterHeader = styled.h1`
     color: #1DA0BC;
 `;
 
-export const SubHeader = styled.h3`
+export const SubHeader = styled.p`
     padding: 10px;
-    text-align: center;
+    font-weight: 300;
+    letter-spacing: 0.35px;
+    font-size: 13px;
+    line-height: 14px;
 `;
 
 export const Label = styled.label`

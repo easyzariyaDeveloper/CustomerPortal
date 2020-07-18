@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Switch from 'react-ios-switch';
-import { Header, Label, SwitchWrapper, Wrapper } from "../BussinessDetail/style";
-import { HomeCard, HomeCardDetail, HomeScreenImage, HomeCardWrapper, WorkDetailHeader,WorkDetailSubheader } from "./style";
+import { Header, Label, SwitchWrapper, Wrapper, SubHeader as WorkDetailSubheader } from "../BussinessDetail/style";
+import { HomeCard, HomeScreenImage, HomeCardWrapper, WorkDetailHeader } from "./style";
 import { WorkshopIcon, DoorstepIcon } from "../../Images";
 
 //https://www.npmjs.com/package/react-ios-switch

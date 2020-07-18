@@ -12,8 +12,7 @@ const settings = {
     centerPadding: "70px",
     slidesToShow: 1,
     speed: 500,
-    swipe: true,
-    autoplay: true
+    swipe: true
 };
 
 export default function Testimonials(props) {

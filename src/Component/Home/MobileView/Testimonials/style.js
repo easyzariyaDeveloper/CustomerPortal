@@ -3,15 +3,18 @@ import { base_spacing } from "../../../../Assets/style-var";
 
 export const QuotationImage= styled.img`
     float: right;
-    width: 40px;
-    height: 40px;
-    padding-bottom:10px
+    width: ${base_spacing * 4}px;
+    height: ${base_spacing * 4}px;
+    padding-bottom:${base_spacing}px;
 `;
 
-export const Testimonial = styled.h3`
-display: inline-block;
-text-align: left;
-letter-spacing: 0.15px;
+export const Testimonial = styled.p`
+    display: inline-block;
+    text-align: left;
+    letter-spacing: 0.35px;
+    font-size: 13px;
+    line-height: 14px;
+    font-weight:300;
 `;
 
 export const PersondDiv= styled.div`

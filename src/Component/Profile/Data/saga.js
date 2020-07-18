@@ -7,7 +7,7 @@ export function*  getProfile(){
     try{
         const {data: profileResponse} = yield call(APIWrapper, {
             method: "GET",
-            url: '/customer/profile',
+            url: '/customer',
         });
 
         if(profileResponse?.customerId && !readCookie("userUUId")){

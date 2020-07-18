@@ -41,7 +41,6 @@ const useStyles = makeStyles(theme => ({
 const userId = readCookie("userUUId");
 function ServiceList(props) {
     const { match: { params = {} } = {} } = props;
-    const [packageState, addPackage] = useState(null);
     const serviceId = params["mode"];
     const serviceKeyId = params["type"];
     const packageData = props?.packages[serviceId];
