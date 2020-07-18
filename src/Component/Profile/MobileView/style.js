@@ -110,3 +110,16 @@ export const PageLink = styled.a`
     color: white;
     text-decoration: none;
 `;
+
+export const AddressLineWrapper = styled.div`
+    padding: ${base_spacing}px;
+`;
+
+export const AddressLine = styled.p`
+    padding: ${base_spacing/2}px 0;
+    font-weight: 300;
+    font-size: ${base_spacing*1.4}px;
+    line-height: ${base_spacing*2.8}px;
+    letter-spacing: 0.15px;
+    color: #4B4B4B;
+`;
