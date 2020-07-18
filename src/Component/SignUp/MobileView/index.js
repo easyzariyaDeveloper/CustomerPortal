@@ -1,9 +1,8 @@
 import React from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
-import { AccountBackgroundImg, AccountImgOverlay,MAccountWrapper, MAccountCard, FbLoginButton, GoogleLoginButton, SocialButtonDiv } from "./style";
+import { AccountBackgroundImg, AccountImgOverlay,MAccountWrapper, MAccountCard} from "./style";
 import MSignUpTab from "./MSignUpTab";
-import Google from "../../../Assets/img/google.jpg";
-import FacebookIcon from '@material-ui/icons/Facebook';
+
 
 export default function Account() {
     return<MobilePageLayout>
@@ -11,16 +10,6 @@ export default function Account() {
             <MAccountWrapper>
                 <MAccountCard>
                     <MSignUpTab />
-
-                    <SocialButtonDiv>
-                        <FbLoginButton><FacebookIcon style= {{verticalAlign: "middle", paddingRight: "10px", fontSize: "30px", paddingBottom: "2px"}}  />
-                            Facebook
-                        </FbLoginButton>
-                        <GoogleLoginButton><img style= {{verticalAlign: "sub", paddingRight: "10px"}} src = {Google}/>
-                            Google
-                        </GoogleLoginButton>
-                    </SocialButtonDiv>
-
                 </MAccountCard>
         </MAccountWrapper>
     </MobilePageLayout>

@@ -11,7 +11,9 @@ import { withRouter } from 'react-router-dom';
 import { loginUserByCredential, createSignup } from '../../Data/action';
 import { connect } from 'react-redux';
 import { isValidUserDetail, isValidPassword, isValidEmail, isValidContactNumber, isPasswordMatching, isValidEmailOrPhone } from '../../utils';
-
+import { SocialButtonDiv,FbLoginButton, GoogleLoginButton ,MAccountCard} from '../style';
+import Google from "../../../../Assets/img/google.jpg";
+import FacebookIcon from '@material-ui/icons/Facebook';
 
 //https://react-swipeable-views.com/demos/demos/
 
@@ -130,6 +132,15 @@ function MSignUpTab(props) {
               <SignupLogInButton onClick = {() => loginUser()}>Login</SignupLogInButton>
               <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign In with</p>
             </div>
+
+          <SocialButtonDiv>
+            <FbLoginButton><FacebookIcon style={{ verticalAlign: "middle", paddingRight: "10px", fontSize: "30px", paddingBottom: "2px" }} />
+                            Facebook
+                        </FbLoginButton>
+            <GoogleLoginButton><img style={{ verticalAlign: "sub", paddingRight: "10px" }} src={Google} />
+                            Google
+                        </GoogleLoginButton>
+          </SocialButtonDiv>
           </div>
 
           
@@ -143,6 +154,14 @@ function MSignUpTab(props) {
               <SignupLogInButton onClick = {() => signUpUser()}>Sign Up</SignupLogInButton>
               <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign Up with</p>
             </div>
+          <SocialButtonDiv>
+            <FbLoginButton><FacebookIcon style={{ verticalAlign: "middle", paddingRight: "10px", fontSize: "30px", paddingBottom: "2px" }} />
+                            Facebook
+                        </FbLoginButton>
+            <GoogleLoginButton><img style={{ verticalAlign: "sub", paddingRight: "10px" }} src={Google} />
+                            Google
+                        </GoogleLoginButton>
+          </SocialButtonDiv>
           </div>
       </SwipeableViews>
 
