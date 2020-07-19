@@ -92,10 +92,11 @@ export const Link = styled(StyledLink)`
   line-height: 24px;
 `;
 
-export const CartWrapper = styled.div`
+export const CartWrapper = styled.a`
   position:relative;
   height: 100%;
   padding-right: 5px;
+  color: white;
 `;
 
 export const ItemCount = styled.p`

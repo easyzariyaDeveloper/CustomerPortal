@@ -79,7 +79,7 @@ export default function Header(props) {
           </svg>
         </BackButton> : <Hamburger onClick={toggleDrawer(true)}>&#x2630;</Hamburger> }
         <PageName>{props["pageName"]}</PageName>
-        <CartWrapper>
+        <CartWrapper href = "/cart">
           <ShoppingCartIcon style={{fontSize:"30px"}}/>
           {
             (props?.cart?.items || []).length > 0 && 
