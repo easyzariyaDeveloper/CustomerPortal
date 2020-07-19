@@ -94,13 +94,23 @@ export const Link = styled(StyledLink)`
 
 export const CartWrapper = styled.div`
   position:relative;
+  height: 100%;
+  padding-right: 5px;
 `;
 
 export const ItemCount = styled.p`
+  color: white;
+  background: ${ez_button_color};
+  width: 25px;
   position: absolute;
-  right: 22px;
-  top: -29px;
-  color: ${ez_button_color};
-  font-weight: 100;
-  font-size: 15px;
+  right: 0px;
+  top: -8px;
+  text-align: center;
+  height: 25px;
+  border-radius: 50%;
+  line-height: initial;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

@@ -80,7 +80,7 @@ export default function Header(props) {
         </BackButton> : <Hamburger onClick={toggleDrawer(true)}>&#x2630;</Hamburger> }
         <PageName>{props["pageName"]}</PageName>
         <CartWrapper>
-          <ShoppingCartIcon style={{position: "absolute", right:"9px",top:"-14px",fontSize:"35px"}}/>
+          <ShoppingCartIcon style={{fontSize:"30px"}}/>
           {
             (props?.cart?.items || []).length > 0 && 
             <ItemCount>
