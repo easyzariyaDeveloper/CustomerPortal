@@ -10,7 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { MOBILE_NUMBER_LENGTH, isValidEmailOrPhone } from "../../utils";
-import { ValidationPara } from "../style";
+import { ValidationPara} from "../style";
 
 
 

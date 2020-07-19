@@ -11,7 +11,7 @@ import { withRouter } from 'react-router-dom';
 import { loginUserByCredential, createSignup } from '../../Data/action';
 import { connect } from 'react-redux';
 import { isValidUserDetail, isValidPassword, isValidEmail, isValidContactNumber, isPasswordMatching, isValidEmailOrPhone } from '../../utils';
-import { SocialButtonDiv,FbLoginButton, GoogleLoginButton } from '../style';
+import { SocialButtonDiv,FbLoginButton, GoogleLoginButton, MAccountWrapper, MAccountCard } from '../style';
 import Google from "../../../../Assets/img/google.jpg";
 import FacebookIcon from '@material-ui/icons/Facebook';
 
@@ -112,6 +112,8 @@ function MSignUpTab(props) {
 
   return (
       <div>
+        <MAccountWrapper>
+          <MAccountCard>
         <div>
           <AntTabs value={activeTabIndex?.index} onChange={handleChange}>
             <AntTab label= "Sign in"/>
@@ -164,7 +166,8 @@ function MSignUpTab(props) {
           </SocialButtonDiv>
           </div>
       </SwipeableViews>
-
+      </MAccountCard>
+      </MAccountWrapper>
     </div>
 )};
 

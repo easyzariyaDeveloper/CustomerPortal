@@ -5,10 +5,10 @@ import {
   white_color,
   ez_primary_theme_color,
   desktop_gradient,
+  ez_button_color,
 } from "../../../Assets/style-var";
 import { StyledLink } from "../../../Assets/common-styled";
 import { EZElevation } from "../../../Component/Common/MobileCard";
-
 const menu_width = 240;
 export const mobile_header_height = 55;
 
@@ -22,7 +22,6 @@ export const HeaderWrapper = styled.div`
   display: flex;
   color: white;
   align-items: center;
-  flex-direction: row-reverse;
   ${EZElevation}
 `;
 
@@ -91,4 +90,17 @@ export const Link = styled(StyledLink)`
   color: black;
   font-size: 16px;
   line-height: 24px;
+`;
+
+export const CartWrapper = styled.div`
+  position:relative;
+`;
+
+export const ItemCount = styled.p`
+  position: absolute;
+  right: 22px;
+  top: -29px;
+  color: ${ez_button_color};
+  font-weight: 100;
+  font-size: 15px;
 `;

@@ -4,7 +4,7 @@ import APIWrapper from "../../../Constants/ApiWrapper";
 import {getProfile}  from "../../Profile/Data/saga";
 
 export function* loginUser({payload}){
-    yield put({type: "SHOW_LOADER"});
+    yield put({type: "FETCHING_API"});
     try {
         const { data, status } = yield call(APIWrapper, {
             method: "POST",
@@ -24,6 +24,9 @@ export function* loginUser({payload}){
             yield put({
                 type: 'USER_LOGGEDIN_SUCCESSFULLY'
             });
+            yield put({
+                type: 'FETCHING_API_SUCCESS'
+            })
         }
     } catch (error) {
         console.log(error);
@@ -31,12 +34,15 @@ export function* loginUser({payload}){
             type: 'USER_LOGGEDIN_SUCCESSFULLY_FAILED',
             error
         });
+        yield put({
+            type: 'FETCHING_API_FAILED'
+        })
     }
 }
 
 
 export function* userSignup({payload}){
-    yield put({type: "SHOW_LOADER"});
+    yield put({type: "FETCHING_API"});
     
     try {
         const { data, status } = yield call(APIWrapper, {
@@ -50,7 +56,7 @@ export function* userSignup({payload}){
             }
         });
         yield put({
-            type: 'USER_SIGNEDUP_SUCCESSFULLY'
+            type: 'FETCHING_API_SUCCESS'
         });
         if(status === 201){
             sessionStorage.setItem("otpMobileNumber", payload?.phone);
@@ -59,7 +65,7 @@ export function* userSignup({payload}){
     } catch (error) {
         console.log(error);
         yield put({
-            type: 'USER_SIGNEDUP_SUCCESSFULLY_FAILED',
+            type: 'FETCHING_API_FAILED',
             error
         });
     }

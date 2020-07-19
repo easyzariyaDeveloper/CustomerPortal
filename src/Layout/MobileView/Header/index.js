@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { HeaderWrapper, Hamburger, PageName, Link, BackButton } from "./styles";
+import { HeaderWrapper, Hamburger, PageName, Link, BackButton, CartWrapper, ItemCount } from "./styles";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {
   Box,
   List,
@@ -78,13 +79,28 @@ export default function Header(props) {
           </svg>
         </BackButton> : <Hamburger onClick={toggleDrawer(true)}>&#x2630;</Hamburger> }
         <PageName>{props["pageName"]}</PageName>
+        <CartWrapper>
+          <ShoppingCartIcon style={{position: "absolute", right:"9px",top:"-14px",fontSize:"35px"}}/>
+          {
+            (props?.cart?.items || []).length > 0 && 
+            <ItemCount>
+              {
+                props.cart.items.reduce((accumlator, item) => { 
+                  accumlator += item["quantity"];
+                  return accumlator;
+                }, 0)
+              }
+            </ItemCount>
+          }
+        </CartWrapper>
       </HeaderWrapper>
+      
       {/* <MenuWrapper active = {slideMenu}>
             <Close onClick = {toggleMenu}>&#x02DF;</Close>
         </MenuWrapper>
         <Overlay onClick = {toggleMenu} active = {slideMenu} />  */}
       <SwipeableDrawer
-        anchor={"right"}
+        anchor={"left"}
         open={slideMenu}
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}

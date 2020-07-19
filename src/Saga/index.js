@@ -5,6 +5,7 @@ import { loginUser, userSignup } from "../Component/SignUp/Data/saga";
 import { getProfile } from "../Component/Profile/Data/saga";
 import { getOtp } from "../Component/OtpPage/Data/saga";
 import { addAddressByUser } from "../Component/Address/Data/saga";
+import { fetchCart, hasActiveCart } from "../Component/Cart/Data/saga";
 
 
 export default function* appSaga() {
@@ -25,4 +26,7 @@ export default function* appSaga() {
     yield takeLatest("FETCH_OTP", getOtp);
     yield takeLatest("CUSTOMER_ADD_ADDRESS", addAddressByUser);
     yield takeLatest("CUSTOMER_ADD_CAR", addCarByUser);
+
+    yield takeLatest("FETCH_ACTIVE_CART_DETAIL", hasActiveCart);
+    yield takeLatest("FETCH_CART_DETAILS", fetchCart);
 }

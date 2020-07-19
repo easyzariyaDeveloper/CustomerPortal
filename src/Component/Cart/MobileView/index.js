@@ -7,9 +7,12 @@ import Coupon from "../../../Assets/img/coupon.png";
 import { ServiceCart, CouponCodes } from "../mockCartData";
 import getPrice from "../util";
 import CouponCancel from "../../../Assets/img/coupon_cancel.jpg"
+import { connect } from "react-redux";
+import { fetchCart } from "../Data/action";
 
 
-export default function Cart(){
+
+function Cart(props){
     const [couponCardVisibility, setCouponCardVisibility] = useState(false);
     const [couponCode, setCouponCode]  = useState("");
     const [mServiceList, setMServiceList] = useState(ServiceCart);
@@ -91,3 +94,21 @@ export default function Cart(){
         </MCartPageWrapper>
     </MobilePageLayout>
 }
+
+const mapStateToProps = (state) => {
+    return {
+        cart: state?.cart
+        
+        // //selectedCarId: state?.profile?.["selectedCarId"],
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchCart: () => {dispatch(fetchCart())}
+        // fetchPackages: (filter = {}) => { dispatch(fetchPackages(filter))},
+        // fetchCar: () => {dispatch(fetchCar())},
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

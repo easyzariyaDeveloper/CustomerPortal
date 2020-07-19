@@ -55,6 +55,15 @@ function ServiceList(props) {
     const [showCarMisMatchWarning, setShowCarMisMatchWarning] = useState(false);
     const [filter, setFilter] = useState({});
 
+    const selectedCityId = new URLSearchParams(window.location.search).get("cityId") || sessionStorage.getItem("citySelectedPackage"); 
+    const selectedCarId = sessionStorage.getItem("carSelectedPackage");
+    const itemIdObj = {
+        itemId: serviceKeyId,
+        quantity:1,
+        "itemType": "PACKAGE"
+    }
+    
+    const matchedCarData = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
     function carMisMatchWarningPopup(){
         return <Dialog
             open={showCarMisMatchWarning}
@@ -120,12 +129,6 @@ function ServiceList(props) {
       </Dialog>
     }
 
-
-    function addSubPackage(code, packageId){
-        console.log(code, packageId);
-        //props.addPackage(code, packageId)
-    }
-
     useEffect(() => {
         props.fetchPackageById(params["type"], filter);
     }, [filter?.carId]);
@@ -182,7 +185,7 @@ function ServiceList(props) {
                                 <ButtonDiv>
                                     <ListImg src =  {Lists} />
                                     <AddButton onClick ={() => {
-                                        userId ? addSubPackage(code, serviceKeyId) : 
+                                        userId ? props.addSubPackage(matchedCarData, selectedCityId,{...itemIdObj,subPackageName: code}) : 
                                         location.href = `/login?referrer=${location.pathname}?carId=${sessionStorage.getItem("carSelectedPackage")}&cityId=${sessionStorage.getItem("citySelectedPackage")}`
                                     }}>
                                     Add</AddButton>
@@ -212,7 +215,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchPackageById: (packageId = "", filter = {}) => { dispatch(fetchPackageById(packageId, filter)) },
         addSubPackage: (packageId = "",code ="") => { dispatch(addSubPackage(packageId,code)) },
-        removeSubPackage: () => { dispatch(removeSubPackage()) }
 
     }
 }

@@ -4,19 +4,21 @@ import {formatPackageResponse} from "../util";
 import APIWrapper from "../../../Constants/ApiWrapper";
 
 export function* fetchPackages({payload}) {
-    yield put({ type: "FETCH_PACKAGES" });
+    yield put({ type: "FETCHING_API" });
     try {
         const { data } = yield call(getPackages, payload?.filter);
         yield put({
             type: 'FETCH_PACKAGES_SUCCESS',
             data: formatPackageResponse(data)
         });
+        yield put({ type: 'FETCHING_API_SUCCESS'});
     } catch (error) {
         console.log(error);
         yield put({
             type: 'FETCH_PACKAGES_FAILED',
             error
         });
+        yield put({ type: 'FETCHING_API_ERROR'});
     }
 }
 
@@ -79,7 +81,7 @@ export function* fetchCities() {
 }
 
 export function* fetchPackageById({payload, filter = {}}) {
-    yield put({ type: "FETCH_PACKAGES" });
+    yield put({ type: "FETCHING_API" });
 
     let URL = `/packages/${payload?.packageId}`;
     if(Object.values(filter).length > 0){
@@ -95,18 +97,20 @@ export function* fetchPackageById({payload, filter = {}}) {
             type: 'FETCH_PACKAGES_SUCCESS',
             data: formatPackageResponse([data])
         });
+        yield put({ type: 'FETCHING_API_SUCCESS'});
     } catch (error) {
         console.log(error);
         yield put({
             type: 'FETCH_PACKAGES_FAILED',
             error
         });
+        yield put({ type: 'FETCHING_API_ERROR'});
     }
 }
 
 
 export function* addSubPackage({payload}){
-    yield put({type: "SHOW_LOADER"});
+    yield put({type: "FETCHING_API"});
     
     try {
         const { data, status } = yield call(APIWrapper, {
@@ -121,6 +125,7 @@ export function* addSubPackage({payload}){
         yield put({
             type: 'ADDED_TO_CART'
         });
+        yield put({ type: 'FETCHING_API_SUCCESS' });
 
     } catch (error) {
         console.log(error);
@@ -128,5 +133,9 @@ export function* addSubPackage({payload}){
             type: 'ADDED_CART_FAILED',
             error
         });
+        yield put({
+            type: 'FETCHING_API_FAILED'
+        });
+        yield put({ type: 'FETCHING_API_ERROR'});
     }
 }

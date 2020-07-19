@@ -7,10 +7,11 @@ import MSignUpTab from "./MSignUpTab";
 export default function Account() {
     return<MobilePageLayout>
             <AccountBackgroundImg><AccountImgOverlay /></AccountBackgroundImg>
-            <MAccountWrapper>
+            <MSignUpTab />
+            {/* <MAccountWrapper>
                 <MAccountCard>
-                    <MSignUpTab />
+                    
                 </MAccountCard>
-        </MAccountWrapper>
+        </MAccountWrapper> */}
     </MobilePageLayout>
 }
