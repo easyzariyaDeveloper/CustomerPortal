@@ -11,7 +11,7 @@ import {
   ListItem,
   ListItemText,
 } from "@material-ui/core";
-import { readCookie } from "../../../util";
+import { readCookie, eraseCookie } from "../../../util";
 import { border_color, anchor_link_color, EZFontMediumSize } from "../../../Assets/style-var";
 const useStyles = makeStyles({
   list: {
@@ -119,7 +119,22 @@ export default function Header(props) {
           <List className={classes.links}>
             {links.map((link, key) => (
               <ListItem className={classes.listItem} key={key}>
-                <ListItemText primary={<Link to={link.to} className = {classes.link}>{link.text}</Link>} />
+                {
+                  link.text === "Logout" ?  
+                  <ListItemText
+                    onClick = {() => {
+                      /**
+                       * Later move to method
+                       */
+                      eraseCookie("access_token");
+                      eraseCookie("userUUId");
+                      eraseCookie("refresh_token")
+                    }}
+                  > {link.text} </ListItemText>
+                  : <ListItemText primary={
+                    <Link to={link.to} className = {classes.link}>{link.text}</Link>
+                  } />
+                }
               </ListItem>
             ))}
           </List>

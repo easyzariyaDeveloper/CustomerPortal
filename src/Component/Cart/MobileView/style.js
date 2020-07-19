@@ -24,7 +24,7 @@ export const SelectedCar = styled.h1`
 
 export const ServicePriceHeader = styled.div`
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: ${base_spacing/2}px; 0px;
     font-size: ${base_spacing*1.8}px;;
 `;

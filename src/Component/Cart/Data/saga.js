@@ -4,7 +4,6 @@ import APIWrapper from "../../../Constants/ApiWrapper";
 
 
 export function* hasActiveCart(){
-    yield put({ type: "FETCH_CART_INPROGRESS" });
     try{
         const {data: isActiveCart} = yield call(APIWrapper, {
             method: "GET",
@@ -26,7 +25,7 @@ export function* hasActiveCart(){
 }
 
 export function* fetchCart(){
-    yield put({ type: "FETCH_CART_INPROGRESS" });
+    yield put({ type: "FETCHING_API" });
     try{
         const {data} = yield call(APIWrapper, {
             method: "GET",
@@ -37,11 +36,13 @@ export function* fetchCart(){
             type: "CART_DATA_SUCCESS",
             data
         });
+        yield put({ type: "FETCHING_API_SUCCESS" });
     }catch(error){
         console.log(error);
         yield put({
             type: 'FETCH_PROFILE_FAILED',
             error
         });
+        yield put({ type: "FETCHING_API_FAILED" });
     }
 }

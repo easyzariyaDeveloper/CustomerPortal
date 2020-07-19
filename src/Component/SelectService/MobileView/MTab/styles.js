@@ -30,7 +30,7 @@ export const ServiceCard = styled.div`
     padding: ${base_spacing}px;
     align-self: center;
     justify-self: center;
-    pointer-events: ${({disabled}) => disabled ? "none" : "auto"}
+    position: relative;
 `;
 
 export const ServiceImage = styled.img`
@@ -52,4 +52,14 @@ export const ServiceLink = styled.a`
     width: 100%;
     height: 100%;
     text-decoration: none;
+    pointer-events: ${({disabled}) => disabled ? "none" : "auto"};
+`;
+
+export const TransparentElement = styled.div`
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
 `;

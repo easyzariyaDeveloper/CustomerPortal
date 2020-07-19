@@ -17,13 +17,14 @@ function Cart(props){
     const [couponCode, setCouponCode]  = useState("");
     const [mServiceList, setMServiceList] = useState(ServiceCart);
 
-    const Car = "Hyundai Creta (Diesel)"
+    const Car = props?.cart?.car?.carName
 
     const deleteItem = (id) => {
         const mFilteredList = mServiceList.filter(serviceObj => serviceObj["id"] != id);
         setMServiceList(mFilteredList);
     }
 
+    console.log(props.cart)
 
     return <MobilePageLayout >
         <MCartPageWrapper>
@@ -31,11 +32,12 @@ function Cart(props){
             <SelectedCar>{Car}</SelectedCar>
             <ServicePriceHeader>
                 <h1>Service</h1>
+                <h1>Quantity</h1>
                 <h1>Price</h1>
             </ServicePriceHeader>
 
             <MServices
-                mServiceList = {mServiceList}
+                mServiceList = {props?.cart?.items}
                 deleteItem = {deleteItem}
             />
 
@@ -75,16 +77,16 @@ function Cart(props){
 
             <SubTotalDiv>
                 <h1 style = {{fontWeight:"normal"}}>Subtotal:</h1>
-                <h1>Rs.{getPrice(mServiceList)}</h1>
+                <h1>Rs.{props?.cart?.totalAmount || 0}</h1>
             </SubTotalDiv>
             <DiscountDiv>
                 <h1 style = {{fontWeight:"normal"}}>Discount:</h1>
-                <h1>Rs {CouponCodes[0].newUser}</h1>
+                <h1>Rs {props?.cart?.discountAmount ==null? 0: props?.cart?.discountAmount}</h1>
             </DiscountDiv>
             
             <TotalDiv>
                 <h1 style = {{fontWeight:"normal"}}>Total:</h1>
-                <h1>Rs {(getPrice(mServiceList) - CouponCodes[0].newUser)}</h1>
+                <h1>Rs {(props?.cart?.totalAmount || 0) - (props?.cart?.discountAmount || 0)}</h1>
             </TotalDiv>
 
             <CheckOutButton>Checkout</CheckOutButton>
@@ -97,8 +99,7 @@ function Cart(props){
 
 const mapStateToProps = (state) => {
     return {
-        cart: state?.cart
-        
+        cart: state?.cart?.cart
         // //selectedCarId: state?.profile?.["selectedCarId"],
     }
 };

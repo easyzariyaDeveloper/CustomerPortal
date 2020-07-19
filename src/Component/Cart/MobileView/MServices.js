@@ -7,10 +7,10 @@ export default function MServices (props){
 
     return<MServiceWrapper>
         {
-            props.mServiceList.map(serviceObject => {
-                const{name,id,price} = serviceObject;
+            (props?.mServiceList ||[]).map(({name,price,quantity}) => {
                 return<ServiceMListItem>
                         <ServiceMPara>{name}</ServiceMPara>
+                        <p>{quantity}</p>
                         <CartPriceMPara>Rs. {price}
                             <DeleteBinButton onClick = {()=> props.deleteItem(id)} src = {Cancel}></DeleteBinButton>
                         </CartPriceMPara>

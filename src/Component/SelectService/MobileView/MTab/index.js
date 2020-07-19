@@ -3,7 +3,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
-import {TabDiv, ServiceCard, ServiceImage, Label, ServiceCardWrapper, ServiceLink} from './styles';
+import {TabDiv, ServiceCard, ServiceImage, Label, ServiceCardWrapper, ServiceLink, TransparentElement} from './styles';
 import {Mfont_color} from "../../../../Assets/style-var";
 import DefaultImage from "../../../../Assets/img/General.png";
 
@@ -58,7 +58,8 @@ const handleChange = (event, value) => {
   };
   const {tabs =[]} = props;
   const { index } = state;
-  
+  const isDisabled = !(props.filter["carId"] && props.filter["cityId"]);
+
     return (
       <div>
         <TabDiv>
@@ -74,16 +75,12 @@ const handleChange = (event, value) => {
                 <ServiceCardWrapper>
                   {
                     props["cardInfo"][id].map(({label, images, id}) => {
-                      const isDisabled = !(props.filter["carId"] && props.filter["cityId"]);
-                      return <ServiceCard disabled = {isDisabled}
-                        onClick = {() => {
-                          isDisabled && alert("Hello");
-                        }}
-                      >
-                        <ServiceLink href = {`/service/${tabs[index]["id"]}/${id}`}>
+                      return <ServiceCard>
+                        <ServiceLink href = {`/service/${tabs[index]["id"]}/${id}`} disabled = {isDisabled}>
                           <ServiceImage src = {images.length > 0 ? images[0] : DefaultImage} />
                           <Label>{label}</Label>
                         </ServiceLink> 
+                        {isDisabled && <TransparentElement onClick = {() => alert("Select Car and City from Filter")} />}
                       </ServiceCard>
                     })
                   }
