@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { base_spacing, ez_button_color, secondary_font_color } from "../../../../Assets/style-var";
+import { base_spacing, ez_button_color, secondary_font_color, white_color, CommonBoxShadow } from "../../../../Assets/style-var";
 import Collapse from '@material-ui/core/Collapse';
 
 export const MServiceListWrapper= styled.div`
@@ -101,4 +101,21 @@ export const CollapseInDialogDiv = styled.div`
  export const CarCollapseInDialog = styled(Collapse)`
     padding: ${base_spacing}px;
  `;
+export const SelectedCarIcon = styled.img`
+    border-radius: 50%;
+    width: 44px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+`;
 
+export const SelectedCarCard = styled.div`
+    ${CommonBoxShadow};
+    background: ${white_color};
+    display: ${({visibility}) => visibility ? "" : "none"};
+    position: absolute;
+    bottom: 50px;
+    right: 80px;
+    padding: 10px;
+    border-radius: 10px;
+`;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import MobilePageLayout from "../../../../Layout/MobileView";
-import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg, CarListInDialog, CarCollapseInDialog, CollapseInDialogDiv} from "./style";
+import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg, CarListInDialog, CarCollapseInDialog, CollapseInDialogDiv, SelectedCarIcon, SelectedCarCard} from "./style";
 import { connect } from "react-redux";
 import { fetchPackageById, addSubPackage, removeSubPackage } from "../../Data/action";
 import defaultImg from "../../../../Assets/img/gold.jpg";
@@ -11,6 +11,7 @@ import TimerIcon from '@material-ui/icons/Timer';
 import { makeStyles } from "@material-ui/core/styles";
 import { base_spacing } from "../../../../Assets/style-var";
 import { readCookie } from "../../../../util";
+import CarIcon from "../../../../Assets/img/carIcon.jpg"
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -24,6 +25,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { EZCard } from "../../../Common/MobileCard";
 
 export const ObjectList = (array) => array.reduce((accumulator, service) => {
     const { name = "", id = "" } = service;
@@ -50,6 +52,8 @@ function ServiceList(props) {
     const serviceKeyId = params["type"];
     const packageData = props?.packages[serviceId];
 
+    const[carIconVisiblity, setCarIconVisibility]= useState(false);
+
     const [collapse, setCollapse] = useState(false);
     const[car, setCar] = useState("");
     const [showCarMisMatchWarning, setShowCarMisMatchWarning] = useState(false);
@@ -64,6 +68,8 @@ function ServiceList(props) {
     }
     
     const matchedCarData = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
+
+    console.log(matchedCarData);
     function carMisMatchWarningPopup(){
         return <Dialog
             open={showCarMisMatchWarning}
@@ -195,6 +201,10 @@ function ServiceList(props) {
                     })
                 }
                 {showCarMisMatchWarning && carMisMatchWarningPopup()}
+                
+                <SelectedCarIcon src={CarIcon} onClick= {()=>setCarIconVisibility(!carIconVisiblity)}/>
+                <SelectedCarCard visibility={carIconVisiblity}>Car Selected: {matchedCarData?.carName}</SelectedCarCard>
+        
             </MServiceListWrapper>
         </MobilePageLayout>
     }
