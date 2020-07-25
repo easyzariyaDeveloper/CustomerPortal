@@ -9,3 +9,12 @@ export function fetchCart(){
         type: "FETCH_CART_DETAILS"
     }
 }
+
+export function deleteItem (id){
+    return{
+        type: "DELETE_ITEM",
+        payload: {
+            itemId: id
+        }
+    }
+}

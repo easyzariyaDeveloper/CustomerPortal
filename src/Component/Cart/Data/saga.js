@@ -46,3 +46,28 @@ export function* fetchCart(){
         yield put({ type: "FETCHING_API_FAILED" });
     }
 }
+
+export function * deleteItem({payload}){
+    yield put({type: "DELETE_ITEM_INPROGRESS"});
+    try {
+        const {data} = yield call(APIWrapper,{
+            url: `/cart/deleteitem`,
+            method: "DELETE",
+            data: {
+                itemId: payload.itemId
+            }
+        });
+        yield put({
+            type: 'DELETE_ITEM',
+            data
+        });
+    }
+    catch(error){
+        yield put({
+            type: 'DELETE_ITEM_FAILED',
+            error
+        });
+    }
+}
+
+

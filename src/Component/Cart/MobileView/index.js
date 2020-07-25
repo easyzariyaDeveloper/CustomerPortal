@@ -8,7 +8,7 @@ import { ServiceCart, CouponCodes } from "../mockCartData";
 import getPrice from "../util";
 import CouponCancel from "../../../Assets/img/coupon_cancel.jpg"
 import { connect } from "react-redux";
-import { fetchCart } from "../Data/action";
+import { fetchCart, deleteItem } from "../Data/action";
 
 
 
@@ -19,10 +19,10 @@ function Cart(props){
 
     const Car = props?.cart?.car?.carName
 
-    const deleteItem = (id) => {
-        const mFilteredList = mServiceList.filter(serviceObj => serviceObj["id"] != id);
-        setMServiceList(mFilteredList);
-    }
+    // const deleteItem = (id) => {
+    //     const mFilteredList = mServiceList.filter(serviceObj => serviceObj["id"] != id);
+    //     setMServiceList(mFilteredList);
+    // }
 
     console.log(props.cart)
 
@@ -37,8 +37,8 @@ function Cart(props){
             </ServicePriceHeader>
 
             <MServices
-                mServiceList = {props?.cart?.items}
-                deleteItem = {deleteItem}
+                mServiceList = {props?.cart}
+                deleteItem = {props?.deleteItem}
             />
 
             <DateTimeGrid>
@@ -106,7 +106,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCart: () => {dispatch(fetchCart())}
+        fetchCart: () => {dispatch(fetchCart())},
+        deleteItem: (id="")=> {dispatch(deleteItem(id))}
         // fetchPackages: (filter = {}) => { dispatch(fetchPackages(filter))},
         // fetchCar: () => {dispatch(fetchCar())},
     }

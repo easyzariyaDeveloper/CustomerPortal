@@ -57,21 +57,21 @@ export default function BussinessDetail(){
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
-                        <CenterImage src= {CustomerIcon["Award"]}/>
+                        <CenterImage src= {CustomerIcon["Genuine"]}/>
                         <CenterHeader>Genuine Spare Parts</CenterHeader>
                         {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
-                        <CenterImage src= {CustomerIcon["Green"]}/>
+                        <CenterImage src= {CustomerIcon["Sustanibility"]}/>
                         <CenterHeader>Sustainable</CenterHeader>
                         {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
-                        <CenterImage src= {CustomerIcon["Insurance"]}/>
+                        <CenterImage src= {CustomerIcon["CarHealthReport"]}/>
                         <CenterHeader>Unique Car Health Report</CenterHeader>
                         {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
                     </Content>
@@ -93,7 +93,7 @@ export default function BussinessDetail(){
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
-                        <CenterImage src= {BusinessIcon["Resume"]}/>
+                        <CenterImage src= {BusinessIcon["Manager"]}/>
                         <CenterHeader>Personal Account Manager</CenterHeader>
                         <SubHeader>Custom pricing, requirements and scheduling as per your needs.</SubHeader>
                     </Content>
@@ -107,7 +107,7 @@ export default function BussinessDetail(){
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
-                        <CenterImage src= {BusinessIcon["CarRepair"]}/>
+                        <CenterImage src= {BusinessIcon["OnSpot"]}/>
                         <CenterHeader>OnSpot Service</CenterHeader>
                         <SubHeader>Custom pricing, requirements and scheduling as per your needs.</SubHeader>
                     </Content>

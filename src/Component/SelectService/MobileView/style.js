@@ -5,10 +5,6 @@ import { EZCard } from "../../Common/MobileCard";
 
 export const ServiceMPageWrapper = styled.div``;
 
-export const DropDrownWrapper = styled.div`
-    padding:10px;
-`;
-
 
 export const MTab = styled(ScrollTab)`
     background: rgba(30, 62, 108, 0.04);
@@ -21,13 +17,38 @@ export const Label = styled.label`
     float: left;
 `;
 
-export const ResetButton = styled.button`
-    margin-top: ${base_spacing}px;
-    height: ${base_spacing * 3.3}px; 
+export const OverlayCard = styled(EZCard)``;
+
+export const CarWrapper = styled.div``;
+
+export const OverlayLabel = styled.h1`
+    padding: ${base_spacing}px;
+    font-size: ${base_spacing*2}px;
+`;
+
+export const CityWrapper = styled.div``;
+
+export const FilterButton = styled.button`
     border: none;
     border-radius: 5px;
     text-align: center;
     background: ${ez_button_color};
     color: ${white_color};
-    font-size: ${base_spacing *1.8}px;
+    font-size: ${base_spacing *1.5}px;
+    padding: ${base_spacing/2}px;
+    margin: ${base_spacing*3}px auto ${base_spacing}px;
+    width: 60%;
+    display: block;
+`;
+
+export const RightNavigator = styled.img`
+    float: right;
+    height: ${base_spacing*1.5}px;
+    margin: ${base_spacing}px;
+`;
+
+export const LeftNavigator = styled.img`
+    float: left;
+    height: ${base_spacing*1.5}px;
+    margin: ${base_spacing}px;
 `;

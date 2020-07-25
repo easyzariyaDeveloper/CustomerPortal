@@ -18,7 +18,7 @@ export function* fetchPackages({payload}) {
             type: 'FETCH_PACKAGES_FAILED',
             error
         });
-        yield put({ type: 'FETCHING_API_ERROR'});
+        yield put({ type: 'FETCHING_API_FAILED'});
     }
 }
 

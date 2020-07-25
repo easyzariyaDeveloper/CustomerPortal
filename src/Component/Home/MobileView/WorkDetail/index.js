@@ -35,21 +35,21 @@ export default function BussinessDetail(){
                     </div>
                 </HomeCard> 
                 <HomeCard>
-                    <HomeScreenImage src = {WorkshopIcon.Report} />
+                    <HomeScreenImage src = {WorkshopIcon.CarHealthReport} />
                     <div>
                         <WorkDetailHeader>2.Car Health Report (CHR)</WorkDetailHeader>
                         <WorkDetailSubheader>Get CHR after detail diagnosis of your vehicle and know the health of your car.</WorkDetailSubheader>
                     </div>
                 </HomeCard> 
                 <HomeCard>
-                    <HomeScreenImage src = {WorkshopIcon.TimeUpdate} />
+                    <HomeScreenImage src = {WorkshopIcon.RealTimeUpdate} />
                     <div>
                         <WorkDetailHeader>3. Real Time Update</WorkDetailHeader>
                         <WorkDetailSubheader>You will get real time updates of each steps & approval will be for any service required.</WorkDetailSubheader>
                     </div>
                 </HomeCard> 
                 <HomeCard>
-                    <HomeScreenImage src = {WorkshopIcon.Spare} />
+                    <HomeScreenImage src = {WorkshopIcon.TransparencyWorkDetail} />
                     <div>
                         <WorkDetailHeader>4. Transparency</WorkDetailHeader>
                         <WorkDetailSubheader>We will share before & after photos of the service and new spare part photos. </WorkDetailSubheader>

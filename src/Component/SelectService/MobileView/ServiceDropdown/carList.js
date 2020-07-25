@@ -14,71 +14,191 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {useStyles} from './style';
 import { readCookie } from "../../../../util";
-import { Label } from "../style";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { fetchBrandForCars, fetchCarListByBrand } from "../../../AddCar/Data/action";
 
 
 
 function CarList(props) {
     const classes = useStyles();
-    const [car, setCar] = useState(props.value);
+    const [vehicle,setVehicle] = useState({
+        brand:"",
+        model:"",
+        type:"",
+        fuelType: "",
+    });
+
+    const [car, setCar] = useState("");
 
     const[radio, setRadio] = useState("personal");
-    const [carList, setCarList] = useState([]);
     const userId = readCookie("userUUId");
+
     useEffect(() => {
-        props.fetchCar();
+        props.fetchBrandForCars();
     }, []);
-
-    if(userId){
-        useEffect(() => {
-            if(props.cars.length > 0 && radio == "all") {
-                setCarList(props.cars.map((car) => {
-                    return { name: car.model, value: car.id }
-                }));
-            } else if(props?.profileCars.length > 0 && radio == "personal"){
-                setCarList(props.profileCars.map(({carName, carId}) => {
-                    return {name: carName, value: carId}
-            }));
-        }
-    },[radio, props.cars.length, props.profileCars.length]);
-    }
-    else{
-        useEffect(()=>{
-            if(props.cars.length > 0){
-                setCarList(props.cars.map((car) => {
-                    return { name: car.model, value: car.id }
-                }));
-            }
-            
-        },[props.cars.length]);
-    }
-
 
 
     return <CarListWrapper>
 
-        {userId ? (props.profileCars ? <RadioGroup row value={radio} onChange={(event)=> setRadio(event.target.value)}>
-            <FormControlLabel value="personal" control={<Radio/>} label="Personal" />
-            <FormControlLabel value="all" control={<Radio/>} label="All" />
+        {userId ? (props.profileCars ? <RadioGroup style ={{paddingLeft:"13px"}}row value={radio} onChange={(event)=> setRadio(event.target.value)}>
+                <FormControlLabel value="personal" control={<Radio/>} label="Personal" />
+                <FormControlLabel value="all" control={<Radio/>} label="All" />
         </RadioGroup> : null) : null}
         
             
+        {
+            userId ?
+            (radio == "all" ? 
+            <div>
+            <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">Select Brand</InputLabel>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={vehicle.brand}
+                onChange={(event) => {
+                    setVehicle({...vehicle,brand: event.target.value});
+                    props.fetchCarListByBrand(event.target.value)
+                }}
+                autoWidth
+                >   
+                {props.inProgress? <CircularProgress style={{size: 10}}/>: !props.inProgress && props.brands? props.brands.map((carBrand) =>{
+                    return <MenuItem value = {carBrand} key = {carBrand}>{carBrand}</MenuItem>
+                }) :null}
+            </Select>
+        </FormControl>
+                
+        <FormControl className={classes.formControl} disabled = {vehicle.brand==""}>
+            <InputLabel id="demo-simple-select-label">Select Model</InputLabel>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={vehicle.model}
+                onChange= {(event)=> {setVehicle({...vehicle, model :event.target.value})
+                    localStorage.setItem("carSelectedPackage", event.target.value);
+                    props.onChange(event.target.value);
+            }}
+                autoWidth
+            >   
+            {vehicle.brand !=="" && props.models ? props.models.map(modelVariant=>{
+                return <MenuItem 
+                    value = {modelVariant.id}
+                    key = {modelVariant.id}
+                    >
+                        {modelVariant.model}
+                    </MenuItem>  
+            })
+            : undefined}
+            </Select>
+        </FormControl> 
+
+        <FormControl className={classes.formControl} disabled = {vehicle.model == ""}>
+            <InputLabel id="demo-simple-select-label">Select Fuel Type</InputLabel>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={vehicle.fuelType}
+                onChange={(event)=> {setVehicle({...vehicle, fuelType :event.target.value})}}
+                autoWidth
+            >   
+            {
+                vehicle.model!=="" && props.models ? props.models.map(carType => {
+                    return carType.id == vehicle.model ? carType.variants.map(variantElement=>{
+                        return <MenuItem 
+                            value = {variantElement.id}
+                            key = {variantElement.id}
+                            >
+                                {variantElement.fuelType}
+                            </MenuItem>
+                    }) :null
+                }):undefined
+            }
+            </Select>
+        </FormControl>
+
+
+        <FormControl className={classes.formControl} disabled ={vehicle.model == ""}>
+            <InputLabel id="demo-simple-select-label">Select Type</InputLabel>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={vehicle.type}
+                onChange={(event)=> {setVehicle({...vehicle, type :event.target.value})}}
+                autoWidth
+            >
+                {
+                    vehicle.fuelType!=="" && props.models ? props.models.map(carType=>{
+                        return carType.id == vehicle.model ? carType.variants.map(variantElement => {
+                            return variantElement.id == vehicle.fuelType  ?  variantElement.subCategory.map(type=> {
+                            return <MenuItem value = {type}>{type}</MenuItem> }):null
+                    }):null
+                }):undefined
+            }
+            </Select>
+        </FormControl>
+        
+        </div> : 
         <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Select Car</InputLabel>
+        <InputLabel id="demo-simple-select-label">Your Car</InputLabel>
         <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={car}
             onChange={(event)=> {
-                setCar(props.value)
-                sessionStorage.setItem("carSelectedPackage", event.target.value);
+                setCar(event.target.value)
+                localStorage.setItem("carSelectedPackage", event.target.value);
                 props.onChange(event.target.value);
         }}>
-            {carList.map(car =>{
-                return <MenuItem value ={car.value}>{car.name}</MenuItem>
+            {props?.profileCars?.map(car =>{
+                return <MenuItem value ={car.carId}>{car.carName}</MenuItem>
             })}
         </Select>
-        </FormControl> 
+        </FormControl>):
+        <div>
+        <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Select Brand</InputLabel>
+        <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={vehicle.brand}
+            onChange={(event) => {
+                setVehicle({...vehicle,brand: event.target.value});
+                props.fetchCarListByBrand(event.target.value)
+            }}
+            autoWidth
+            >   
+            {props.inProgress? <CircularProgress style={{size: 10}}/>: !props.inProgress && props.brands? props.brands.map((carBrand) =>{
+                return <MenuItem value = {carBrand} key = {carBrand}>{carBrand}</MenuItem>
+            }) :null}
+        </Select>
+    </FormControl>
+            
+    <FormControl className={classes.formControl} disabled = {vehicle.brand==""}>
+        <InputLabel id="demo-simple-select-label">Select Model</InputLabel>
+        <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={vehicle.model}
+            onChange= {(event)=> {setVehicle({...vehicle, model :event.target.value})
+                localStorage.setItem("carSelectedPackage", event.target.value);
+                props.onChange(event.target.value);
+        }}
+            autoWidth
+        >   
+        {vehicle.brand !=="" && props.models ? props.models.map(modelVariant=>{
+            return <MenuItem 
+                value = {modelVariant.id}
+                key = {modelVariant.id}
+                >
+                    {modelVariant.model}
+                </MenuItem>  
+        })
+        : undefined}
+        </Select>
+    </FormControl> </div> 
+
+        }
+        
            
     </CarListWrapper>
 }   
@@ -86,8 +206,9 @@ function CarList(props) {
 
 const mapStateToProps = (state) => {
     return {
-        inProgress: state?.carList?.inProgress,
-        cars: state?.carList?.car,
+        inProgress: state?.brands?.inProgress,
+        brands: state?.brands?.brands,
+        models: state?.cars?.carModel,
         profileCars: state?.profile?.carList || []
     }
 };
@@ -95,7 +216,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCar: () => {dispatch(fetchCar())},
+        fetchBrandForCars: () => { dispatch(fetchBrandForCars())},
+        fetchCarListByBrand: (brand ="") => { dispatch(fetchCarListByBrand(brand)) },
     }
 }
 

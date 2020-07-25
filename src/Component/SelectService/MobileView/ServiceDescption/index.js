@@ -19,8 +19,8 @@ function ServiceDescription(props) {
     const codeId = params["packageCode"];
     const packageId = params["packageId"];
 
-    const selectedCityId = new URLSearchParams(window.location.search).get("cityId") || sessionStorage.getItem("citySelectedPackage"); 
-    const selectedCarId = sessionStorage.getItem("carSelectedPackage");
+    const selectedCityId = new URLSearchParams(window.location.search).get("cityId") || localStorage.getItem("citySelectedPackage"); 
+    const selectedCarId = localStorage.getItem("carSelectedPackage");
     const itemIdObj = {
         itemId: packageId,
         subPackageName: codeId,

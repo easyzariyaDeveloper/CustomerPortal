@@ -78,6 +78,7 @@ function AddCar(props) {
     const handleChange = (prop) => (event) => { 
         if(prop == "model"){
             const selectedCars = props?.models.find(({id}) =>  id  === event.target.value);
+            
             let updateVehicleData =  {
                 ...vehicle,
                 [prop]: event.target.value,
@@ -87,6 +88,7 @@ function AddCar(props) {
                 
             }
             setVehicle(updateVehicleData);
+            localStorage.setItem("carSelectedPackage",event.target.value);
         } else {
             setVehicle({ ...vehicle, [prop]: event.target.value });
         }

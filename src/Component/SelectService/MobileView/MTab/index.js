@@ -58,7 +58,7 @@ const handleChange = (event, value) => {
   };
   const {tabs =[]} = props;
   const { index } = state;
-  const isDisabled = !(props.filter["carId"] && props.filter["cityId"]);
+ 
 
     return (
       <div>
@@ -76,11 +76,10 @@ const handleChange = (event, value) => {
                   {
                     props["cardInfo"][id].map(({label, images, id}) => {
                       return <ServiceCard>
-                        <ServiceLink href = {`/service/${tabs[index]["id"]}/${id}`} disabled = {isDisabled}>
+                        <ServiceLink href = {`/service/${tabs[index]["id"]}/${id}`}>
                           <ServiceImage src = {images.length > 0 ? images[0] : DefaultImage} />
                           <Label>{label}</Label>
                         </ServiceLink> 
-                        {isDisabled && <TransparentElement onClick = {() => alert("Select Car and City from Filter")} />}
                       </ServiceCard>
                     })
                   }

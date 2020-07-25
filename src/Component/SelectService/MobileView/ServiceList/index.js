@@ -13,19 +13,6 @@ import { base_spacing } from "../../../../Assets/style-var";
 import { readCookie } from "../../../../util";
 import CarIcon from "../../../../Assets/img/carIcon.jpg"
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
-
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { EZCard } from "../../../Common/MobileCard";
 
 export const ObjectList = (array) => array.reduce((accumulator, service) => {
     const { name = "", id = "" } = service;
@@ -69,95 +56,11 @@ function ServiceList(props) {
     
     const matchedCarData = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
 
-    console.log(matchedCarData);
-    function carMisMatchWarningPopup(){
-        return <Dialog
-            open={showCarMisMatchWarning}
-            disableBackdropClick = {true}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-        >
-        <DialogTitle id="alert-dialog-title">{"Car Mismatch - Reselecting the Car from Profile"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-           We found mismatch the car
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick = {() => {
-              const {carId, fuelVariantId} = props?.profile?.carList[0];
-              if(carId && fuelVariantId){
-                setFilter({
-                    carId: carId,
-                    variantId: fuelVariantId,
-                    cityId: sessionStorage.getItem("citySelectedPackage")
-                  });
-              }
-              sessionStorage.removeItem("carSelectedPackage");
-              sessionStorage.removeItem("citySelectedPackage");
-              setCollapse(!collapse);
-            }} color="primary">
-            Revert
-          </Button>
-          <Button onClick = {() => {
-              const carId = sessionStorage.getItem("carSelectedPackage");
-              sessionStorage.removeItem("carSelectedPackage");
-              setShowCarMisMatchWarning(false);
-              window.location.href = `/add-car?carId=${carId}&redirect=${location.pathname}`;
-            }} color="primary">
-            Add Car
-          </Button>
-        </DialogActions>
-    
-        <CollapseInDialogDiv>
-        <CarCollapseInDialog in={collapse} collapsedHeight={1}>
-            <FormControl style = {{width:200}}>
-            <InputLabel id="demo-simple-select-label">Your Car</InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={car}
-                    onChange= {(event)=>{
-                        setCar(event.target.value)
-                        sessionStorage.setItem("carSelectedPackage",event.target.value)
-                        setShowCarMisMatchWarning(false);
-                    }}
-            >
-                {
-                    props?.profile.carList.map(({carName,carId})=>{
-                        return <MenuItem value = {carId}>{carName}</MenuItem>
-                    })   
-                }
-            </Select>
-        </FormControl>
-        </CarCollapseInDialog>
-        </CollapseInDialogDiv>
-      </Dialog>
-    }
 
     useEffect(() => {
         props.fetchPackageById(params["type"], filter);
     }, [filter?.carId]);
 
-    useEffect(() => {
-        const {carList = []} = props.profile;
-        const carSelectedAnonymously = sessionStorage.getItem("carSelectedPackage");
-        const matchedCarData = carList.find((car) => car["carId"] === carSelectedAnonymously);
-        if(
-            carList.length > 0 &&  
-            carSelectedAnonymously && 
-            matchedCarData?.["carId"] !== carSelectedAnonymously
-        ){
-            setShowCarMisMatchWarning(true);
-        } else if(carList.length > 0 && matchedCarData?.["carId"] === carSelectedAnonymously){
-            const {carId, fuelVariantId } = matchedCarData;
-            setFilter({
-                carId: carId,
-                variantId: fuelVariantId,
-                cityId: sessionStorage.getItem("citySelectedPackage")
-            });
-        }
-    }, [props?.profile?.customerId])
 
     if (serviceId) {
         return <MobilePageLayout pageName = {packageData[0] && packageData[0]["label"]}>
@@ -201,6 +104,9 @@ function ServiceList(props) {
                     })
                 }
                 {showCarMisMatchWarning && carMisMatchWarningPopup()}
+                <button onClick = {() =>{
+                    location.href = `/add-car?redirect=${location.pathname}`
+                }}>Change Car</button>
                 
                 <SelectedCarIcon src={CarIcon} onClick= {()=>setCarIconVisibility(!carIconVisiblity)}/>
                 <SelectedCarCard visibility={carIconVisiblity}>Car Selected: {matchedCarData?.carName}</SelectedCarCard>

@@ -9,14 +9,16 @@ export const CarListWrapper= styled.div`
 `;
 
 export const CityListWrapper= styled.div`
-    align-self: end;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 `;
 
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(theme => ({
     formControl: {
-      width: 120,
-      float:"left"
+        margin: `0 ${base_spacing*1.5}px`,
+        minWidth: 300,
+        display: `flex`
     }
 }));
 
@@ -24,4 +26,9 @@ export const useStyles = makeStyles(() => ({
 export const FilterWrapper = styled.div`
     display: grid;
     grid-template-columns: 3fr 1fr;
+`;
+
+export const CityCard = styled.div`
+    text-align: centre;
+    padding: ${base_spacing}px;
 `;

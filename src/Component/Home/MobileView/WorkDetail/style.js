@@ -20,8 +20,8 @@ export const HomeCard = styled.div`
 `;
 
 export const HomeScreenImage = styled.img`
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
 `;
 
 export const WorkDetailHeader = styled.h1`

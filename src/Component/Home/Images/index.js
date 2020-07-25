@@ -1,38 +1,37 @@
 import Fun from "./fun.jpg";
 import Worker from "./worker.jpg";
-import Award from "./award.jpg";
-import Green from "./green.jpg";
+import Genuine from "./genuine.png";
+import Sustanibility from "./sustainbility.jpg";
 import Transparency from "./transparency.jpg";
-import Insurance from "./insurance.jpg";
-import Flexibility from "./flexibility.jpg";
-import Responsibility from "./responsibility.jpg";
-import Resume from "./resume.jpg";
-import CarRepair from "./car-repair.jpg";
-import Calendar from "./calendar.jpg";
-import Report from "./report.jpg";
-import Payment from "./payment.jpg";
-import Spare from "./spare.jpg";
-import TimeUpdate from "./timeUpdate.jpg";
-import Doorstep from "./doorstep.jpg";
+import Flexibility from "./flexibility.png";
+import Responsibility from "./responsibility.png";
+import OnSpot from "./onSpot.png";
+import Calendar from "./calendar.png";
+import CarHealthReport from "./carHealthReport.jpg";
+import Payment from "./payment.png";
+import TransparencyWorkDetail from "./transparency_workDetail.png";
+import RealTimeUpdate from "./realTimeUpdate.png";
+import Doorstep from "./doorstep.png";
+import Manager from "./manager.png";
 
 
 
 export const  CustomerIcon = {
     Fun,
     Worker,
-    Award,
-    Green,
+    Genuine,
+    Sustanibility,
     Transparency,
-    Insurance
+    CarHealthReport
 };
 
 export const  BusinessIcon = {
-    Flexibility,Responsibility,Resume,CarRepair
+    Flexibility,Responsibility,Manager,OnSpot
     
 };
 
 export const  WorkshopIcon = {
-Calendar,Report,Spare,Payment,TimeUpdate
+Calendar,CarHealthReport,TransparencyWorkDetail,Payment,RealTimeUpdate
 };
 export const  DoorstepIcon = {
     Doorstep
