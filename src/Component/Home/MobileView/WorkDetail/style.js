@@ -12,6 +12,7 @@ export const HomeCard = styled.div`
     display: grid;
     grid-template-columns: 1fr 3.5fr ;
     margin: 20px 0;
+    align-items: center;
     ${CommonBoxShadow}
 
     &:last-child{
@@ -20,8 +21,8 @@ export const HomeCard = styled.div`
 `;
 
 export const HomeScreenImage = styled.img`
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
 `;
 
 export const WorkDetailHeader = styled.h1`

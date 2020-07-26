@@ -12,9 +12,9 @@ export function fetchPackageById(packageId, filter){
   return {
     type: "REQUEST_PACKAGES_DATA_BY_ID",
     payload:{
-        packageId,
-        filter
-    }
+        packageId
+    },
+    filter
   }
 }
 export function fetchCar(){
