@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { fetchProfile } from "../../Component/Profile/Data/action";
 import PageLoader from "./PageLoader";
 import { fetchActiveCart, fetchCart } from "../../Component/Cart/Data/action";
+import Alert from '@material-ui/lab/Alert';
 
 
 
@@ -24,7 +25,7 @@ function PageLayout(props) {
       props.fetchCart();
     }
   }, [props?.cart?.hasActiveCart])
-  
+
   return (
     <PageWrapper className="container">
       <Header 
@@ -33,6 +34,11 @@ function PageLayout(props) {
         noborder = {props.noborder || false} 
         cart = {props?.cart?.["cart"]}
       />
+      {props?.errorMessage && 
+      <Alert variant="filled" severity="error">
+        {props?.errorMessage}
+      </Alert>
+      }
       <Content>
         {props.children}
       </Content>
@@ -45,7 +51,8 @@ const mapStateToProps = (state) => {
   return {
     profile: state.profile,
     loading: state.loading,
-    cart: state.cart
+    cart: state.cart,
+    errorMessage: state.loading?.error?.message
   }
 }
 

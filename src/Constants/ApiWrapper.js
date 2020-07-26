@@ -30,6 +30,6 @@ export default function APIWrapper(options) {
         /**
          * Handle Error Alert through this
          */
-        throw error;
+        throw {errorObj: error.response, message: error?.message, status: error?.response?.status};
     });
 }

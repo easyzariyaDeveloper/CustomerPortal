@@ -6,20 +6,20 @@ const defaultBrandState = {
 
 export default function BrandsReducer(state = defaultBrandState, {type, data, error}){
     switch (type){
-        case "FETCH_BRAND": 
+        case "FETCHING_API": 
             return {
                 ...state,
                 inProgress: true
             }
         break;
-        case "FETCH_BRAND_SUCCESS":
+        case "FETCHING_API_SUCCESS":
             return {
                 ...state,
                 inProgress: false,
                 brands: data,  
             }
         break;
-        case "FETCH_BRAND_FAILED":
+        case "FETCHING_API_FAILED":
             return {
                 ...state,
                 inProgress: false,

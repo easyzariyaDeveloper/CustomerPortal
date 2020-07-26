@@ -9,6 +9,7 @@ import CityImage from "../../../../Assets/img/cityImage.jpg"
 
 function CityList(props) {
     const [city, setCity] = useState(props.value);
+    const [enabled, setEnabled] = useState(false);
     const userId = readCookie("userUUId");
     useEffect(()=>{
         props.fetchCities();
@@ -21,6 +22,8 @@ function CityList(props) {
                     setCity(cityId);
                     localStorage.setItem("citySelectedPackage", cityId);
                     props.onChange(city.cityId);
+                    setEnabled(true);
+                    enabled
                 }}>
                     <img src = {CityImage}></img>
                     <h1>{city}</h1>

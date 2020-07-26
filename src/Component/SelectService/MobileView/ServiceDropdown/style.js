@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { base_spacing, EZFontMediumSize } from "../../../../Assets/style-var";
+import { base_spacing, EZFontMediumSize, ez_button_color, white_color } from "../../../../Assets/style-var";
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -31,4 +31,7 @@ export const FilterWrapper = styled.div`
 export const CityCard = styled.div`
     text-align: centre;
     padding: ${base_spacing}px;
+    background: ${({enabled}) => enabled ? ez_button_color : white_color};
 `;
+
+

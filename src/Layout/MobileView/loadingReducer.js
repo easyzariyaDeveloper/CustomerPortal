@@ -1,5 +1,6 @@
 const defaultLoadingState = {
     LoadingInProgress: true,
+    error: ""
 }
 
 export default function LoadingReducer(state = defaultLoadingState, {type, data, error}){
@@ -20,10 +21,17 @@ export default function LoadingReducer(state = defaultLoadingState, {type, data,
             return {
                 ...state,
                 loadingInProgress: false,
-                error: error,  
+                error: {...setErrorData(error)},  
             } 
         break;
         default:
             return state
+    }
+}
+
+function setErrorData(error){
+    return {
+        message: error?.message,
+        status: error?.status
     }
 }

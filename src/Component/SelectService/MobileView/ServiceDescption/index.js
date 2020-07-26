@@ -25,7 +25,9 @@ function ServiceDescription(props) {
         itemId: packageId,
         subPackageName: codeId,
         quantity:1,
-        "itemType": "PACKAGE"
+        "itemType": "PACKAGE",
+        service:true,
+        package:true
     }
     
     const matchedCarData = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
@@ -64,7 +66,7 @@ function ServiceDescription(props) {
 
                             <AddServiceButton onClick={()=> {
                                 addSubPackage()}}>Add</AddServiceButton>
-
+                            {props?.error ? console.log(props?.error): ""}
                         </BottomDiv>
                         </div> ):null   
             })
@@ -78,7 +80,8 @@ const mapStateToProps = (state) => {
     return {
         inProgress: state?.packages?.["inProgress"],
         packages: state?.packages?.["packages"],
-        profile: state?.profile
+        profile: state?.profile,
+        error: state?.loading?.error,
     }
 };
 

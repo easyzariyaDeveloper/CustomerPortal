@@ -134,8 +134,8 @@ export function* addSubPackage({payload}){
             error
         });
         yield put({
-            type: 'FETCHING_API_FAILED'
+            type: 'FETCHING_API_FAILED',
+            error: error
         });
-        yield put({ type: 'FETCHING_API_ERROR'});
     }
 }

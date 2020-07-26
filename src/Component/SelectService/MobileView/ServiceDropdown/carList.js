@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { SwitchWrapper, CarListWrapper} from "./style";
+import { SwitchWrapper, CarListWrapper, CircularLoading} from "./style";
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -62,7 +62,7 @@ function CarList(props) {
                 }}
                 autoWidth
                 >   
-                {props.inProgress? <CircularProgress style={{size: 10}}/>: !props.inProgress && props.brands? props.brands.map((carBrand) =>{
+                {props.inProgress? <CircularProgress style={{height:"25px", width:"25px"}}/>: !props.inProgress && props.brands? props.brands.map((carBrand) =>{
                     return <MenuItem value = {carBrand} key = {carBrand}>{carBrand}</MenuItem>
                 }) :null}
             </Select>
@@ -80,7 +80,7 @@ function CarList(props) {
             }}
                 autoWidth
             >   
-            {vehicle.brand !=="" && props.models ? props.models.map(modelVariant=>{
+            {props.models.inProgress ? <CircularProgress style={{height:"25px", width:"25px"}}/> : vehicle.brand !=="" && props.models.carModel ? props.models.carModel.map(modelVariant=>{
                 return <MenuItem 
                     value = {modelVariant.id}
                     key = {modelVariant.id}
@@ -102,7 +102,7 @@ function CarList(props) {
                 autoWidth
             >   
             {
-                vehicle.model!=="" && props.models ? props.models.map(carType => {
+                vehicle.model!=="" && props.models.carModel ? props.models.carModel.map(carType => {
                     return carType.id == vehicle.model ? carType.variants.map(variantElement=>{
                         return <MenuItem 
                             value = {variantElement.id}
@@ -127,7 +127,7 @@ function CarList(props) {
                 autoWidth
             >
                 {
-                    vehicle.fuelType!=="" && props.models ? props.models.map(carType=>{
+                    vehicle.fuelType!=="" && props.models.carModel ? props.models.carModel.map(carType=>{
                         return carType.id == vehicle.model ? carType.variants.map(variantElement => {
                             return variantElement.id == vehicle.fuelType  ?  variantElement.subCategory.map(type=> {
                             return <MenuItem value = {type}>{type}</MenuItem> }):null
@@ -185,7 +185,7 @@ function CarList(props) {
         }}
             autoWidth
         >   
-        {vehicle.brand !=="" && props.models ? props.models.map(modelVariant=>{
+        {vehicle.brand !=="" && props.models.carModel ? props.models.carModel.map(modelVariant=>{
             return <MenuItem 
                 value = {modelVariant.id}
                 key = {modelVariant.id}
@@ -207,9 +207,9 @@ function CarList(props) {
 const mapStateToProps = (state) => {
     return {
         inProgress: state?.brands?.inProgress,
-        brands: state?.brands?.brands,
-        models: state?.cars?.carModel,
-        profileCars: state?.profile?.carList || []
+        brands: state?.brands?.brands ||[],
+        models: state?.cars,
+        profileCars: state?.profile?.carList || [],
     }
 };
 

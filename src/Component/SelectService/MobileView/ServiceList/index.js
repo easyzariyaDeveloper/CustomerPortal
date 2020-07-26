@@ -15,6 +15,20 @@ import CarIcon from "../../../../Assets/img/carIcon.jpg"
 import CarCityFilter from "../CarCityFilter";
 
 
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { EZCard } from "../../../Common/MobileCard";
+
 export const ObjectList = (array) => array.reduce((accumulator, service) => {
     const { name = "", id = "" } = service;
     accumulator = {
@@ -47,21 +61,105 @@ function ServiceList(props) {
     const [showCarMisMatchWarning, setShowCarMisMatchWarning] = useState(false);
     const [filter, setFilter] = useState({});
 
-    const selectedCityId = new URLSearchParams(window.location.search).get("cityId") || sessionStorage.getItem("citySelectedPackage"); 
-    const selectedCarId = sessionStorage.getItem("carSelectedPackage");
+    const selectedCityId = new URLSearchParams(window.location.search).get("cityId") || localStorage.getItem("citySelectedPackage"); 
+    const selectedCarId = localStorage.getItem("carSelectedPackage");
     const itemIdObj = {
         itemId: serviceKeyId,
         quantity:1,
-        "itemType": "PACKAGE"
+        "itemType": "PACKAGE",
+        service:true,
+        package:true
     }
     
     const matchedCarData = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
-
+    function carMisMatchWarningPopup(){
+        return <Dialog
+            open={showCarMisMatchWarning}
+            disableBackdropClick = {true}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+        >
+        <DialogTitle id="alert-dialog-title">{"Car Mismatch - Reselecting the Car from Profile"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+           We found mismatch the car
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick = {() => {
+              const {carId, fuelVariantId} = props?.profile?.carList[0];
+              if(carId && fuelVariantId){
+                setFilter({
+                    carId: carId,
+                    variantId: fuelVariantId,
+                    cityId: localStorage.getItem("citySelectedPackage")
+                  });
+              }
+              localStorage.removeItem("carSelectedPackage");
+              localStorage.removeItem("citySelectedPackage");
+              setCollapse(!collapse);
+            }} color="primary">
+            Revert
+          </Button>
+          <Button onClick = {() => {
+              const carId = localStorage.getItem("carSelectedPackage");
+              localStorage.removeItem("carSelectedPackage");
+              setShowCarMisMatchWarning(false);
+              window.location.href = `/add-car?carId=${carId}&redirect=${location.pathname}`;
+            }} color="primary">
+            Add Car
+          </Button>
+        </DialogActions>
+    
+        <CollapseInDialogDiv>
+        <CarCollapseInDialog in={collapse} collapsedHeight={1}>
+            <FormControl style = {{width:200}}>
+            <InputLabel id="demo-simple-select-label">Your Car</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={car}
+                    onChange= {(event)=>{
+                        setCar(event.target.value)
+                        localStorage.setItem("carSelectedPackage",event.target.value)
+                        setShowCarMisMatchWarning(false);
+                    }}
+            >
+                {
+                    props?.profile.carList.map(({carName,carId})=>{
+                        return <MenuItem value = {carId}>{carName}</MenuItem>
+                    })   
+                }
+            </Select>
+        </FormControl>
+        </CarCollapseInDialog>
+        </CollapseInDialogDiv>
+      </Dialog>
+    }
 
     useEffect(() => {
         props.fetchPackageById(params["type"], filter);
     }, [filter?.carId]);
 
+    useEffect(() => {
+        const {carList = []} = props.profile;
+        const carSelectedAnonymously = localStorage.getItem("carSelectedPackage");
+        const matchedCarData = carList.find((car) => car["carId"] === carSelectedAnonymously);
+        if(
+            carList.length > 0 &&  
+            carSelectedAnonymously && 
+            matchedCarData?.["carId"] !== carSelectedAnonymously
+        ){
+            setShowCarMisMatchWarning(true);
+        } else if(carList.length > 0 && matchedCarData?.["carId"] === carSelectedAnonymously){
+            const {carId, fuelVariantId } = matchedCarData;
+            setFilter({
+                carId: carId,
+                variantId: fuelVariantId,
+                cityId: localStorage.getItem("citySelectedPackage")
+            });
+        }
+    }, [props?.profile?.customerId])
 
     if (serviceId) {
         return <MobilePageLayout pageName = {packageData[0] && packageData[0]["label"]}>
@@ -98,7 +196,8 @@ function ServiceList(props) {
                                     <ListImg src =  {Lists} />
                                     <AddButton onClick ={() => {
                                         userId ? props.addSubPackage(matchedCarData, selectedCityId,{...itemIdObj,subPackageName: code}) : 
-                                        location.href = `/login?referrer=${location.pathname}?carId=${sessionStorage.getItem("carSelectedPackage")}&cityId=${sessionStorage.getItem("citySelectedPackage")}`
+                                        location.href = `/login?referrer=${location.pathname}?carId=${localStorage.getItem("carSelectedPackage")}&cityId=${localStorage.getItem("citySelectedPackage")}`
+                                        console.log(props?.loadingError)
                                     }}>
                                     Add</AddButton>
                                 </ButtonDiv>
@@ -131,13 +230,14 @@ const mapStateToProps = (state) => {
         packages: state?.packages?.["packages"],
         subPackages: state?.subPackages?.subPackageLabel,
         profile: state?.profile,
+        loadingError: state?.loading?.error
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchPackageById: (packageId = "", filter = {}) => { dispatch(fetchPackageById(packageId, filter)) },
-        addSubPackage: (packageId = "",code ="") => { dispatch(addSubPackage(packageId,code)) },
+        addSubPackage: (car = {},cityId= "",itemIdObj ={}) => { dispatch(addSubPackage(car,cityId,itemIdObj)) },
 
     }
 }

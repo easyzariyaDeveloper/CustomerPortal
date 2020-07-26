@@ -3,19 +3,19 @@ import APIWrapper from "../../../Constants/ApiWrapper";
 
 
 export function* fetchBrandForCars() {
-    yield put({ type: "FETCH_BRAND" });
+    yield put({ type: "FETCHING_API" });
     try {
         const { data } = yield call(APIWrapper, {
             url: "/cars/brands"
         });
         yield put({
-            type: 'FETCH_BRAND_SUCCESS',
+            type: 'FETCHING_API_SUCCESS',
             data: data
         });
     } catch (error) {
         console.log(error);
         yield put({
-            type: 'FETCH_BRAND_FAILED',
+            type: 'FETCHING_API_FAILED',
             error
         });
     }
