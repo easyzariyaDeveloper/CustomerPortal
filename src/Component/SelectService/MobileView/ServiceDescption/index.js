@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import MobilePageLayout from "../../../../Layout/MobileView";
 import { withRouter } from "react-router";
 import { ImageSlideShow } from "./ImageSlideShow";

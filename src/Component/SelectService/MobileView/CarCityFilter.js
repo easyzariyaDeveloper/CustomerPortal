@@ -21,12 +21,9 @@ export default function CarCityFilter(props){
             [type]: value
         };
         setFilter(latestFilter);
-        props.packageFilter(latestFilter);
     }
 
-    
-    return localStorage.getItem("citySelectedPackage") && localStorage.getItem("carSelectedPackage") ? "": 
-        <OverLay>
+    return <OverLay>
             <OverlayCard>
                 {filterVisibility? <CarWrapper>
                     <RightNavigator src = {RightIcon} onClick={()=> setFilterVisibility(!filterVisibility)}></RightNavigator>
@@ -38,9 +35,8 @@ export default function CarCityFilter(props){
                     <OverlayLabel>Select City</OverlayLabel>
                     <CityList  onChange = {value => {setValueInFilter("cityId", value)}} value={filter.cityId} />
                     <FilterButton onClick={()=> {
-                        setFilterVisibility(!filterVisibility)
-                        props.fetchPackages(filter)
-                        }}>Done</FilterButton>
+                        props.fetchData(filter)
+                    }}> Done </FilterButton>
                 </CityWrapper>}
             </OverlayCard>
         </OverLay>

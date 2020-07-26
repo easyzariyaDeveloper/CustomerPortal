@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { base_spacing } from "../../../../Assets/style-var";
 import { readCookie } from "../../../../util";
 import CarIcon from "../../../../Assets/img/carIcon.jpg"
+import CarCityFilter from "../CarCityFilter";
 
 
 export const ObjectList = (array) => array.reduce((accumulator, service) => {
@@ -64,7 +65,9 @@ function ServiceList(props) {
 
     if (serviceId) {
         return <MobilePageLayout pageName = {packageData[0] && packageData[0]["label"]}>
-            <MServiceListWrapper>
+            {
+            localStorage.getItem("citySelectedPackage") && localStorage.getItem("carSelectedPackage") ?
+                <MServiceListWrapper>
                 {
                     props.packages[serviceId].map(pack => {
                         return pack.id == serviceKeyId ? pack.packages.map(subPacks => {
@@ -106,12 +109,16 @@ function ServiceList(props) {
                 {showCarMisMatchWarning && carMisMatchWarningPopup()}
                 <button onClick = {() =>{
                     location.href = `/add-car?redirect=${location.pathname}`
-                }}>Change Car</button>
-                
+                }}>
+                    Change Car</button>
+                    
                 <SelectedCarIcon src={CarIcon} onClick= {()=>setCarIconVisibility(!carIconVisiblity)}/>
                 <SelectedCarCard visibility={carIconVisiblity}>Car Selected: {matchedCarData?.carName}</SelectedCarCard>
-        
-            </MServiceListWrapper>
+            </MServiceListWrapper> : 
+            <CarCityFilter 
+                fetchData = {(filter) => props.fetchPackageById(params["type"], filter)}
+            />
+        }
         </MobilePageLayout>
     }
 

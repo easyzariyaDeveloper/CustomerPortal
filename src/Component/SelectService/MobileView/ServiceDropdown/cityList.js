@@ -9,9 +9,7 @@ import CityImage from "../../../../Assets/img/cityImage.jpg"
 
 function CityList(props) {
     const [city, setCity] = useState(props.value);
-
     const userId = readCookie("userUUId");
-
     useEffect(()=>{
         props.fetchCities();
     },[]);
@@ -22,21 +20,23 @@ function CityList(props) {
                 return <CityCard onClick = {()=>{
                     setCity(cityId);
                     localStorage.setItem("citySelectedPackage", cityId);
+                    props.onChange(city.cityId);
                 }}>
                     <img src = {CityImage}></img>
                     <h1>{city}</h1>
                 </CityCard>
-            }): (!props.inProgress && props.cities ?props.cities.map(city =>{
-                return <CityCard onClick= {()=>{
+            }): (!props.inProgress && props.cities ? props.cities.map(city =>{
+                return <CityCard onClick= {(event)=>{
+                    event.stopPropagation();
                     setCity(city.cityId);
                     localStorage.setItem("citySelectedPackage", city.cityId);
+                    props.onChange(city.cityId);
                 }}>
                     <img src = {CityImage}></img>
                     <h1>{city.cityName}</h1>
                 </CityCard>
             }):null)
         }
-        
     </CityListWrapper>
 }     
 
