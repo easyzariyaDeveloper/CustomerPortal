@@ -12,6 +12,7 @@ export const HomeCard = styled.div`
     display: grid;
     grid-template-columns: 1fr 3.5fr ;
     margin: 20px 0;
+    align-items: center;
     ${CommonBoxShadow}
 
     &:last-child{
