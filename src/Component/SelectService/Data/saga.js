@@ -84,11 +84,11 @@ export function* fetchPackageById({payload, filter = {}}) {
     yield put({ type: "FETCHING_API" });
 
     let URL = `/packages/${payload?.packageId}`;
-    if(Object.values(filter).length > 0){
-        for(const[type, value] of Object.entries(args[0])){
-            URL = URL.includes("?") ? `${URL}&${type}=${value}` : `${URL}?${type}=${value}`;
-        }
-    }
+    // if(Object.values(filter).length > 0){
+    //     for(const[type, value] of Object.entries(filter)){
+    //         URL = URL.includes("?") ? `${URL}&${type}=${value}` : `${URL}?${type}=${value}`;
+    //     }
+    // }
     try {
         const { data } = yield call(APIWrapper, {
             url: URL  

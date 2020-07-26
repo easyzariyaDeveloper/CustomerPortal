@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import MobilePageLayout from "../../../../Layout/MobileView";
-import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg, CarListInDialog, CarCollapseInDialog, CollapseInDialogDiv, SelectedCarIcon, SelectedCarCard} from "./style";
+import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg, CarListInDialog, CarCollapseInDialog, CollapseInDialogDiv} from "./style";
 import { connect } from "react-redux";
 import { fetchPackageById, addSubPackage, removeSubPackage } from "../../Data/action";
 import defaultImg from "../../../../Assets/img/gold.jpg";
@@ -11,7 +11,6 @@ import TimerIcon from '@material-ui/icons/Timer';
 import { makeStyles } from "@material-ui/core/styles";
 import { base_spacing } from "../../../../Assets/style-var";
 import { readCookie } from "../../../../util";
-import CarIcon from "../../../../Assets/img/carIcon.jpg"
 import CarCityFilter from "../CarCityFilter";
 
 
@@ -39,24 +38,22 @@ function ServiceList(props) {
     const serviceId = params["mode"];
     const serviceKeyId = params["type"];
     const packageData = props?.packages[serviceId];
-
-    const[carIconVisiblity, setCarIconVisibility]= useState(false);
-
     const [collapse, setCollapse] = useState(false);
     const[car, setCar] = useState("");
     const [showCarMisMatchWarning, setShowCarMisMatchWarning] = useState(false);
-    const [filter, setFilter] = useState({});
+    const [filter, setFilter] = useState({
+        carId: localStorage.getItem("carSelectedPackage"),
+        cityId: localStorage.getItem("citySelectedPackage")
+    });
 
     const selectedCityId = new URLSearchParams(window.location.search).get("cityId") || sessionStorage.getItem("citySelectedPackage"); 
     const selectedCarId = sessionStorage.getItem("carSelectedPackage");
     const itemIdObj = {
         itemId: serviceKeyId,
-        quantity:1,
+        quantity: 1,
         "itemType": "PACKAGE"
     }
-    
     const matchedCarData = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
-
 
     useEffect(() => {
         props.fetchPackageById(params["type"], filter);
@@ -66,7 +63,12 @@ function ServiceList(props) {
     if (serviceId) {
         return <MobilePageLayout pageName = {packageData[0] && packageData[0]["label"]}>
             {
-            localStorage.getItem("citySelectedPackage") && localStorage.getItem("carSelectedPackage") ?
+            (!(localStorage.getItem("citySelectedPackage") && localStorage.getItem("carSelectedPackage"))) ? 
+                <CarCityFilter 
+                    fetchData = {(filter) => {
+                        props.fetchPackageById(params["type"], filter)
+                    }}
+                /> :
                 <MServiceListWrapper>
                 {
                     props.packages[serviceId].map(pack => {
@@ -106,18 +108,8 @@ function ServiceList(props) {
                         }) : null
                     })
                 }
-                {showCarMisMatchWarning && carMisMatchWarningPopup()}
-                <button onClick = {() =>{
-                    location.href = `/add-car?redirect=${location.pathname}`
-                }}>
-                    Change Car</button>
-                    
-                <SelectedCarIcon src={CarIcon} onClick= {()=>setCarIconVisibility(!carIconVisiblity)}/>
-                <SelectedCarCard visibility={carIconVisiblity}>Car Selected: {matchedCarData?.carName}</SelectedCarCard>
-            </MServiceListWrapper> : 
-            <CarCityFilter 
-                fetchData = {(filter) => props.fetchPackageById(params["type"], filter)}
-            />
+                {showCarMisMatchWarning && carMisMatchWarningPopup()}     
+            </MServiceListWrapper>
         }
         </MobilePageLayout>
     }
