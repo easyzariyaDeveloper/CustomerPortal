@@ -8,36 +8,37 @@ import Skeleton from '@material-ui/lab/Skeleton';
 
 
 function CityList(props) {
-    const [city, setCity] = useState(props.value);
-    const [enabled, setEnabled] = useState(false);
+    const [selectedCityId, setSelectedCityId] = useState(props.value);
     const userId = readCookie("userUUId");
+    
     useEffect(()=>{
         props.fetchCities();
     },[]);
 
-    console.log(enabled);
     return <div>
         {
             props?.inProgress ? <Skeleton animation="wave" height={250} width = {250}  /> :(
                 <CityListWrapper>
                     {userId ? props.profileAddress.map(({cityId,city}) =>{
                         return <CityCard onClick = {()=>{
-                            setCity(cityId);
-                            setEnabled(true);
-                            localStorage.setItem("citySelectedPackage", cityId);
-                            props.onChange(city.cityId);
-                            enabled = enabled
-                        }}>
+                                setSelectedCityId(cityId);
+                                localStorage.setItem("citySelectedPackage", cityId);
+                                props.onChange(city.cityId);
+                            }}
+                            enabled = {city.cityId === selectedCityId}
+                        >
                             <img src = {CityImage}></img>
                             <h1>{city}</h1>
                         </CityCard>
                     }): (!props.inProgress && props.cities ? props.cities.map(city =>{
                         return <CityCard onClick= {(event)=>{
                             event.stopPropagation();
-                            setCity(city.cityId);
+                            setSelectedCityId(city.cityId);
                             localStorage.setItem("citySelectedPackage", city.cityId);
                             props.onChange(city.cityId);
-                        }}>
+                        }}
+                            enabled = {city.cityId === selectedCityId}
+                        >
                             <img src = {CityImage}></img>
                             <h1>{city.cityName}</h1>
                         </CityCard>
