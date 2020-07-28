@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import MobilePageLayout from "../../../Layout/MobileView";
-import { ServiceMPageWrapper, MTab} from "./style";
+import { ServiceMPageWrapper, MTab,PencilIcon, FilterButton} from "./style";
 import { ServiceTabs } from "../mockServiceData";
 import { connect } from "react-redux";
 import { fetchPackages } from "../Data/action";
-import CarIcon from "../../../Assets/img/carIcon.jpg"
+import CarIcon from "../../../Assets/img/carIcon.svg";
+import EditIcon from "../../../Assets/img/pencil.svg";
 
 
 import CarCityFilter from "./CarCityFilter";
@@ -13,11 +14,11 @@ import { SelectedCarIcon, SelectedCarCard } from "./ServiceList/style";
 
 
 function SelectService(props) {
-
     const [packageFilter, setPackageFilter] = useState({
         carId: localStorage.getItem("carSelectedPackage"),
         cityId: localStorage.getItem("citySelectedPackage")
     });
+
     const[carIconVisiblity, setCarIconVisibility]= useState(false);
     const [showSelectCarPopupVisibility, setSelectCarPopupVisibility] = useState(false);
 
@@ -43,13 +44,15 @@ function SelectService(props) {
                     cardInfo = {props?.packages}
                     packageFilter = {packageFilter}
                 />
-
+                
+                <PencilIcon src = {EditIcon}/>
                 <SelectedCarIcon src={CarIcon} onClick= {()=>setCarIconVisibility(!carIconVisiblity)}/>
+                
                 <SelectedCarCard visibility={carIconVisiblity}>
-                    Car Selected: Hello
-                    <button onClick = {() => setSelectCarPopupVisibility(true)}>
+                    <p>Selected Car: Aveo </p>
+                    <FilterButton onClick = {() => setSelectCarPopupVisibility(true)}>
                         Change Car
-                    </button>
+                    </FilterButton>
                 </SelectedCarCard>
             </ServiceMPageWrapper> : null) 
         }

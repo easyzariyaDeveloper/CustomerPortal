@@ -31,7 +31,8 @@ export const FilterWrapper = styled.div`
 export const CityCard = styled.div`
     text-align: centre;
     padding: ${base_spacing}px;
-    background: ${({enabled}) => enabled ? ez_button_color : white_color};
+    cursor: pointer;
+    background: ${({enabled}) => enabled ? 'blue' : 'red'};
 `;
 
 

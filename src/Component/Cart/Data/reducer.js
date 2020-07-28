@@ -1,5 +1,5 @@
 const defaultCartState = {
-    inProgress: false,
+    inProgress: true,
     cart: {},
     error:  {},
     hasActiveCart: false

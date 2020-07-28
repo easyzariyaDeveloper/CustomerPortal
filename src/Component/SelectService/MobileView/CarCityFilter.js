@@ -12,7 +12,7 @@ export default function CarCityFilter(props){
     const [filterVisibility, setFilterVisibility] = useState(true);
     const [filter, setFilter] = useState({
         carId: "",
-        cityId: ""
+        cityId: "",
     });
 
     function setValueInFilter(type = "", value = ""){

@@ -77,9 +77,9 @@ export default function Signup(props){
         <TextField
           required
           id="outlined-required"
-          label="name"
+          label="Name"
           value= {values.name}
-          onChange={handleChange('Name')}
+          onChange={handleChange('name')}
           variant="outlined"
           margin="dense"
         />

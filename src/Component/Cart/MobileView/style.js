@@ -1,23 +1,25 @@
 import styled from "styled-components";
 import {base_spacing} from "../../../Assets/style-var";
 import { MobileActionButton } from "../../../Assets/common-styled";
+import {withStyles } from '@material-ui/core/styles';
+import MaterialUIPickers from "../../Common/DateTimePicker";
+
 
 export const MCartPageWrapper = styled.div`
-    padding: ${base_spacing*2}px;
+    padding: ${base_spacing*1.5}px;
 `;
 
 export const CartMCard = styled.div`
     background:white;
-    min-height:625px;
-    border-radius: ${base_spacing*1.5}px;
-    padding: ${base_spacing*2}px;
-    position:relative
+    border-radius: ${base_spacing*0.5}px;
+    padding: ${base_spacing}px;
+    margin-bottom: 20px;
 `;
 
 export const SelectedCar = styled.h1`
     border-bottom: 1px solid #E3E3E3;
     text-align: center;
-    padding-bottom: ${base_spacing*1.5}px;
+    padding-bottom: ${base_spacing}px;
     font-size: ${base_spacing*1.8}px;;
     font-weight:300;
 `;
@@ -31,7 +33,7 @@ export const ServicePriceHeader = styled.div`
 
 
 export const MServiceWrapper = styled.div`
-border-bottom: 1px solid #E3E3E3;
+
 `;
 
 export const ServiceMListItem = styled.div`
@@ -68,9 +70,7 @@ export const CartPriceMPara = styled.p`
 export const DateTimeGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    row-gap: ${base_spacing*3}px;
     margin: auto;
-    border-bottom: 1px solid #E3E3E3;
     padding-bottom:${base_spacing}px;
 `;
 
@@ -89,7 +89,6 @@ export const DateTimeMPicker = styled.div`
 `;
 
 export const CouponCodeButton = styled.button`
-    margin:10px 0;
     width:150px;
     height: ${base_spacing*4}px;
     background: #F6F5F5;
@@ -112,6 +111,7 @@ export const CouponTextField = styled.input`
     font-size: ${base_spacing*2}px;
     height: ${base_spacing*4}px;
     padding: ${base_spacing/2}px;
+    outline:none;
 `;
 
 export const CouponCardCloseButton = styled.img`
@@ -121,7 +121,6 @@ export const CouponCardCloseButton = styled.img`
 `;
 
 export const SubTotalDiv = styled.div`
-    border-top: 1px solid #E3E3E3;
     display:flex;
     justify-content: space-between;
     padding-top: ${base_spacing*1.5}px;
@@ -139,7 +138,6 @@ export const DiscountDiv = styled.div`
 `;
 
 export const TotalDiv = styled.div`
-    border-bottom: 1px solid #E3E3E3;
     display:flex;
     justify-content: space-between;
     padding: ${base_spacing*1.5}px 0;
@@ -152,16 +150,18 @@ export const MCouponImage = styled.img`
     vertical-align: middle;
 `;
 
-export const CheckOutButton = styled(MobileActionButton)``;
+export const CheckOutButton = styled(MobileActionButton)`
+    height: 40px;
+`;
 
 export const MCouponCard = styled.div`
-    width: 70%;
+    min-width: 70%;
     min-height: ${base_spacing*20}px;
     padding: ${base_spacing*2}px;
     background: white;
-    position: absolute;
+    position: fixed;
     top: 40%;
-    left: 15%;
+    left: 5%;
     border-radius: ${base_spacing*1.5}px;
     
 `;
@@ -181,4 +181,19 @@ export const MApplyCouponButton = styled.button`
     border:none;
     background: white; 
     cursor:pointer;
+    outline:none;
 `;
+
+
+export const DateTimePickers = withStyles(theme => ({
+    root: {
+        '&:first-child': {
+            marginTop: '0px',
+            marginBottom: '0px'
+          },
+      
+          '&:last-child': {
+            marginTop: '0px',
+            marginBottom: '0px'
+          },
+    }}))(MaterialUIPickers);

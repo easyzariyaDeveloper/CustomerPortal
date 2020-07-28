@@ -21,6 +21,7 @@ import { fetchBrandForCars, fetchCarListByBrand } from "../../../AddCar/Data/act
 
 function CarList(props) {
     const classes = useStyles();
+
     const [vehicle,setVehicle] = useState({
         brand:"",
         model:"",
@@ -80,12 +81,12 @@ function CarList(props) {
             }}
                 autoWidth
             >   
-            {props.models.inProgress ? <CircularProgress style={{height:"25px", width:"25px"}}/> : vehicle.brand !=="" && props.models.carModel ? props.models.carModel.map(modelVariant=>{
+            {props.models.inProgress ? <CircularProgress style={{height:"25px", width:"25px"}}/> : vehicle.brand !=="" && props.models.carModel ? props.models.carModel.map(({id,model})=>{
                 return <MenuItem 
-                    value = {modelVariant.id}
-                    key = {modelVariant.id}
+                    value = {id}
+                    key = {id}
                     >
-                        {modelVariant.model}
+                        {model}
                     </MenuItem>  
             })
             : undefined}

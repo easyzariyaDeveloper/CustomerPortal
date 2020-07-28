@@ -37,7 +37,7 @@ export const FilterButton = styled.button`
     font-size: ${base_spacing *1.5}px;
     padding: ${base_spacing/2}px;
     margin: ${base_spacing*3}px auto ${base_spacing}px;
-    width: 60%;
+    width: 80%;
     display: block;
 `;
 
@@ -51,4 +51,12 @@ export const LeftNavigator = styled.img`
     float: left;
     height: ${base_spacing*1.5}px;
     margin: ${base_spacing}px;
+`;
+
+export const PencilIcon = styled.img`
+    height: ${base_spacing*2.5}px;
+    position: fixed;
+    bottom: ${base_spacing*6.5}px;
+    right:${base_spacing*3}px;
+    z-index:2;
 `;

@@ -4,7 +4,7 @@ import {CityListWrapper, CityCard} from './style';
 import { fetchCities } from "../../Data/action";
 import { readCookie } from "../../../../util";
 import CityImage from "../../../../Assets/img/cityImage.jpg"
-
+import Skeleton from '@material-ui/lab/Skeleton';
 
 
 function CityList(props) {
@@ -15,32 +15,37 @@ function CityList(props) {
         props.fetchCities();
     },[]);
 
-    return <CityListWrapper>
+    console.log(enabled);
+    return <div>
         {
-            userId ? props.profileAddress.map(({cityId,city}) =>{
-                return <CityCard onClick = {()=>{
-                    setCity(cityId);
-                    localStorage.setItem("citySelectedPackage", cityId);
-                    props.onChange(city.cityId);
-                    setEnabled(true);
-                    enabled
-                }}>
-                    <img src = {CityImage}></img>
-                    <h1>{city}</h1>
-                </CityCard>
-            }): (!props.inProgress && props.cities ? props.cities.map(city =>{
-                return <CityCard onClick= {(event)=>{
-                    event.stopPropagation();
-                    setCity(city.cityId);
-                    localStorage.setItem("citySelectedPackage", city.cityId);
-                    props.onChange(city.cityId);
-                }}>
-                    <img src = {CityImage}></img>
-                    <h1>{city.cityName}</h1>
-                </CityCard>
-            }):null)
+            props?.inProgress ? <Skeleton animation="wave" height={250} width = {250}  /> :(
+                <CityListWrapper>
+                    {userId ? props.profileAddress.map(({cityId,city}) =>{
+                        return <CityCard onClick = {()=>{
+                            setCity(cityId);
+                            setEnabled(true);
+                            localStorage.setItem("citySelectedPackage", cityId);
+                            props.onChange(city.cityId);
+                            enabled = enabled
+                        }}>
+                            <img src = {CityImage}></img>
+                            <h1>{city}</h1>
+                        </CityCard>
+                    }): (!props.inProgress && props.cities ? props.cities.map(city =>{
+                        return <CityCard onClick= {(event)=>{
+                            event.stopPropagation();
+                            setCity(city.cityId);
+                            localStorage.setItem("citySelectedPackage", city.cityId);
+                            props.onChange(city.cityId);
+                        }}>
+                            <img src = {CityImage}></img>
+                            <h1>{city.cityName}</h1>
+                        </CityCard>
+                    }):null)}
+                </CityListWrapper>
+            )
         }
-    </CityListWrapper>
+        </div>
 }     
 
 const mapStateToProps = (state) => {

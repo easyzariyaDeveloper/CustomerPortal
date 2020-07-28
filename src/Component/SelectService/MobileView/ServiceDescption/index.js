@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import MobilePageLayout from "../../../../Layout/MobileView";
 import { withRouter } from "react-router";
 import { ImageSlideShow } from "./ImageSlideShow";
@@ -8,12 +8,16 @@ import { connect } from "react-redux";
 import { fetchPackageById, addSubPackage} from "../../Data/action";
 import Tick from "../../../../Assets/img/gradient tick.jpg"
 import { EZCard } from "../../../Common/MobileCard";
+import { SelectedCarCard, SelectedCarIcon } from "../ServiceList/style";
+
 
 
 
 function ServiceDescription(props) {
     const { match: { params = {} } = {} } = props;
     console.log(params["mode"], params["packageCode"]);
+
+  
 
     const serviceId = params["mode"];
     const codeId = params["packageCode"];
@@ -58,17 +62,17 @@ function ServiceDescription(props) {
                             }
                     </EZCard>
 
-                        <BottomDiv>
-                            <TimeDurationWrapper>
-                                <TimerIcon style={{ color: "white", fontSize: "25px", verticalAlign: "bottom" }} />
-                                <ServiceTimePara>{subPack.serviceTime > 0 ? subPack.serviceTime / 60 : 0}hour</ServiceTimePara>
-                            </TimeDurationWrapper>
+                    <BottomDiv>
+                        <TimeDurationWrapper>
+                            <TimerIcon style={{ color: "white", fontSize: "25px", verticalAlign: "bottom" }} />
+                            <ServiceTimePara>{subPack.serviceTime > 0 ? subPack.serviceTime / 60 : 0}hour</ServiceTimePara>
+                        </TimeDurationWrapper>
 
-                            <AddServiceButton onClick={()=> {
-                                addSubPackage()}}>Add</AddServiceButton>
-                            {props?.error ? console.log(props?.error): ""}
-                        </BottomDiv>
-                        </div> ):null   
+                        <AddServiceButton onClick={()=> {
+                            addSubPackage()}}>Add</AddServiceButton>
+                        {props?.error ? console.log(props?.error): ""}
+                    </BottomDiv>
+                    </div> ):null   
             })
             })}
             </MobilePageLayout>

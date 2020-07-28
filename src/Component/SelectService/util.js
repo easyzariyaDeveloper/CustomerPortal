@@ -27,7 +27,7 @@ function getPackageInfo(servicePackage = {}) {
         label: servicePackage["packageName"],
         code: servicePackage["code"],
         desc: servicePackage["desc"] || "",
-        serviceMap: servicePackage["services"].reduce((accumulator, currentService) => {
+        serviceMap: (servicePackage["services"] || []).reduce((accumulator, currentService) => {
             const { id = "" } = currentService;
             if (id) {
                 accumulator = {
@@ -42,7 +42,7 @@ function getPackageInfo(servicePackage = {}) {
 
     return {
         ...packageData,
-        packages: servicePackage["subPackages"].reduce((accumulator, subPackageData = {}) => {
+        packages: (servicePackage["subPackages"] || []).reduce((accumulator, subPackageData = {}) => {
             const { name = "", serviceTime = 0,
                 images = [], price = "",
                 code = "", customInfo = [],

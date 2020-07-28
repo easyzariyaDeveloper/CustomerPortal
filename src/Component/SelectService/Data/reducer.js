@@ -1,5 +1,5 @@
 const defaultPackagesState = {
-    inProgress: false,
+    inProgress: true,
     packages:  {
         "autoCare": [],
         "doorStep": []
@@ -68,7 +68,7 @@ export function CarReducer(state = defaultCarState, {type,data,error}){
 }
 
 const defaultCityState = {
-    inProgress: false,
+    inProgress: true,
     cities: []
 }
 
