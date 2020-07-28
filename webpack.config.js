@@ -97,6 +97,9 @@ export default (mode) => {
   rules.push({
     test: /\.(woff|ttf|eot|gif|png|jpg|woff2|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
     loader: "file-loader",
+    options: {
+      outputPath: 'fonts/'
+    }
   });
 
   config = {

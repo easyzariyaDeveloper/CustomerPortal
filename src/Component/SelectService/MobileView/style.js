@@ -36,9 +36,10 @@ export const FilterButton = styled.button`
     color: ${white_color};
     font-size: ${base_spacing *1.5}px;
     padding: ${base_spacing/2}px;
-    margin: ${base_spacing*3}px auto ${base_spacing}px;
+    margin: ${base_spacing}px auto ${base_spacing}px;
     width: 80%;
     display: block;
+    height: 40px;
 `;
 
 export const RightNavigator = styled.img`

@@ -27,6 +27,7 @@ function CityList(props) {
                             }}
                             enabled = {city.cityId === selectedCityId}
                         >
+                            <span className = {`icon-${city.toLowerCase()}`}></span>
                             <img src = {CityImage}></img>
                             <h1>{city}</h1>
                         </CityCard>
@@ -39,6 +40,7 @@ function CityList(props) {
                         }}
                             enabled = {city.cityId === selectedCityId}
                         >
+                            <span className = {`icon-${city?.cityName.toLowerCase()}`}></span>
                             <img src = {CityImage}></img>
                             <h1>{city.cityName}</h1>
                         </CityCard>
