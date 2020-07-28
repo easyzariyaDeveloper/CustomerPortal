@@ -2,6 +2,13 @@ import styled from "styled-components";
 import { ez_button_color, ez_gradient_secondColor } from "../../../../Assets/style-var";
 import { EZElevation } from "../../../Common/MobileCard";
 import "./style.scss";
+import { mobile_header_height } from "../../../../Layout/MobileView/Header/styles";
+
+export const SeviceDetailPageWrapper = styled.div`
+    height: calc(100vh - ${mobile_header_height}px);
+    overflow: auto;
+    padding-bottom: ${mobile_header_height + 10}px;
+`;
 
 export const ImageContentDiv = styled.div`
     display: flex;
@@ -16,14 +23,13 @@ export const FeatureHeader = styled.h1`
     font-weight: bold;
     font-size: 20px;
     line-height: 19px;
-    margin-left: 30px;
     padding: 10px;
     
 `;
 
 export const IndividualService = styled.p`
     line-height: 25px;
-    margin-left: 30px;
+    margin-left: 20px;
     font-size: 14px;
 `;
 
@@ -32,7 +38,7 @@ export const BottomDiv = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 50px;
+    height: 45px;
     display: flex;
     justify-content: space-around;
     align-items: center;

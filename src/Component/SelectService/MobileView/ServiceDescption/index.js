@@ -2,7 +2,10 @@ import React, { useEffect,useState } from "react";
 import MobilePageLayout from "../../../../Layout/MobileView";
 import { withRouter } from "react-router";
 import { ImageSlideShow } from "./ImageSlideShow";
-import { FeatureHeader, IndividualService, BottomDiv, AddServiceButton, TickImage, ServiceTimePara, TimeDurationWrapper } from "./style";
+import { FeatureHeader, IndividualService, BottomDiv, 
+    AddServiceButton, TickImage, ServiceTimePara, TimeDurationWrapper,
+    SeviceDetailPageWrapper
+ } from "./style";
 import TimerIcon from '@material-ui/icons/Timer';
 import { connect } from "react-redux";
 import { fetchPackageById, addSubPackage} from "../../Data/action";
@@ -50,9 +53,9 @@ function ServiceDescription(props) {
         return <MobilePageLayout>
         { props.packages[serviceId].map(pack => {
             return pack.packages.map(subPack => {
-                return subPack.code == codeId ? (<div>
+                return subPack.code == codeId ? (<SeviceDetailPageWrapper>
                     <ImageSlideShow price={subPack.price} name={subPack.name} />
-                    <EZCard>
+                    <EZCard style = {{"margin": "20px 15px 0 15px"}}>
                         <FeatureHeader>What is included?</FeatureHeader>
 
                             {
@@ -72,7 +75,7 @@ function ServiceDescription(props) {
                             addSubPackage()}}>Add</AddServiceButton>
                         {props?.error ? console.log(props?.error): ""}
                     </BottomDiv>
-                    </div> ):null   
+                    </SeviceDetailPageWrapper> ):null   
             })
             })}
             </MobilePageLayout>
