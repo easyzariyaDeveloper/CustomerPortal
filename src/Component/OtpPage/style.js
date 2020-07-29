@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { desktop_gradient, base_spacing } from "../../Assets/style-var";
+import { MobileActionButton } from "../../Assets/common-styled";
 
 export const OtpPageWrapper = styled.div`
     background: ${desktop_gradient};
@@ -19,10 +20,13 @@ export const OtpPageWrapper = styled.div`
     }
 `;
 
-export const AnchorButton = styled.a`
-    vertical-align: middle;
-    color: white;
-    text-decoration: none;
+export const ResendButton = styled(MobileActionButton)`
+    width: auto;
+    height: ${base_spacing*3}px;
+    border-bottom: 1px solid;
+    cursor: pointer;
+    background: transparent;
+
 `;
 
 export const OtpImg = styled.img`

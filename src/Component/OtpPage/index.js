@@ -1,6 +1,6 @@
 import React, { useEffect , useRef } from "react";
 import MobilePageLayout from "../../Layout/MobileView";
-import {OtpPageWrapper, OtpImg, MessagePara, VerifyButton, AnchorButton} from "./style";
+import {OtpPageWrapper, OtpImg, MessagePara, VerifyButton, ResendButton} from "./style";
 import OtpImage from "../../Assets/img/OtpImage.png"
 import ActionButton from "../Common/ActionButton";
 import {PHONE} from "../../Constants";
@@ -28,7 +28,7 @@ function Otp(props) {
             <MessagePara>Please enter the OTP received in your mobile number <br></br> {`+91-${phoneNumber?.current}`} </MessagePara>
             <OtpBox/>
 
-            <MessagePara>Didn't recieve the code? <a href = "#" className = "link">Resend Code</a></MessagePara>
+            <MessagePara>Didn't recieve the code? <ResendButton>Resend Code</ResendButton></MessagePara>
 
 
         

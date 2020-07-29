@@ -11,14 +11,14 @@ import { connect } from "react-redux";
 import { fetchPackageById, addSubPackage} from "../../Data/action";
 import Tick from "../../../../Assets/img/gradient tick.jpg"
 import { EZCard } from "../../../Common/MobileCard";
-import { SelectedCarCard, SelectedCarIcon } from "../ServiceList/style";
+import FloatingCarDetails from "../ServiceDropdown/FloatingCarDetails";
 
 
 
 
 function ServiceDescription(props) {
     const { match: { params = {} } = {} } = props;
-    console.log(params["mode"], params["packageCode"]);
+    console.log(params["mode"], params["packageCode"],params["packageId"]);
 
   
 
@@ -50,19 +50,25 @@ function ServiceDescription(props) {
 
 
     if (serviceId) {
-        return <MobilePageLayout>
+        return <MobilePageLayout pageName ={sessionStorage.getItem("service")} >
         { props.packages[serviceId].map(pack => {
             return pack.packages.map(subPack => {
                 return subPack.code == codeId ? (<SeviceDetailPageWrapper>
                     <ImageSlideShow price={subPack.price} name={subPack.name} />
-                    <EZCard style = {{"margin": "20px 15px 0 15px"}}>
+
+                    {sessionStorage.setItem("service", subPack.name)}
+
+                    <EZCard style = {{"margin": "20px 15px 0 15px", position: "relative"}}>
                         <FeatureHeader>What is included?</FeatureHeader>
 
                             {
+                                
                                 subPack.services.map(seviceId => {
                                     return <IndividualService><TickImage src = {Tick}/> {seviceId.name}</IndividualService>
                                 })
                             }
+
+                        <FloatingCarDetails/>
                     </EZCard>
 
                     <BottomDiv>

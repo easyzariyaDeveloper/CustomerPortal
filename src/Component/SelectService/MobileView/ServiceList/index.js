@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import MobilePageLayout from "../../../../Layout/MobileView";
-import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg, CarListInDialog, CarCollapseInDialog, CollapseInDialogDiv, SelectedCarIcon, SelectedCarCard} from "./style";
+import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg, CarListInDialog, CarCollapseInDialog, CollapseInDialogDiv} from "./style";
 import { connect } from "react-redux";
 import { fetchPackageById, addSubPackage, removeSubPackage } from "../../Data/action";
 import defaultImg from "../../../../Assets/img/gold.jpg";
 import Tick from "../../../../Assets/img/gradient tick.jpg"
 import Lists from "../../../../Assets/img/lists.jpg"
 import TimerIcon from '@material-ui/icons/Timer';
-import CarIcon from "../../../../Assets/img/carIcon.svg";
 import { makeStyles } from "@material-ui/core/styles";
 import { base_spacing } from "../../../../Assets/style-var";
 import { readCookie } from "../../../../util";
 import CarCityFilter from "../CarCityFilter";
+import FloatingCarDetails from "../ServiceDropdown/FloatingCarDetails";
 
 
 import Button from '@material-ui/core/Button';
@@ -61,7 +61,7 @@ function ServiceList(props) {
         cityId: localStorage.getItem("citySelectedPackage")
     });
 
-    const[carDetailsVisibility, setCarDetailsVisibility]= useState(false);
+    
 
     const selectedCityId = new URLSearchParams(window.location.search).get("cityId") || localStorage.getItem("citySelectedPackage"); 
     const selectedCarId = localStorage.getItem("carSelectedPackage");
@@ -216,12 +216,8 @@ function ServiceList(props) {
                 {showCarMisMatchWarning && carMisMatchWarningPopup()}     
             </MServiceListWrapper>
         }
-        <SelectedCarIcon src= {CarIcon} onClick = {()=> setCarDetailsVisibility(!carDetailsVisibility)}/>
-        <SelectedCarCard visibility = {carDetailsVisibility}>
-           {
-               matchedCarData? (<p>Selected Car: {matchedCarData["carName"]}</p>) :""
-           } 
-        </SelectedCarCard>
+
+        <FloatingCarDetails car = {matchedCarData?.matchedCarData["carName"]} />
         </MobilePageLayout>
     }
 

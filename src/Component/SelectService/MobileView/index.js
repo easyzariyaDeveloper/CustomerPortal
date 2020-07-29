@@ -10,7 +10,7 @@ import EditIcon from "../../../Assets/img/pencil.svg";
 
 
 import CarCityFilter from "./CarCityFilter";
-import { SelectedCarIcon, SelectedCarCard } from "./ServiceList/style";
+import { SelectedCarIcon, SelectedCarCard } from "./ServiceDropdown/style";
 
 
 function SelectService(props) {
