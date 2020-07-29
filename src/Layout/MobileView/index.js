@@ -39,6 +39,11 @@ function PageLayout(props) {
         {props?.errorMessage}
       </Alert>
       }
+      {props?.message && 
+      <Alert variant="filled" severity="success">
+        {props?.message}
+      </Alert>
+      }
       <Content>
         {props.children}
       </Content>
@@ -52,7 +57,8 @@ const mapStateToProps = (state) => {
     profile: state.profile,
     loading: state.loading,
     cart: state.cart,
-    errorMessage: state.loading?.error?.message
+    errorMessage: state.loading?.error?.message,
+    message: state.loading?.message
   }
 }
 

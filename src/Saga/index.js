@@ -3,7 +3,7 @@ import { fetchPackages, fetchCars, fetchCities, fetchPackageById, addSubPackage 
 import { fetchBrandForCars, fetchCarListByBrand, addCarByUser, getCarById} from "../Component/AddCar/Data/saga";
 import { loginUser, userSignup } from "../Component/SignUp/Data/saga";
 import { getProfile } from "../Component/Profile/Data/saga";
-import { createOtp } from "../Component/OtpPage/Data/saga";
+import { createOtp, verifyOTP } from "../Component/OtpPage/Data/saga";
 import { addAddressByUser } from "../Component/Address/Data/saga";
 import { fetchCart, hasActiveCart, deleteItem } from "../Component/Cart/Data/saga";
 
@@ -24,6 +24,7 @@ export default function* appSaga() {
 
     yield takeLatest("FETCH_PROFILE", getProfile);
     yield takeLatest("CREATE_OTP", createOtp);
+    yield takeLatest("VERIFY_OTP", verifyOTP);
     yield takeLatest("CUSTOMER_ADD_ADDRESS", addAddressByUser);
     yield takeLatest("CUSTOMER_ADD_CAR", addCarByUser);
 

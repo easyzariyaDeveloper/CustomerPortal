@@ -5,24 +5,32 @@ import OtpImage from "../../Assets/img/OtpImage.png"
 import ActionButton from "../Common/ActionButton";
 import {PHONE} from "../../Constants";
 import OtpBox from "../Common/OtpBox";
-import { fetchOtp, createOtp } from "./Data/action";
+import { createOtp, verifyOtp } from "./Data/action";
 import { connect } from "react-redux";
 
 function Otp(props) {
     const phoneNumber = useRef(sessionStorage?.getItem("otpMobileNumber"));
     const customerId = useRef(new URLSearchParams(window.location.search).get("customerId"));
-
+    const otpValue = useRef("");
+    
     return<MobilePageLayout backButton = {true}>
         <OtpPageWrapper>
             <OtpImg src = {OtpImage} alt = "OtpImage"/>
 
             <MessagePara>Please enter the OTP received in your mobile number <br></br> {`+91-${phoneNumber?.current}`} </MessagePara>
-            <OtpBox/>
-
+            <OtpBox otpValue = {(otp) => {
+                otpValue.current = otp;
+            }}/>
             <MessagePara>Didn't recieve the code? <ResendButton onClick= {()=> props.createOtpResend(customerId?.current)}>Resend Code</ResendButton></MessagePara>
 
             <VerifyButton>
-                <ActionButton label = "Verify" use = {PHONE} /> 
+                <ActionButton label = "Verify" use = {PHONE}
+                    onClick = {() => {
+                        if(customerId?.current && otpValue?.current){
+                            props.verifyOtp(customerId?.current, otpValue?.current);
+                        }
+                    }}
+                /> 
             </VerifyButton>
         </OtpPageWrapper>
     </MobilePageLayout>
@@ -39,7 +47,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createOtpResend: (customerId="") => {dispatch(createOtp(customerId))}
+        createOtpResend: (customerId="") => {dispatch(createOtp(customerId))},
+        verifyOtp: (customerId, otpValue) => dispatch(verifyOtp(customerId, otpValue))
     }
 }
 

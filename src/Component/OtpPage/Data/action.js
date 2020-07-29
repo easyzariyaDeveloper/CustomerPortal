@@ -4,3 +4,11 @@ export function createOtp(customerId){
         payload: customerId
     }
 }
+
+export function verifyOtp(customerId, otpValue){
+    return{
+        type: "VERIFY_OTP",
+        customerId,
+        otpValue
+    }
+}

@@ -3,7 +3,7 @@ const defaultLoadingState = {
     error: ""
 }
 
-export default function LoadingReducer(state = defaultLoadingState, {type, data, error}){
+export default function LoadingReducer(state = defaultLoadingState, {type, data, error, message}){
     switch (type){
         case "FETCHING_API": 
             return {
@@ -22,8 +22,16 @@ export default function LoadingReducer(state = defaultLoadingState, {type, data,
                 ...state,
                 loadingInProgress: false,
                 error: {...setErrorData(error)},  
+                message: ""
             } 
         break;
+        case "SHOW_NOTIFICATION":
+            return {
+                ...state,
+                loadingInProgress: false,
+                error: {},
+                message: message
+            } 
         default:
             return state
     }

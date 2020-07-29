@@ -18,7 +18,7 @@ export function* createOtp({payload}) {
     } catch (error) {
         console.log(error);
         yield put({
-            type: 'CREATE_OTP_FAILED',
+            type: 'FETCHING_API_FAILED',
             error
         });
     }
@@ -27,21 +27,24 @@ export function* createOtp({payload}) {
 export function* verifyOTP({customerId, otpValue}) {
     try {
         const { data } = yield call(APIWrapper, {
-            url: `customer/otp/verify_customer`,
+            url: `customer/otp/match_otp_verify`,
             method: "POST",
             data: {
                 "customerId": customerId,
-                "otp": otp
+                "otp": otpValue
             }
         });
-        yield put({
-            type: 'CREATE_OTP_SUCCESS',
-            data: data
+        yield({
+            type: "SHOW_NOTIFICATION",
+            message: "Suceessfully Verified !! Login again"
         });
+        setTimeout(() => {
+            location.href = "/login";
+        },1000);
     } catch (error) {
         console.log(error);
         yield put({
-            type: 'CREATE_OTP_FAILED',
+            type: 'FETCHING_API_FAILED',
             error
         });
     }
