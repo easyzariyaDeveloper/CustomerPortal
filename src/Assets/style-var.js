@@ -1,3 +1,8 @@
+import "./font/icomoon.eot";
+import "./font/icomoon.svg";
+import "./font/icomoon.ttf";
+import "./font/icomoon.woff";
+
 export const base_spacing = 10;
 export const login_bg_color = "#E7EAFF";
 export const white_color = "#FFFFFF";

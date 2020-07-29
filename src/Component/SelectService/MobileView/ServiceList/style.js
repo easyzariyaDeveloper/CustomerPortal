@@ -101,8 +101,28 @@ export const CollapseInDialogDiv = styled.div`
  export const CarCollapseInDialog = styled(Collapse)`
     padding: ${base_spacing}px;
  `;
+export const SelectedCarIcon = styled.img`
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    border-radius: 50%;
+    background: ${ez_button_color};
+    padding: ${base_spacing}px;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    animation: scale-animation 250ms ease;
+`;
 
 
 
-
-
+export const SelectedCarCard = styled.div`
+    ${CommonBoxShadow};
+    background: ${ez_button_color};
+    display: ${({visibility}) => visibility ? "" : "none"};
+    position: absolute;
+    bottom: ${base_spacing*6}px;
+    right: ${base_spacing*8.5}px;
+    padding: ${base_spacing}px;
+    border-radius: ${base_spacing}px;
+`;

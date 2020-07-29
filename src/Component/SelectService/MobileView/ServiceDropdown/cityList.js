@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import {CityListWrapper, CityCard} from './style';
+import {CityListWrapper, CityCard, CityIcon, CityName} from './style';
 import { fetchCities } from "../../Data/action";
 import { readCookie } from "../../../../util";
-import CityImage from "../../../../Assets/img/cityImage.jpg"
 import Skeleton from '@material-ui/lab/Skeleton';
 
 
@@ -27,11 +26,15 @@ function CityList(props) {
                             }}
                             enabled = {city.cityId === selectedCityId}
                         >
-                            <span className = {`icon-${city.toLowerCase()}`}></span>
-                            <img src = {CityImage}></img>
-                            <h1>{city}</h1>
+                            <CityIcon 
+                                className = {`icon-${city?.cityName.split(" ").join("-").toLowerCase()}`} 
+                                enabled = {city.cityId === selectedCityId}
+                            />
+                            <CityName
+                                enabled = {city.cityId === selectedCityId}
+                            >{city}</CityName>
                         </CityCard>
-                    }): (!props.inProgress && props.cities ? props.cities.map(city =>{
+                    }): (!props.inProgress && props.cities ? props.cities.map(city => {
                         return <CityCard onClick= {(event)=>{
                             event.stopPropagation();
                             setSelectedCityId(city.cityId);
@@ -40,9 +43,13 @@ function CityList(props) {
                         }}
                             enabled = {city.cityId === selectedCityId}
                         >
-                            <span className = {`icon-${city?.cityName.toLowerCase()}`}></span>
-                            <img src = {CityImage}></img>
-                            <h1>{city.cityName}</h1>
+                            <CityIcon 
+                                className = {`icon-${city?.cityName.split(" ").join("-").toLowerCase()}`}
+                                enabled = {city.cityId === selectedCityId}
+                            />
+                            <CityName
+                                enabled = {city.cityId === selectedCityId}
+                            >{city.cityName}</CityName>
                         </CityCard>
                     }):null)}
                 </CityListWrapper>
