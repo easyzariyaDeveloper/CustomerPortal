@@ -39,6 +39,7 @@ function setErrorData(error){
     } else if(status === 403){
         errorMessage = "Forbidden !! You need extra credential to access.";
     }
+    errorMessage = error.ErrorMessage ? error.ErrorMessage : errorMessage;
     return {
         message: errorMessage,
         status: error?.status

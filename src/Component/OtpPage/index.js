@@ -10,16 +10,7 @@ import { connect } from "react-redux";
 
 function Otp(props) {
     const phoneNumber = useRef(sessionStorage?.getItem("otpMobileNumber"));
-
-    useEffect(() => {
-        if(phoneNumber?.current){
-            props.fetchOtp(phoneNumber?.current);
-        }
-        /**
-         * Saga to call  -> {"phone": phoneNumber?.current}
-         */
-        
-    }, []);
+    const customerId = useRef(new URLSearchParams(window.location.search).get("customerId"));
 
     return<MobilePageLayout backButton = {true}>
         <OtpPageWrapper>
@@ -28,7 +19,7 @@ function Otp(props) {
             <MessagePara>Please enter the OTP received in your mobile number <br></br> {`+91-${phoneNumber?.current}`} </MessagePara>
             <OtpBox/>
 
-            <MessagePara>Didn't recieve the code? <ResendButton onClick= {()=> createOtpResend(phoneNumber?.current)}>Resend Code</ResendButton></MessagePara>
+            <MessagePara>Didn't recieve the code? <ResendButton onClick= {()=> props.createOtpResend(customerId?.current)}>Resend Code</ResendButton></MessagePara>
 
             <VerifyButton>
                 <ActionButton label = "Verify" use = {PHONE} /> 
@@ -48,8 +39,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchOtp: (phone="") => {dispatch(fetchOtp(phone))},
-        createOtpResend: (phone="") => {dispatch(createOtp(phone))}
+        createOtpResend: (customerId="") => {dispatch(createOtp(customerId))}
     }
 }
 

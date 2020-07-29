@@ -1,14 +1,6 @@
-export function fetchOtp (phone){
-    return {
-        type: "FETCH_OTP",
-        payload: {phone}
-    }
-}
-
-
-export function createOtp(phone){
+export function createOtp(customerId){
     return{
-        type: "CREATE OTP",
-        payload: phone
+        type: "CREATE_OTP",
+        payload: customerId
     }
 }

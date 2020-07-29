@@ -8,7 +8,7 @@ export function* loginUser({payload, search = ""}){
     try {
         const { data, status } = yield call(APIWrapper, {
             method: "POST",
-            url: `oauth/token`,
+            url: `/login`,
             data: qs.stringify({
                 username: payload?.user,
                 password: payload?.password,
@@ -35,6 +35,19 @@ export function* loginUser({payload, search = ""}){
             }
         }
     } catch (error) {
+        console.log(error);
+        const {status = "", errorObj = {}} = error;
+        if(status === 401 && errorObj?.data?.error_description.includes("not verified")){
+            const customerIdArray = errorObj?.data?.error_description.split(";")[1].split(" ");
+            console.log(customerIdArray);
+            setTimeout(() => {
+                location.href = `/otp?customerId=${customerIdArray[0]}`;
+            },1000);
+            /**
+             * Setting Session Storage (Both Email / Number)
+             */
+            error.ErrorMessage = "Not verified account. Redirecting to verify user";
+        }
         yield put({
             type: 'FETCHING_API_FAILED',
             error: error
