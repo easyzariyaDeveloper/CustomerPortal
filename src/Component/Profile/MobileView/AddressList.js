@@ -16,7 +16,7 @@ function AddressList(props) {
     </ProfileButtonWrapper>
   </ProfileCard>
   {
-    props?.profile?.addressList.map(address =>{
+    props?.profile?.addressList? props?.profile?.addressList?.map(address =>{
       return <ProfileCard>
           {
             <AddressLineWrapper>
@@ -26,7 +26,7 @@ function AddressList(props) {
             </AddressLineWrapper>
           }
       </ProfileCard>
-    })
+    }) : null
   }
 
 

@@ -3,7 +3,7 @@ import qs from "querystring";
 import APIWrapper from "../../../Constants/ApiWrapper";
 import {getProfile}  from "../../Profile/Data/saga";
 
-export function* loginUser({payload}){
+export function* loginUser({payload, search = ""}){
     yield put({type: "FETCHING_API"});
     try {
         const { data, status } = yield call(APIWrapper, {
@@ -26,16 +26,18 @@ export function* loginUser({payload}){
             });
             yield put({
                 type: 'FETCHING_API_SUCCESS'
-            })
+            });
+            const referrerArray = search.split("referrer=");
+            if(referrerArray.length > 0){
+                location.href = referrerArray[1] || "/";
+            } else {
+                location.href = "/";
+            }
         }
     } catch (error) {
-        console.log(error);
         yield put({
-            type: 'USER_LOGGEDIN_SUCCESSFULLY_FAILED',
-            error
-        });
-        yield put({
-            type: 'FETCHING_API_FAILED'
+            type: 'FETCHING_API_FAILED',
+            error: error
         })
     }
 }
@@ -70,6 +72,7 @@ export function* userSignup({payload}){
         });
     }
 }
+
 
 
 

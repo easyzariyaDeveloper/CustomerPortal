@@ -1,7 +1,8 @@
-export function loginUserByCredential(userDetail){
+export function loginUserByCredential(userDetail, search){
     return {
         type: "LOGIN_USER_WITH_CRENDETIAL",
-        payload: userDetail
+        payload: userDetail,
+        search : search
     }
 }
 
@@ -11,3 +12,4 @@ export function createSignup(signupDetails){
         payload: signupDetails
     }
 }
+

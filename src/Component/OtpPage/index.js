@@ -5,7 +5,7 @@ import OtpImage from "../../Assets/img/OtpImage.png"
 import ActionButton from "../Common/ActionButton";
 import {PHONE} from "../../Constants";
 import OtpBox from "../Common/OtpBox";
-import { fetchOtp } from "./Data/action";
+import { fetchOtp, createOtp } from "./Data/action";
 import { connect } from "react-redux";
 
 function Otp(props) {
@@ -28,10 +28,8 @@ function Otp(props) {
             <MessagePara>Please enter the OTP received in your mobile number <br></br> {`+91-${phoneNumber?.current}`} </MessagePara>
             <OtpBox/>
 
-            <MessagePara>Didn't recieve the code? <ResendButton>Resend Code</ResendButton></MessagePara>
+            <MessagePara>Didn't recieve the code? <ResendButton onClick= {()=> createOtpResend(phoneNumber?.current)}>Resend Code</ResendButton></MessagePara>
 
-
-        
             <VerifyButton>
                 <ActionButton label = "Verify" use = {PHONE} /> 
             </VerifyButton>
@@ -50,7 +48,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchOtp: (phone="") => {dispatch(fetchOtp(phone))}
+        fetchOtp: (phone="") => {dispatch(fetchOtp(phone))},
+        createOtpResend: (phone="") => {dispatch(createOtp(phone))}
     }
 }
 

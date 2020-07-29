@@ -30,8 +30,17 @@ export default function LoadingReducer(state = defaultLoadingState, {type, data,
 }
 
 function setErrorData(error){
+    const {status = ""} = error;
+    let errorMessage = "Something went wrong. Fail to login";
+    if(status === 401){
+        errorMessage = "Unauthorized !! You need to login to use the service";
+    } else if(status === 400){
+        errorMessage = "Bad credential !! Please verify the data";
+    } else if(status === 403){
+        errorMessage = "Forbidden !! You need extra credential to access.";
+    }
     return {
-        message: error?.message,
+        message: errorMessage,
         status: error?.status
     }
 }

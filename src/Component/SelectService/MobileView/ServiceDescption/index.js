@@ -58,7 +58,7 @@ function ServiceDescription(props) {
 
                     {sessionStorage.setItem("service", subPack.name)}
 
-                    <EZCard style = {{"margin": "20px 15px 0 15px", position: "relative"}}>
+                    <EZCard style = {{"margin": "20px 15px 0 15px"}}>
                         <FeatureHeader>What is included?</FeatureHeader>
 
                             {
@@ -68,7 +68,7 @@ function ServiceDescription(props) {
                                 })
                             }
 
-                        <FloatingCarDetails/>
+                        <FloatingCarDetails bottomPosition = {"60px"}/>
                     </EZCard>
 
                     <BottomDiv>

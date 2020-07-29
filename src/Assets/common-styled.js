@@ -149,7 +149,7 @@ export const EZHeader = styled.h1`
 
 export const MobileActionButton = styled.button`
     width: 100%;
-    height: ${base_spacing * 4.5}px; 
+    height: ${base_spacing * 4}px; 
     border: none;
     border-radius: 5px;
     text-align: center;

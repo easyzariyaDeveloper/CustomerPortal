@@ -72,8 +72,9 @@ function ServiceList(props) {
         service:true,
         package:true
     }
+
     const matchedCarData = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
-    console.log(matchedCarData);
+ 
 
     function carMisMatchWarningPopup(){
         return <Dialog

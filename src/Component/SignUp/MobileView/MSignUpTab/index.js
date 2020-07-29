@@ -6,14 +6,17 @@ import SwipeableViews from 'react-swipeable-views';
 import {Mfont_color, ez_button_color} from "../../../../Assets/style-var";
 import Signup from '../TextComponent/Signup';
 import Login from '../TextComponent/Login';
-import { TermsPara,SignupLogInButton } from './style';
+import { TermsPara,SignupLogInButton, RedirectButton } from './style';
 import { withRouter } from 'react-router-dom';
-import { loginUserByCredential, createSignup } from '../../Data/action';
+import { loginUserByCredential, createSignup} from '../../Data/action';
 import { connect } from 'react-redux';
 import { isValidUserDetail, isValidPassword, isValidEmail, isValidContactNumber, isPasswordMatching, isValidEmailOrPhone } from '../../utils';
 import { SocialButtonDiv,FbLoginButton, GoogleLoginButton, MAccountWrapper, MAccountCard } from '../style';
 import Google from "../../../../Assets/img/google.jpg";
 import FacebookIcon from '@material-ui/icons/Facebook';
+import ResetPassword from './ResetPassword';
+import { createOtp } from '../../../OtpPage/Data/action';
+
 
 //https://react-swipeable-views.com/demos/demos/
 
@@ -51,6 +54,8 @@ function MSignUpTab(props) {
   const handleChange = (event, value) => setActiveTabIndex({index: value});
   const handleChangeIndex = index => setActiveTabIndex({index: index});
   const userDetail = useRef({});
+
+  const [resetEnabled, setResetEnabled] = useState(false)
   
   function fetchAndSetUserDetail(key, value){
     userDetail.current[key] = value;
@@ -69,16 +74,8 @@ function MSignUpTab(props) {
     setLoginError(loginError);
 
     if(Object.keys(loginError).length == 0){
-      props.loginUser(userDetail);
-      setTimeout(() => {
-        const {search = ""} = location;
-        const referrerArray = search.split("referrer=");
-        if(referrerArray.length > 0){
-          location.href = referrerArray[1] || "/";
-        } else {
-          location.href = "/";
-        }
-      }, 5 * 1000);
+      const {search = ""} = location;
+      props.loginUser(userDetail, search);
     }
 
     // const validCredentials = isValidUserDetail(userDetail.current.user) && isValidPassword(userDetail.current.password);
@@ -127,9 +124,17 @@ function MSignUpTab(props) {
               updateValue = {fetchAndSetUserDetail}
               loginErrorObj = {loginError}
             />  
-            <div style= {{display:"flex", justifyContent: "space-around", margin: "25px 0"}}>
+
+            <RedirectButton onClick = {()=> {
+              setResetEnabled(!resetEnabled)
+            }}>Forgot Password?</RedirectButton>
+
+            {/* <div style= {{display:"flex", justifyContent: "space-around", margin: "25px 0"}}>
+
             <a style= {{textDecoration:"none", color: ez_button_color}}href = "#">Forgot Password?</a>
-            </div>
+            </div> */}
+
+
             <div style= {{textAlign:"center", margin: "40px 0"}}>
               <SignupLogInButton onClick = {() => loginUser()}>Login</SignupLogInButton>
               <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign In with</p>
@@ -153,7 +158,7 @@ function MSignUpTab(props) {
             />
             <div style= {{textAlign:"center"}}>
             <TermsPara>By Signing Up you agree to our &nbsp;<a href="#">terms and conditions</a></TermsPara>
-              <SignupLogInButton onClick = {() => signUpUser()}>Sign Up</SignupLogInButton>
+              <SignupLogInButton onClick = {() => {signUpUser()}}>Sign Up</SignupLogInButton>
               <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign Up with</p>
             </div>
           <SocialButtonDiv>
@@ -167,6 +172,11 @@ function MSignUpTab(props) {
           </div>
       </SwipeableViews>
       </MAccountCard>
+
+      {resetEnabled ? <ResetPassword setVisibility = {setResetEnabled}
+        generateOtp = {props.createOtp}
+      /> : null}
+
       </MAccountWrapper>
     </div>
 )};
@@ -178,9 +188,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginUser: (userDetail) => {dispatch(loginUserByCredential(userDetail?.current))},
+    loginUser: (userDetail, search) => {dispatch(loginUserByCredential(userDetail?.current, search))},
     signUpUser: (signupDetails) => {dispatch(createSignup(signupDetails?.current))},
-    
+    createOtp : (phone= "") => {dispatch(createOtp(phone))}
+
   }
 }
 

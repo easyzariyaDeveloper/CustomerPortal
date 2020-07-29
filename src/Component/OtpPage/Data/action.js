@@ -4,3 +4,11 @@ export function fetchOtp (phone){
         payload: {phone}
     }
 }
+
+
+export function createOtp(phone){
+    return{
+        type: "CREATE OTP",
+        payload: phone
+    }
+}

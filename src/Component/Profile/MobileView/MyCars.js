@@ -43,12 +43,12 @@ function MyCars(props) {
         </ProfileCard>
         
         {
-          props?.profile?.carList.map(car =>{
+          props?.profile?.carList ? props?.profile?.carList.map(car =>{
             return <ProfileCard>
               {car.carId}
               <button onClick={deleteCar}>Remove Car</button>
             </ProfileCard>
-          })
+          }) :null
         }
         </div>
       }
