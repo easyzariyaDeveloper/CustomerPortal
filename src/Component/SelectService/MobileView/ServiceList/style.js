@@ -107,7 +107,7 @@ export const SelectedCarIcon = styled.img`
     right: 20px;
     width: 60px;
     border-radius: 50%;
-    background: ${desktop_gradient};
+    background: ${ez_button_color};
     padding: ${base_spacing}px;
     cursor: pointer;
     box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
@@ -118,7 +118,7 @@ export const SelectedCarIcon = styled.img`
 
 export const SelectedCarCard = styled.div`
     ${CommonBoxShadow};
-    background: ${desktop_gradient};
+    background: ${ez_button_color};
     display: ${({visibility}) => visibility ? "" : "none"};
     position: absolute;
     bottom: ${base_spacing*6}px;
