@@ -33,6 +33,7 @@ function AddCar(props) {
         model:"",
         carName:"",
         type:"",
+        fuelVariantId: "",
         fuelType: "",
         carColor:"",
         registration:"",
@@ -47,8 +48,12 @@ function AddCar(props) {
             "carId": vehicle?.model,
             "carName":vehicle?.carName,
             "color":vehicle?.carColor,
-            "fuelVariantId": vehicle?.fuelType,
-            "variantName":vehicle?.type,
+            "fuelVariantId": vehicle?.fuelVariantId,
+            "variantName" : vehicle?.fuelType,
+            "id": "",
+            "model" :""
+            
+            // "variantName":vehicle?.type,
             // "registration":vehicle?.registration,
             // "makeYear":vehicle?.makeYear,
         };
@@ -88,11 +93,27 @@ function AddCar(props) {
                 
             }
             setVehicle(updateVehicleData);
+           
             // localStorage.setItem("carSelectedPackage",event.target.value);
-        } else {
+        } 
+
+        else if(prop == "fuelVariantId"){
+            const findFuelType = props?.models.map(({id,variants}) => {
+                return id == vehicle?.model ? variants.find(fuelVariant=> {
+                    return fuelVariant.id == event.target.value
+                }): null
+            });
+
+            const selectedFuelType = findFuelType.find(el => el!=null).fuelType;
+
+            setVehicle({...vehicle,[prop]: event.target.value,fuelType: selectedFuelType});
+            
+        }
+        else {
             setVehicle({ ...vehicle, [prop]: event.target.value });
         }
     };
+    console.log(vehicle)
 
     return <MobilePageLayout pageName="Select Your Car">
         <MAddCarPageWrapper>
@@ -158,8 +179,8 @@ function AddCar(props) {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={vehicle.fuelType}
-                        onChange={handleChange('fuelType')}
+                        value={vehicle.fuelVariantId}
+                        onChange={handleChange('fuelVariantId')}
                         autoWidth
                     >   
                     {

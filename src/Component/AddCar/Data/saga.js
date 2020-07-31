@@ -63,6 +63,10 @@ export function* addCarByUser({payload, callback}) {
             type: 'CUSTOMER_ADD_CAR_FAILED',
             error
         });
+        yield put({
+            type: 'FETCHING_API_FAILED',
+            error
+        })
     }
 
 }

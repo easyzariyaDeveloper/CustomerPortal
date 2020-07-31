@@ -129,6 +129,7 @@ export const AddressLine = styled.p`
 export const CarDetailsCard = styled(ProfileCard)`
     display: grid;
     grid-template-columns: 0.5fr 1fr;
+    position: relative;
 `;
 export const CarImage = styled.img`
     height:100px;
@@ -136,4 +137,22 @@ export const CarImage = styled.img`
 
 export const LabelHeading = styled.p`
     padding: 5px;
+`;
+
+export const KebabMenuCard = styled(EZCard)`
+    position: absolute;
+    right:10px;
+    top: 10px;
+    display: grid;
+`;
+
+export const KebabMenuButton = styled.button`
+    border: none;
+    outline: none;
+    padding: 10px;
+    text-align: left;
+    color: black;
+    background: white;
+    cursor: pointer;
+    font-size: 15px;
 `;

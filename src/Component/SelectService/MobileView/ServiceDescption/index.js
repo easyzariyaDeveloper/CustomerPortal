@@ -37,7 +37,7 @@ function ServiceDescription(props) {
         package:true
     }
     
-    const matchedCarData = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
+    const matchedCarData = props?.profile?.carList?.find((car) => car["carId"] === selectedCarId);
 
     function addSubPackage(){
         props.addSubPackage(matchedCarData,selectedCityId,itemIdObj)

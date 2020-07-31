@@ -18,7 +18,7 @@ function CityList(props) {
         {
             props?.inProgress ? <Skeleton animation="wave" height={250} width = {250}  /> :(
                 <CityListWrapper>
-                    {userId ? props.profileAddress.map(({cityId,city}) =>{
+                    {userId && props.profileAddress ? props.profileAddress.map(({cityId,city}) =>{
                         return <CityCard onClick = {()=>{
                                 setSelectedCityId(cityId);
                                 localStorage.setItem("citySelectedPackage", cityId);
@@ -52,6 +52,27 @@ function CityList(props) {
                             >{city.cityName}</CityName>
                         </CityCard>
                     }):null)}
+
+                    {/* {
+                        (!props.inProgress && props.cities ? props.cities.map(city => {
+                            return <CityCard onClick= {(event)=>{
+                                event.stopPropagation();
+                                setSelectedCityId(city.cityId);
+                                localStorage.setItem("citySelectedPackage", city.cityId);
+                                props.onChange(city.cityId);
+                            }}
+                                enabled = {city.cityId === selectedCityId}
+                            >
+                                <CityIcon 
+                                    className = {`icon-${city?.cityName.split(" ").join("-").toLowerCase()}`}
+                                    enabled = {city.cityId === selectedCityId}
+                                />
+                                <CityName
+                                    enabled = {city.cityId === selectedCityId}
+                                >{city.cityName}</CityName>
+                            </CityCard>
+                        }):null)
+                    } */}
                 </CityListWrapper>
             )
         }

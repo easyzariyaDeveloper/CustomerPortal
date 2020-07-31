@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Skeleton from '@material-ui/lab/Skeleton';
 import {useStyles} from "../../../Assets/common-styled";
 
-import { ProfileActionButton, ProfileButtonWrapper, ProfileCard, PageLink,CarImage, CarDetailsCard, LabelHeading } from "./style";
+import { ProfileActionButton, ProfileButtonWrapper, ProfileCard, PageLink,CarImage, CarDetailsCard, LabelHeading, KebabMenuCard, KebabMenuButton } from "./style";
 import { withRouter } from "react-router-dom";
 
 import {deleteCar, fetchProfile} from "../Data/action";
@@ -16,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 function MyCars(props) {
   const classes = useStyles();
 
-  const [kebabMenu, setKebabMenu] = useState(null);
+  const [kebabMenu, setKebabMenu] = useState(false);
 
   const [values, setValues] = useState({
     car: '',
@@ -53,44 +53,20 @@ function MyCars(props) {
               {car?.image ? <CarImage src = {car?.image}/>: <CarImage src = {DefaultCarImage}/>}
               <div>
                 <div >
-                <IconButton aria-label="more"
-                    aria-controls="long-menu"
-                    aria-haspopup="true"
-                    onClick={(event)=> setKebabMenu(event.currentTarget)}
-                    style = {{float: "right"}}>
-                  <MoreVertIcon/>
-                  </IconButton>
+                  <MoreVertIcon style = {{padding: 0, float: "right"}} onClick={(event)=> setKebabMenu(!kebabMenu)}/>
 
-                  <Menu
-                    id="long-menu"
-                    keepMounted
-                    open={Boolean(kebabMenu)}
-                    onClose={()=> setKebabMenu(null)}
-                    PaperProps={{
-                      root:{
-                        postion: "absolute",
-                        top:"10px",
-                        right:"10px"
-                      },
-                      style: {
-                        width: "20ch",
+                  {
+                    kebabMenu ? <KebabMenuCard>
+                      <KebabMenuButton onClick = {()=> {
+                        props?.deleteCar(car.carId);
+                        props?.fetchProfile()
+                      }}>Remove Car</KebabMenuButton>
 
-                      }
-                    }}
-                  >
-                      <MenuItem selected
-                        onClick={()=> {
-                          setKebabMenu(null);
-                          props?.deleteCar(car.carId);
-                          props?.fetchProfile()
-                        }}
-                      >Remove</MenuItem>
-                      <MenuItem                   
-                        onClick={()=> {
-                          location.href = `/add-car?carId=${car.carId}?redirect=/profile`
-                          setKebabMenu(null)}}
-                      >Edit</MenuItem>
-                  </Menu>
+                      <KebabMenuButton onClick= {()=> location.href = `/add-car?carId=${car.carId}?redirect=/profile`
+                      }>Edit Car</KebabMenuButton>
+                    </KebabMenuCard> :null
+                  }
+
                 </div>
                 {console.log(car.carId)}
                 <LabelHeading>Brand: {car.brand? car.brand : "" } </LabelHeading>

@@ -99,7 +99,7 @@ function MSignUpTab(props) {
       error["phone"] = "Invalid Contact Number. Should be 10 digits.";
     }
     if(!isValidPassword(userDetail?.current?.password)){
-      error["password"] = "Invalid Password";
+      error["password"] = "Min 6 digit.Please include Special Char,Uppercase,Lowercase & Number in password.";
     } else if (!isPasswordMatching(userDetail?.current?.password,  userDetail?.current?.confirmPassword)){
       error["confirmPassword"] = "Password & Confirm password doesn't match";
     }

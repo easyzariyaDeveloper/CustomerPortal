@@ -73,7 +73,7 @@ function ServiceList(props) {
         package:true
     }
 
-    const matchedCarData = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
+    const matchedCarData = props?.profile?.carList?.find((car) => car["carId"] === selectedCarId);
  
 
     function carMisMatchWarningPopup(){
@@ -148,20 +148,22 @@ function ServiceList(props) {
     useEffect(() => {
         const {carList = []} = props.profile;
         const carSelectedAnonymously = localStorage.getItem("carSelectedPackage");
-        const matchedCarData = carList.find((car) => car["carId"] === carSelectedAnonymously);
-        if(
-            carList.length > 0 &&  
-            carSelectedAnonymously && 
-            matchedCarData?.["carId"] !== carSelectedAnonymously
-        ){
-            setShowCarMisMatchWarning(true);
-        } else if(carList.length > 0 && matchedCarData?.["carId"] === carSelectedAnonymously){
-            const {carId, fuelVariantId } = matchedCarData;
-            setFilter({
-                carId: carId,
-                variantId: fuelVariantId,
-                cityId: localStorage.getItem("citySelectedPackage")
-            });
+        const matchedCarData = carList?.find((car) => car["carId"] === carSelectedAnonymously);
+        if(carList){
+            if(
+                carList.length > 0 &&  
+                carSelectedAnonymously && 
+                matchedCarData?.["carId"] !== carSelectedAnonymously
+            ){
+                setShowCarMisMatchWarning(true);
+            } else if(carList.length > 0 && matchedCarData?.["carId"] === carSelectedAnonymously){
+                const {carId, fuelVariantId } = matchedCarData;
+                setFilter({
+                    carId: carId,
+                    variantId: fuelVariantId,
+                    cityId: localStorage.getItem("citySelectedPackage")
+                });
+            }
         }
     }, [props?.profile?.customerId])
 

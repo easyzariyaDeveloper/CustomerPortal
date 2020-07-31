@@ -48,7 +48,10 @@ function setErrorData(error){
         errorMessage = "Forbidden !! You need extra credential to access.";
     } else if(status === 409){
         errorMessage = "Conflict !! This record already exists.";
+    } else if(status === 404){
+        errorMessage = "Not Found.. Something went wrong.";
     }
+    
     errorMessage = error.ErrorMessage ? error.ErrorMessage : errorMessage;
     return {
         message: errorMessage,

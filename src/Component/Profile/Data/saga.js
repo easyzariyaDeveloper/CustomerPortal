@@ -53,8 +53,8 @@ export function* changePassword({payload}){
     yield put ({type: "CHANGE_PASSWORD_INPROGRESS"});
     try{
         const { data } = yield call(APIWrapper, {
-            url: ``,
-            method: "POST",
+            url: `/customer/changepassword`,
+            method: "PUT",
             data: {
                 "oldPassword": payload?.oldPassword,
                 "newPassword": payload?.newPassword

@@ -18,7 +18,8 @@ export function isValidEmailOrPhone(value = ""){
 
 
 export function isValidPassword(password = ""){
-    return password.length > 6 ? true : false;
+    let isPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
+    return isPassword.test(password) ? true : false;
 }
 
 export function isValidEmail(email = ""){
