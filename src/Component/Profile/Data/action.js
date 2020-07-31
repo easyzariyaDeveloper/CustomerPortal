@@ -4,12 +4,22 @@ export function fetchProfile(){
     }
 }
 
-export function deleteCar(car){
+export function deleteCar(carId){
     return{
         type: "DELETE_CAR",
-        payload: car
+        payload: carId
     }
 }
 
+
+export function changePassword(oldPassword,newPassword){
+    return{
+        type: "CHANGE_PASSWORD",
+        payload:{
+            oldPassword,
+            newPassword
+        }
+    }
+}
 
 

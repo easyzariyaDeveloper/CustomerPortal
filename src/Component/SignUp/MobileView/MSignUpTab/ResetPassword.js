@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import { withRouter } from "react-router";
 import { EZCard } from '../../../Common/MobileCard';
 import TextField from "@material-ui/core/TextField";
-import { ResetOverLay, ResetSubmitButton, ResetWrapper } from "./style";
+import { ResetOverLay, ResetSubmitButton, ResetWrapper, ResetPasswordLabel } from "./style";
 import { isValidEmailOrPhone, MOBILE_NUMBER_LENGTH } from "../../utils";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -36,8 +36,8 @@ function ResetPassword(props){
     return<ResetOverLay>
         <ResetWrapper>
             <EZCard>
-                <p onClick = {() => props.setVisibility(false)}>X</p>
-                <p>Reset Password</p>
+                <p onClick = {() => props.setVisibility(false)} style= {{float: "right"}}>X</p>
+                <ResetPasswordLabel>Reset Password</ResetPasswordLabel>
                 <form className={classes.root} noValidate autoComplete="off">
                     <TextField
                     required

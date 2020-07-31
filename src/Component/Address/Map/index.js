@@ -7,7 +7,7 @@ import GooglePlacesAutocomplete, {geocodeByPlaceId} from 'react-google-places-au
 import 'react-google-places-autocomplete/dist/index.min.css';
 import { border_color, desktop_gradient } from '../../../Assets/style-var';
 
-const API_KEY = "AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8";
+const API_KEY = "AIzaSyCkgCpbS3B5ryii-6a2xStzpxpGYC30EZ4"; //"AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8";
 Geocode.setApiKey(API_KEY);
 
 export default function Map(props) {

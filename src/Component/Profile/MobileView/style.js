@@ -66,6 +66,7 @@ export const ProfileDiv = styled.div`
 export const ProfileCard = styled(EZCard)`
     padding: ${base_spacing}px;
     border-radius: ${base_spacing/2}px;
+   
 `;
 
 export const ChangePasswordDiv = styled.div`
@@ -122,4 +123,17 @@ export const AddressLine = styled.p`
     line-height: ${base_spacing*2.8}px;
     letter-spacing: 0.15px;
     color: #4B4B4B;
+`;
+
+
+export const CarDetailsCard = styled(ProfileCard)`
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+`;
+export const CarImage = styled.img`
+    height:100px;
+`;
+
+export const LabelHeading = styled.p`
+    padding: 5px;
 `;

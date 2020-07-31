@@ -2,6 +2,7 @@ import {call, put} from "redux-saga/effects";
 import qs from "querystring";
 import APIWrapper from "../../../Constants/ApiWrapper";
 import {getProfile}  from "../../Profile/Data/saga";
+import { setCookie } from "../../../util";
 
 export function* loginUser({payload, search = ""}){
     yield put({type: "FETCHING_API"});
@@ -75,7 +76,13 @@ export function* userSignup({payload}){
         });
         if(status === 201){
             sessionStorage.setItem("otpMobileNumber", payload?.phone);
-            window.location.href = "/otp";
+            if(data?.customerId){
+                setCookie("userUUId", data?.customerId);
+                setCookie("isVerifiedUser", data?.verified);
+                setTimeout(() => {
+                    location.href = `/otp?customerId=${data?.customerId}`;
+                },1000);
+            }
         }
     } catch (error) {
         console.log(error);

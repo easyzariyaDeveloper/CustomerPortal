@@ -14,7 +14,8 @@ function PageLayout(props) {
   
   useEffect(() => {
     const userId = readCookie("userUUId");
-    if(userId){
+    const isVerifiedUser = readCookie("isVerifiedUser") === "true";
+    if(userId && isVerifiedUser){
       props.fetchProfile();
       props.fetchActiveCart();
     }

@@ -2,7 +2,7 @@ import { takeLatest } from "redux-saga/effects";
 import { fetchPackages, fetchCars, fetchCities, fetchPackageById, addSubPackage } from "../Component/SelectService/Data/saga";
 import { fetchBrandForCars, fetchCarListByBrand, addCarByUser, getCarById} from "../Component/AddCar/Data/saga";
 import { loginUser, userSignup } from "../Component/SignUp/Data/saga";
-import { getProfile } from "../Component/Profile/Data/saga";
+import { getProfile, changePassword, deleteCar } from "../Component/Profile/Data/saga";
 import { createOtp, verifyOTP } from "../Component/OtpPage/Data/saga";
 import { addAddressByUser } from "../Component/Address/Data/saga";
 import { fetchCart, hasActiveCart, deleteItem } from "../Component/Cart/Data/saga";
@@ -27,8 +27,13 @@ export default function* appSaga() {
     yield takeLatest("VERIFY_OTP", verifyOTP);
     yield takeLatest("CUSTOMER_ADD_ADDRESS", addAddressByUser);
     yield takeLatest("CUSTOMER_ADD_CAR", addCarByUser);
+    yield takeLatest("DELETE_CAR", deleteCar);
+
+
 
     yield takeLatest("FETCH_ACTIVE_CART_DETAIL", hasActiveCart);
     yield takeLatest("FETCH_CART_DETAILS", fetchCart);
     yield takeLatest("DELETE_ITEM", deleteItem);
+
+    yield takeLatest("CHANGE_PASSWORD", changePassword);
 }

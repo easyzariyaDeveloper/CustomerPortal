@@ -88,7 +88,7 @@ function AddCar(props) {
                 
             }
             setVehicle(updateVehicleData);
-            localStorage.setItem("carSelectedPackage",event.target.value);
+            // localStorage.setItem("carSelectedPackage",event.target.value);
         } else {
             setVehicle({ ...vehicle, [prop]: event.target.value });
         }
@@ -222,7 +222,7 @@ function AddCar(props) {
                   </FormControl> </div>:null
                 }
                 
-                <ConfirmButton disabled = {!vehicle["brand"] || !vehicle["model"] || !vehicle["fuelType"] || !vehicle["type"]}
+                <ConfirmButton disabled = {!vehicle["brand"] || !vehicle["model"] || !vehicle["fuelType"]}
                 onClick = {addCar}> Confirm </ConfirmButton>
             </MCarCard>
             </div>

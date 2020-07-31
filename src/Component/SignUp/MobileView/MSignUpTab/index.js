@@ -18,6 +18,7 @@ import ResetPassword from './ResetPassword';
 import { createOtp } from '../../../OtpPage/Data/action';
 
 
+
 //https://react-swipeable-views.com/demos/demos/
 
 const AntTabs = withStyles({
@@ -54,6 +55,7 @@ function MSignUpTab(props) {
   const handleChange = (event, value) => setActiveTabIndex({index: value});
   const handleChangeIndex = index => setActiveTabIndex({index: index});
   const userDetail = useRef({});
+  const [checked, setChecked] = useState(true);
 
   const [resetEnabled, setResetEnabled] = useState(false)
   
@@ -190,7 +192,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loginUser: (userDetail, search) => {dispatch(loginUserByCredential(userDetail?.current, search))},
     signUpUser: (signupDetails) => {dispatch(createSignup(signupDetails?.current))},
-    createOtp : (phone= "") => {dispatch(createOtp(phone))}
+    createOtp : (customerId= "") => {dispatch(createOtp(customerId))}
 
   }
 }

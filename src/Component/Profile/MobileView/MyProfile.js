@@ -14,6 +14,7 @@ import {useStyles} from "../../../Assets/common-styled";
 import { connect } from 'react-redux';
 import Collapse from "@material-ui/core/Collapse";
 import Skeleton from '@material-ui/lab/Skeleton';
+import { changePassword } from "../Data/action";
 
 const profileDetails = { 'Name': 'name', 'Email': 'email', 'Phone Number': 'phone' };
 const profileDetailsArray = Object.entries(profileDetails);
@@ -180,7 +181,10 @@ function MyProfile(props) {
             />
           </FormControl>
           <ProfileButtonWrapper>
-            <PasswordSaveButton onClick={() => setCollapsed(!collapsed)}
+            <PasswordSaveButton onClick={() => {
+              setCollapsed(!collapsed);
+              props?.changePassword(values?.oldPassword,values?.newPassword);
+            }}
             disabled = {values.oldPassword=="" && values.newPassword=="" && values.confirmNewPassword==""}
             > Save </PasswordSaveButton>
           </ProfileButtonWrapper>
@@ -198,4 +202,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(MyProfile);
+const mapDispatchToProps = (dispatch) => {
+  return {
+      changePassword: (oldPassword="",newPassword="") => { dispatch(changePassword(oldPassword,newPassword))},
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);

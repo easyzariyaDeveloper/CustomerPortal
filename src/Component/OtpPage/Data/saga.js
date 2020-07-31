@@ -1,5 +1,6 @@
 import { call, put } from "redux-saga/effects";
 import APIWrapper from "../../../Constants/ApiWrapper";
+import { setCookie, eraseCookie } from "../../../util";
 
 
 export function* createOtp({payload}) {
@@ -39,6 +40,8 @@ export function* verifyOTP({customerId, otpValue}) {
             message: "Suceessfully Verified !! Login again"
         });
         setTimeout(() => {
+            eraseCookie("isVerifiedUser");
+            eraseCookie("userUUId");
             location.href = "/login";
         },1000);
     } catch (error) {

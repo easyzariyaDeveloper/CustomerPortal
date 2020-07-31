@@ -11,9 +11,9 @@ export function readCookie(cname){
     const cookieList = document.cookie.split(";");
     const value = cookieList.find((cookie = "") => {
         const [cookieName] = cookie.split("=");
-        return cookieName === cname;
+        return cookieName.trim() === cname.trim();
     });
-    return value || "";
+    return value ? (value.split("=")[1] || "") : "";
 }
 
 export function eraseCookie(name) {   

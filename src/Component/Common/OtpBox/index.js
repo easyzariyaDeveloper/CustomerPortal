@@ -12,7 +12,7 @@ export default function OtpBox(props) {
             setOTP(otp);
             props?.otpValue(otp);
           }}
-          numInputs={5}
+          numInputs={6}
           inputStyle = {{marginLeft:"30px", fontSize: "20px", background: "white", border: "none", borderBottom: "2px solid white", color: "black",width:"40px"}}
         />
       </OtpBoxWrapper>
