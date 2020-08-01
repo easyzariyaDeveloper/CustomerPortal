@@ -127,23 +127,35 @@ export const AddressLine = styled.p`
 
 
 export const CarDetailsCard = styled(ProfileCard)`
-    display: grid;
-    grid-template-columns: 0.5fr 1fr;
+    padding-left: 90px;
     position: relative;
+    
 `;
 export const CarImage = styled.img`
-    height:100px;
+    width:65px;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translate3d(0,-50%,0);
 `;
 
 export const LabelHeading = styled.p`
     padding: 5px;
+    text-transform: capitalize;
+    font-size: 15px;
+
+    label {
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 15px;
+    }
 `;
 
 export const KebabMenuCard = styled(EZCard)`
     position: absolute;
     right:10px;
-    top: 10px;
-    display: grid;
+    top: 0px;
+    width: 135px;
+    padding: 5px;
 `;
 
 export const KebabMenuButton = styled.button`

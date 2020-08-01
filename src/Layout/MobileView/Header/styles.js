@@ -48,7 +48,7 @@ export const BackButton = styled.div`
   color: ${white_color};
   position: absolute;
   left: ${base_spacing/2}px;
-  top: ${base_spacing/2}px;
+  top: 2px;
   bottom: 0;
   width: ${base_spacing*3}px;
   text-align: center;
@@ -97,6 +97,7 @@ export const CartWrapper = styled.a`
   height: 100%;
   padding-right: 5px;
   color: white;
+  top: -5px;
 `;
 
 export const ItemCount = styled.p`

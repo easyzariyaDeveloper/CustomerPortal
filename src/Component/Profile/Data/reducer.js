@@ -24,9 +24,9 @@ export default function ProfileReducer(state = defaultProfileState, {type, data,
             return {
                 ...state,
                 inProgress: false,
+                ...data,
                 addressList: data.addressList || [],
                 orderList:  data.orderList || [],
-                ...data  
             }
         break;
         case "FETCH_PROFILE_FAILED":

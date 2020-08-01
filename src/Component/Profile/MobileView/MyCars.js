@@ -17,6 +17,7 @@ function MyCars(props) {
   const classes = useStyles();
 
   const [kebabMenu, setKebabMenu] = useState(false);
+  const [indexForActionButton, SetIndexForActionButton] = useState(-1);
 
   const [values, setValues] = useState({
     car: '',
@@ -29,7 +30,9 @@ function MyCars(props) {
     setValues({ ...values, [prop]: event.target.value });
   };
 
-
+  function setActiveActionCard(index){
+    SetIndexForActionButton(indexForActionButton === index ? -1 : index)
+  }
 
   return (
     <div className={classes.root}>
@@ -48,31 +51,31 @@ function MyCars(props) {
         </ProfileCard>
         
         {
-          props?.profile?.carList ? props?.profile?.carList.map(car =>{
+          props?.profile?.carList ? props?.profile?.carList.map((car, index) => {
             return <CarDetailsCard>
-              {car?.image ? <CarImage src = {car?.image}/>: <CarImage src = {DefaultCarImage}/>}
+              <CarImage src = {car?.image || DefaultCarImage}/>
               <div>
-                <div >
-                  <MoreVertIcon style = {{padding: 0, float: "right"}} onClick={(event)=> setKebabMenu(!kebabMenu)}/>
-
+                <div>
+                  <MoreVertIcon style = {{padding: 0, float: "right"}} onClick = {setActiveActionCard.bind(null, index)}/>
                   {
-                    kebabMenu ? <KebabMenuCard>
-                      <KebabMenuButton onClick = {()=> {
-                        props?.deleteCar(car.carId);
-                        props?.fetchProfile()
-                      }}>Remove Car</KebabMenuButton>
+                    index === indexForActionButton ? <KebabMenuCard>
+                        <KebabMenuButton onClick = {()=> {
+                          props?.deleteCar(car.carId);
+                          props?.fetchProfile()
+                        }}>Remove Car</KebabMenuButton>
 
-                      <KebabMenuButton onClick= {()=> location.href = `/add-car?carId=${car.carId}?redirect=/profile`
-                      }>Edit Car</KebabMenuButton>
-                    </KebabMenuCard> :null
+                        <KebabMenuButton 
+                          onClick= {()=> location.href = `/add-car?carId=${car.carId}?redirect=/profile/cars`}>
+                            Edit Car
+                        </KebabMenuButton>
+                      </KebabMenuCard> : null
                   }
-
                 </div>
-                {console.log(car.carId)}
-                <LabelHeading>Brand: {car.brand? car.brand : "" } </LabelHeading>
-                <LabelHeading>Car Model: {car.carName} </LabelHeading>
-                <LabelHeading>Color: {car.color? car.color : "" } </LabelHeading>
-                <LabelHeading>Reg Number: {car.reg? car.reg : "" } </LabelHeading>
+                <LabelHeading>
+                  <label> Brand: </label> {car.brand ? car?.brand.toLowerCase() : "" } </LabelHeading>
+                <LabelHeading>  <label> Car Model: </label> {car?.carName.toLowerCase()} </LabelHeading>
+                <LabelHeading> <label> Color: </label>  {car.color? car.color : "" } </LabelHeading>
+                <LabelHeading> <label> Reg Number: </label> {car.reg? car.reg : "" } </LabelHeading>
               </div>
             </CarDetailsCard>
           }) :null
