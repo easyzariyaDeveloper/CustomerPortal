@@ -33,7 +33,7 @@ export function* deleteCar({payload}){
     yield put ({type: "DELETE_CAR_INPROGRESS"});
     try{
         const { data } = yield call(APIWrapper, {
-            url: `/customer/car/0`,
+            url: `/customer/car/${payload}`,
             method: "DELETE"
         });
         yield put({

@@ -44,14 +44,11 @@ function AddCar(props) {
 
     function addCar (){
         const carDetails = {
-            "brand": vehicle?.brand,
             "carId": vehicle?.model,
             "carName":vehicle?.carName,
             "color":vehicle?.carColor,
             "fuelVariantId": vehicle?.fuelVariantId,
             "variantName" : vehicle?.fuelType,
-            "id": "",
-            "model" :""
             
             // "variantName":vehicle?.type,
             // "registration":vehicle?.registration,
