@@ -7,8 +7,10 @@ import GooglePlacesAutocomplete, {geocodeByPlaceId} from 'react-google-places-au
 import 'react-google-places-autocomplete/dist/index.min.css';
 import { border_color, desktop_gradient } from '../../../Assets/style-var';
 
-const API_KEY = "AIzaSyCkgCpbS3B5ryii-6a2xStzpxpGYC30EZ4"; //"AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8";
+const API_KEY = "AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8"; //"AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8";
 Geocode.setApiKey(API_KEY);
+
+//https://medium.com/@imranhsayed/google-maps-in-react-autocomplete-location-search-draggable-marker-marker-infobox-565ab8e8cf22
 
 export default function Map(props) {
 
@@ -17,21 +19,48 @@ export default function Map(props) {
     state: "",
     area: "",
     address: "",
-    postalCode: ""
+    postalCode: "",
+    latitude: "",
+    longitude: ""
   });
   const [mapPosition, setMapPosition] = useState({});
   const initialRender = useRef(true);
-
  
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
       
-      if(navigator.geolocation){
+     if(navigator.geolocation && !props.preSelectedAddressId){
         navigator.geolocation.getCurrentPosition(getCurrentLocation, handleLocationError);
       } 
     }   
-  }, []);
+  }, [props?.address?.addressId]);
+
+  useEffect(() => {
+    const {latitude = "", longitude = "", pinCode = "", city = "", state = "", secondLine = ""} = props?.address || {};
+    if(secondLine){
+      setMapPosition({
+        mapPosition: {
+          lat: latitude,
+          lng: longitude
+        },
+        markerPosition: {
+          lat: latitude,
+          lng: longitude
+        }
+      });
+      setAddress({
+        ...address,
+        address: secondLine,
+        postalCode: pinCode,
+        city,
+        state,
+        area: "",
+        latitude,
+        longitude
+      });
+    }
+  }, [props?.address?.addressId]);
 
   function getCurrentLocation(location){
     if(location?.coords?.latitude){
@@ -69,7 +98,9 @@ export default function Map(props) {
         city: getCity(addressArray) || "",
         state: getState(addressArray) || "",
         address:  response?.results[0]?.formatted_address,
-        postalCode: getPostalCode(addressArray)
+        postalCode: getPostalCode(addressArray),
+        latitude: latitude,
+        longitude: longitude
       }
       setAddress(address);
       sendAddressToParent({enableInputComponent, address});
@@ -104,7 +135,9 @@ export default function Map(props) {
           area: getArea(addressArray),
           city: getCity(addressArray),
           state: getState(addressArray),
-          postalCode: getPostalCode(addressArray)
+          postalCode: getPostalCode(addressArray),
+          latitude: place?.geometry?.location?.lat(),
+          longitude: place?.geometry?.location?.lng()
         };
         const mapPosition = {
           markerPosition: {
@@ -136,6 +169,7 @@ export default function Map(props) {
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ margin: `0 auto`, height: props.height, width: props.width }} />}
         mapElement={<div style={{ height: `100%` }} />}
+        defaultCenter={{ lat:  mapPosition?.mapPosition?.lat, lng: mapPosition?.mapPosition?.lng }}
       />
     } else {
       return null;

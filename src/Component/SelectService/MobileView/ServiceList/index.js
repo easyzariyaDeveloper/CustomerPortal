@@ -165,7 +165,7 @@ function ServiceList(props) {
                 });
             }
         }
-    }, [props?.profile?.customerId])
+    }, [props?.profile?.customerId]);
 
     if (serviceId) {
         return <MobilePageLayout pageName = {packageData[0] && packageData[0]["label"]}>
@@ -196,9 +196,9 @@ function ServiceList(props) {
                                         </TimerPara>
 
                                         
-                                        <ServiceMenu>{services[0].name}<TickImg src= {Tick}/></ServiceMenu>
-                                        <ServiceMenu>{services[1].name}<TickImg src= {Tick}/></ServiceMenu>
-                                        <ServiceMenu>{services[2].name}<TickImg src= {Tick}/></ServiceMenu>
+                                        {services[0] && <ServiceMenu>{services[0]}<TickImg src= {Tick}/></ServiceMenu>}
+                                        {services[1] && <ServiceMenu>{services[1]}<TickImg src= {Tick}/></ServiceMenu>}
+                                        {services[2] && <ServiceMenu>{services[2]}<TickImg src= {Tick}/></ServiceMenu>}
                                         {services.length - 3 > 0 ? <ServiceCount>+{services.length - 3} more services</ServiceCount> : ""}
                                     </PackagesDetails>
                                 </RightDiv>
@@ -220,7 +220,7 @@ function ServiceList(props) {
             </MServiceListWrapper>
         }
 
-        <FloatingCarDetails car = {matchedCarData?.matchedCarData["carName"]} />
+        <FloatingCarDetails car = {`${matchedCarData?.["brand"]} ${matchedCarData?.["carName"]}`} />
         </MobilePageLayout>
     }
 
@@ -241,7 +241,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchPackageById: (packageId = "", filter = {}) => { dispatch(fetchPackageById(packageId, filter)) },
         addSubPackage: (car = {},cityId= "",itemIdObj ={}) => { dispatch(addSubPackage(car,cityId,itemIdObj)) },
-
     }
 }
 

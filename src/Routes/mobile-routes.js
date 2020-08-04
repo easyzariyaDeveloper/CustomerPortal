@@ -22,7 +22,7 @@ export default () => {
       <Route path="/cart" component={Cart} />
       {/* <Route path="/address"  component  = {Address} /> */}
       <Route path="/address/add-address"  component = {Address} />
-      <Route path="/address/edit-address/:id"  component  = {Address} />
+      <Route path="/address/edit-address"  component  = {Address} />
       {/* <Route path="/profile/:id" component={Profile} /> */}
       <Route path="/profile/:type" component={Profile} />
       <Route path="/profile" exact component={Profile} />

@@ -21,7 +21,7 @@ export function* fetchPackages({payload}) {
         yield put({ type: 'FETCHING_API_FAILED'});
     }
 }
-
+  
 async function getPackages(...args) {
     let URL = `${BASE_API_ENDPOINT}/packages`;
     if(args.length > 0){
@@ -84,11 +84,11 @@ export function* fetchPackageById({payload, filter = {}}) {
     yield put({ type: "FETCHING_API" });
 
     let URL = `/packages/${payload?.packageId}`;
-    // if(Object.values(filter).length > 0){
-    //     for(const[type, value] of Object.entries(filter)){
-    //         URL = URL.includes("?") ? `${URL}&${type}=${value}` : `${URL}?${type}=${value}`;
-    //     }
-    // }
+    if(Object.values(filter).length > 0){
+        for(const[type, value] of Object.entries(filter)){
+            URL = URL.includes("?") ? `${URL}&${type}=${value}` : `${URL}?${type}=${value}`;
+        }
+    }
     try {
         const { data } = yield call(APIWrapper, {
             url: URL  
@@ -104,9 +104,18 @@ export function* fetchPackageById({payload, filter = {}}) {
             type: 'FETCH_PACKAGES_FAILED',
             error
         });
-        yield put({ type: 'FETCHING_API_ERROR'});
+        yield put({ 
+            type: 'FETCHING_API_FAILED', 
+            error: {
+                ...error,
+                message: "Failed to fetch the package information"
+            }
+        });
     }
 }
+
+
+
 
 
 export function* addSubPackage({payload}){

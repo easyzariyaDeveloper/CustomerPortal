@@ -100,32 +100,67 @@ export function CityReducer(state = defaultCityState, {type,data,error}){
 }
 
 
-
-
-
 const defaultSubPackageState = {
-    id: "",
-    subPackageLabel :""
+    inProgress: true,
+    subPackages:  {},
+    error:  {},
 }
 
-export function SubPackageReducer(state = defaultSubPackageState, {type,code,data}) {
-    switch(type){
-        case "ADD_SUBPACKAGE":
-            return{
+export function SubPackageReducer(state = defaultSubPackageState, {type, data, error}){
+    switch (type){
+        case "FETCH_PACKAGES_DETAILS_INPROGRESS": 
+            return {
                 ...state,
-                id: code,
-                subPackageLabel: data
+                inProgress: true
             }
         break;
-        case "REMOVE_SUBPACKAGE":
-            return{
+        case "FETCH_PACKAGES_DETAILS_SUCCESS":
+            return {
                 ...state,
-                id:"",
-                subPackageLabel: ""
+                inProgress: false,
+                subPackages: data,  
             }
+        break;
+        case "FETCH_PACKAGES_DETAILS_FAILED":
+            return {
+                ...state,
+                inProgress: false,
+                error: error,  
+            } 
         break;
         default:
             return state
-
     }
 }
+
+
+
+
+
+
+// const defaultSubPackageState = {
+//     id: "",
+//     subPackageLabel :""
+// }
+
+// export function SubPackageReducer(state = defaultSubPackageState, {type,code,data}) {
+//     switch(type){
+//         case "ADD_SUBPACKAGE":
+//             return{
+//                 ...state,
+//                 id: code,
+//                 subPackageLabel: data
+//             }
+//         break;
+//         case "REMOVE_SUBPACKAGE":
+//             return{
+//                 ...state,
+//                 id:"",
+//                 subPackageLabel: ""
+//             }
+//         break;
+//         default:
+//             return state
+
+//     }
+// }

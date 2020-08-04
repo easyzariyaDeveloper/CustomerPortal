@@ -2,6 +2,9 @@ import React from 'react';
 import { Packages } from "./mockServiceData";
 import { ServiceName, ServiceInfo, ServiceCostInTable, ServiceDurationInTable } from "./styles";
 
+const PETROL = "PETROL";
+const DIESEL = "DIESEL";
+const CNG = "CNG";
 
 export function formatPackageResponse(response = []) {
     const formattedResponse = {
@@ -20,6 +23,7 @@ export function formatPackageResponse(response = []) {
     return formattedResponse;
 }
 
+
 function getPackageInfo(servicePackage = {}) {
     const packageData = {
         id: servicePackage["id"],
@@ -27,6 +31,8 @@ function getPackageInfo(servicePackage = {}) {
         label: servicePackage["packageName"],
         code: servicePackage["code"],
         desc: servicePackage["desc"] || "",
+        cityList: servicePackage["cityList"] || [],
+        carList: servicePackage["carList"] || [],
         serviceMap: (servicePackage["services"] || []).reduce((accumulator, currentService) => {
             const { id = "" } = currentService;
             if (id) {
@@ -37,7 +43,6 @@ function getPackageInfo(servicePackage = {}) {
             }
             return accumulator
         }, {})
-
     };
 
     return {
@@ -45,7 +50,7 @@ function getPackageInfo(servicePackage = {}) {
         packages: (servicePackage["subPackages"] || []).reduce((accumulator, subPackageData = {}) => {
             const { name = "", serviceTime = 0,
                 images = [], price = "",
-                code = "", customInfo = [],
+                code = "", pricing = [],
                 serviceIds = []
             } = subPackageData;
             accumulator = [
@@ -54,14 +59,38 @@ function getPackageInfo(servicePackage = {}) {
                     name, 
                     serviceTime,
                     images,
-                    price,
+                    price: getOptimalPrice(pricing, servicePackage["carList"]),
                     code,
-                    services : serviceIds.map((id) => packageData["serviceMap"][id] || {})
+                    services : serviceIds.map(({id, name}) => name),
+                    pricing
                 }
             ]
             return accumulator;
         }, [])
     }
+}
+
+function getOptimalPrice(pricing = [], carList = []){
+    const variantMap = carList[0]?.variants || {};
+    const fuelMap = {};
+    for(const [variantId, variantName] of Object.entries(variantMap)){
+        fuelMap[variantName] = variantId;
+    };
+    
+    let price = 0;
+    if(fuelMap[PETROL]){
+        price = pricing[0]?.price[fuelMap[PETROL]];
+    }
+
+    if(price === 0 && fuelMap[DIESEL]){
+        price = pricing[0]?.price[fuelMap[DIESEL]];
+    }
+
+    if(price === 0 && fuelMap[CNG]){
+        price = pricing[0]?.price[fuelMap[CNG]];
+    }
+    
+    return price;
 }
 
 

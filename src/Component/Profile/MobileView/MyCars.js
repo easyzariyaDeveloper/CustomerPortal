@@ -9,9 +9,6 @@ import { withRouter } from "react-router-dom";
 import {deleteCar, fetchProfile} from "../Data/action";
 import DefaultCarImage from "../../../Assets/img/carIcon.jpg";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import IconButton from '@material-ui/core/IconButton';
 
 function MyCars(props) {
   const classes = useStyles();
@@ -60,13 +57,13 @@ function MyCars(props) {
                   {
                     index === indexForActionButton ? <KebabMenuCard>
                         <KebabMenuButton onClick = {()=> {
-                          props?.deleteCar(car.carId);
+                          props?.deleteCar(car.id);
                           props?.fetchProfile()
-                        }}>Remove Car</KebabMenuButton>
+                        }}>Remove</KebabMenuButton>
 
                         <KebabMenuButton 
-                          onClick= {()=> location.href = `/add-car?carId=${car.carId}?redirect=/profile/cars`}>
-                            Edit Car
+                          onClick= {()=> location.href = `/add-car?carId=${car.carId}&fuelVariantId=${car.fuelVariantId}&redirect=/profile/cars`}>
+                            Edit
                         </KebabMenuButton>
                       </KebabMenuCard> : null
                   }
@@ -75,7 +72,9 @@ function MyCars(props) {
                   <label> Brand: </label> {car.brand ? car?.brand.toLowerCase() : "" } </LabelHeading>
                 <LabelHeading>  <label> Car Model: </label> {car?.carName.toLowerCase()} </LabelHeading>
                 <LabelHeading> <label> Color: </label>  {car.color? car.color : "" } </LabelHeading>
-                <LabelHeading> <label> Reg Number: </label> {car.reg? car.reg : "" } </LabelHeading>
+                <LabelHeading> <label> Reg Number: </label> {car.registrationNum? car.registrationNum : "" } </LabelHeading>
+                <LabelHeading> <label> Make Year: </label> {car.makeYear? car.makeYear : "" } </LabelHeading>
+                <LabelHeading> <label> Fuel Type: </label> {car.variantName? car.variantName : "" } </LabelHeading>
               </div>
             </CarDetailsCard>
           }) :null
@@ -100,7 +99,6 @@ const mapDispatchToProps = (dispatch) =>{
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MyCars));
-
 
 
 

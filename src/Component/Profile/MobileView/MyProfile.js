@@ -16,6 +16,7 @@ import Collapse from "@material-ui/core/Collapse";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { changePassword } from "../Data/action";
 
+
 const profileDetails = { 'Name': 'name', 'Email': 'email', 'Phone Number': 'phone' };
 const profileDetailsArray = Object.entries(profileDetails);
 
@@ -86,6 +87,7 @@ function MyProfile(props) {
                 value={values[element[1]]}
                 onChange={handleChange(element[1])}
                 labelWidth={element[0].length * 9}
+                disabled= {props?.profile}
               />
             </FormControl>
             )

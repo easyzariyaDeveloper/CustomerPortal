@@ -27,6 +27,7 @@ function AddCar(props) {
     const classes = useStylesForDropDown();
     const classForText = useStyles();
     const preSelectCarId = useRef(new URLSearchParams(window.location.search).get("carId"));
+    const preSelectFuelVariantId = useRef(new URLSearchParams(window.location.search).get("fuelVariantId"));
 
     const [vehicle, setVehicle] = React.useState({
         brand: "",
@@ -49,13 +50,14 @@ function AddCar(props) {
             "color":vehicle?.carColor,
             "fuelVariantId": vehicle?.fuelVariantId,
             "variantName" : vehicle?.fuelType,
-            
-            // "variantName":vehicle?.type,
-            // "registration":vehicle?.registration,
-            // "makeYear":vehicle?.makeYear,
+            "registrationNum": vehicle?.registration,
+            "makeYear": vehicle?.makeYear
         };
+
+        const redirectURL = new URLSearchParams(window.location.search).get("redirect");
+        
         props.addCar(carDetails, () => {
-            const redirectURL = new URLSearchParams(window.location.search).get("redirect");
+            
             if(redirectURL){
                 window.location.href = redirectURL;
             }
@@ -65,11 +67,13 @@ function AddCar(props) {
     useEffect(() => {
         if(preSelectCarId.current) {
             props.getCarById(preSelectCarId.current, (vehicleData) => {
+                const fuelVariantId = new URLSearchParams(window.location.search).get("fuelVariantId");
                 setVehicle({
                     brand: vehicleData?.brand,
                     model: vehicleData?.id,
                     carName: vehicleData?.model,
-                    colorPalletes: vehicleData?.colours
+                    colorPalletes: vehicleData?.colours,
+                    fuelVariantId: preSelectFuelVariantId?.current
                 });
             });
         } else {
@@ -90,8 +94,6 @@ function AddCar(props) {
                 
             }
             setVehicle(updateVehicleData);
-           
-            // localStorage.setItem("carSelectedPackage",event.target.value);
         } 
 
         else if(prop == "fuelVariantId"){
@@ -132,23 +134,35 @@ function AddCar(props) {
                     }
                 </ColorMPallete>
 
-                <FormControl className={classes.formControl} disabled = {preSelectCarId.current}>
-                    <InputLabel id="demo-simple-select-label">Select Brand</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={vehicle.brand}
-                        onChange={(event) => {
-                            setVehicle({...vehicle,brand: event.target.value});
-                            props.fetchCarListByBrand(event.target.value)
-                        }}
-                        autoWidth
-                        >   
-                        {props.inProgress? <CircularProgress style={{size: 10}}/>: !props.inProgress && props.brands? props.brands.map((carBrand) =>{
-                            return <MenuItem value = {carBrand} key = {carBrand}>{carBrand}</MenuItem>
-                        }) :null}
-                    </Select>
-                </FormControl>
+
+                    {
+                        preSelectCarId.current ?  <FormControl className={clsx(classForText.textField)} variant="outlined" size="small" disabled = {preSelectCarId.current}>
+                        <InputLabel htmlFor="outlined-adornment-name">Brand</InputLabel>
+                        <OutlinedInput
+                          required
+                          id="outlined-adornment-name"
+                          label= "Brand"
+                          value={vehicle.brand}
+                        />
+                      </FormControl> : <FormControl className={classes.formControl} disabled = {preSelectCarId.current}>
+                            <InputLabel id="demo-simple-select-label">Select Brand</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={vehicle.brand}
+                                onChange={(event) => {
+                                    setVehicle({...vehicle,brand: event.target.value});
+                                    props.fetchCarListByBrand(event.target.value)
+                                }}
+                                autoWidth
+                                >   
+                                {props.inProgress? <CircularProgress style={{size: 10}}/>: !props.inProgress && props.brands? props.brands.map((carBrand) =>{
+                                    return <MenuItem value = {carBrand} key = {carBrand}>{carBrand}</MenuItem>
+                                }) :null}
+                            </Select>
+                        </FormControl>
+                    }
+              
                 
                 <FormControl className={classes.formControl} disabled = {vehicle.brand=="" || preSelectCarId.current}>
                     <InputLabel id="demo-simple-select-label">Select Model</InputLabel>
@@ -171,7 +185,7 @@ function AddCar(props) {
                     </Select>
                 </FormControl>
                 
-                <FormControl className={classes.formControl} disabled = {vehicle.model == ""}>
+                <FormControl className={classes.formControl} disabled = {vehicle.model == "" || preSelectFuelVariantId?.current}>
                     <InputLabel id="demo-simple-select-label">Select Fuel Type</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"

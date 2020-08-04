@@ -1,9 +1,23 @@
-import React from 'react';
-import { ProfileButtonWrapper, ProfileActionButton, ProfileCard, PageLink, AddressLine, AddressLineWrapper } from './style';
+import React, { useState } from 'react';
+import { ProfileButtonWrapper, ProfileActionButton, ProfileCard, PageLink, AddressLine, AddressLineWrapper, KebabMenuCard, KebabMenuButton, AddressIcon, AddressLabel } from './style';
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { fetchProfile, deleteAddress } from '../Data/action';
+import HomeIcon from "../../../Assets/img/home.svg";
+import OfficeIcon from "../../../Assets/img/work.svg";
+import OtherIcon from "../../../Assets/img/other.svg";
+
+
 
 function AddressList(props) {
+
+  const [indexForActionButton, SetIndexForActionButton] = useState(-1);
+
+  function setActiveActionCard(index){
+    SetIndexForActionButton(indexForActionButton === index ? -1 : index)
+  }
+
 
   return <div>
   <ProfileCard>
@@ -15,14 +29,49 @@ function AddressList(props) {
       </ProfileActionButton>
     </ProfileButtonWrapper>
   </ProfileCard>
+
   {
-    props?.profile?.addressList? props?.profile?.addressList?.map(address =>{
+    props?.profile?.addressList? props?.profile?.addressList?.map((address,index) =>{
       return <ProfileCard>
           {
             <AddressLineWrapper>
-              Flat/House No:<AddressLine>{address.firstLine}</AddressLine>
-              Address: <AddressLine>{address.secondLine}</AddressLine>
-              Landmark: <AddressLine>{address.landmark}</AddressLine>
+              <MoreVertIcon style={{float:"right"}} onClick = {setActiveActionCard.bind(null, index)}/>
+
+              {
+                index === indexForActionButton ? <KebabMenuCard>
+                    <KebabMenuButton
+                      children = "Edit"
+                      onClick = {() => {
+                        location.href = `/address/edit-address?addressId=${address["addressId"]}&redirect=/profile/address`
+                      }}
+                    />
+
+                    <KebabMenuButton 
+                      onClick = {()=> {
+                        props?.deleteAddress(address["addressId"]);
+                        props?.fetchProfile()
+                      }}
+                      children = "Delete"
+                    />
+                  </KebabMenuCard> : null
+              }
+              {
+                <div>
+                  <AddressIcon 
+                    src = {address?.addressLabel === "home" ? HomeIcon : (address?.addressLabel === "office" ? OfficeIcon : OtherIcon)}
+                  />
+                  <AddressLabel
+                    children = {address?.addressLabel === "home" ? "Home" : (address?.addressLabel === "office" ? "Office" : "Other")}
+                  />
+                  <AddressLine>{address.firstLine}, {address.secondLine}</AddressLine>
+                  {
+                    address.landmark && <>
+                      <p style = {{display:"inline-block", fontWeight: "300"}}>Landmark : </p> 
+                      <AddressLine>&nbsp; {address.landmark}</AddressLine>
+                    </>
+                  }
+                </div>
+              }
             </AddressLineWrapper>
           }
       </ProfileCard>
@@ -39,8 +88,14 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    deleteAddress: (addressId ="") =>{dispatch(deleteAddress(addressId))},
+    fetchProfile: () => {dispatch(fetchProfile())},
+  }
+}
 
-export default withRouter(connect(mapStateToProps, null)(AddressList));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddressList));
 
 
 

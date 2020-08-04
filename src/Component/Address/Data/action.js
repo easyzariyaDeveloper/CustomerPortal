@@ -5,3 +5,14 @@ export function addAddress(address){
         payload: address
     }
 }
+
+
+export function updateCustomerAddresss(updatedAddress,addressId){
+    return{
+        type: "CUSTOMER_UPDATE_ADDRESS",
+        payload: {
+            updatedAddress,
+            addressId
+        }
+    }
+}

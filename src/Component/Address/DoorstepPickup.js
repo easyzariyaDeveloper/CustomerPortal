@@ -10,19 +10,34 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import { EZCard } from "../Common/MobileCard";
 import {useStyles} from "../../Assets/common-styled";
-import { addAddress } from "./Data/action";
+import { addAddress, updateCustomerAddresss } from "./Data/action";
+
+
 const textAddressArray = [["Flat/House No.","house"],["Address","address"],["Landmark","landmark"]];
 
 function DoorstepPickup(props) {
     const classes = useStyles();
     const [userAddress, setUserAddress] = React.useState({
-        house:"",
-        address: "",
-        landmark: "",
-        addressObj: {}
+        house: props?.address?.firstLine || "",
+        address: props?.address?.secondLine || "",
+        landmark: props?.address?.landmark || "",
+        addressObj: props.address || {}
     });
 
-    const [radio, setRadio] = React.useState('home');
+    useEffect(() => {
+        const {firstLine = "", secondLine = "", landmark = "", addressLabel = ""} = props.address || {};
+        if(props?.address?.addressId){
+            setUserAddress({
+                house: firstLine,
+                address: secondLine,
+                landmark: landmark,
+                addressObj: props.address
+            });
+            setRadio(addressLabel);
+        }
+    }, [props?.address?.addressId])
+
+    const [radio, setRadio] = React.useState(props?.address?.addressLabel || "home");
 
     function addAddress(){
         const addressObj = {
@@ -32,10 +47,35 @@ function DoorstepPickup(props) {
             "landmark": userAddress["landmark"] || "",
             "pinCode": parseInt(userAddress?.addressObj?.address?.postalCode),
             "secondLine": userAddress?.address,
-            "state": userAddress?.addressObj?.address?.state
+            "state": userAddress?.addressObj?.address?.state,
+            "latitude": userAddress?.addressObj?.address?.latitude,
+            "longitude": userAddress?.addressObj?.address?.longitude
         }
         console.log(userAddress, radio, addressObj);
         props.addAddress(addressObj);
+    }
+
+
+    function updateAddress(){
+        let {addressObj = {}, house = "", landmark = "", address = ""} = userAddress;
+        
+        if(addressObj.hasOwnProperty("address")){
+            addressObj = addressObj?.address;
+        }
+
+        const updatedAddress = {
+            "addressLabel": radio,
+            "city": addressObj?.city,
+            "firstLine": house,
+            "landmark": landmark,
+            "pinCode": parseInt(addressObj?.pinCode || addressObj?.postalCode),
+            "secondLine": address,
+            "state": addressObj?.state,
+            "latitude": addressObj?.latitude,
+            "longitude": addressObj?.longitude
+        };
+        console.log(updatedAddress);
+        props.updateAddress(updatedAddress, props?.preSelectedAddressId);
     }
 
     useEffect(()  => {
@@ -77,9 +117,14 @@ function DoorstepPickup(props) {
                 </RadioGroup>
             </FormControl>
         </RadioWrapper>
+        {
+            props.preSelectedAddressId ? <SaveButton onClick = {updateAddress}>
+                Update Address
+            </SaveButton> : 
         <SaveButton onClick = {addAddress}
             disabled = {!(props?.address?.enableInputComponent) && (userAddress?.house =="")}
-            >Submit</SaveButton>
+        >Submit</SaveButton>
+        }
         </EZCard>
         
     </DoorstepWrapper>
@@ -93,7 +138,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addAddress:(addressObj) => {dispatch(addAddress(addressObj))}
+        addAddress:(addressObj) => {dispatch(addAddress(addressObj))},
+        updateAddress: (updatedAddress, addressId)=> {dispatch(updateCustomerAddresss(updatedAddress,addressId))}
     }
 }
 

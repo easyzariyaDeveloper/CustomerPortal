@@ -66,6 +66,7 @@ export const ProfileDiv = styled.div`
 export const ProfileCard = styled(EZCard)`
     padding: ${base_spacing}px;
     border-radius: ${base_spacing/2}px;
+    position: relative;
    
 `;
 
@@ -123,6 +124,18 @@ export const AddressLine = styled.p`
     line-height: ${base_spacing*2.8}px;
     letter-spacing: 0.15px;
     color: #4B4B4B;
+    display: inline-block;
+`;
+
+export const AddressIcon = styled.img`
+    height: 22px;
+`;
+
+export const AddressLabel = styled.p`
+    display: inline-block;
+    font-weight: 300;
+    vertical-align: bottom;
+    padding: 5px;
 `;
 
 
@@ -154,8 +167,9 @@ export const KebabMenuCard = styled(EZCard)`
     position: absolute;
     right:10px;
     top: 0px;
-    width: 135px;
+    min-width: 100px;
     padding: 5px;
+    display: grid;
 `;
 
 export const KebabMenuButton = styled.button`

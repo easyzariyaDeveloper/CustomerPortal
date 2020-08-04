@@ -44,10 +44,7 @@ function SelectService(props) {
                     cardInfo = {props?.packages}
                     packageFilter = {packageFilter}
                 />
-                
-                <PencilIcon src = {EditIcon}/>
                 <SelectedCarIcon src={CarIcon} onClick= {()=>setCarIconVisibility(!carIconVisiblity)}/>
-                
                 <SelectedCarCard visibility={carIconVisiblity}>
                     <p>Selected Car: Aveo </p>
                     <FilterButton onClick = {() => setSelectCarPopupVisibility(true)}>

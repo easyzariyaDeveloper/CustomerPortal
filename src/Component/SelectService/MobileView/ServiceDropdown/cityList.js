@@ -27,7 +27,7 @@ function CityList(props) {
                             enabled = {city.cityId === selectedCityId}
                         >
                             <CityIcon 
-                                className = {`icon-${city?.cityName.split(" ").join("-").toLowerCase()}`} 
+                                className = {`icon-${city?.cityName?.split(" ").join("-").toLowerCase()}`} 
                                 enabled = {city.cityId === selectedCityId}
                             />
                             <CityName
@@ -44,7 +44,7 @@ function CityList(props) {
                             enabled = {city.cityId === selectedCityId}
                         >
                             <CityIcon 
-                                className = {`icon-${city?.cityName.split(" ").join("-").toLowerCase()}`}
+                                className = {`icon-${city?.cityName?.split(" ").join("-").toLowerCase()}`}
                                 enabled = {city.cityId === selectedCityId}
                             />
                             <CityName

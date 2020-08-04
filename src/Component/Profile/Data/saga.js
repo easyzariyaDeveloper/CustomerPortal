@@ -73,6 +73,28 @@ export function* changePassword({payload}){
     
 }
 
+export function* deleteAddress({payload}){
+    yield put ({type: "DELETE_ADDRESS_INPROGRESS"});
+    try{
+        const { data } = yield call(APIWrapper, {
+            url: `/customer/address/${payload}`,
+            method: "DELETE"
+        });
+        yield put({
+            type: 'DELETING_ADDRESS_SUCCESS'
+        });
+    }catch (error) {
+        console.log(error);
+        yield put({
+            type: 'DELETING_ADDRESS_FAILED',
+            error
+        });
+    }
+    
+}
+
+
+
 
 
 
