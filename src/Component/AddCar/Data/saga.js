@@ -10,12 +10,15 @@ export function* fetchBrandForCars() {
         });
         yield put({
             type: 'FETCHING_API_SUCCESS',
-            data: data
         });
+        yield put({
+            type: "FETCHED_BRAND_SUCCESS",
+            data: data
+        })
     } catch (error) {
         console.log(error);
         yield put({
-            type: 'FETCHING_API_FAILED',
+            type: 'FETCHED_BRAND_FAILED',
             error
         });
     }

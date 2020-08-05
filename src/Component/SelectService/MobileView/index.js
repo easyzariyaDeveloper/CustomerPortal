@@ -22,6 +22,9 @@ function SelectService(props) {
     const[carIconVisiblity, setCarIconVisibility]= useState(false);
     const [showSelectCarPopupVisibility, setSelectCarPopupVisibility] = useState(false);
 
+    const selectedCarId = localStorage.getItem("carSelectedPackage");
+    const matchedCarData = props?.profile?.carList?.find((car) => car["carId"] === selectedCarId);
+
     useEffect(() => {
         if(packageFilter.cityId && packageFilter.carId){
             props.fetchPackages(packageFilter);
@@ -46,7 +49,8 @@ function SelectService(props) {
                 />
                 <SelectedCarIcon src={CarIcon} onClick= {()=>setCarIconVisibility(!carIconVisiblity)}/>
                 <SelectedCarCard visibility={carIconVisiblity}>
-                    <p>Selected Car: Aveo </p>
+                    <p>{`${matchedCarData?.["brand"]} ${matchedCarData?.["carName"]}`}</p>
+                    <p style = {{"textTransform": "capitalize", "marginTop": "10px"}}>{matchedCarData?.variantName.toLowerCase()}</p>
                     <FilterButton onClick = {() => setSelectCarPopupVisibility(true)}>
                         Change Car
                     </FilterButton>
@@ -60,6 +64,7 @@ const mapStateToProps = (state) => {
     return {
         inProgress: state?.packages?.["inProgress"],
         packages: state?.packages?.["packages"],
+        profile: state?.profile,
     }
 };
 

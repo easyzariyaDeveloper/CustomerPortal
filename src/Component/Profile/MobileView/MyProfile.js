@@ -93,9 +93,9 @@ function MyProfile(props) {
             )
           })}
         </div>
-        <ProfileButtonWrapper>
+        {/* <ProfileButtonWrapper>
           <ProfileActionButton> Save </ProfileActionButton>
-        </ProfileButtonWrapper>
+        </ProfileButtonWrapper> */}
       </ProfileCard>
       </Collapse>}
       

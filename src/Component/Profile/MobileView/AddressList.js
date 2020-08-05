@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import { ProfileButtonWrapper, ProfileActionButton, ProfileCard, PageLink, AddressLine, AddressLineWrapper, KebabMenuCard, KebabMenuButton, AddressIcon, AddressLabel } from './style';
+import { ProfileButtonWrapper, ProfileActionButton, ProfileCard, PageLink, AddressLine, AddressLineWrapper, KebabMenuCard, KebabMenuButton, AddressIcon, AddressLabel, AddressLabelWrapper } from './style';
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { fetchProfile, deleteAddress } from '../Data/action';
-import HomeIcon from "../../../Assets/img/home.svg";
-import OfficeIcon from "../../../Assets/img/work.svg";
-import OtherIcon from "../../../Assets/img/other.svg";
-
-
 
 function AddressList(props) {
 
@@ -57,12 +52,12 @@ function AddressList(props) {
               }
               {
                 <div>
-                  <AddressIcon 
-                    src = {address?.addressLabel === "home" ? HomeIcon : (address?.addressLabel === "office" ? OfficeIcon : OtherIcon)}
-                  />
-                  <AddressLabel
-                    children = {address?.addressLabel === "home" ? "Home" : (address?.addressLabel === "office" ? "Office" : "Other")}
-                  />
+                  <AddressLabelWrapper>
+                    <AddressIcon className = {`icon-${address?.addressLabel}`}/>
+                    <AddressLabel
+                      children = {address?.addressLabel === "home" ? "Home" : (address?.addressLabel === "office" ? "Office" : "Other")}
+                    />
+                  </AddressLabelWrapper>
                   <AddressLine>{address.firstLine}, {address.secondLine}</AddressLine>
                   {
                     address.landmark && <>

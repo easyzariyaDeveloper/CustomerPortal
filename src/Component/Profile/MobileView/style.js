@@ -119,7 +119,6 @@ export const AddressLineWrapper = styled.div`
 
 export const AddressLine = styled.p`
     padding: ${base_spacing/2}px 0;
-    font-weight: 300;
     font-size: ${base_spacing*1.4}px;
     line-height: ${base_spacing*2.8}px;
     letter-spacing: 0.15px;
@@ -127,13 +126,26 @@ export const AddressLine = styled.p`
     display: inline-block;
 `;
 
-export const AddressIcon = styled.img`
-    height: 22px;
+export const AddressLabelWrapper = styled.div`
+    background: white;
+    color: ${ez_button_color};
+    border: 1px solid ${ez_button_color};
+    padding: 0px 10px;
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: ${base_spacing}px;
+`;
+
+export const AddressIcon = styled.p`
+    font-size: 20px;
 `;
 
 export const AddressLabel = styled.p`
     display: inline-block;
-    font-weight: 300;
+    font-size: 14px;
     vertical-align: bottom;
     padding: 5px;
 `;

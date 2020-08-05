@@ -83,6 +83,7 @@ export const PageName = styled.p`
   font-size: 20px;
   color: white;
   margin: 0 auto;
+  text-transform: capitalize;
 `;
 
 export const Link = styled(StyledLink)`

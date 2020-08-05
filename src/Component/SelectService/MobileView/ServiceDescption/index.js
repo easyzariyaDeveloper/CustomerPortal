@@ -4,7 +4,10 @@ import { withRouter } from "react-router";
 import { ImageSlideShow } from "./ImageSlideShow";
 import { FeatureHeader, IndividualService, BottomDiv, 
     AddServiceButton, TickImage, ServiceTimePara, TimeDurationWrapper,
-    SeviceDetailPageWrapper
+    SeviceDetailPageWrapper,
+    FuelCard,
+    FuelIcon,
+    FuelCardWrapper
  } from "./style";
 import TimerIcon from '@material-ui/icons/Timer';
 import { connect } from "react-redux";
@@ -71,20 +74,25 @@ function ServiceDescription(props) {
             <SeviceDetailPageWrapper>
                 <ImageSlideShow price={activeSubPackage?.current?.price} name={activeSubPackage?.current?.name} />
                 <EZCard>
-                    <FeatureHeader>Prices</FeatureHeader>
-                    {variants?.map((variantObj = {}) => {
+                    {/* <FeatureHeader>Prices</FeatureHeader> */}
+                    <FuelCardWrapper>
+                    {variants?.map((variantObj = {}, index = {}) => {
                         const [variantId, variantName = ""] = variantObj;
-                        return <>
-                            <p>{variantName.toLowerCase()}</p>
-                            <p>{activeSubPackage?.current?.pricing?.[0]?.price?.[variantId] || "NA"}</p>
-                        </>
+                        return <FuelCard className = {matchedCarData?.variantName === variantName ? "active" : ""}>
+                            <FuelIcon className = {`icon-${variantName.toLowerCase()} ${matchedCarData?.variantName === variantName ? "active" : ""} `}></FuelIcon>
+                            <p style={{"marginBottom": "10px"}}>&#8377; {activeSubPackage?.current?.pricing?.[0]?.price?.[variantId] || "NA"}</p>
+                        </FuelCard>
                     })}
+                    </FuelCardWrapper>
                 </EZCard>
 
                 <EZCard style = {{"margin": "20px 15px 0 15px"}}>
                     <FeatureHeader>What is included?</FeatureHeader>
                         { activeSubPackage?.current?.services.map(serviceName => <IndividualService><TickImage src = {Tick}/> {serviceName}</IndividualService>) }
-                    <FloatingCarDetails bottomPosition = {"60px"} car = {`${matchedCarData?.["brand"]} ${matchedCarData?.["carName"]}`}/>
+                    <FloatingCarDetails bottomPosition = {"60px"} 
+                        car = {`${matchedCarData?.["brand"]} ${matchedCarData?.["carName"]}`}
+                        variantName = {matchedCarData?.variantName}
+                    />
                 </EZCard>
 
                 <BottomDiv>

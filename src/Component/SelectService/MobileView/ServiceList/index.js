@@ -220,7 +220,10 @@ function ServiceList(props) {
             </MServiceListWrapper>
         }
 
-        <FloatingCarDetails car = {`${matchedCarData?.["brand"]} ${matchedCarData?.["carName"]}`} />
+        <FloatingCarDetails 
+            car = {`${matchedCarData?.["brand"]} ${matchedCarData?.["carName"]}`} 
+            variantName = {matchedCarData?.variantName}
+        />
         </MobilePageLayout>
     }
 

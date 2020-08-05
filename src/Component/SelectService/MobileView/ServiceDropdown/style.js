@@ -61,7 +61,7 @@ export const SelectedCarIcon = styled.img`
     position: fixed;
     bottom: ${({bottomPosition}) => bottomPosition ? "50px" : "20px"};
     right: 20px;
-    width: 60px;
+    width: 50px;
     border-radius: 50%;
     background: ${ez_button_color};
     padding: ${base_spacing}px;
@@ -75,10 +75,11 @@ export const SelectedCarIcon = styled.img`
 export const SelectedCarCard = styled.div`
     ${CommonBoxShadow};
     background: ${ez_button_color};
+    color: white;
     display: ${({visibility}) => visibility ? "" : "none"};
     position: absolute;
     bottom: ${base_spacing*6}px;
-    right: ${base_spacing*8.5}px;
+    right: ${base_spacing*8}px;
     padding: ${base_spacing}px;
     border-radius: ${base_spacing}px;
 `;

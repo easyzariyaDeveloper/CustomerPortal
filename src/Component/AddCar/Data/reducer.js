@@ -12,14 +12,14 @@ export default function BrandsReducer(state = defaultBrandState, {type, data, er
                 inProgress: true
             }
         break;
-        case "FETCHING_API_SUCCESS":
+        case "FETCHED_BRAND_SUCCESS":
             return {
                 ...state,
                 inProgress: false,
                 brands: data,  
             }
         break;
-        case "FETCHING_API_FAILED":
+        case "FETCHING_BRAND_FAILED":
             return {
                 ...state,
                 inProgress: false,

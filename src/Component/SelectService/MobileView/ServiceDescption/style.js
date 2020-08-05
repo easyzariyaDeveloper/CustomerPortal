@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { ez_button_color, ez_gradient_secondColor } from "../../../../Assets/style-var";
-import { EZElevation } from "../../../Common/MobileCard";
+import { ez_button_color, ez_gradient_secondColor, base_spacing } from "../../../../Assets/style-var";
+import { EZElevation, EZCard } from "../../../Common/MobileCard";
 import "./style.scss";
 import { mobile_header_height } from "../../../../Layout/MobileView/Header/styles";
 
@@ -66,9 +66,29 @@ export const TickImage = styled.img`
 `;
 
 export const ServiceTimePara =  styled.p`
-color: white;
-display: inline-block;
-padding: 5px;
-font-size: 16px;
+    color: white;
+    display: inline-block;
+    padding: 5px;
+    font-size: 16px;
 `;
 
+export const FuelCardWrapper = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+`;
+
+export const FuelIcon = styled.p`
+    font-size: ${base_spacing * 6.5}px;
+`;
+
+export const FuelCard = styled(EZCard)`
+    margin: ${base_spacing}px;
+    color: ${ez_button_color};
+    padding: 0px;
+    text-align: center;
+
+    &.active{
+        background: rgba(29,160,188,0.7);
+        color: white;
+    }
+`;

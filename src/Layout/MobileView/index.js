@@ -30,7 +30,7 @@ function PageLayout(props) {
   return (
     <PageWrapper className="container">
       <Header 
-        pageName = {props.pageName} 
+        pageName = {props?.pageName?.toLowerCase()} 
         backButton = {props.backButton} 
         noborder = {props.noborder || false} 
         cart = {props?.cart?.["cart"]}
