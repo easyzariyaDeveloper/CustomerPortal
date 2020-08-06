@@ -1,25 +1,43 @@
 import styled from "styled-components";
 import {base_spacing} from "../../../Assets/style-var";
-import { MobileActionButton } from "../../../Assets/common-styled";
+import { MobileActionButton, alignCenter } from "../../../Assets/common-styled";
 import {withStyles } from '@material-ui/core/styles';
 import MaterialUIPickers from "../../Common/DateTimePicker";
 
+const secondaryText = "color: rgba(0,0,0,0.54);";
 
 export const MCartPageWrapper = styled.div`
     padding-top: ${base_spacing*1.5}px;
 `;
 
-export const CarImage = styled.img``;
-
-export const CarInfo = styled.p`
-
+export const CarImage = styled.img`
+    width: 50px;
+    border-radius: 50%;
+    background: ${(props) => props["defaultIcon"] ? "#1DA0BC" : "#FFF" };
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0,0,0,0.06), 0 2px 32px 0 rgba(0,0,0,0.16);
+    position: absolute;
+    top: 50%;
+    left: ${base_spacing}px;
+    transform: translate3d(0, -50%, 0);
 `;
 
-export const ServicePriceHeader = styled.div`
-    display: flex;
-    justify-content: space-between;
-    padding: ${base_spacing/2}px; 0px;
-    font-size: ${base_spacing*1.8}px;;
+export const CarInfo = styled.p`
+    ${secondaryText}
+`;
+
+export const CarWrapper = styled.div`
+    position: relative;
+    padding: ${base_spacing}px;
+    padding-left: 70px;
+    ${alignCenter}
+`;
+
+export const VariantName = styled.span`
+    text-transform: capitalize;
+    display: inline-block;
+    margin-top: ${base_spacing}px;
 `;
 
 
@@ -39,9 +57,8 @@ export const DeleteBinButton = styled.img`
     height: ${base_spacing*1.5}px;
     margin-left: ${base_spacing*0.7}px;
     vertical-align: middle;
-}
-
 `;
+
 //     margin-left:8px;
 //     border: none;
 //     color: white;
@@ -50,13 +67,13 @@ export const DeleteBinButton = styled.img`
 // `;
 
 export const ServiceMPara = styled.p`
-    text-align: left;
-  
+    font-weight: 500;
 `;
 
 export const CartPriceMPara = styled.p`
     text-align: right;
-   
+    font-size: 14px;
+    ${secondaryText}
 `;
 export const DateTimeGrid = styled.div`
     display: grid;

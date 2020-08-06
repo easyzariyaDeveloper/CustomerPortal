@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
-import { ServicePriceHeader, DateTimeMPicker, CouponCodeButton,
+import { DateTimeMPicker, CouponCodeButton,
     OverlayCard, CouponTextField,CouponCardCloseButton, SubTotalDiv, 
     DiscountDiv, TotalDiv,DateTimeDiv, DateTimeGrid, CheckOutButton,
      MCartPageWrapper, DatePara, TimePara, MCouponCard, MCouponPara, 
@@ -8,7 +8,8 @@ import { ServicePriceHeader, DateTimeMPicker, CouponCodeButton,
 } from "./style";
 
 import {
-    CarInfo, CarImage
+    CarInfo, CarImage,VariantName,
+    CarWrapper, CartPriceMPara, ServiceMPara
 
 } from "./style";
 import MServices from "./MServices";
@@ -21,7 +22,7 @@ import { connect } from "react-redux";
 import { fetchCart, deleteItem } from "../Data/action";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { EZCard } from "../../Common/MobileCard";
-
+import CarIcon from "../../../Assets/img/carIcon.svg";
 
 
 function Cart(props){
@@ -29,7 +30,7 @@ function Cart(props){
     const [couponCardVisibility, setCouponCardVisibility] = useState(false);
     const [couponCode, setCouponCode]  = useState("");
     const [mServiceList, setMServiceList] = useState(ServiceCart);
-    
+    const {cart : {cart = {}} = {}} = props;
     return <MobilePageLayout pageName = "Cart">
         {
             props?.cart?.inProgress ? 
@@ -40,21 +41,25 @@ function Cart(props){
             </> :
             <MCartPageWrapper>
             <EZCard>
-                <CarImage src = "" />
-                <CarInfo>
-
-                </CarInfo>
+                <CarWrapper>
+                    <CarImage src = {cart?.car?.imageUrl || CarIcon} defaultIcon = {cart?.car?.imageUrl ? false : true} />
+                    <CarInfo>
+                        {cart?.car?.brand || ""} - {cart?.car?.carName || ""} 
+                        <br/>
+                        <VariantName>{cart?.car?.variantName.toLowerCase()} ({cart?.car?.registrationNum})</VariantName>
+                        <br/>
+                    </CarInfo>
+                </CarWrapper>
             </EZCard>
             <EZCard>
-                {/* <SelectedCar>{Car}</SelectedCar> */}
-                <ServicePriceHeader>
-                    <h1>Service</h1>
-                    <h1>Quantity</h1>
-                    <h1>Price</h1>
-                </ServicePriceHeader>
-
+                <ServiceMPara>
+                    Service Name
+                </ServiceMPara>
+                <CartPriceMPara>
+                    Price
+                </CartPriceMPara>
                 <MServices
-                    mServiceList = {props?.cart?.cart}
+                    mServiceList = {cart}
                     deleteItem = {props?.deleteItem}
                 />
             </EZCard>
