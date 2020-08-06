@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
-import { CartMCard, SelectedCar, ServicePriceHeader, DateTimeMPicker, CouponCodeButton,OverlayCard, CouponTextField,CouponCardCloseButton, SubTotalDiv, DiscountDiv, TotalDiv,DateTimeDiv, DateTimeGrid, CheckOutButton, MCartPageWrapper, DatePara, TimePara, MCouponCard, MCouponPara, MApplyCouponButton, MCouponImage, CouponTextDiv, DateTimePickers} from "./style";
+import { ServicePriceHeader, DateTimeMPicker, CouponCodeButton,
+    OverlayCard, CouponTextField,CouponCardCloseButton, SubTotalDiv, 
+    DiscountDiv, TotalDiv,DateTimeDiv, DateTimeGrid, CheckOutButton,
+     MCartPageWrapper, DatePara, TimePara, MCouponCard, MCouponPara, 
+     MApplyCouponButton, MCouponImage, CouponTextDiv, DateTimePickers
+} from "./style";
+
+import {
+    CarInfo, CarImage
+
+} from "./style";
 import MServices from "./MServices";
 import MaterialUIPickers from "../../Common/DateTimePicker";
 import Coupon from "../../../Assets/img/coupon.png";
@@ -10,6 +20,7 @@ import CouponCancel from "../../../Assets/img/coupon_cancel.jpg"
 import { connect } from "react-redux";
 import { fetchCart, deleteItem } from "../Data/action";
 import Skeleton from '@material-ui/lab/Skeleton';
+import { EZCard } from "../../Common/MobileCard";
 
 
 
@@ -18,22 +29,24 @@ function Cart(props){
     const [couponCardVisibility, setCouponCardVisibility] = useState(false);
     const [couponCode, setCouponCode]  = useState("");
     const [mServiceList, setMServiceList] = useState(ServiceCart);
-
-    const Car = props?.cart?.cart?.car?.carName
-
-    // const deleteItem = (id) => {
-    //     const mFilteredList = mServiceList.filter(serviceObj => serviceObj["id"] != id);
-    //     setMServiceList(mFilteredList);
-    // }
-
-
-
-    return <MobilePageLayout >
+    
+    return <MobilePageLayout pageName = "Cart">
         {
-            props?.cart?.inProgress ? <Skeleton animation="wave" height={250} width="100%"  /> :
+            props?.cart?.inProgress ? 
+            <>
+                <Skeleton animation="wave" height={200} width="90%" style = {{margin : "0 auto"}} />
+                <Skeleton animation="wave" height={250} width="90%" style = {{margin : "0 auto"}} />
+                <Skeleton animation="wave" height={300} width="90%" style = {{margin : "0 auto"}} />
+            </> :
             <MCartPageWrapper>
-            <CartMCard>
-                <SelectedCar>{Car}</SelectedCar>
+            <EZCard>
+                <CarImage src = "" />
+                <CarInfo>
+
+                </CarInfo>
+            </EZCard>
+            <EZCard>
+                {/* <SelectedCar>{Car}</SelectedCar> */}
                 <ServicePriceHeader>
                     <h1>Service</h1>
                     <h1>Quantity</h1>
@@ -44,9 +57,9 @@ function Cart(props){
                     mServiceList = {props?.cart?.cart}
                     deleteItem = {props?.deleteItem}
                 />
-            </CartMCard>
+            </EZCard>
 
-            <CartMCard>
+            <EZCard>
                 <DateTimeGrid>
                     <DateTimeDiv>
                         <DatePara>Select Date: </DatePara>
@@ -55,14 +68,14 @@ function Cart(props){
 
                     <DateTimeMPicker><DateTimePickers/></DateTimeMPicker> 
                 </DateTimeGrid>
-            </CartMCard>
+            </EZCard>
         
-            <CartMCard>
+            <EZCard>
                 <CouponCodeButton onClick = {() => setCouponCardVisibility(true)}>
                     <MCouponImage src = {Coupon} />
                     {`Apply Coupon >`}
                 </CouponCodeButton>
-            </CartMCard>
+            </EZCard>
             
             {
                 couponCardVisibility ? <OverlayCard> 
@@ -84,7 +97,7 @@ function Cart(props){
                 </OverlayCard> : null
             }
             
-            <CartMCard>
+            <EZCard>
                 <SubTotalDiv>
                     <h1 style = {{fontWeight:"normal"}}>Subtotal:</h1>
                     <h1>Rs.{props?.cart?.cart?.totalAmount || 0}</h1>
@@ -98,7 +111,7 @@ function Cart(props){
                     <h1 style = {{fontWeight:"normal"}}>Total:</h1>
                     <h1>Rs {(props?.cart?.cart?.totalAmount || 0) - (props?.cart?.cart?.discountAmount || 0)}</h1>
                 </TotalDiv>
-            </CartMCard> 
+            </EZCard> 
 
             <CheckOutButton>Checkout</CheckOutButton>
 
@@ -110,7 +123,6 @@ function Cart(props){
 const mapStateToProps = (state) => {
     return {
         cart: state?.cart
-        // //selectedCarId: state?.profile?.["selectedCarId"],
     }
 };
 

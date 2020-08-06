@@ -6,22 +6,13 @@ import MaterialUIPickers from "../../Common/DateTimePicker";
 
 
 export const MCartPageWrapper = styled.div`
-    padding: ${base_spacing*1.5}px;
+    padding-top: ${base_spacing*1.5}px;
 `;
 
-export const CartMCard = styled.div`
-    background:white;
-    border-radius: ${base_spacing*0.5}px;
-    padding: ${base_spacing}px;
-    margin-bottom: 20px;
-`;
+export const CarImage = styled.img``;
 
-export const SelectedCar = styled.h1`
-    border-bottom: 1px solid #E3E3E3;
-    text-align: center;
-    padding-bottom: ${base_spacing}px;
-    font-size: ${base_spacing*1.8}px;;
-    font-weight:300;
+export const CarInfo = styled.p`
+
 `;
 
 export const ServicePriceHeader = styled.div`

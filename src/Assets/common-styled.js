@@ -171,7 +171,7 @@ export const useStyles = makeStyles(theme => ({
   },
   textField: {
     width: `calc(100% - ${base_spacing * 6}px)`,
-    margin: `${base_spacing * 1.5}px ${base_spacing * 3}px`
+    margin: `${base_spacing * 1.5}px ${base_spacing * 3}px !important`
   }
 }));
 

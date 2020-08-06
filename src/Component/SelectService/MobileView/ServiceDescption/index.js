@@ -31,7 +31,8 @@ function ServiceDescription(props) {
     const activeSubPackage = useRef();
     const [car, setCar] = useState([]);
 
-    function addSubPackage(){
+    function addSubPackage(selectedCity){
+        const selectedCar = props?.profile?.carList?.find((car) => car["carId"] === selectedCarId);
         const itemIdObj = {
             itemId: packageId,
             subPackageName: codeId,
@@ -40,7 +41,7 @@ function ServiceDescription(props) {
             service:true,
             package:true
         };
-        props.addSubPackage(selectedCarId ,selectedCityId,itemIdObj)
+        props.addSubPackage(selectedCar ,selectedCity,itemIdObj)
     }
     
 
@@ -100,7 +101,7 @@ function ServiceDescription(props) {
                         <TimerIcon style={{ color: "white", fontSize: "25px", verticalAlign: "bottom" }} />
                         <ServiceTimePara>{activeSubPackage?.current?.serviceTime > 0 ? activeSubPackage?.current?.serviceTime / 60 : 0}hour</ServiceTimePara>
                     </TimeDurationWrapper>
-                    <AddServiceButton onClick={addSubPackage}>Add</AddServiceButton>
+                    <AddServiceButton onClick={() => addSubPackage(selectedCityId)}>Add</AddServiceButton>
                 </BottomDiv>
             </SeviceDetailPageWrapper>
            </> : <>

@@ -108,7 +108,7 @@ export function* fetchPackageById({payload, filter = {}}) {
             type: 'FETCHING_API_FAILED', 
             error: {
                 ...error,
-                message: "Failed to fetch the package information"
+                ErrorMessage: "Failed to fetch the package information"
             }
         });
     }
@@ -144,7 +144,10 @@ export function* addSubPackage({payload}){
         });
         yield put({
             type: 'FETCHING_API_FAILED',
-            error: error
+            error: {
+                ...error,
+                message: "Failed to fetch the package information"
+            }
         });
     }
 }

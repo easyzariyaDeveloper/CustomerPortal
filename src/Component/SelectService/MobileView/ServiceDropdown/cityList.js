@@ -8,71 +8,51 @@ import Skeleton from '@material-ui/lab/Skeleton';
 
 function CityList(props) {
     const [selectedCityId, setSelectedCityId] = useState(props.value);
+    const [city, setCity] = useState([]);
     const userId = readCookie("userUUId");
     
     useEffect(()=>{
         props.fetchCities();
     },[]);
 
+    useEffect(() => {
+        if(userId){
+            const cityMap = props?.profileAddress?.reduce((accumlator, {cityId, city}) => {
+                if(!accumlator[cityId]){
+                    accumlator[cityId] = {cityId, cityName: city};
+                }
+                return accumlator;
+            }, {});
+            setCity(Object.values(cityMap));
+        } else {
+            setCity(props?.cities || []);
+        }
+    }, [userId && props?.profileAddress?.length, props?.cities?.length])
+
     return <div>
         {
             props?.inProgress ? <Skeleton animation="wave" height={250} width = {250}  /> :(
                 <CityListWrapper>
-                    {userId && props.profileAddress ? props.profileAddress.map(({cityId,city}) =>{
-                        return <CityCard onClick = {()=>{
-                                setSelectedCityId(cityId);
-                                localStorage.setItem("citySelectedPackage", cityId);
-                                props.onChange(city.cityId);
-                            }}
-                            enabled = {city.cityId === selectedCityId}
-                        >
-                            <CityIcon 
-                                className = {`icon-${city?.cityName?.split(" ").join("-").toLowerCase()}`} 
-                                enabled = {city.cityId === selectedCityId}
-                            />
-                            <CityName
-                                enabled = {city.cityId === selectedCityId}
-                            >{city}</CityName>
-                        </CityCard>
-                    }): (!props.inProgress && props.cities ? props.cities.map(city => {
-                        return <CityCard onClick= {(event)=>{
-                            event.stopPropagation();
-                            setSelectedCityId(city.cityId);
-                            localStorage.setItem("citySelectedPackage", city.cityId);
-                            props.onChange(city.cityId);
-                        }}
-                            enabled = {city.cityId === selectedCityId}
-                        >
-                            <CityIcon 
-                                className = {`icon-${city?.cityName?.split(" ").join("-").toLowerCase()}`}
-                                enabled = {city.cityId === selectedCityId}
-                            />
-                            <CityName
-                                enabled = {city.cityId === selectedCityId}
-                            >{city.cityName}</CityName>
-                        </CityCard>
-                    }):null)}
-
-                    {/* {
-                        (!props.inProgress && props.cities ? props.cities.map(city => {
-                            return <CityCard onClick= {(event)=>{
-                                event.stopPropagation();
-                                setSelectedCityId(city.cityId);
-                                localStorage.setItem("citySelectedPackage", city.cityId);
-                                props.onChange(city.cityId);
-                            }}
-                                enabled = {city.cityId === selectedCityId}
+                    {
+                        city.map(({cityId, cityName}) => {
+                            return <CityCard 
+                                onClick = {() => {
+                                    setSelectedCityId(cityId);
+                                    localStorage.setItem("citySelectedPackage", cityId);
+                                    props.onChange(cityId);
+                                }}
+                                enabled = {cityId === selectedCityId}
                             >
                                 <CityIcon 
-                                    className = {`icon-${city?.cityName.split(" ").join("-").toLowerCase()}`}
-                                    enabled = {city.cityId === selectedCityId}
+                                    className = {`icon-${cityName?.split(" ").join("-").toLowerCase()}`} 
+                                    enabled = {cityId === selectedCityId}
                                 />
-                                <CityName
-                                    enabled = {city.cityId === selectedCityId}
-                                >{city.cityName}</CityName>
+                                <CityName enabled = {cityId === selectedCityId}>
+                                    {cityName}
+                                </CityName>
                             </CityCard>
-                        }):null)
-                    } */}
+                        })
+                    }
                 </CityListWrapper>
             )
         }

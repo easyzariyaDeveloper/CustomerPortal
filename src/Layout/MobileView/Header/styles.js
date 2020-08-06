@@ -104,10 +104,10 @@ export const CartWrapper = styled.a`
 export const ItemCount = styled.p`
   color: white;
   background: ${ez_button_color};
-  width: 25px;
+  width: 20px;
   position: absolute;
-  right: 0px;
-  top: -8px;
+  right: -8px;
+  top: -2px;
   text-align: center;
   height: 25px;
   border-radius: 50%;
