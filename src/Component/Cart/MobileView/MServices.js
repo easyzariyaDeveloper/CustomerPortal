@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {ServiceMListItem, ServiceMPara, CartPriceMPara, DeleteBinButton, MServiceWrapper} from "./style";
-import Cancel from "../../../Assets/img/cancel.png"
+import Cancel from "../../../Assets/img/delete.svg"
 
 
 export default function MServices (props){

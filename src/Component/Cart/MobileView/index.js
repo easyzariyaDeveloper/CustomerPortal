@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
 import { DateTimeMPicker, CouponCodeButton,
     OverlayCard, CouponTextField,CouponCardCloseButton, SubTotalDiv, 
-    DiscountDiv, TotalDiv,DateTimeDiv, DateTimeGrid, CheckOutButton,
-     MCartPageWrapper, DatePara, TimePara, MCouponCard, MCouponPara, 
+    DiscountDiv, TotalDiv, DateTimeGrid, CheckOutButton,
+     MCartPageWrapper,MCouponCard, MCouponPara, 
      MApplyCouponButton, MCouponImage, CouponTextDiv, DateTimePickers
 } from "./style";
 
 import {
     CarInfo, CarImage,VariantName,
-    CarWrapper, CartPriceMPara, ServiceMPara
+    CarWrapper, Label
 
 } from "./style";
 import MServices from "./MServices";
@@ -52,36 +52,22 @@ function Cart(props){
                 </CarWrapper>
             </EZCard>
             <EZCard>
-                <ServiceMPara>
-                    Service Name
-                </ServiceMPara>
-                <CartPriceMPara>
-                    Price
-                </CartPriceMPara>
-                <MServices
-                    mServiceList = {cart}
-                    deleteItem = {props?.deleteItem}
-                />
+                <Label> List of Services </Label>
+                <MServices mServiceList = {cart} deleteItem = {props?.deleteItem} />
             </EZCard>
 
             <EZCard>
+                <Label> Select Date & Time </Label>
                 <DateTimeGrid>
-                    <DateTimeDiv>
-                        <DatePara>Select Date: </DatePara>
-                        <TimePara>Select Time: </TimePara>
-                    </DateTimeDiv>
-
-                    <DateTimeMPicker><DateTimePickers/></DateTimeMPicker> 
+                    <DateTimeMPicker/>
+                    <DateTimePickers/> 
                 </DateTimeGrid>
-            </EZCard>
-        
-            <EZCard>
+
                 <CouponCodeButton onClick = {() => setCouponCardVisibility(true)}>
                     <MCouponImage src = {Coupon} />
                     {`Apply Coupon >`}
                 </CouponCodeButton>
-            </EZCard>
-            
+            </EZCard>            
             {
                 couponCardVisibility ? <OverlayCard> 
                     <MCouponCard>
@@ -103,6 +89,7 @@ function Cart(props){
             }
             
             <EZCard>
+                <Label> Cart Summary </Label>
                 <SubTotalDiv>
                     <h1 style = {{fontWeight:"normal"}}>Subtotal:</h1>
                     <h1>Rs.{props?.cart?.cart?.totalAmount || 0}</h1>

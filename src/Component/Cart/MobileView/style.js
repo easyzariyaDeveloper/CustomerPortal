@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {base_spacing} from "../../../Assets/style-var";
+import {base_spacing, ez_button_color} from "../../../Assets/style-var";
 import { MobileActionButton, alignCenter } from "../../../Assets/common-styled";
 import {withStyles } from '@material-ui/core/styles';
 import MaterialUIPickers from "../../Common/DateTimePicker";
@@ -48,7 +48,7 @@ export const MServiceWrapper = styled.div`
 export const ServiceMListItem = styled.div`
     display: flex;
     justify-content: space-between;
-    line-height: ${base_spacing*4}px;
+    margin: ${base_spacing * 1.5}px 0;
     font-weight:300;
 
 `;
@@ -66,30 +66,23 @@ export const DeleteBinButton = styled.img`
 //     border-radius:50%;
 // `;
 
+export const Label = styled.h2`
+    margin-bottom: ${base_spacing}px;
+    text-align: center;
+    color: ${ez_button_color};
+    ${secondaryText}
+`;
+
 export const ServiceMPara = styled.p`
     font-weight: 500;
 `;
 
 export const CartPriceMPara = styled.p`
-    text-align: right;
     font-size: 14px;
-    ${secondaryText}
+    font-weight: 500;
 `;
 export const DateTimeGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin: auto;
-    padding-bottom:${base_spacing}px;
-`;
-
-export const DateTimeDiv = styled.div``;
-
-export const DatePara = styled.p`
-    padding: ${base_spacing *4.2}px 0;
-`;
-
-export const TimePara = styled.p`
-    padding: ${base_spacing*1.2}px 0
+    display: flex;
 `;
 
 export const DateTimeMPicker = styled.div`
@@ -160,6 +153,9 @@ export const MCouponImage = styled.img`
 
 export const CheckOutButton = styled(MobileActionButton)`
     height: 40px;
+    margin: 0 auto;
+    margin-bottom: ${base_spacing *2}px;
+    width: 80%;
 `;
 
 export const MCouponCard = styled.div`
