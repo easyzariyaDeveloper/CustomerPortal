@@ -95,3 +95,32 @@ export function* applyCoupon({payload}){
         yield* fetchCart();
     }
 }
+
+
+export function* setTime({payload}){
+    yield put({type: "FETCHING_API"});
+    
+    try {
+        const { data,status } = yield call(APIWrapper, {
+            url: `/cart/setdate`,
+            method: "POST",
+            data: {
+                "date": payload
+            }
+        });
+        if(status === 200){
+            location.href = "/checkout";
+            yield put({
+                type: 'SET_TIME_SUCCESS',
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        yield put({
+            type: 'FETCHING_API_FAILED',
+            error
+        });
+    }
+}
+
+

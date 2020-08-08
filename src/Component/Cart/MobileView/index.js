@@ -4,7 +4,7 @@ import { DateTimeMPicker, CouponCodeButton,
     OverlayCard, CouponTextField,CouponCardCloseButton, SubTotalDiv, 
     DiscountDiv, TotalDiv, CheckOutButton,
      MCartPageWrapper,MCouponCard, MCouponPara, 
-     MApplyCouponButton, MCouponImage, CouponTextDiv, DateTimePickers, CartPriceMPara
+     MApplyCouponButton, MCouponImage, CouponTextDiv, DateTimePickers, CartPriceMPara, CartButtonDiv
 } from "./style";
 
 import {
@@ -17,16 +17,15 @@ import MServices from "./MServices";
 import MaterialUIPickers from "../../Common/DateTimePicker";
 import Coupon from "../../../Assets/img/coupon.png";
 import { ServiceCart, CouponCodes } from "../mockCartData";
-import getPrice from "../util";
 import CouponCancel from "../../../Assets/img/coupon_cancel.jpg"
 import { connect } from "react-redux";
-import { fetchCart, deleteItem, applyCoupon } from "../Data/action";
+import { fetchCart, deleteItem, applyCoupon,setTime } from "../Data/action";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { EZCard } from "../../Common/MobileCard";
 import CarIcon from "../../../Assets/img/carIcon.svg";
 import { MobileActionButton } from "../../../Assets/common-styled";
 import EmptyCart from "./emptyCart";
-
+import Alert from '@material-ui/lab/Alert';
 
 function Cart(props){
 
@@ -39,11 +38,21 @@ function Cart(props){
 
     const handleDateTimeChange = (value) =>{
         setDateTime(value);
-        console.log(value);
+        
+        console.log(value.getTime())
     }
+    
 
-    function disableCheckoutButton(){
-
+    function navigateNext(){
+        location.href = '/cart/add-address'
+        if(dateTime.getTime() - Date.now() > 14400000) {
+            props?.setTime(dateTime.toISOString());
+        } else {
+            alert("enter correct time")
+           
+        }
+        
+        console.log(dateTime)
     }
 
     return <MobilePageLayout pageName = "Cart">
@@ -80,7 +89,9 @@ function Cart(props){
                     </DateTimeMPicker>
                     
                 </div>
-
+                {/* {
+                    props?.cart?appliedVoucher
+                } */}
                 <CouponCodeButton onClick = {() => setCouponCardVisibility(true)}>
                     <MCouponImage src = {Coupon} />
                     {`Apply Coupon >`}
@@ -130,7 +141,10 @@ function Cart(props){
                 }
             </EZCard> 
 
-            <MobileActionButton onClick = {() => location.href = "/checkout"}disabled = {disableCheckoutButton}>Checkout</MobileActionButton>
+            <CartButtonDiv>
+                <MobileActionButton onClick = {() => navigateNext()}> Checkout </MobileActionButton>
+            </CartButtonDiv>    
+            
 
         </MCartPageWrapper>: <EmptyCart/>)
         }
@@ -147,7 +161,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchCart: () => {dispatch(fetchCart())},
         deleteItem: (id="")=> {dispatch(deleteItem(id))},
-        applyCoupon: (code="") => {dispatch(applyCoupon(code))}
+        applyCoupon: (code="") => {dispatch(applyCoupon(code))},
+        setTime: (time="") => {dispatch(setTime(time))}
     }
 }
 

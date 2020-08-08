@@ -153,13 +153,6 @@ export const MCouponImage = styled.img`
     vertical-align: middle;
 `;
 
-export const CheckOutButton = styled(MobileActionButton)`
-    height: 40px;
-    margin: 0 auto;
-    margin-bottom: ${base_spacing *2}px;
-    width: 90%;
-    display: block;
-`;
 
 export const MCouponCard = styled.div`
     min-width: 70%;
@@ -197,9 +190,13 @@ export const EmptyCardWrapper = styled.div`
     position: fixed;
     top: 50%;
     left: 10%;
-}
+`;
 
-`
+export const CartButtonDiv = styled.div`
+    padding: ${base_spacing*2}px;
+`;
+
+
 
 // export const DateTimePickers = withStyles(theme => ({
 //     root: {

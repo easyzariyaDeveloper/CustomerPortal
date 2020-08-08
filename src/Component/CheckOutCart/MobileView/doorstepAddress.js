@@ -4,8 +4,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { connect } from "react-redux";
-import { CheckoutRadioWrapper, CheckoutCard } from "./style";
-import { MobileActionButton } from "../../../Assets/common-styled";
+import { CheckoutRadioWrapper, CheckoutCard, CheckoutButton, CheckoutButtonDiv } from "./style";
+
 
 
 function DoorstepAddress(props) {
@@ -28,12 +28,14 @@ function DoorstepAddress(props) {
         </RadioGroup>
       </FormControl>
 
-      <MobileActionButton onClick = {() => {
+      <CheckoutButton onClick = {() => {
           location.href = `/address/add-address?referrer=${location.pathname}` 
-      }}>Add Address</MobileActionButton>
+      }}>Add Address</CheckoutButton>
 
-      <MobileActionButton>Next</MobileActionButton>
-      </div>
+        <CheckoutButtonDiv>
+            <CheckoutButton onClick={()=> location.href=`/cart/checkout`}>Next</CheckoutButton>
+        </CheckoutButtonDiv>
+    </div>
     );
   }
 

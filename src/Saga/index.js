@@ -5,7 +5,8 @@ import { loginUser, userSignup } from "../Component/SignUp/Data/saga";
 import { getProfile, changePassword, deleteCar, deleteAddress } from "../Component/Profile/Data/saga";
 import { createOtp, verifyOTP } from "../Component/OtpPage/Data/saga";
 import { addAddressByUser, updateCustomerAddress } from "../Component/Address/Data/saga";
-import { fetchCart, hasActiveCart, deleteItem, applyCoupon } from "../Component/Cart/Data/saga";
+import { fetchCart, hasActiveCart, deleteItem, applyCoupon, setTime } from "../Component/Cart/Data/saga";
+import { createOrder } from "../Component/CheckOutCart/MobileView/Data/saga";
 
 
 export default function* appSaga() {
@@ -38,6 +39,9 @@ export default function* appSaga() {
     yield takeLatest("FETCH_CART_DETAILS", fetchCart);
     yield takeLatest("DELETE_ITEM", deleteItem);
     yield takeLatest("APPLY_COUPON", applyCoupon);
+    yield takeLatest("CREATE_ORDER", createOrder);
+    yield takeLatest("SET_TIME", setTime);
+
 
     yield takeLatest("CHANGE_PASSWORD", changePassword);
 }

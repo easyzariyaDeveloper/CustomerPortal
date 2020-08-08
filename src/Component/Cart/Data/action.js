@@ -1,3 +1,5 @@
+import { TimeStyling } from "../../Common/DateTimePicker/style"
+
 export function fetchActiveCart(){
     return{
         type: "FETCH_ACTIVE_CART_DETAIL"
@@ -23,5 +25,12 @@ export function applyCoupon (code){
     return{
         type: "APPLY_COUPON",
         payload: code
+    }
+}
+
+export function setTime(time){
+    return {
+        type: "SET_TIME",
+        payload: time
     }
 }
