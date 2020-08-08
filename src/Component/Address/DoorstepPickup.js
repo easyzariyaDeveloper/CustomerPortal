@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -38,6 +38,9 @@ function DoorstepPickup(props) {
     }, [props?.address?.addressId])
 
     const [radio, setRadio] = React.useState(props?.address?.addressLabel || "home");
+
+    const checkoutReferrer = useRef(new URLSearchParams(window.location.search).get("referrer"));
+    console.log(checkoutReferrer.current)
 
     function addAddress(){
         const addressObj = {
@@ -121,7 +124,10 @@ function DoorstepPickup(props) {
             props.preSelectedAddressId ? <SaveButton onClick = {updateAddress}>
                 Update Address
             </SaveButton> : 
-        <SaveButton onClick = {addAddress}
+        <SaveButton onClick = {() => {
+            addAddress;
+            location.href = `${checkoutReferrer.current}`
+        }}
             disabled = {!(props?.address?.enableInputComponent) && (userAddress?.house =="")}
         >Submit</SaveButton>
         }

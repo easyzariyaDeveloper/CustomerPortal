@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
 import { DateTimeMPicker, CouponCodeButton,
     OverlayCard, CouponTextField,CouponCardCloseButton, SubTotalDiv, 
-    DiscountDiv, TotalDiv, DateTimeGrid, CheckOutButton,
+    DiscountDiv, TotalDiv, CheckOutButton,
      MCartPageWrapper,MCouponCard, MCouponPara, 
-     MApplyCouponButton, MCouponImage, CouponTextDiv, DateTimePickers
+     MApplyCouponButton, MCouponImage, CouponTextDiv, DateTimePickers, CartPriceMPara
 } from "./style";
 
 import {
     CarInfo, CarImage,VariantName,
-    CarWrapper, Label
+    CarWrapper, Label, CardHeaderText,
+    Row
 
 } from "./style";
 import MServices from "./MServices";
@@ -19,10 +20,12 @@ import { ServiceCart, CouponCodes } from "../mockCartData";
 import getPrice from "../util";
 import CouponCancel from "../../../Assets/img/coupon_cancel.jpg"
 import { connect } from "react-redux";
-import { fetchCart, deleteItem } from "../Data/action";
+import { fetchCart, deleteItem, applyCoupon } from "../Data/action";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { EZCard } from "../../Common/MobileCard";
 import CarIcon from "../../../Assets/img/carIcon.svg";
+import { MobileActionButton } from "../../../Assets/common-styled";
+import EmptyCart from "./emptyCart";
 
 
 function Cart(props){
@@ -31,6 +34,18 @@ function Cart(props){
     const [couponCode, setCouponCode]  = useState("");
     const [mServiceList, setMServiceList] = useState(ServiceCart);
     const {cart : {cart = {}} = {}} = props;
+
+    const[dateTime, setDateTime] = useState(null);
+
+    const handleDateTimeChange = (value) =>{
+        setDateTime(value);
+        console.log(value);
+    }
+
+    function disableCheckoutButton(){
+
+    }
+
     return <MobilePageLayout pageName = "Cart">
         {
             props?.cart?.inProgress ? 
@@ -38,9 +53,9 @@ function Cart(props){
                 <Skeleton animation="wave" height={200} width="90%" style = {{margin : "0 auto"}} />
                 <Skeleton animation="wave" height={250} width="90%" style = {{margin : "0 auto"}} />
                 <Skeleton animation="wave" height={300} width="90%" style = {{margin : "0 auto"}} />
-            </> :
-            <MCartPageWrapper>
-            <EZCard>
+            </> : (cart?.itemIds.length > 0 ? <MCartPageWrapper>
+            <EZCard style = {{"marginTop": "5px"}}>
+                <CardHeaderText> Car Detail </CardHeaderText>
                 <CarWrapper>
                     <CarImage src = {cart?.car?.imageUrl || CarIcon} defaultIcon = {cart?.car?.imageUrl ? false : true} />
                     <CarInfo>
@@ -52,22 +67,25 @@ function Cart(props){
                 </CarWrapper>
             </EZCard>
             <EZCard>
-                <Label> List of Services </Label>
+                <CardHeaderText> Order Detail </CardHeaderText>
                 <MServices mServiceList = {cart} deleteItem = {props?.deleteItem} />
-            </EZCard>
 
-            <EZCard>
-                <Label> Select Date & Time </Label>
-                <DateTimeGrid>
-                    <DateTimeMPicker/>
-                    <DateTimePickers/> 
-                </DateTimeGrid>
+                <div style = {{display: "grid", gridTemplateColumns: "1fr 1fr"}}>
+                    <div style = {{display: "grid", alignItems: "end"}}>
+                        <label style= {{ marginBottom: "5px"}}>Select Date</label>
+                        <label style= {{ marginBottom: "5px"}}>Select Time</label>
+                    </div>
+                    <DateTimeMPicker>
+                        <MaterialUIPickers handleChange = {handleDateTimeChange}/>
+                    </DateTimeMPicker>
+                    
+                </div>
 
                 <CouponCodeButton onClick = {() => setCouponCardVisibility(true)}>
                     <MCouponImage src = {Coupon} />
                     {`Apply Coupon >`}
                 </CouponCodeButton>
-            </EZCard>            
+            </EZCard>
             {
                 couponCardVisibility ? <OverlayCard> 
                     <MCouponCard>
@@ -81,7 +99,7 @@ function Cart(props){
                                 onChange={(event) => setCouponCode(event.target.value)}
                                 label="Enter Coupon Code"
                             />
-                            <MApplyCouponButton>Apply</MApplyCouponButton>
+                            <MApplyCouponButton onClick={() => props?.applyCoupon(couponCode)}>Apply</MApplyCouponButton>
                         </CouponTextDiv>  
                         <MCouponPara>No Coupons Available</MCouponPara>
                     </MCouponCard> 
@@ -89,25 +107,32 @@ function Cart(props){
             }
             
             <EZCard>
-                <Label> Cart Summary </Label>
-                <SubTotalDiv>
-                    <h1 style = {{fontWeight:"normal"}}>Subtotal:</h1>
-                    <h1>Rs.{props?.cart?.cart?.totalAmount || 0}</h1>
-                </SubTotalDiv>
-                <DiscountDiv>
-                    <h1 style = {{fontWeight:"normal"}}>Discount:</h1>
-                    <h1>Rs {props?.cart?.cart?.discountAmount ==null? 0: props?.cart?.cart?.discountAmount}</h1>
-                </DiscountDiv>
-                
-                <TotalDiv>
-                    <h1 style = {{fontWeight:"normal"}}>Total:</h1>
-                    <h1>Rs {(props?.cart?.cart?.totalAmount || 0) - (props?.cart?.cart?.discountAmount || 0)}</h1>
-                </TotalDiv>
+                <CardHeaderText> Order Summary </CardHeaderText>
+                {
+                    !cart?.needsInspection ?
+                    <>
+                        <SubTotalDiv>
+                            <h1 style = {{fontWeight:"normal"}}>Subtotal</h1>
+                            <CartPriceMPara>&#8377; {cart?.totalAmount || 0}</CartPriceMPara>
+                        </SubTotalDiv>
+
+                        <DiscountDiv>
+                            <h1 style = {{fontWeight:"normal"}}>Discount</h1>
+                            <CartPriceMPara>&#8377; {cart?.discountAmount ==null? 0: cart?.discountAmount}</CartPriceMPara>
+                        </DiscountDiv>
+                        
+                        <TotalDiv>
+                            <h1 style = {{fontWeight:"normal"}}>Total</h1>
+                            <CartPriceMPara>&#8377; {(cart?.totalAmount || 0) - (cart?.discountAmount || 0)}</CartPriceMPara>
+                        </TotalDiv>
+                    </> : 
+                    <h1>We'll calculate the price and Call you.</h1>
+                }
             </EZCard> 
 
-            <CheckOutButton>Checkout</CheckOutButton>
+            <MobileActionButton onClick = {() => location.href = "/checkout"}disabled = {disableCheckoutButton}>Checkout</MobileActionButton>
 
-        </MCartPageWrapper>
+        </MCartPageWrapper>: <EmptyCart/>)
         }
     </MobilePageLayout>
 }
@@ -121,9 +146,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchCart: () => {dispatch(fetchCart())},
-        deleteItem: (id="")=> {dispatch(deleteItem(id))}
-        // fetchPackages: (filter = {}) => { dispatch(fetchPackages(filter))},
-        // fetchCar: () => {dispatch(fetchCar())},
+        deleteItem: (id="")=> {dispatch(deleteItem(id))},
+        applyCoupon: (code="") => {dispatch(applyCoupon(code))}
     }
 }
 

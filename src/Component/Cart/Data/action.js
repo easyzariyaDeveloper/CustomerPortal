@@ -18,3 +18,10 @@ export function deleteItem (id){
         }
     }
 }
+
+export function applyCoupon (code){
+    return{
+        type: "APPLY_COUPON",
+        payload: code
+    }
+}

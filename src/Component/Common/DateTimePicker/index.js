@@ -10,24 +10,23 @@ import {
 
 import {DateStyling,TimeStyling} from "./style";
 
-export default function MaterialUIPickers() {
+export default function MaterialUIPickers(props) {
   // The first commit of Material-UI
   const [selectedDate, setSelectedDate] = React.useState(null);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
+    props.handleChange(date);
   };
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <DateStyling 
-            margin="normal"
+            // margin="normal"
             value={selectedDate} 
             format="d MMM yyyy"
-            onChange={handleDateChange}
             id="date-picker-inline"
             label="DD/MM/YYYY"
-            value={selectedDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{
               'aria-label': 'change date',
@@ -36,7 +35,7 @@ export default function MaterialUIPickers() {
         />
         
         <TimeStyling
-          margin="normal"
+          // margin="normal"
           id="time-picker"
           label="Time Slot"
           value={selectedDate}
@@ -48,5 +47,6 @@ export default function MaterialUIPickers() {
     </MuiPickersUtilsProvider>
   );
 }
+
 
 

@@ -7,7 +7,7 @@ const defaultCartState = {
 
 export function CartReducer(state = defaultCartState, {type, data, error}){
     switch (type){
-        case "FETCHING_API": 
+        case "FETCHING_CART_DATA": 
             return {
                 ...state,
                 inProgress: true

@@ -2,6 +2,7 @@ import { call, put } from "redux-saga/effects";
 import { BASE_API_ENDPOINT } from "../../../constant";
 import {formatPackageResponse} from "../util";
 import APIWrapper from "../../../Constants/ApiWrapper";
+import { fetchCart } from "../../Cart/Data/saga";
 
 export function* fetchPackages({payload}) {
     yield put({ type: "FETCHING_API" });
@@ -134,8 +135,7 @@ export function* addSubPackage({payload}){
         yield put({
             type: 'ADDED_TO_CART'
         });
-        yield put({ type: 'FETCHING_API_SUCCESS' });
-
+        yield* fetchCart();
     } catch (error) {
         console.log(error);
         yield put({

@@ -11,6 +11,7 @@ import Account from "../Component/SignUp/MobileView";
 import Profile from "../Component/Profile/MobileView";
 import Address from "../Component/Address";
 import Home from "../Component/Home/MobileView/index";
+import CheckOutCart from "../Component/CheckOutCart/MobileView";
 
 
 export default () => {
@@ -31,6 +32,7 @@ export default () => {
       <Route path = "/otp" component={Otp} />
       <Route path = "/service/:mode/:type" component={ServiceList} />
       <Route path = "/service-description/:mode/:packageId/:packageCode" component={ServiceDescription} />
+      <Route path = "/checkout" component = {CheckOutCart} />
       {/* <Route component = {NotFound} /> */}
     </>
   );

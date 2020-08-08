@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {base_spacing, ez_button_color} from "../../../Assets/style-var";
 import { MobileActionButton, alignCenter } from "../../../Assets/common-styled";
 import {withStyles } from '@material-ui/core/styles';
-import MaterialUIPickers from "../../Common/DateTimePicker";
+// import MaterialUIPickers from "../../Common/DateTimePicker";
 
 const secondaryText = "color: rgba(0,0,0,0.54);";
 
@@ -59,18 +59,21 @@ export const DeleteBinButton = styled.img`
     vertical-align: middle;
 `;
 
-//     margin-left:8px;
-//     border: none;
-//     color: white;
-//     background: #1A91AB;
-//     border-radius:50%;
-// `;
-
-export const Label = styled.h2`
+export const CardHeaderText = styled.h2`
     margin-bottom: ${base_spacing}px;
-    text-align: center;
-    color: ${ez_button_color};
+    border-bottom: 1px dashed rgba(0,0,0,0.54);
+    padding-bottom: ${base_spacing}px;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16px;
+`;
+
+export const Label = styled.label`
     ${secondaryText}
+`;
+
+export const Row = styled.section`
+
 `;
 
 export const ServiceMPara = styled.p`
@@ -81,12 +84,10 @@ export const CartPriceMPara = styled.p`
     font-size: 14px;
     font-weight: 500;
 `;
-export const DateTimeGrid = styled.div`
-    display: flex;
-`;
 
 export const DateTimeMPicker = styled.div`
     display: grid;
+    justify-content: center;
 `;
 
 export const CouponCodeButton = styled.button`
@@ -95,6 +96,7 @@ export const CouponCodeButton = styled.button`
     background: #F6F5F5;
     border-radius: ${base_spacing/2}px;
     border: none;
+    margin: ${base_spacing*3}px 0 ${base_spacing}px 0;
 `;
 
 export const OverlayCard = styled.div`
@@ -155,7 +157,8 @@ export const CheckOutButton = styled(MobileActionButton)`
     height: 40px;
     margin: 0 auto;
     margin-bottom: ${base_spacing *2}px;
-    width: 80%;
+    width: 90%;
+    display: block;
 `;
 
 export const MCouponCard = styled.div`
@@ -188,16 +191,25 @@ export const MApplyCouponButton = styled.button`
     outline:none;
 `;
 
+export const EmptyCardWrapper = styled.div`
+    margin: 0 auto;
+    width: 80%;
+    position: fixed;
+    top: 50%;
+    left: 10%;
+}
 
-export const DateTimePickers = withStyles(theme => ({
-    root: {
-        '&:first-child': {
-            marginTop: '0px',
-            marginBottom: '0px'
-          },
+`
+
+// export const DateTimePickers = withStyles(theme => ({
+//     root: {
+//         '&:first-child': {
+//             marginTop: '0px',
+//             marginBottom: '0px'
+//           },
       
-          '&:last-child': {
-            marginTop: '0px',
-            marginBottom: '0px'
-          },
-    }}))(MaterialUIPickers);
+//           '&:last-child': {
+//             marginTop: '0px',
+//             marginBottom: '0px'
+//           },
+//     }}))(MaterialUIPickers);

@@ -7,7 +7,6 @@ import { base_spacing, disabled_button_bg_color } from "../../../Assets/style-va
 
 
 export const DateStyling = styled(KeyboardDatePicker)`
-    margin-right: ${base_spacing * 3}px !important;
     width: 150px;
 
     .MuiInputBase-input{
@@ -22,7 +21,12 @@ export const TimeStyling = styled(KeyboardTimePicker)`
     .MuiInputBase-input{
         color: black;
     }
+    
 
 `;
+
+// .MuiIconButton-label{
+    //     display: none;
+    // }
 
 
