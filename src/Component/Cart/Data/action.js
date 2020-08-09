@@ -28,6 +28,12 @@ export function applyCoupon (code){
     }
 }
 
+export function removeCoupon(){
+    return{
+        type: "REMOVE_COUPON"
+    }
+}
+
 export function setTime(time){
     return {
         type: "SET_TIME",

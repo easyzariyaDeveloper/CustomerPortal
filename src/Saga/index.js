@@ -1,11 +1,11 @@
 import { takeLatest } from "redux-saga/effects";
 import { fetchPackages, fetchCars, fetchCities, fetchPackageById, addSubPackage } from "../Component/SelectService/Data/saga";
 import { fetchBrandForCars, fetchCarListByBrand, addCarByUser, getCarById} from "../Component/AddCar/Data/saga";
-import { loginUser, userSignup } from "../Component/SignUp/Data/saga";
+import { loginUser, userSignup, getResetPasswordOtp, verifyResetPasswordOtp } from "../Component/SignUp/Data/saga";
 import { getProfile, changePassword, deleteCar, deleteAddress } from "../Component/Profile/Data/saga";
 import { createOtp, verifyOTP } from "../Component/OtpPage/Data/saga";
 import { addAddressByUser, updateCustomerAddress } from "../Component/Address/Data/saga";
-import { fetchCart, hasActiveCart, deleteItem, applyCoupon, setTime } from "../Component/Cart/Data/saga";
+import { fetchCart, hasActiveCart, deleteItem, applyCoupon, setTime, removeCoupon } from "../Component/Cart/Data/saga";
 import { createOrder } from "../Component/CheckOutCart/MobileView/Data/saga";
 
 
@@ -26,6 +26,10 @@ export default function* appSaga() {
     yield takeLatest("FETCH_PROFILE", getProfile);
     yield takeLatest("CREATE_OTP", createOtp);
     yield takeLatest("VERIFY_OTP", verifyOTP);
+    yield takeLatest("RESET_PASSWORD_CREATE_OTP", getResetPasswordOtp);
+    yield takeLatest("VERIFY_RESET_PASSWORD_OTP", verifyResetPasswordOtp);
+
+
     yield takeLatest("CUSTOMER_ADD_ADDRESS", addAddressByUser);
     yield takeLatest("CUSTOMER_ADD_CAR", addCarByUser);
     yield takeLatest("DELETE_CAR", deleteCar);
@@ -39,6 +43,7 @@ export default function* appSaga() {
     yield takeLatest("FETCH_CART_DETAILS", fetchCart);
     yield takeLatest("DELETE_ITEM", deleteItem);
     yield takeLatest("APPLY_COUPON", applyCoupon);
+    yield takeLatest("REMOVE_COUPON", removeCoupon);
     yield takeLatest("CREATE_ORDER", createOrder);
     yield takeLatest("SET_TIME", setTime);
 

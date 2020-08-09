@@ -68,13 +68,6 @@ export const CardHeaderText = styled.h2`
     font-size: 16px;
 `;
 
-export const Label = styled.label`
-    ${secondaryText}
-`;
-
-export const Row = styled.section`
-
-`;
 
 export const ServiceMPara = styled.p`
     font-weight: 500;
@@ -196,7 +189,12 @@ export const CartButtonDiv = styled.div`
     padding: ${base_spacing*2}px;
 `;
 
-
+export const AppliedCouponDiv = styled.div`
+    display: flex;
+    padding: 15px 10px;
+    background: antiquewhite;
+    margin: 10px;
+`;
 
 // export const DateTimePickers = withStyles(theme => ({
 //     root: {

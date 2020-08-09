@@ -93,6 +93,50 @@ export function* userSignup({payload}){
     }
 }
 
+export function*  getResetPasswordOtp({payload}){
+    yield put({ type: "FETCH_RESETPASSWORD_OTP_INPROGRESS" });
+    try{
+        const {data} = yield call(APIWrapper, {
+            method: "GET",
+            url: '/customer/otp/reset-password',
+            data: {
+                resetInput: payload
+            }
+        });
+        yield put({
+            type: 'FETCH_RESETPASSWORD_OTP_SUCCESS',
+            data
+        })
+    }catch(error){
+        console.log(error);
+        yield put({
+            type: 'FETCH_RESETPASSWORD_OTP_FAILED',
+            error
+        });
+    }
+}
 
-
+export function*  verifyResetPasswordOtp({payload}){
+    yield put({ type: "VERIFY_RESETPASSWORD_OTP_INPROGRESS" });
+    try{
+        const {data} = yield call(APIWrapper, {
+            method: "PUT",
+            url: '/customer/otp/match_otp_verify/reset-password',
+            data: {
+                "otp" : payload?.otp,
+                "resetInput": payload?.resetInput
+            }
+        });
+        yield put({
+            type: 'VERIFY_RESETPASSWORD_OTP_SUCCESS',
+            data
+        })
+    }catch(error){
+        console.log(error);
+        yield put({
+            type: 'VERIFY_RESETPASSWORD_OTP_FAILED',
+            error
+        });
+    }
+}
 

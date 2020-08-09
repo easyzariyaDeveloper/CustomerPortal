@@ -57,3 +57,9 @@ export const ResetWrapper = styled.div`
 export const ResetPasswordLabel = styled.p`
     padding: 10px 0 10px 25px;
 `;
+
+export const ResendOtpLabelDiv = styled.div`
+    display: flex;
+    margin: 0px 10px 20px 10px;
+    justify-content: space-between;
+`;

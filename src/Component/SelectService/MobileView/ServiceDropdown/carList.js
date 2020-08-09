@@ -29,6 +29,16 @@ function CarList(props) {
         fuelType: "",
     });
 
+    const matchedCarName = vehicle.model!= "" ? props?.models.carModel.find(({id}) => id == vehicle.model) : "";
+
+
+    const carDetails = {
+        brand: matchedCarName?.brand,
+        carName: matchedCarName?.model,
+        variantName: vehicle?.fuelType
+    }
+    localStorage.setItem("carDetails", JSON.stringify(carDetails));
+
     const [car, setCar] = useState("");
 
     const[radio, setRadio] = useState("personal");
@@ -45,7 +55,6 @@ function CarList(props) {
                 <FormControlLabel value="personal" control={<Radio/>} label="Personal" />
                 <FormControlLabel value="all" control={<Radio/>} label="All" />
         </RadioGroup> : null) : null}
-        
             
         {
             userId ?

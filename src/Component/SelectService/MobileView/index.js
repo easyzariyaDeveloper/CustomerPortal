@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { fetchPackages } from "../Data/action";
 import CarIcon from "../../../Assets/img/carIcon.svg";
 import EditIcon from "../../../Assets/img/pencil.svg";
-
+import { readCookie } from "../../../util";
 
 import CarCityFilter from "./CarCityFilter";
 import { SelectedCarIcon, SelectedCarCard } from "./ServiceDropdown/style";
@@ -23,7 +23,18 @@ function SelectService(props) {
     const [showSelectCarPopupVisibility, setSelectCarPopupVisibility] = useState(false);
 
     const selectedCarId = localStorage.getItem("carSelectedPackage");
-    const matchedCarData = props?.profile?.carList?.find((car) => car["carId"] === selectedCarId);
+    const userId = readCookie("userUUId");
+
+    const matchedCarData = (function () {
+        if(userId){
+            localStorage.removeItem('carDetails');
+            return props?.profile?.carList?.find((car) => car["carId"] === selectedCarId)
+        } else {
+            return localStorage.getItem('carDetails') ? JSON.parse(localStorage.getItem('carDetails')) : {}
+        }
+    })();
+    //const matchedCarData = props?.profile?.carList?.find((car) => car["carId"] === selectedCarId);
+
 
     useEffect(() => {
         if(packageFilter.cityId && packageFilter.carId){
@@ -50,7 +61,7 @@ function SelectService(props) {
                 <SelectedCarIcon src={CarIcon} onClick= {()=>setCarIconVisibility(!carIconVisiblity)}/>
                 <SelectedCarCard visibility={carIconVisiblity}>
                     <p>{`${matchedCarData?.["brand"]} ${matchedCarData?.["carName"]}`}</p>
-                    <p style = {{"textTransform": "capitalize", "marginTop": "10px"}}>{matchedCarData?.variantName.toLowerCase()}</p>
+                    <p style = {{"textTransform": "capitalize", "marginTop": "10px"}}>{matchedCarData?.variantName?.toLowerCase()}</p>
                     <FilterButton onClick = {() => setSelectCarPopupVisibility(true)}>
                         Change Car
                     </FilterButton>

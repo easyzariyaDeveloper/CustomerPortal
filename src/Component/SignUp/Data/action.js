@@ -13,3 +13,19 @@ export function createSignup(signupDetails){
     }
 }
 
+export function resetPasswordCreateOtp(userId){
+    return{
+        type: "RESET_PASSWORD_CREATE_OTP",
+        payload: userId
+    }
+}
+
+export function verifyResetPasswordOtp(userId,otp){
+    return{
+        type: "VERIFY_RESET_PASSWORD_OTP",
+        payload: {
+            "otp": otp,
+            "resetInput": userId
+        }
+    }
+}

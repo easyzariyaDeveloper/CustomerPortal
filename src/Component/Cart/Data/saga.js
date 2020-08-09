@@ -124,3 +124,22 @@ export function* setTime({payload}){
 }
 
 
+
+export function* removeCoupon(){
+    yield put({type: "REMOVE_COUPON_INPROGRESS"});
+
+    try {
+        const {data} = yield call(APIWrapper,{
+            url: `/cart/removevoucher`,
+            method: "DELETE"
+        });
+        yield put({type:"REMOVE_COUPON_SUCCESSFULLY"})
+    }
+    catch(error){
+        console.log(error);
+        yield put({
+            type: 'REMOVE_COUPON_FAILED',
+            error
+        });
+    }
+}

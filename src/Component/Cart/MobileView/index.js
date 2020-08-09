@@ -2,24 +2,21 @@ import React, { useState } from "react";
 import MobilePageLayout from "../../../Layout/MobileView";
 import { DateTimeMPicker, CouponCodeButton,
     OverlayCard, CouponTextField,CouponCardCloseButton, SubTotalDiv, 
-    DiscountDiv, TotalDiv, CheckOutButton,
+    DiscountDiv, TotalDiv,
      MCartPageWrapper,MCouponCard, MCouponPara, 
-     MApplyCouponButton, MCouponImage, CouponTextDiv, DateTimePickers, CartPriceMPara, CartButtonDiv
+     MApplyCouponButton, MCouponImage, CouponTextDiv, DateTimePickers, CartPriceMPara, CartButtonDiv, AppliedCouponDiv
 } from "./style";
 
 import {
     CarInfo, CarImage,VariantName,
-    CarWrapper, Label, CardHeaderText,
-    Row
-
-} from "./style";
+    CarWrapper, CardHeaderText,} from "./style";
 import MServices from "./MServices";
 import MaterialUIPickers from "../../Common/DateTimePicker";
 import Coupon from "../../../Assets/img/coupon.png";
 import { ServiceCart, CouponCodes } from "../mockCartData";
 import CouponCancel from "../../../Assets/img/coupon_cancel.jpg"
 import { connect } from "react-redux";
-import { fetchCart, deleteItem, applyCoupon,setTime } from "../Data/action";
+import { fetchCart, deleteItem, applyCoupon,setTime, removeCoupon } from "../Data/action";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { EZCard } from "../../Common/MobileCard";
 import CarIcon from "../../../Assets/img/carIcon.svg";
@@ -89,13 +86,24 @@ function Cart(props){
                     </DateTimeMPicker>
                     
                 </div>
-                {/* {
-                    props?.cart?appliedVoucher
-                } */}
-                <CouponCodeButton onClick = {() => setCouponCardVisibility(true)}>
-                    <MCouponImage src = {Coupon} />
-                    {`Apply Coupon >`}
-                </CouponCodeButton>
+
+                {
+                    props?.cart?.cart?.appliedVoucher ? <AppliedCouponDiv>
+                        <>
+                            <MCouponImage src = {Coupon} />
+                            <span>{props.cart.cart.appliedVoucher.code} </span>
+                            </>
+                            <span style= {{fontStyle:"italic",fontSize:"12px",paddingLeft: "10px"}}>applied successfully</span>
+                            
+                            <button onClick= {() => {props?.removeCoupon();
+                                props?.fetchCart()
+                            }} style={{float:"right"}}>Remove</button>
+                    </AppliedCouponDiv>: <CouponCodeButton onClick = {() => setCouponCardVisibility(true)}>
+                            <MCouponImage src = {Coupon} />
+                            {`Apply Coupon >`}
+                        </CouponCodeButton>
+                }
+                
             </EZCard>
             {
                 couponCardVisibility ? <OverlayCard> 
@@ -110,7 +118,9 @@ function Cart(props){
                                 onChange={(event) => setCouponCode(event.target.value)}
                                 label="Enter Coupon Code"
                             />
-                            <MApplyCouponButton onClick={() => props?.applyCoupon(couponCode)}>Apply</MApplyCouponButton>
+                            <MApplyCouponButton onClick={() => {props?.applyCoupon(couponCode)
+                                setCouponCardVisibility(false)
+                            }}>Apply</MApplyCouponButton>
                         </CouponTextDiv>  
                         <MCouponPara>No Coupons Available</MCouponPara>
                     </MCouponCard> 
@@ -162,6 +172,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchCart: () => {dispatch(fetchCart())},
         deleteItem: (id="")=> {dispatch(deleteItem(id))},
         applyCoupon: (code="") => {dispatch(applyCoupon(code))},
+        removeCoupon: () => {dispatch(removeCoupon())},
         setTime: (time="") => {dispatch(setTime(time))}
     }
 }
