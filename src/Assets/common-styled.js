@@ -156,6 +156,7 @@ export const MobileActionButton = styled.button`
     background: ${ez_button_color};
     color: ${white_color};
     font-size: 18px;
+    outline: transparent;
 `;
 
 

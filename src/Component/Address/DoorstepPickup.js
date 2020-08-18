@@ -124,10 +124,7 @@ function DoorstepPickup(props) {
             props.preSelectedAddressId ? <SaveButton onClick = {updateAddress}>
                 Update Address
             </SaveButton> : 
-        <SaveButton onClick = {() => {
-            addAddress;
-            location.href = `${checkoutReferrer.current}`
-        }}
+        <SaveButton onClick = {() => addAddress()}
             disabled = {!(props?.address?.enableInputComponent) && (userAddress?.house =="")}
         >Submit</SaveButton>
         }

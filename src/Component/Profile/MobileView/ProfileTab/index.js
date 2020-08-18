@@ -10,6 +10,7 @@ import { ProfileTabWrapper } from '../style';
 import {URLToIndexMap} from "./config";
 import { withRouter } from 'react-router-dom';
 import { EZFontMediumSize } from '../../../../Assets/style-var';
+import OrderHistory from '../OrderHistory';
 
 
 
@@ -72,13 +73,11 @@ function ProfileTab(props) {
         </AntTabs>
       </ProfileTabWrapper>
       
-      <SwipeableViews index={activeTabIndex} onChangeIndex={handleChangeIndex} slideStyle = {{position: "relative"}}>
+      <SwipeableViews index={activeTabIndex} onChangeIndex={handleChangeIndex} slideStyle = {{position: "relative", height: "80vh"}}>
         <MyProfile/>
         <MyCars/>
         <AddressList />
-        <div>
-          slide 4
-        </div>
+        <OrderHistory/>
       </SwipeableViews>
     </>
   );

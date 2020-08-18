@@ -34,9 +34,9 @@ export function removeCoupon(){
     }
 }
 
-export function setTime(time){
+export function navigateNext(payload){
     return {
-        type: "SET_TIME",
-        payload: time
+        type: "NAVIGATE_SELECT_ADDRESS_PAGE",
+        payload
     }
 }

@@ -47,3 +47,10 @@ export const removeSubPackage = () => {
     type: "REMOVE_SUBPACKAGE",
     }
 }
+
+export const setCarToCart = (carObject) =>{
+  return{
+    type: "ADD_CAR_TO_CART",
+    payload: carObject
+  }
+}

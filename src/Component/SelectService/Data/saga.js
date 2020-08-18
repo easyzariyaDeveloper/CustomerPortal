@@ -146,8 +146,28 @@ export function* addSubPackage({payload}){
             type: 'FETCHING_API_FAILED',
             error: {
                 ...error,
-                message: "Failed to fetch the package information"
+                ErrorMessage: "Failed to add this package, Item already exists in cart"
             }
+        });
+    }
+}
+
+export function* setCarToCart({payload}){
+    yield put ({type:"SET_CAR_TO_CART_INPROGRESS"});
+
+    try{
+        const{data}= yield call(APIWrapper,{
+            method: "PUT",
+            url: `/cart/setcar`,
+            data: payload
+        });
+        yield put ({type: "SET_CAR_TO_CART_SUCCESS"})
+    }
+    catch (error) {
+        console.log(error);
+        yield put({
+            type: 'SET_CAR_TO_CART_FAILED',
+            error
         });
     }
 }

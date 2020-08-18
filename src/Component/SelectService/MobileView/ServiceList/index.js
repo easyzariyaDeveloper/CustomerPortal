@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import MobilePageLayout from "../../../../Layout/MobileView";
 import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg, CarListInDialog, CarCollapseInDialog, CollapseInDialogDiv} from "./style";
 import { connect } from "react-redux";
-import { fetchPackageById, addSubPackage, removeSubPackage } from "../../Data/action";
+import { fetchPackageById, addSubPackage, setCarToCart } from "../../Data/action";
 import defaultImg from "../../../../Assets/img/gold.jpg";
 import Tick from "../../../../Assets/img/gradient tick.jpg"
 import Lists from "../../../../Assets/img/lists.jpg"
@@ -91,28 +91,34 @@ function ServiceList(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick = {() => {
-              const {carId, fuelVariantId} = props?.profile?.carList[0];
-              if(carId && fuelVariantId){
-                setFilter({
-                    carId: carId,
-                    variantId: fuelVariantId,
-                    cityId: localStorage.getItem("citySelectedPackage")
-                  });
-              }
-              localStorage.removeItem("carSelectedPackage");
-              localStorage.removeItem("citySelectedPackage");
+              const selectedCarId = localStorage.getItem("carSelectedPackage");
+              const carObj = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
+              const {carId, fuelVariantId} = carObj;
+               if(carId && fuelVariantId){
+                 setFilter({
+                     carId: carId,
+                     variantId: fuelVariantId,
+                     cityId: localStorage.getItem("citySelectedPackage")
+                   });
+               }
+               props.setCarToCart(carObj);
               setCollapse(!collapse);
             }} color="primary">
             Revert
           </Button>
-          <Button onClick = {() => {
-              const carId = localStorage.getItem("carSelectedPackage");
-              localStorage.removeItem("carSelectedPackage");
-              setShowCarMisMatchWarning(false);
-              window.location.href = `/add-car?carId=${carId}&redirect=${location.pathname}`;
+          {console.log(props?.profile.carList)}
+          {
+            props?.profile.carList.map(({carId}) => {
+                return carId == localStorage.getItem("carSelectedPackage")
+            }).includes(true) ? null : <Button onClick = {() => {
+                const carId = localStorage.getItem("carSelectedPackage");
+                setShowCarMisMatchWarning(false);
+                window.location.href = `/add-car?carId=${carId}&redirect=${location.pathname}`;
             }} color="primary">
-            Add Car
-          </Button>
+            Add Car 
+            </Button>
+          }
+          
         </DialogActions>
     
         <CollapseInDialogDiv>
@@ -146,26 +152,34 @@ function ServiceList(props) {
     }, [filter?.carId]);
 
     useEffect(() => {
-        const {carList = []} = props.profile;
         const carSelectedAnonymously = localStorage.getItem("carSelectedPackage");
-        const matchedCarData = carList?.find((car) => car["carId"] === carSelectedAnonymously);
-        if(carList){
-            if(
-                carList.length > 0 &&  
-                carSelectedAnonymously && 
-                matchedCarData?.["carId"] !== carSelectedAnonymously
-            ){
+        if(userId){
+            if(props?.cart?.car?.carId && props?.cart?.car?.carId != carSelectedAnonymously){
                 setShowCarMisMatchWarning(true);
-            } else if(carList.length > 0 && matchedCarData?.["carId"] === carSelectedAnonymously){
-                const {carId, fuelVariantId } = matchedCarData;
+            } else if(props?.cart?.car?.carId && !props?.profile?.carList.filter(({carId}) => (carId == props?.cart?.car?.carId))){
+                setShowCarMisMatchWarning(true);
+            } else if(props?.cart?.car?.carId){
                 setFilter({
-                    carId: carId,
-                    variantId: fuelVariantId,
+                    carId: props?.cart?.car?.carId,
+                    variantId: props?.cart?.car?.fuelVariantId,
                     cityId: localStorage.getItem("citySelectedPackage")
-                });
+                })
             }
         }
-    }, [props?.profile?.customerId]);
+    }, [props?.cart?.id]);
+
+      function addToCart(code){
+        if(userId){
+            let carObj = matchedCarData;
+            if(props?.cart?.cart?.car?.carId && props?.cart?.cart?.car?.carId != selectedCarId ){
+                carObj = props?.profile?.carList.find(car => car["carId"] == selectedCarId);
+                props?.setCarToCart(carObj);
+            }  
+            props.addSubPackage(carObj, selectedCityId,{...itemIdObj,subPackageName: code})
+        } else {
+            location.href = `/login?referrer=${location.pathname}?carId=${localStorage.getItem("carSelectedPackage")}&cityId=${localStorage.getItem("citySelectedPackage")}`
+        }
+    }
 
     if (serviceId) {
         return <MobilePageLayout pageName = {packageData[0] && packageData[0]["label"]}>
@@ -205,12 +219,13 @@ function ServiceList(props) {
                                 </ServiceListCardWrapper>
                                 <ButtonDiv>
                                     <ListImg src =  {Lists} />
-                                    <AddButton onClick ={() => {
+                                    <AddButton onClick = {() => addToCart(code)}>Add</AddButton>
+                                    {/* <AddButton onClick ={() => {
                                         userId ? props.addSubPackage(matchedCarData, selectedCityId,{...itemIdObj,subPackageName: code}) : 
                                         location.href = `/login?referrer=${location.pathname}?carId=${localStorage.getItem("carSelectedPackage")}&cityId=${localStorage.getItem("citySelectedPackage")}`
                                         console.log(props?.loadingError)
                                     }}>
-                                    Add</AddButton>
+                                    Add</AddButton> */}
                                 </ButtonDiv>
                             </ServiceListCard>
                         }) : null
@@ -236,7 +251,8 @@ const mapStateToProps = (state) => {
         packages: state?.packages?.["packages"],
         subPackages: state?.subPackages?.subPackageLabel,
         profile: state?.profile,
-        loadingError: state?.loading?.error
+        loadingError: state?.loading?.error,
+        cart: state?.cart?.cart
     }
 };
 
@@ -244,6 +260,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchPackageById: (packageId = "", filter = {}) => { dispatch(fetchPackageById(packageId, filter)) },
         addSubPackage: (car = {},cityId= "",itemIdObj ={}) => { dispatch(addSubPackage(car,cityId,itemIdObj)) },
+        setCarToCart: (carObject ={}) => {dispatch(setCarToCart(carObject))}
     }
 }
 

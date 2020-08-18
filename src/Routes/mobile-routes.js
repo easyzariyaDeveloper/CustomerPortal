@@ -12,6 +12,7 @@ import Address from "../Component/Address";
 import Home from "../Component/Home/MobileView/index";
 import CheckOutCart from "../Component/CheckOutCart/MobileView";
 import InitiatePayment from "../Component/CheckOutCart/MobileView/payment";
+import OrderDetails from "../Component/OrderDetails/MobileView";
 
 export default () => {
   return (
@@ -33,6 +34,7 @@ export default () => {
       <Route path = "/otp" component={Otp} />
       <Route path = "/service/:mode/:type" component={ServiceList} />
       <Route path = "/service-description/:mode/:packageId/:packageCode" component={ServiceDescription} />
+      <Route path = "/order/:orderId/detail" component={OrderDetails} />
       
       {/* <Route component = {NotFound} /> */}
     </>

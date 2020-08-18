@@ -16,7 +16,7 @@ import Coupon from "../../../Assets/img/coupon.png";
 import { ServiceCart, CouponCodes } from "../mockCartData";
 import CouponCancel from "../../../Assets/img/coupon_cancel.jpg"
 import { connect } from "react-redux";
-import { fetchCart, deleteItem, applyCoupon,setTime, removeCoupon } from "../Data/action";
+import { fetchCart, deleteItem, applyCoupon,navigateNext, removeCoupon } from "../Data/action";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { EZCard } from "../../Common/MobileCard";
 import CarIcon from "../../../Assets/img/carIcon.svg";
@@ -35,21 +35,18 @@ function Cart(props){
 
     const handleDateTimeChange = (value) =>{
         setDateTime(value);
-        
-        console.log(value.getTime())
     }
     
 
     function navigateNext(){
-        location.href = '/cart/add-address'
         if(dateTime.getTime() - Date.now() > 14400000) {
-            props?.setTime(dateTime.toISOString());
+            props?.navigateNext({
+                time: dateTime.toISOString()
+            });
+            location.href = "/cart/add-address"
         } else {
-            alert("enter correct time")
-           
+            alert("Enter correct time");
         }
-        
-        console.log(dateTime)
     }
 
     return <MobilePageLayout pageName = "Cart">
@@ -173,7 +170,7 @@ const mapDispatchToProps = (dispatch) => {
         deleteItem: (id="")=> {dispatch(deleteItem(id))},
         applyCoupon: (code="") => {dispatch(applyCoupon(code))},
         removeCoupon: () => {dispatch(removeCoupon())},
-        setTime: (time="") => {dispatch(setTime(time))}
+        navigateNext: (payload) => {dispatch(navigateNext(payload))}
     }
 }
 

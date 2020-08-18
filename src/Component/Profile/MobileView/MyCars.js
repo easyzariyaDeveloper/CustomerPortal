@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import Skeleton from '@material-ui/lab/Skeleton';
 import {useStyles} from "../../../Assets/common-styled";
@@ -13,7 +13,6 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 function MyCars(props) {
   const classes = useStyles();
 
-  const [kebabMenu, setKebabMenu] = useState(false);
   const [indexForActionButton, SetIndexForActionButton] = useState(-1);
 
   const [values, setValues] = useState({
@@ -22,6 +21,10 @@ function MyCars(props) {
     numberPlate: '',
     lastService: ''
   });
+
+  useEffect(() => {
+    props?.fetchProfile();
+  },[props?.profile?.carList?.length])
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -58,7 +61,8 @@ function MyCars(props) {
                     index === indexForActionButton ? <KebabMenuCard>
                         <KebabMenuButton onClick = {()=> {
                           props?.deleteCar(car.id);
-                          props?.fetchProfile()
+                          props?.fetchProfile();
+                          SetIndexForActionButton(-1);
                         }}>Remove</KebabMenuButton>
 
                         <KebabMenuButton 

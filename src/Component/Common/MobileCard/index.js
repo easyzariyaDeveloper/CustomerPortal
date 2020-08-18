@@ -13,6 +13,6 @@ export const EZCard = styled.div`
     background: ${white_color};
     padding: ${base_spacing}px;
     overflow: hidden;
-    border-radius: ${base_spacing/2}px;
+    border-radius: ${base_spacing}px;
 `;
 

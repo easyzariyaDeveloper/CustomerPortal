@@ -97,23 +97,25 @@ export function* applyCoupon({payload}){
 }
 
 
-export function* setTime({payload}){
+export function* navigateToSelectAddress({payload}){
     yield put({type: "FETCHING_API"});
-    
+    const {time} = payload;
     try {
         const { data,status } = yield call(APIWrapper, {
             url: `/cart/setdate`,
             method: "POST",
             data: {
-                "date": payload
+                "date": time
             }
         });
-        if(status === 200){
-            location.href = "/checkout";
-            yield put({
-                type: 'SET_TIME_SUCCESS',
-            });
-        }
+        // if(status === 200){
+        //     location.href = "/cart/add-address";
+        //     yield put({
+        //         type: 'SET_TIME_SUCCESS',
+        //     });
+        // }
+ 
+        
     } catch (error) {
         console.log(error);
         yield put({

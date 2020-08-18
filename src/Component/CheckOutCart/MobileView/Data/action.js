@@ -4,3 +4,10 @@ export function createOrder(type){
         payload: type
     }
 }
+
+export function setShippingAddress(address){
+    return {
+        type:"SET_SHIPPING_ADDRESS",
+        payload: address
+    }
+}

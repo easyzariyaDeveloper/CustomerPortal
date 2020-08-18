@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { base_spacing, ez_button_color, white_color, desktop_gradient, disabled_button_color } from "../../../Assets/style-var";
 import { EZCard } from "../../Common/MobileCard";
 import CloseIcon from '@material-ui/icons/Close';
+import { MobileActionButton } from "../../../Assets/common-styled";
 
 
 export const ProfilePicDiv = styled.div`
@@ -165,7 +166,7 @@ export const CarImage = styled.img`
 `;
 
 export const LabelHeading = styled.p`
-    padding: 5px;
+    padding: ${base_spacing*0.8}px ${base_spacing}px;
     text-transform: capitalize;
     font-size: 15px;
 
@@ -187,10 +188,23 @@ export const KebabMenuCard = styled(EZCard)`
 export const KebabMenuButton = styled.button`
     border: none;
     outline: none;
-    padding: 10px;
+    padding: ${base_spacing}px;
     text-align: left;
     color: black;
     background: white;
     cursor: pointer;
     font-size: 15px;
+`;
+
+export const OrderHistoryHeaderDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: ${base_spacing}px;
+    margin-bottom: ${base_spacing/2}px;
+    color: rgba(0, 0, 0, 0.54);
+    border-bottom: 1px dashed;
+`;
+
+export const OrderDetailsButton = styled(MobileActionButton)`
+    margin: 5px;
 `;

@@ -5,13 +5,19 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { connect } from "react-redux";
 import { CheckoutRadioWrapper, CheckoutCard, CheckoutButton, CheckoutButtonDiv } from "./style";
+import { setShippingAddress } from "./Data/action";
 
 
 
 function DoorstepAddress(props) {
     const [address, setAddress] = React.useState('');
+    const selectedAddress = props?.profile?.addressList.find(addr => addr.addressId == address);
 
-  console.log(address)
+    function setShippingAddress(addr){
+        if(addr) {
+            props?.setShippingAddress(addr);
+        }
+    }
   
     return (
         <div>
@@ -20,8 +26,8 @@ function DoorstepAddress(props) {
             {
                 props?.profile?.addressList.map((address) => {
                     return <CheckoutRadioWrapper>
-                    <FormControlLabel value={address.addressId} control={<Radio />}/> 
-                    <CheckoutCard>{address.secondLine}</CheckoutCard>
+                        <FormControlLabel value={address.addressId} control={<Radio />}/> 
+                        <CheckoutCard>{address.secondLine}</CheckoutCard>
                     </CheckoutRadioWrapper>
                 })
             }
@@ -33,7 +39,7 @@ function DoorstepAddress(props) {
       }}>Add Address</CheckoutButton>
 
         <CheckoutButtonDiv>
-            <CheckoutButton onClick={()=> location.href=`/cart/checkout`}>Next</CheckoutButton>
+            <CheckoutButton onClick={() => setShippingAddress(selectedAddress)}>Next</CheckoutButton>
         </CheckoutButtonDiv>
     </div>
     );
@@ -48,7 +54,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        //fetchCart: () => {dispatch(fetchCart())},
+        setShippingAddress: (address) => {dispatch(setShippingAddress(address))}
     }
 }
 

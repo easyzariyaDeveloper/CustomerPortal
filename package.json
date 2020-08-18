@@ -35,6 +35,7 @@
     "http-proxy-middleware": "^1.0.5",
     "material-ui-image": "^3.2.3",
     "mobile-detect": "^1.4.4",
+    "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-geocode": "^0.2.1",

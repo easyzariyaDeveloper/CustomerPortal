@@ -19,3 +19,7 @@ export function readCookie(cname){
 export function eraseCookie(name) {   
     document.cookie = name+'=; Max-Age=-99999999;';  
 }
+
+export function getFormattedString(inputStr = ""){
+    return inputStr?.split("_")?.join(" ").toLowerCase();
+}

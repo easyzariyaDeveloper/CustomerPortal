@@ -93,6 +93,26 @@ export function* deleteAddress({payload}){
     
 }
 
+export function*  fetchOrderHistory(){
+    yield put({ type: "FETCHING_ORDER_HISTORY_INPROGRESS" });
+    try{
+        const {data} = yield call(APIWrapper, {
+            method: "GET",
+            url: '/cart/getorders',
+        });
+        yield put({
+            type: 'FETCH_ORDER_HISTORY_SUCCESS',
+            data
+        })
+    }catch(error){
+        console.log(error);
+        yield put({
+            type: 'FETCH_ORDER_HISTORY_FAILED',
+            error
+        });
+    }
+}
+
 
 
 

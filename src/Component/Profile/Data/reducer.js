@@ -11,7 +11,7 @@ const defaultProfileState = {
     carList: []
 }
 
-export default function ProfileReducer(state = defaultProfileState, {type, data, error}){
+export function ProfileReducer(state = defaultProfileState, {type, data, error}){
     switch (type){
         case  "FETCH_PROFILE":{
             return {
@@ -30,6 +30,40 @@ export default function ProfileReducer(state = defaultProfileState, {type, data,
             }
         break;
         case "FETCH_PROFILE_FAILED":
+            return {
+                ...state,
+                inProgress: false,
+                error: error,  
+            } 
+        break;
+        default:
+            return state
+    }
+}
+
+const defaultOrderHistoryState = {
+    inProgress: false,
+    orderHistory: [],
+    error:{}
+}
+
+export function OrderHistoryReducer(state = defaultOrderHistoryState, {type, data, error}){
+    switch (type){
+        case  "FETCHING_ORDER_HISTORY_INPROGRESS":{
+            return {
+                ...state,
+                inProgress:true
+            }
+        }
+        break;
+        case "FETCH_ORDER_HISTORY_SUCCESS":
+            return {
+                ...state,
+                inProgress: false,
+                orderHistory:data
+            }
+        break;
+        case "FETCH_ORDER_HISTORY_FAILED":
             return {
                 ...state,
                 inProgress: false,

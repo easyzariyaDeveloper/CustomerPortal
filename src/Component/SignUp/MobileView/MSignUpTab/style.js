@@ -63,3 +63,9 @@ export const ResendOtpLabelDiv = styled.div`
     margin: 0px 10px 20px 10px;
     justify-content: space-between;
 `;
+
+export const ResendOtpButton = styled.button`
+    border: none;
+    background: transparent;
+    color: blue;
+`;

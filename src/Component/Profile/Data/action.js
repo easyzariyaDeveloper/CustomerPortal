@@ -30,5 +30,11 @@ export function deleteAddress(addressId){
 }
 
 
+export function fetchOrderHistory(){
+    return {
+        type: "FETCH_ORDER_HISTORY"
+    }
+}
+
 
 

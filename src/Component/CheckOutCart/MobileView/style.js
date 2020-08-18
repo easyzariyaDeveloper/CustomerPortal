@@ -27,3 +27,8 @@ export const PaymentButtonDiv = styled.div`
     bottom: ${base_spacing*2}px;
     width: 100%;
 `;
+
+export const ThankYouCard = styled(EZCard)`
+    position: absolute;
+    top: 45%;
+`;

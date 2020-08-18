@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import { withRouter } from "react-router";
 import { EZCard } from '../../../Common/MobileCard';
 import TextField from "@material-ui/core/TextField";
-import { ResetOverLay, ResetSubmitButton, ResetWrapper, ResetPasswordLabel, ResendOtpLabelDiv } from "./style";
+import { ResetOverLay, ResetSubmitButton, ResetWrapper, ResetPasswordLabel, ResendOtpLabelDiv, ResendOtpButton } from "./style";
 import { isValidEmailOrPhone, MOBILE_NUMBER_LENGTH } from "../../utils";
 import { makeStyles } from "@material-ui/core/styles";
 import { resetPasswordCreateOtp, verifyResetPasswordOtp } from "../../Data/action";
@@ -91,7 +91,7 @@ function ResetPassword(props){
                   </form>
                   <ResendOtpLabelDiv>
                     <p>Didn't receive OTP ?</p>
-                    <a href = "#"> Resend OTP</a>
+                    <ResendOtpButton onClick = {() => props?.resetPasswordOtp(userId)}> Resend OTP</ResendOtpButton>
                   </ResendOtpLabelDiv>
                   <ResetSubmitButton onClick= {() => {
                     props.setVisibility(false);
