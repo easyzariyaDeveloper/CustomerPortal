@@ -31,7 +31,10 @@ export const RightDiv = styled.div`
     padding-right:20px;
 `;
 
-export const ServiceListImages = styled.img``;
+export const ServiceListImages = styled.img`
+    width: 120px;
+    height: 110px;
+`;
 
 export const CostPara = styled.p`
     text-align: center;

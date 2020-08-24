@@ -10,7 +10,7 @@ export const BannerComponent = styled.div`
 export const BannerImage = styled.img`
     height: 200px;
     width: 100%;
-    padding: ${base_spacing * 2}px ${base_spacing}px;
+    padding: ${base_spacing * 2}px ${base_spacing}px;  
 `;
 
 export const SlideContainer = styled.div`

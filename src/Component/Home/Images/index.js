@@ -1,13 +1,13 @@
-import Fun from "./fun.png";
-import Worker from "./worker.png";
-import Genuine from "./genuine.png";
-import Sustanibility from "./sustanibility.png";
+import UserFriendly from "./User Friendly.png";
+import Technician from "./Technician.png";
+import Genuine from "./Genuine.png";
+import Sustainable from "./Sustainable.png";
 import Transparency from "./transparency.png";
 import Flexibility from "./flexibility.png";
 import Responsibility from "./responsibility.png";
 import OnSpot from "./onSpot.png";
 import Calendar from "./calendar.png";
-import CarHealthReport from "./report.png";
+import CarHealthReport from "./Car Health Report.png";
 import Payment from "./payment.png";
 import TransparencyWorkDetail from "./transparency_workDetail.png";
 import RealTimeUpdate from "./realTimeUpdate.png";
@@ -17,10 +17,10 @@ import Manager from "./manager.png";
 
 
 export const  CustomerIcon = {
-    Fun,
-    Worker,
+    UserFriendly,
+    Technician,
     Genuine,
-    Sustanibility,
+    Sustainable,
     Transparency,
     CarHealthReport
 };

@@ -7,6 +7,7 @@ import Image2 from  "../slider/1.png";
 import Image3 from  "../slider/2.png";
 import Image4 from  "../slider/3.png";
 import { BannerImage, BannerComponentHeight, SlideContainer, SliderItem } from "./style";
+import Home from "../Images/Home.png"
 
 
 const properties = {
@@ -17,19 +18,22 @@ const properties = {
   slidesToShow: 1,
   speed: 400,
   swipe: true,
-  autoplay: true,
+  autoplay: false,
 };
 
 const useStyles = makeStyles(theme => ({
   root: {
     "position": "absolute",
     "left": "30px",
-    "bottom": "-20px"
+    "bottom": "-20px",
+    "width": "100%"
   },
 }));
    
 export default function Slideshow() {
   const images = [Image1, Image2, Image3, Image4];
+  
+
   // const images  = [
   //   "https://lh3.googleusercontent.com/proxy/TPDG5TUGklNY4p6LQFHIHhbcnNMpu3PY5zNYk7F-vy3z6UTJpY10KFsVPle5F-RQKgBrFB7hOK0hBAj0jcJbQjwB9GzgNUi9JGZQ9grddTsg8RyC38ANORnMc6az8V8y1w",
   //   Image1,
@@ -41,24 +45,31 @@ export default function Slideshow() {
   const [loadingList,setLoadingList] = useState(Array(images.length).fill(true));
   const classes = useStyles();
 
+    // return (
+    //   <SlideContainer>
+    //      <Slider {...properties}>
+    //       {
+    //           images.map((image, index) => {
+    //             return <>
+    //                 <SliderItem className="each-slide" key = {index}>
+    //                   {loadingList[index] && <Skeleton animation="wave" height={BannerComponentHeight} width="80%" className={classes.root} />}
+    //                   <BannerImage src = {image} style = {{"visibility": loadingList[index] ? "hidden" : "visible" }}  onLoad = {() => {
+    //                     const newLoadingList = [...loadingList];
+    //                     newLoadingList[index] = false;
+    //                     setLoadingList(newLoadingList);
+    //                   }}/> 
+    //                 </SliderItem>
+    //             </>
+    //           })
+    //       }
+    //     </Slider>
+    //   </SlideContainer>
+    // )
+
+
     return (
-      <SlideContainer>
-         <Slider {...properties}>
-          {
-              images.map((image, index) => {
-                return <>
-                    <SliderItem className="each-slide" key = {index}>
-                      {loadingList[index] && <Skeleton animation="wave" height={BannerComponentHeight} width="80%" className={classes.root} />}
-                      <BannerImage src = {image} style = {{"visibility": loadingList[index] ? "hidden" : "visible" }}  onLoad = {() => {
-                        const newLoadingList = [...loadingList];
-                        newLoadingList[index] = false;
-                        setLoadingList(newLoadingList);
-                      }}/> 
-                    </SliderItem>
-                </>
-              })
-          }
-        </Slider>
-      </SlideContainer>
+     <div>
+       <img src = {Home} alt = "Home" style = {{width: "100%"}} onClick = {() => location.href = "/services"}/>
+     </div>
     )
 }

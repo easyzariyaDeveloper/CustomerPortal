@@ -21,7 +21,7 @@ function InitiatePayment(props) {
                 <CheckoutCard>
                     <FormControl style = {{margin: "15px"}}>
                         <RadioGroup value={payment} onChange={(event) => {setPayment(event.target.value)}}>
-                            <FormControlLabel value="WAITING_FOR_COD" control={<Radio />} label="COD" />
+                            <FormControlLabel value="WAITING_FOR_COD" control={<Radio />} label="Pay after Service" />
                             <FormControlLabel value="WAITING_FOR_PAYMENT_GATEWAY" control={<Radio />} label="Online Payment" />
                         </RadioGroup>
                     </FormControl>
@@ -30,8 +30,11 @@ function InitiatePayment(props) {
 
             <PaymentButtonDiv>
                 <CheckoutButton 
-                    onClick={() => {props.createOrder(payment);
-                        setPopupToggle(true);
+                    onClick={() => {
+                        if(payment){
+                            props.createOrder(payment);
+                            setPopupToggle(true);
+                        }
                     }}>Proceed For Payment</CheckoutButton>
             </PaymentButtonDiv>
 

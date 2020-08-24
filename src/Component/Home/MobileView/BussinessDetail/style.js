@@ -16,17 +16,17 @@ export const Header = styled.p`
 export const ContentWrapper = styled.div``;
 
 export const Content = styled.div`
+    width: 184px;
+    min-height: 212px;
     border-radius: 5px;
-    padding: ${base_spacing}px;
     background: white;
     margin: ${base_spacing}px ${base_spacing * 1.5}px;
     ${EZElevation}
 `;
 
 export const CenterImage = styled.img`
-    width: 60px;
-    height: 60px;
-    margin: ${base_spacing}px auto;
+    width: 100%;
+    height: 105px;
 `;
 
 export const CenterHeader = styled.h1`
@@ -39,8 +39,9 @@ export const SubHeader = styled.p`
     padding: 10px;
     font-weight: 300;
     letter-spacing: 0.35px;
-    font-size: 13px;
-    line-height: 14px;
+    font-size: 12px;
+    line-height: 17px;
+    text-align:center;
 `;
 
 export const Label = styled.label`

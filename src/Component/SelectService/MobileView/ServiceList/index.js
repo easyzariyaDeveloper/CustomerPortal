@@ -4,7 +4,7 @@ import MobilePageLayout from "../../../../Layout/MobileView";
 import { MServiceListWrapper, ServiceListCard, ServiceListImages, PackageName, PackagesDetails, LeftDiv, RightDiv, ServiceListCardWrapper, CostPara, AddButton, ServiceMenu, ButtonDiv, TimerPara, TickImg, ServiceCount, ListImg, CarListInDialog, CarCollapseInDialog, CollapseInDialogDiv} from "./style";
 import { connect } from "react-redux";
 import { fetchPackageById, addSubPackage, setCarToCart } from "../../Data/action";
-import defaultImg from "../../../../Assets/img/gold.jpg";
+import PackageImage from "../../Images";
 import Tick from "../../../../Assets/img/gradient tick.jpg"
 import Lists from "../../../../Assets/img/lists.jpg"
 import TimerIcon from '@material-ui/icons/Timer';
@@ -198,7 +198,7 @@ function ServiceList(props) {
                             return <ServiceListCard key = {code}>
                                 <ServiceListCardWrapper href = {`/service-description/${serviceId}/${serviceKeyId}/${code}`}>
                                 <LeftDiv>
-                                    <ServiceListImages src={images ? images[0] : defaultImg} alt="image" />
+                                    <ServiceListImages src={images ? images[0] : PackageImage[pack["label"]]} alt="image" />
                                     <CostPara>Rs.{price}</CostPara>
                                 </LeftDiv>
                                 <RightDiv>

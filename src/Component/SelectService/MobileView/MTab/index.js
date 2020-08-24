@@ -6,6 +6,7 @@ import SwipeableViews from 'react-swipeable-views';
 import {TabDiv, ServiceCard, ServiceImage, Label, ServiceCardWrapper, ServiceLink, TransparentElement} from './styles';
 import {Mfont_color} from "../../../../Assets/style-var";
 import DefaultImage from "../../../../Assets/img/General.png";
+import PackageImage from "../../Images/index";
 
 
 //https://react-swipeable-views.com/demos/demos/
@@ -77,7 +78,8 @@ const handleChange = (event, value) => {
                     props["cardInfo"][id].map(({label, images, id}) => {
                       return <ServiceCard>
                         <ServiceLink href = {`/service/${tabs[index]["id"]}/${id}`}>
-                          <ServiceImage src = {images.length > 0 ? images[0] : DefaultImage} />
+                          <ServiceImage src = {images.length > 0 ? images[0] : PackageImage[label]} />
+                          {/* <ServiceImage src = {`${PackageImage[label]}`} />  */}
                           <Label>{label}</Label>
                         </ServiceLink> 
                       </ServiceCard>

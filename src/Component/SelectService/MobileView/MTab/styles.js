@@ -22,12 +22,11 @@ export const ServiceCardWrapper = styled.div`
 `;
 
 export const ServiceCard = styled.div`
-    width: ${base_spacing*13}px;
-    height: ${base_spacing*12}px;
+    width: ${base_spacing*15}px;
+    height: ${base_spacing*15}px;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: ${base_spacing*1.5}px;
-    padding: ${base_spacing}px;
+    border-radius: ${base_spacing*0.5}px;
     align-self: center;
     justify-self: center;
     position: relative;
@@ -36,7 +35,8 @@ export const ServiceCard = styled.div`
 export const ServiceImage = styled.img`
     display: block;
     margin: auto;
-    padding-bottom: ${base_spacing}px;
+    height: 110px;
+    width: 100%;
 `;
 
 export const Label = styled.p`
@@ -45,6 +45,11 @@ export const Label = styled.p`
     font-size: ${base_spacing*1.3}px;
     display: flex;
     justify-content: center;
+    height: 40px;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
 `;
 
 export const ServiceLink = styled.a`

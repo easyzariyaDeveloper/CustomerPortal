@@ -43,44 +43,44 @@ export default function BussinessDetail(){
             <Slider {...settings}>
                 <ContentWrapper>
                     <Content>
-                        <CenterImage src= {CustomerIcon["Fun"]}/>
+                        <CenterImage src= {CustomerIcon["UserFriendly"]}/>
                         <CenterHeader>User Friendly</CenterHeader>
-                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
+                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
-                        <CenterImage src= {CustomerIcon["Worker"]}/>
+                        <CenterImage src= {CustomerIcon["Technician"]}/>
                         <CenterHeader>In-House Trained Technician</CenterHeader>
-                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
+                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
                         <CenterImage src= {CustomerIcon["Genuine"]}/>
                         <CenterHeader>Genuine Spare Parts</CenterHeader>
-                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
+                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
-                        <CenterImage src= {CustomerIcon["Sustanibility"]}/>
+                        <CenterImage src= {CustomerIcon["Sustainable"]}/>
                         <CenterHeader>Sustainable</CenterHeader>
-                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
+                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
                         <CenterImage src= {CustomerIcon["CarHealthReport"]}/>
                         <CenterHeader>Unique Car Health Report</CenterHeader>
-                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
+                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
                     </Content>
                 </ContentWrapper>
                 <ContentWrapper>
                     <Content>
                         <CenterImage src= {CustomerIcon["Transparency"]}/>
                         <CenterHeader>Transparency</CenterHeader>
-                        {/* <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader> */}
+                        <SubHeader>Book any service at your preferred time and enjoy free pick and drop at best price.</SubHeader>
                     </Content>
                 </ContentWrapper>
             </Slider> : <Slider {...settings}>

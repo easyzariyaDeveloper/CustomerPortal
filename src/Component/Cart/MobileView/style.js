@@ -181,7 +181,7 @@ export const EmptyCardWrapper = styled.div`
     margin: 0 auto;
     width: 80%;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 10%;
 `;
 
