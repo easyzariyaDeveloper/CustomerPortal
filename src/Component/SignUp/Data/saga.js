@@ -25,15 +25,15 @@ export function* loginUser({payload, search = ""}){
             yield put({
                 type: 'USER_LOGGEDIN_SUCCESSFULLY'
             });
-            yield put({
-                type: 'FETCHING_API_SUCCESS'
-            });
             const referrerArray = search.split("referrer=");
             if(referrerArray.length > 0){
                 location.href = referrerArray[1] || "/";
             } else {
                 location.href = "/";
             }
+            yield put({
+                type: 'FETCHING_API_SUCCESS'
+            });
         }
     } catch (error) {
         console.log(error);

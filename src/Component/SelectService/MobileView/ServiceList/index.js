@@ -153,20 +153,26 @@ function ServiceList(props) {
 
     useEffect(() => {
         const carSelectedAnonymously = localStorage.getItem("carSelectedPackage");
+        console.log(props?.profile)
+        console.log(props?.profile?.carList[0]?.carId)
+
         if(userId){
-            if(props?.cart?.car?.carId && props?.cart?.car?.carId != carSelectedAnonymously){
+            const selectedCarId = props?.cart?.car?.carId || (props?.profile?.carList.find(({carId}) => carId == carSelectedAnonymously) || props?.profile?.carList[0])?.carId
+            //cart car is not same as car in local storage
+            if( selectedCarId && selectedCarId != carSelectedAnonymously){
                 setShowCarMisMatchWarning(true);
-            } else if(props?.cart?.car?.carId && !props?.profile?.carList.filter(({carId}) => (carId == props?.cart?.car?.carId))){
+            } //cart car is not there in the profile
+            else if(selectedCarId && !props?.profile?.carList.filter(({carId}) => (carId == selectedCarId))){
                 setShowCarMisMatchWarning(true);
-            } else if(props?.cart?.car?.carId){
+            }else if(selectedCarId){
                 setFilter({
-                    carId: props?.cart?.car?.carId,
+                    carId: selectedCarId,
                     variantId: props?.cart?.car?.fuelVariantId,
                     cityId: localStorage.getItem("citySelectedPackage")
                 })
             }
         }
-    }, [props?.cart?.id]);
+    }, [props?.cart?.id, props?.profile?.customerId]);
 
       function addToCart(code){
         if(userId){

@@ -1,13 +1,13 @@
-import UserFriendly from "./User Friendly.png";
-import Technician from "./Technician.png";
+import UserFriendly from "./User Friendly.webp";
+import Technician from "./Technician.webp";
 import Genuine from "./Genuine.png";
-import Sustainable from "./Sustainable.png";
-import Transparency from "./transparency.png";
+import Sustainable from "./Sustainable.webp";
+import Transparency from "./Transparency.webp";
 import Flexibility from "./flexibility.png";
 import Responsibility from "./responsibility.png";
 import OnSpot from "./onSpot.png";
 import Calendar from "./calendar.png";
-import CarHealthReport from "./Car Health Report.png";
+import CarHealthReport from "./Car Health Report.webp";
 import Payment from "./payment.png";
 import TransparencyWorkDetail from "./transparency_workDetail.png";
 import RealTimeUpdate from "./realTimeUpdate.png";

@@ -4,15 +4,18 @@ import APIWrapper from "../../../../Constants/ApiWrapper";
 
 export function* createOrder({payload}){
     yield put({ type: "FETCHING_API" });
+    yield put({ type: "FETCHING_CREATE_ORDER_API" });
+    
     try{
-        const {data} = yield call(APIWrapper, {
+        const {data,status} = yield call(APIWrapper, {
             method: "GET",
             url: `/cart/initiatePayment?mode=${payload}`,
         });
+        yield put({ 
+            type: "FETCHED_CREATE_ORDER_SUCCESS",
+            data: data
+        });
         yield put({ type: "FETCHING_API_SUCCESS" });
-        if(payload === "WAITING_FOR_COD" && data?.orderId){
-            // location.href = "/";
-        }
     }catch(error){
         console.log(error);
         yield put({

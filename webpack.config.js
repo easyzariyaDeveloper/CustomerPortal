@@ -104,7 +104,7 @@ export default (mode) => {
   });
 
   rules.push({
-    test: /\.(gif|png|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+    test: /\.(gif|png|jpg|webp)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
     loader: "file-loader",
   });
 

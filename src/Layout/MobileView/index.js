@@ -35,6 +35,7 @@ function PageLayout(props) {
         noborder = {props.noborder || false} 
         cart = {props?.cart?.["cart"]}
       />
+
       {props?.errorMessage && 
       <Alert variant="filled" severity="error">
         {props?.errorMessage}
@@ -45,6 +46,7 @@ function PageLayout(props) {
         {props?.message}
       </Alert>
       }
+      
       <Content>
         {props.children}
       </Content>

@@ -25,7 +25,7 @@ function OrderHistory(props){
                         </OrderHistoryHeaderDiv>
 
                     <>
-                        <LabelHeading style = {{"text-transform": "initial", "letter-spacing": "1px"}}> <label>Order #:</label> {order?.orderId} </LabelHeading>
+                        <LabelHeading style = {{"text-transform": "initial", "letter-spacing": "1px"}}> <label>Order #:</label> {order?.orderCode || order?.orderId} </LabelHeading>
                         <LabelHeading> <label>Car:</label> {order?.car?.carName}</LabelHeading>
                         <LabelHeading> <label>Reg. Number:</label> {order?.car?.registrationNum} </LabelHeading>
                         <LabelHeading> <label>Payment Status: </label> {getFormattedString(order?.paymentStatus)} </LabelHeading>

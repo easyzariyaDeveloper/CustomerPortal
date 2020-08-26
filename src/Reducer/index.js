@@ -7,6 +7,7 @@ import { OtpReducer } from "../Component/OtpPage/Data/reducer";
 import LoadingReducer from "../Layout/MobileView/loadingReducer";
 import {CartReducer} from "../Component/Cart/Data/reducer";
 import {OrderByIdReducer} from "../Component/OrderDetails/Data/reducer"
+import CreateOrderReducer from "../Component/CheckOutCart/MobileView/Data/reducer";
 
 const rootReducer = combineReducers({
     packages: PackagesReducer,
@@ -21,5 +22,6 @@ const rootReducer = combineReducers({
     cart: CartReducer,
     orderHistory: OrderHistoryReducer,
     orderById: OrderByIdReducer,
+    createOrder: CreateOrderReducer
 });
 export default rootReducer;

@@ -142,11 +142,16 @@ export function* addSubPackage({payload}){
             type: 'ADDED_CART_FAILED',
             error
         });
+        const {status} = error;
+        let ErrorMessage = "Failed to add this package, Item already exists in cart";
+        if(status === 500){
+            ErrorMessage = "Something went Wrong !! Please try later."
+        }
         yield put({
             type: 'FETCHING_API_FAILED',
             error: {
                 ...error,
-                ErrorMessage: "Failed to add this package, Item already exists in cart"
+                ErrorMessage
             }
         });
     }

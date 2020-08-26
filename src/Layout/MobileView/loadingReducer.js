@@ -1,3 +1,5 @@
+import { put, call, delay } from "redux-saga/effects";
+
 const defaultLoadingState = {
     LoadingInProgress: true,
     error: ""
@@ -32,6 +34,13 @@ export default function LoadingReducer(state = defaultLoadingState, {type, data,
                 error: {},
                 message: message
             } 
+        case "CLEAR_MESSAGE": 
+            return {
+                ...state,
+                message: "",
+                error: {}
+            }
+        break;
         default:
             return state
     }
@@ -57,4 +66,9 @@ function setErrorData(error = {}){
         message: errorMessage,
         status: error?.status
     }
+}
+
+export function* clearMessage() {
+    yield delay(5000);
+    yield put({type: "CLEAR_MESSAGE"});
 }

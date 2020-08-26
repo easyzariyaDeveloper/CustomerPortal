@@ -6,6 +6,11 @@
 *{
   box-sizing: border-box ;
   font-family: 'Roboto', sans-serif !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body{
+  overflow-x: hidden;
 }
 
 body {

@@ -8,7 +8,7 @@ export default function EmptyCart(){
 
     return <EmptyCardWrapper>
         <EZCard>
-            <CardHeaderText style = {{textAlign: "center"}}>No Items Found In Your Card </CardHeaderText>
+            <CardHeaderText style = {{textAlign: "center"}}> Your Cart is empty.</CardHeaderText>
             <MobileActionButton onClick = {()=> location.href = "/"} style = {{display: "block", margin: "0px auto", width: "70%"}}>Home</MobileActionButton>   
         </EZCard>
     </EmptyCardWrapper>

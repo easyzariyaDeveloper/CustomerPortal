@@ -28,7 +28,7 @@ function OrderDetails(props){
                    <Skeleton animation="wave" height={300} width="90%" style = {{margin : "0 auto"}} />
                </>: <div style = {{padding: "5px"}}>
                    <EZCard>
-                        <CarInfo> Order #: {props?.match?.params?.orderId} </CarInfo>
+                        <CarInfo> Order #: { orderDetails?.orderCode || props?.match?.params?.orderId} </CarInfo>
                    </EZCard>
 
                     <EZCard>

@@ -1,4 +1,4 @@
-import { takeLatest } from "redux-saga/effects";
+import { takeLatest, takeEvery } from "redux-saga/effects";
 import { fetchPackages, fetchCars, fetchCities, fetchPackageById, addSubPackage, setCarToCart } from "../Component/SelectService/Data/saga";
 import { fetchBrandForCars, fetchCarListByBrand, addCarByUser, getCarById} from "../Component/AddCar/Data/saga";
 import { loginUser, userSignup, getResetPasswordOtp, verifyResetPasswordOtp } from "../Component/SignUp/Data/saga";
@@ -8,7 +8,7 @@ import { addAddressByUser, updateCustomerAddress } from "../Component/Address/Da
 import { fetchCart, hasActiveCart, deleteItem, applyCoupon, navigateToSelectAddress, removeCoupon } from "../Component/Cart/Data/saga";
 import { createOrder, setShippingAddress } from "../Component/CheckOutCart/MobileView/Data/saga";
 import { fetchOrderById } from "../Component/OrderDetails/Data/saga";
-
+import {clearMessage} from "../Layout/MobileView/loadingReducer";
 
 export default function* appSaga() {
     yield takeLatest("REQUEST_PACKAGES_DATA", fetchPackages);
@@ -54,4 +54,5 @@ export default function* appSaga() {
 
 
     yield takeLatest("CHANGE_PASSWORD", changePassword);
+    yield takeEvery("FETCHING_API_FAILED", clearMessage);
 }

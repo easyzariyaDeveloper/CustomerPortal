@@ -62,21 +62,25 @@ const handleChange = (event, value) => {
   const { index } = state;
  
 
-    return (<MobilePageLayout>
-        <TabDiv>
-          <AntTabs value={index} onChange={handleChange}>
-            {ServiceTabs.map(({label, id}) => <AntTab label= {label} key = {id}/>)}
-          </AntTabs>
-        </TabDiv>
+    // return (<MobilePageLayout>
+    //     <TabDiv>
+    //       <AntTabs value={index} onChange={handleChange}>
+    //         {ServiceTabs.map(({label, id}) => <AntTab label= {label} key = {id}/>)}
+    //       </AntTabs>
+    //     </TabDiv>
         
-        <SwipeableViews index={index} onChangeIndex={handleChangeIndex} style = {{minHeight: "80vh"}}>
-          <div>jjfhj</div>
-          <div>
-              <DoorstepAddress/>
-          </div>
-        </SwipeableViews>
-      </MobilePageLayout>
-    );
+    //     <SwipeableViews index={index} onChangeIndex={handleChangeIndex} style = {{minHeight: "80vh"}}>
+    //       <div>jjfhj</div>
+    //       <div>
+    //           <DoorstepAddress/>
+    //       </div>
+    //     </SwipeableViews>
+    //   </MobilePageLayout>
+    // );
+
+    return <MobilePageLayout pageName = "Select Your Address">
+      <DoorstepAddress/>
+    </MobilePageLayout>
     
 
 }

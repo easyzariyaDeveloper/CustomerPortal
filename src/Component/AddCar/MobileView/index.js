@@ -73,7 +73,8 @@ function AddCar(props) {
                     model: vehicleData?.id,
                     carName: vehicleData?.model,
                     colorPalletes: vehicleData?.colours,
-                    fuelVariantId: preSelectFuelVariantId?.current
+                    fuelVariantId: preSelectFuelVariantId?.current,
+                    fuelType: vehicleData?.variants.find(({id, fuelType}) => id === preSelectFuelVariantId?.current && fuelType)
                 });
             });
         } else {
@@ -208,7 +209,7 @@ function AddCar(props) {
                     }
                     </Select>
                 </FormControl>
-
+{/* 
 
                 <FormControl className={classes.formControl} disabled ={vehicle.model == ""}>
                     <InputLabel id="demo-simple-select-label">Select Type</InputLabel>
@@ -228,7 +229,7 @@ function AddCar(props) {
                         }):undefined
                     }
                     </Select>
-                </FormControl>
+                </FormControl> */}
 
                 {
                     enableAddCarForProfile? <div>

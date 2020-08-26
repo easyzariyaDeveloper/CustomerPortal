@@ -17,7 +17,8 @@ export function CartReducer(state = defaultCartState, {type, data, error}){
         case "SET_ACTIVE_CART":
             return {
                 ...state,
-                hasActiveCart: data
+                hasActiveCart: data,
+                inProgress: false
             }
         break;
 

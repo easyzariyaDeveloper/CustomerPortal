@@ -139,17 +139,17 @@ function MSignUpTab(props) {
 
             <div style= {{textAlign:"center", margin: "40px 0"}}>
               <SignupLogInButton onClick = {() => loginUser()}>Login</SignupLogInButton>
-              <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign In with</p>
+              {/* <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign In with</p> */}
             </div>
 
-          <SocialButtonDiv>
+          {/* <SocialButtonDiv>
             <FbLoginButton><FacebookIcon style={{ verticalAlign: "middle", paddingRight: "10px", fontSize: "30px", paddingBottom: "2px" }} />
                             Facebook
                         </FbLoginButton>
             <GoogleLoginButton><img style={{ verticalAlign: "sub", paddingRight: "10px" }} src={Google} />
                             Google
                         </GoogleLoginButton>
-          </SocialButtonDiv>
+          </SocialButtonDiv> */}
           </div>
 
           
@@ -161,16 +161,16 @@ function MSignUpTab(props) {
             <div style= {{textAlign:"center"}}>
             <TermsPara>By Signing Up you agree to our &nbsp;<a href="#">terms and conditions</a></TermsPara>
               <SignupLogInButton onClick = {() => {signUpUser()}}>Sign Up</SignupLogInButton>
-              <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign Up with</p>
+              {/* <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign Up with</p> */}
             </div>
-          <SocialButtonDiv>
+          {/* <SocialButtonDiv>
             <FbLoginButton><FacebookIcon style={{ verticalAlign: "middle", paddingRight: "10px", fontSize: "30px", paddingBottom: "2px" }} />
                             Facebook
                         </FbLoginButton>
             <GoogleLoginButton><img style={{ verticalAlign: "sub", paddingRight: "10px" }} src={Google} />
                             Google
                         </GoogleLoginButton>
-          </SocialButtonDiv>
+          </SocialButtonDiv> */}
           </div>
       </SwipeableViews>
       </MAccountCard>

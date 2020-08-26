@@ -7,7 +7,7 @@ import Image2 from  "../slider/1.png";
 import Image3 from  "../slider/2.png";
 import Image4 from  "../slider/3.png";
 import { BannerImage, BannerComponentHeight, SlideContainer, SliderItem } from "./style";
-import Home from "../Images/Home.png"
+import Home from "../Images/Home.webp"
 
 
 const properties = {

@@ -16,8 +16,7 @@ export const Header = styled.p`
 export const ContentWrapper = styled.div``;
 
 export const Content = styled.div`
-    width: 184px;
-    min-height: 212px;
+    max-width: 184px;
     border-radius: 5px;
     background: white;
     margin: ${base_spacing}px ${base_spacing * 1.5}px;

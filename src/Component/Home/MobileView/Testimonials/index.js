@@ -20,7 +20,7 @@ export default function Testimonials(props) {
         <Header>Testimonials</Header>
         <Slider {...settings}>
             <ContentWrapper>
-                <Content>
+                <Content style={{padding:"10px"}}>
                     <QuotationImage src={Quotation} />
                     <Testimonial>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer</Testimonial>
                     <PersondDiv>
@@ -30,7 +30,7 @@ export default function Testimonials(props) {
                 </Content>
             </ContentWrapper>
             <ContentWrapper>
-                <Content>
+                <Content style={{padding:"10px"}}>
                     <QuotationImage src={Quotation} />
                     <Testimonial>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer</Testimonial>
                     <PersondDiv>
@@ -40,7 +40,7 @@ export default function Testimonials(props) {
                 </Content>
             </ContentWrapper>
             <ContentWrapper>
-                <Content>
+                <Content style={{padding:"10px"}}>
                     <QuotationImage src={Quotation} />
                     <Testimonial>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer</Testimonial>
                     <PersondDiv>

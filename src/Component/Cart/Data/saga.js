@@ -108,12 +108,12 @@ export function* navigateToSelectAddress({payload}){
                 "date": time
             }
         });
-        // if(status === 200){
-        //     location.href = "/cart/add-address";
-        //     yield put({
-        //         type: 'SET_TIME_SUCCESS',
-        //     });
-        // }
+        if(status === 200){
+            location.href = "/cart/add-address";
+            yield put({
+                type: 'SET_TIME_SUCCESS',
+            });
+        }
  
         
     } catch (error) {
