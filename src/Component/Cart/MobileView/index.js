@@ -144,7 +144,7 @@ function Cart(props){
                             <CartPriceMPara>&#8377; {(cart?.totalAmount || 0) - (cart?.discountAmount || 0)}</CartPriceMPara>
                         </TotalDiv>
                     </> : 
-                    <h1>We'll calculate the price and Call you.</h1>
+                    <h1 style = {{lineHeight: "25px"}}>We'll calculate the price and Call you. <br/> Note: *Item in your Cart requires our expert diagnosis</h1>
                 }
             </EZCard> 
 

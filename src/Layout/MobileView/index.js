@@ -7,6 +7,7 @@ import { fetchProfile } from "../../Component/Profile/Data/action";
 import PageLoader from "./PageLoader";
 import { fetchActiveCart, fetchCart } from "../../Component/Cart/Data/action";
 import Alert from '@material-ui/lab/Alert';
+import { logout } from "../../Component/SignUp/Data/action";
 
 
 
@@ -34,6 +35,7 @@ function PageLayout(props) {
         backButton = {props.backButton} 
         noborder = {props.noborder || false} 
         cart = {props?.cart?.["cart"]}
+        logout = {props?.logout}
       />
 
       {props?.errorMessage && 
@@ -69,7 +71,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchProfile: () => {dispatch(fetchProfile())},
     fetchActiveCart: () => {dispatch(fetchActiveCart())},
-    fetchCart: () => {dispatch(fetchCart())}
+    fetchCart: () => {dispatch(fetchCart())},
+    logout: () => {dispatch(logout())}
   }
 }
 

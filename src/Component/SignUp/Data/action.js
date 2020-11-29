@@ -29,3 +29,9 @@ export function verifyResetPasswordOtp(userId,otp){
         }
     }
 }
+
+export function logout(){
+    return{
+        type: "LOGOUT"
+    }
+}

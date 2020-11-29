@@ -7,6 +7,7 @@ import { fetchPackageById, addSubPackage, setCarToCart } from "../../Data/action
 import PackageImage from "../../Images";
 import Tick from "../../../../Assets/img/gradient tick.jpg"
 import Lists from "../../../../Assets/img/lists.jpg"
+import carMismatch from "../../../../Assets/img/carMismatch.svg"
 import TimerIcon from '@material-ui/icons/Timer';
 import { makeStyles } from "@material-ui/core/styles";
 import { base_spacing } from "../../../../Assets/style-var";
@@ -15,12 +16,7 @@ import CarCityFilter from "../CarCityFilter";
 import FloatingCarDetails from "../ServiceDropdown/FloatingCarDetails";
 
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import {DialogTitle,DialogContentText,DialogContent,DialogActions,Dialog,Button} from '@material-ui/core';
 
 
 import InputLabel from '@material-ui/core/InputLabel';
@@ -28,6 +24,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { EZCard } from "../../../Common/MobileCard";
+
 
 export const ObjectList = (array) => array.reduce((accumulator, service) => {
     const { name = "", id = "" } = service;
@@ -74,7 +71,6 @@ function ServiceList(props) {
     }
 
     const matchedCarData = props?.profile?.carList?.find((car) => car["carId"] === selectedCarId);
- 
 
     function carMisMatchWarningPopup(){
         return <Dialog
@@ -83,29 +79,35 @@ function ServiceList(props) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-        <DialogTitle id="alert-dialog-title">{"Car Mismatch - Reselecting the Car from Profile"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-           We found mismatch the car
+        <img src = {carMismatch}/>
+        <DialogTitle id="alert-dialog-title" style= {{textAlign: "center",padding: "0px"}}>Car Mismatch</DialogTitle>
+        <DialogContent style= {{padding: "8px"}}>
+          <DialogContentText id="alert-dialog-description" style= {{marginBottom: "0px", fontSize: "13px"}}>
+            We found a Car Mismatch. Please reselect the car.
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button onClick = {() => {
-              const selectedCarId = localStorage.getItem("carSelectedPackage");
-              const carObj = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
-              const {carId, fuelVariantId} = carObj;
-               if(carId && fuelVariantId){
-                 setFilter({
-                     carId: carId,
-                     variantId: fuelVariantId,
-                     cityId: localStorage.getItem("citySelectedPackage")
-                   });
-               }
-               props.setCarToCart(carObj);
-              setCollapse(!collapse);
-            }} color="primary">
-            Revert
-          </Button>
+        <DialogActions style = {{display: "flex", justifyContent: "space-around"}}>
+            {
+                Object.keys(props?.cart).length > 0 ? <Button onClick = {() => {
+                    const selectedCarId = localStorage.getItem("carSelectedPackage");
+                    const carObj = props?.profile?.carList.find((car) => car["carId"] === selectedCarId);
+                    console.log(selectedCarId)
+                    console.log(props?.profile?.carList)
+                    const {carId, fuelVariantId} = carObj;
+                     if(carId && fuelVariantId){
+                       setFilter({
+                           carId: carId,
+                           variantId: fuelVariantId,
+                           cityId: localStorage.getItem("citySelectedPackage")
+                         });
+                     }
+                     props.setCarToCart(carObj);
+                    setCollapse(!collapse);
+                  }} color="primary" variant="contained">
+                  Revert
+                </Button> : null
+            }
+          
           {console.log(props?.profile.carList)}
           {
             props?.profile.carList.map(({carId}) => {
@@ -114,7 +116,7 @@ function ServiceList(props) {
                 const carId = localStorage.getItem("carSelectedPackage");
                 setShowCarMisMatchWarning(false);
                 window.location.href = `/add-car?carId=${carId}&redirect=${location.pathname}`;
-            }} color="primary">
+            }} color="primary" variant="contained">
             Add Car 
             </Button>
           }
@@ -122,7 +124,7 @@ function ServiceList(props) {
         </DialogActions>
     
         <CollapseInDialogDiv>
-        <CarCollapseInDialog in={collapse} collapsedHeight={1}>
+        <CarCollapseInDialog in={collapse} collapsedHeight={1} style={{padding: "0 10px 10px 10px"}}>
             <FormControl style = {{width:200}}>
             <InputLabel id="demo-simple-select-label">Your Car</InputLabel>
                 <Select

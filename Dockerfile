@@ -1,9 +1,9 @@
 FROM node:alpine
 
-WORKDIR /usr/src/easyzariya-docker
+WORKDIR /usr/src/ezautocare-customer
 
 COPY package*.json ./
-ADD package.json /usr/src/easyzariya-docker/package.json
+ADD package.json /usr/src/ezautocare-customer/package.json
 
 RUN npm install
 COPY . .

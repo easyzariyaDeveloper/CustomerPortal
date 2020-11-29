@@ -27,8 +27,11 @@ function SelectService(props) {
 
     const matchedCarData = (function () {
         if(userId){
-            localStorage.removeItem('carDetails');
-            return props?.profile?.carList?.find((car) => car["carId"] === selectedCarId)
+            // localStorage.removeItem('carDetails');
+            // let matchedCar = props?.profile?.carList?.find((car) => car["carId"] === selectedCarId) || localStorage.getItem('carDetails') ? JSON.parse(localStorage.getItem('carDetails')) :{}
+            // return matchedCar;
+            let matchedCar = props?.profile?.carList?.find((car) => car["carId"] === selectedCarId)
+            return ( matchedCar ? matchedCar : localStorage.getItem('carDetails') ? JSON.parse(localStorage.getItem('carDetails')) :{})
         } else {
             return localStorage.getItem('carDetails') ? JSON.parse(localStorage.getItem('carDetails')) : {}
         }

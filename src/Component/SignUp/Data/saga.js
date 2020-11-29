@@ -2,7 +2,7 @@ import {call, put} from "redux-saga/effects";
 import qs from "querystring";
 import APIWrapper from "../../../Constants/ApiWrapper";
 import {getProfile}  from "../../Profile/Data/saga";
-import { setCookie } from "../../../util";
+import { eraseCookie, setCookie } from "../../../util";
 
 export function* loginUser({payload, search = ""}){
     yield put({type: "FETCHING_API"});
@@ -17,7 +17,7 @@ export function* loginUser({payload, search = ""}){
             }),
             headers : {
                 "Authorization": "Basic ZWFzeXphcml5YTpzZWNyZXQ=",
-                "Content-Type":'application/x-www-form-urlencoded'  
+                "Content-Type":"application/x-www-form-urlencoded"  
             }
         });
         if(status === 200){
@@ -137,6 +137,35 @@ export function*  verifyResetPasswordOtp({payload}){
             type: 'VERIFY_RESETPASSWORD_OTP_FAILED',
             error
         });
+    }
+}
+
+
+export function* logout(){
+    try{
+        const {data,status} = yield call(APIWrapper,{
+            method: "GET",
+            url:'/oauth/revoke-token'
+        });
+        if(status == 200){
+            yield put({
+                type: 'LOGOUT_SUCCESS',
+                data
+            })
+            eraseCookie("userUUId");
+            eraseCookie("isVerifiedUser");
+            localStorage.clear();
+            // eraseCookie("access_token");
+            // eraseCookie("refresh_token")
+            location.href = '/login'
+        }
+        
+    }catch(error){
+        console.log(error)
+        yield put({
+            type: 'LOGOUT_FAILED',
+            error
+        })
     }
 }
 

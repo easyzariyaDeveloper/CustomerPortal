@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from 'react-redux';
-import { fetchOrderHistory } from "../Data/action";
+import { downloadJobCard, fetchOrderHistory } from "../Data/action";
 import { EZCard } from "../../Common/MobileCard";
 import { LabelHeading, OrderHistoryHeaderDiv, OrderDetailsButton } from "./style";
 import { getFormattedString } from "../../../util";
@@ -33,7 +33,7 @@ function OrderHistory(props){
 
                         <div style = {{display: "flex"}}>
                             <OrderDetailsButton onClick = {() => location.href = `/order/${order?.orderId}/detail`}>Order Details</OrderDetailsButton>
-                            <OrderDetailsButton>Download</OrderDetailsButton>
+                            <OrderDetailsButton onClick = {() => props?.downloadJobCard(order?.orderId)}>Download</OrderDetailsButton>
                         </div>
                     </>
                 </EZCard>
@@ -51,7 +51,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) =>{
     return {
-        fetchOrderHistory: () => {dispatch(fetchOrderHistory())}
+        fetchOrderHistory: () => {dispatch(fetchOrderHistory())},
+        downloadJobCard: (orderId) => {dispatch(downloadJobCard(orderId))}
     }
 }
   

@@ -65,7 +65,7 @@ export default function Header(props) {
       { text: "My Cars", to: "/profile/cars" },
       { text: "Address List", to: "/profile/address" },
       { text: "Service History", to: "/profile/orders" },
-      { text: "Logout", to: "/" }
+      { text: "Logout", to: "/login" }
     );
   } else {
     links.push({ text: "Login", to: "/login" },)
@@ -126,9 +126,7 @@ export default function Header(props) {
                       /**
                        * Later move to method
                        */
-                      eraseCookie("access_token");
-                      eraseCookie("userUUId");
-                      eraseCookie("refresh_token")
+                      props?.logout()
                     }}
                   > {link.text} </ListItemText>
                   : <ListItemText primary={

@@ -7,12 +7,15 @@ export default function MServices (props){
 
     return<MServiceWrapper>
         {
-            (props?.mServiceList?.items || []).map(({quantity,name,price, subPackageName}) => {
+            (props?.mServiceList?.items || []).map(({needsInpection,name,price, subPackageName}) => {
                 return<ServiceMListItem>
-                        <ServiceMPara>{name}</ServiceMPara>                
+                        <ServiceMPara>{name}</ServiceMPara>              
                         <CartPriceMPara>
-                            &#8377; {price}
-                            {(props?.mServiceList?.itemIds || []).map(item => {
+                            <>{
+                                needsInpection ? <>Diagnosis Required *</>: <>&#8377; {price}</>
+                            }</>
+                            {
+                            (props?.mServiceList?.itemIds || []).map(item => {
                                 return item.subPackageName == subPackageName ? <DeleteBinButton onClick = {()=> {
                                     props.deleteItem(item.itemId)}} src = {Cancel}></DeleteBinButton>
                                 : null

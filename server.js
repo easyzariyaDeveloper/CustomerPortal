@@ -16,18 +16,18 @@ app.use(express.static(__dirname + '/dist'));
 
 app.use('/api', (req, res, next) => {
     if (req.cookies["access_token"] && !req.cookies["access_token"].includes("bearer")) {
-        req.headers["Authorization"] = "Bearer " + req.cookies["access_token"];
+        req.headers["Authorization"] = "bearer " + req.cookies["access_token"];
     }
     next();
 }, createProxyMiddleware({ 
-    target: "https://easyzariyademo.azurewebsites.net/", 
+    target: "http://ezautocare.in/", 
     changeOrigin: true,
     pathRewrite: { "^/api": "" }
 }));
 
 app.use(function (req, res, next) {
     if (req.cookies["access_token"] && !req.cookies["access_token"].includes("bearer")) {
-        req.headers["Authorization"] = "Bearer " + req.cookies["access_token"];
+        req.headers["Authorization"] = "bearer " + req.cookies["access_token"];
     }
     if((req.url.includes("profile")) && !req.cookies["access_token"]){
         return res.redirect(`/login`)

@@ -113,6 +113,25 @@ export function*  fetchOrderHistory(){
     }
 }
 
+export function*  downloadJobCard({payload}){
+    yield put({ type: "DOWNLOAD_JOBCARD_INPROGRESS" });
+    try{
+        const {data} = yield call(APIWrapper, {
+            method: "GET",
+            url: `/job-card/${payload}/download`,
+        });
+        yield put({
+            type: 'DOWNLOAD_JOBCARD_SUCCESS',
+            data
+        })
+    }catch(error){
+        console.log(error);
+        yield put({
+            type: 'DOWNLOAD_JOBCARD_FAILED',
+            error
+        });
+    }
+}
 
 
 

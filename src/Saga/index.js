@@ -1,8 +1,8 @@
 import { takeLatest, takeEvery } from "redux-saga/effects";
 import { fetchPackages, fetchCars, fetchCities, fetchPackageById, addSubPackage, setCarToCart } from "../Component/SelectService/Data/saga";
 import { fetchBrandForCars, fetchCarListByBrand, addCarByUser, getCarById} from "../Component/AddCar/Data/saga";
-import { loginUser, userSignup, getResetPasswordOtp, verifyResetPasswordOtp } from "../Component/SignUp/Data/saga";
-import { getProfile, changePassword, deleteCar, deleteAddress, fetchOrderHistory } from "../Component/Profile/Data/saga";
+import { loginUser, userSignup, getResetPasswordOtp, verifyResetPasswordOtp, logout } from "../Component/SignUp/Data/saga";
+import { getProfile, changePassword, deleteCar, deleteAddress, fetchOrderHistory,downloadJobCard } from "../Component/Profile/Data/saga";
 import { createOtp, verifyOTP } from "../Component/OtpPage/Data/saga";
 import { addAddressByUser, updateCustomerAddress } from "../Component/Address/Data/saga";
 import { fetchCart, hasActiveCart, deleteItem, applyCoupon, navigateToSelectAddress, removeCoupon } from "../Component/Cart/Data/saga";
@@ -24,6 +24,7 @@ export default function* appSaga() {
 
     yield takeLatest("LOGIN_USER_WITH_CRENDETIAL", loginUser);
     yield takeLatest("SIGNUP_USER_DETAILS", userSignup);
+    yield takeLatest("LOGOUT",logout)
 
     yield takeLatest("FETCH_PROFILE", getProfile);
     yield takeLatest("FETCH_ORDER_HISTORY", fetchOrderHistory);
@@ -55,4 +56,6 @@ export default function* appSaga() {
 
     yield takeLatest("CHANGE_PASSWORD", changePassword);
     yield takeEvery("FETCHING_API_FAILED", clearMessage);
+
+    yield takeLatest("DOWNLOAD JOBCARD",downloadJobCard)
 }

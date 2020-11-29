@@ -12,7 +12,7 @@ import { AddressLabelWrapper, AddressIcon, AddressLabel, AddressLine } from "../
 
 function OrderDetails(props){
     const {orderDetails = {}} = props?.orderInfo;
-    console.log(orderDetails)
+    console.log(orderDetails?.cart)
 
     useEffect(() => {
         props?.fetchOrderById(props?.match?.params?.orderId);
@@ -28,17 +28,17 @@ function OrderDetails(props){
                    <Skeleton animation="wave" height={300} width="90%" style = {{margin : "0 auto"}} />
                </>: <div style = {{padding: "5px"}}>
                    <EZCard>
-                        <CarInfo> Order #: { orderDetails?.orderCode || props?.match?.params?.orderId} </CarInfo>
+                        <CarInfo> Order #: { orderDetails?.cart?.orderCode || props?.match?.params?.orderId} </CarInfo>
                    </EZCard>
 
                     <EZCard>
                         <CardHeaderText> Car Detail </CardHeaderText>
                             <CarWrapper>
-                                <CarImage src = {orderDetails?.car?.imageUrl || CarIcon} defaultIcon = {orderDetails?.car?.imageUrl ? false : true} />
+                                <CarImage src = {orderDetails?.cart?.car?.imageUrl || CarIcon} defaultIcon = {orderDetails?.cart?.car?.imageUrl ? false : true} />
                                 <CarInfo>
-                                    {orderDetails?.car?.brand || ""} - {orderDetails?.car?.carName || ""} 
+                                    {orderDetails?.cart?.car?.brand || ""} - {orderDetails?.cart?.car?.carName || ""} 
                                     <br/>
-                                    <VariantName>{orderDetails?.car?.variantName.toLowerCase()} ({orderDetails?.car?.registrationNum})</VariantName>
+                                    <VariantName>{orderDetails?.cart?.car?.variantName.toLowerCase()} ({orderDetails?.cart?.car?.registrationNum})</VariantName>
                                     <br/>
                                 </CarInfo>
                             </CarWrapper>
@@ -48,47 +48,50 @@ function OrderDetails(props){
                    <EZCard>
                    <CardHeaderText> Shipping Address </CardHeaderText>
                         <AddressLabelWrapper>
-                        <AddressIcon className = {`icon-${orderDetails?.shippingAddress?.addressLabel}`}/>
+                        <AddressIcon className = {`icon-${orderDetails?.cart?.shippingAddress?.addressLabel}`}/>
                         <AddressLabel
                         children = {orderDetails?.shippingAddress?.addressLabel === "home" ? "Home" : (orderDetails?.shippingAddress?.addressLabel === "office" ? "Office" : "Other")}
                         />
                     </AddressLabelWrapper>
-                    <AddressLine>{orderDetails?.shippingAddress?.firstLine}, {orderDetails?.shippingAddress?.secondLine}</AddressLine>
+                    <AddressLine>{orderDetails?.cart?.shippingAddress?.firstLine}, {orderDetails?.cart?.shippingAddress?.secondLine}</AddressLine>
                     {
-                        orderDetails?.shippingAddress?.landmark && <>
+                        orderDetails?.cart?.shippingAddress?.landmark && <>
                         <p style = {{display:"inline-block", fontWeight: "300"}}>Landmark : </p> 
-                        <AddressLine>&nbsp; {orderDetails?.shippingAddress?.landmark}</AddressLine>
+                        <AddressLine>&nbsp; {orderDetails?.cart?.shippingAddress?.landmark}</AddressLine>
                         </>
                     }
                    </EZCard>
 
                    <EZCard>
                         <CardHeaderText> Order Detail</CardHeaderText>
-                            {orderDetails?.items?.map(item => {
+                            {orderDetails?.cart?.items?.map(item => {
                                 return <ServiceMListItem>
                                     <ServiceMPara>{item.name}</ServiceMPara>
                                     <ServiceMPara>&#8377;{item.price}</ServiceMPara>
                                 </ServiceMListItem>
                             })}
-                        <ServiceMPara>Order Placed On : {moment(orderDetails?.orderPlacedTime).format('MMMM Do YYYY')}</ServiceMPara>
+                        <ServiceMPara>Order Placed On : {moment(orderDetails?.cart?.orderPlacedTime).format('MMMM Do YYYY')}</ServiceMPara>
                    </EZCard>
 
                    <EZCard>
                         <CardHeaderText> Order Summary </CardHeaderText>
-                        <SubTotalDiv>
-                            <h1 style = {{fontWeight:"normal"}}>Subtotal</h1>
-                            <CartPriceMPara>&#8377; {orderDetails?.totalAmount || 0}</CartPriceMPara>
-                        </SubTotalDiv>
+                        {
+                            ! orderDetails?.cart?.needsInspection ? <> <SubTotalDiv>
+                                <h1 style = {{fontWeight:"normal"}}>Subtotal</h1>
+                                <CartPriceMPara>&#8377; {orderDetails?.cart?.totalAmount || 0}</CartPriceMPara>
+                            </SubTotalDiv>
 
-                        <DiscountDiv>
-                            <h1 style = {{fontWeight:"normal"}}>Discount</h1>
-                            <CartPriceMPara>&#8377; {orderDetails?.discountAmount ==null? 0: orderDetails?.discountAmount}</CartPriceMPara>
-                        </DiscountDiv>
+                            <DiscountDiv>
+                                <h1 style = {{fontWeight:"normal"}}>Discount</h1>
+                                <CartPriceMPara>&#8377; {orderDetails?.cart?.discountAmount ==null? 0: orderDetails?.cart?.discountAmount}</CartPriceMPara>
+                            </DiscountDiv>
+                            
+                            <TotalDiv>
+                                <h1 style = {{fontWeight:"normal"}}>Total</h1>
+                                <CartPriceMPara>&#8377; {orderDetails?.cart?.payableAmount}</CartPriceMPara>
+                            </TotalDiv> </>: <h1>We'll calculate the price and Call you.</h1>
+                        }
                         
-                        <TotalDiv>
-                            <h1 style = {{fontWeight:"normal"}}>Total</h1>
-                            <CartPriceMPara>&#8377; {orderDetails?.payableAmount}</CartPriceMPara>
-                        </TotalDiv>
                    </EZCard>
                </div>
         }

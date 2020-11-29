@@ -36,5 +36,12 @@ export function fetchOrderHistory(){
     }
 }
 
+export function downloadJobCard(orderId){
+    return{
+        type: "DOWNLOAD JOBCARD",
+        payload: orderId
+    }
+}
+
 
 
