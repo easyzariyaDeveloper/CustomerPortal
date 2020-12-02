@@ -36,7 +36,6 @@
     "material-ui-image": "^3.2.3",
     "mobile-detect": "^1.4.4",
     "moment": "^2.27.0",
-    "node-sass": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-geocode": "^0.2.1",
@@ -52,6 +51,7 @@
     "react-swipeable-views": "^0.13.9",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
+    "save-dev": "0.0.1-security",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.1.0",
     "uuidv4": "^6.1.1"
@@ -79,6 +79,7 @@
     "html-webpack-plugin": "^4.2.0",
     "jest": "^25.3.0",
     "moment-timezone": "^0.5.28",
+    "node-sass": "^4.14.1",
     "nodemon": "^2.0.3",
     "redux-devtools-extension": "^2.13.8",
     "rimraf": "^3.0.2",
