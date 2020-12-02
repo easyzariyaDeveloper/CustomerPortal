@@ -20,7 +20,7 @@ app.use('/api', (req, res, next) => {
     }
     next();
 }, createProxyMiddleware({ 
-    target: "http://ezautocare.in/", 
+    target: "http://api.ezautocare.in/", 
     changeOrigin: true,
     pathRewrite: { "^/api": "" }
 }));

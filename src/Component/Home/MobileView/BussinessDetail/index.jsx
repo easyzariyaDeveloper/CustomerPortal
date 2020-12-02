@@ -5,7 +5,7 @@ import { Header, Label, ContentWrapper, Content,
     SwitchWrapper, CenterImage, CenterHeader,
     SubHeader, Wrapper
  } from "./style";
-import {CustomerIcon,BusinessIcon} from "../../Images"
+import {CustomerIcon,BusinessIcon} from "../../Images";
 
 
 const settings = {
