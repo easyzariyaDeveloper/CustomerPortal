@@ -48,7 +48,7 @@ export default function LoadingReducer(state = defaultLoadingState, {type, data,
 
 function setErrorData(error = {}){
     const {status = "", message = ""} = error;
-    let errorMessage = message || "Something went wrong. Fail to login";
+    let errorMessage = message || "Something went wrong...";
     if(status === 401){
         errorMessage = "Unauthorized !! You need to login to use the service";
     } else if(status === 400){

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 import { downloadJobCard, fetchOrderHistory } from "../Data/action";
 import { EZCard } from "../../Common/MobileCard";
-import { LabelHeading, OrderHistoryHeaderDiv, OrderDetailsButton } from "./style";
+import { LabelHeading, OrderHistoryHeaderDiv, OrderDetailsButton, OrderDownloadButton } from "./style";
 import { getFormattedString } from "../../../util";
 import moment from "moment";
 import { MobileActionButton } from "../../../Assets/common-styled";
@@ -33,7 +33,8 @@ function OrderHistory(props){
 
                         <div style = {{display: "flex"}}>
                             <OrderDetailsButton onClick = {() => location.href = `/order/${order?.orderId}/detail`}>Order Details</OrderDetailsButton>
-                            <OrderDetailsButton onClick = {() => props?.downloadJobCard(order?.orderId)}>Download</OrderDetailsButton>
+                            {/* <OrderDownloadButton onClick = {() => props?.downloadJobCard(order?.orderId)}>Download</OrderDownloadButton> */}
+                            <OrderDownloadButton href = {`/job-card/${order?.orderId}/download`} download>Download</OrderDownloadButton>
                         </div>
                     </>
                 </EZCard>

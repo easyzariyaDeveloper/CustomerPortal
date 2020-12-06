@@ -40,7 +40,6 @@ export const SubHeader = styled.p`
     letter-spacing: 0.35px;
     font-size: 12px;
     line-height: 17px;
-    text-align:center;
 `;
 
 export const Label = styled.label`

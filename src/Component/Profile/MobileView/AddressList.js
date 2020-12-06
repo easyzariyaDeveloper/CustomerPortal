@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { fetchProfile, deleteAddress } from '../Data/action';
+import { TrainOutlined } from '@material-ui/icons';
 
 function AddressList(props) {
 
@@ -13,6 +14,7 @@ function AddressList(props) {
     SetIndexForActionButton(indexForActionButton === index ? -1 : index)
   }
 
+  const [enabled, setEnabled] = useState(false)
 
   return <div>
   <ProfileCard>
@@ -45,8 +47,10 @@ function AddressList(props) {
                       onClick = {()=> {
                         props?.deleteAddress(address["addressId"]);
                         props?.fetchProfile()
+                        setEnabled(true)
                       }}
                       children = "Delete"
+                      enabled = {enabled}
                     />
                   </KebabMenuCard> : null
               }

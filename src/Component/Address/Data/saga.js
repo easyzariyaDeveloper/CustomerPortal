@@ -8,17 +8,21 @@ export function* addAddressByUser({payload}) {
     yield put({ type: "FETCHING_API" });
     //console.log(cvalue);
     try {
-        const { data } = yield call(APIWrapper, {
+        const { data, status } = yield call(APIWrapper, {
             url: `/customer/address`,
             method: "POST",
             data: {
                 ...payload
             }
         });
-        yield put({
-            type: 'CUSTOMER_ADD_ADDRESS_SUCCESS',
-            data: data
-        });
+
+        if(status == 201) {
+            location.href = '/profile';
+            yield put({
+                type: 'CUSTOMER_ADD_ADDRESS_SUCCESS',
+                data: data
+            });
+        }
         const referrer = new URLSearchParams(window.location.search).get("referrer");
         if(referrer){
             location.href = `${referrer}`;

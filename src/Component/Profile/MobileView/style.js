@@ -194,6 +194,7 @@ export const KebabMenuButton = styled.button`
     background: white;
     cursor: pointer;
     font-size: 15px;
+    background: ${({enabled}) => enabled ? 'rgba(29, 160, 188, 0.7);' : 'transparent'};
 `;
 
 export const OrderHistoryHeaderDiv = styled.div`
@@ -207,4 +208,19 @@ export const OrderHistoryHeaderDiv = styled.div`
 
 export const OrderDetailsButton = styled(MobileActionButton)`
     margin: 5px;
+`;
+
+export const OrderDownloadButton = styled.a`
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    background: ${ez_button_color};
+    color: ${white_color};
+    font-size: 18px;
+    outline: transparent;
+    margin: 5px;
+    text-decoration:none;
+    padding: ${base_spacing}px 0px;
 `;
