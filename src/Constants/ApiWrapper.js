@@ -9,6 +9,7 @@ export const AxiosClient = axios.create({
     responseType: "json",
 });
 
+
 export default function APIWrapper(options) {
     const traceId = uuid();
     const newOptions = {
