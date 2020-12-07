@@ -7,8 +7,9 @@ import GooglePlacesAutocomplete, {geocodeByPlaceId} from 'react-google-places-au
 import 'react-google-places-autocomplete/dist/index.min.css';
 import { border_color, desktop_gradient } from '../../../Assets/style-var';
 
-const API_KEY = "AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8"; //"AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8";
+const API_KEY = "AIzaSyBXF7_n0kdQZtJ9h112Chxn6xdfJ7GmeS4"; //"AIzaSyDeYrtX2zsk_yGH6tHxXnzthYgUckGkqE8";
 Geocode.setApiKey(API_KEY);
+
 
 //https://medium.com/@imranhsayed/google-maps-in-react-autocomplete-location-search-draggable-marker-marker-infobox-565ab8e8cf22
 
