@@ -156,9 +156,10 @@ function ServiceList(props) {
     useEffect(() => {
         const carSelectedAnonymously = localStorage.getItem("carSelectedPackage");
         console.log(props?.profile)
-        console.log(props?.profile?.carList[0]?.carId)
+        // console.log(props?.profile?.carList[0]?.carId)
 
-        if(userId){
+        //if(userId){  --earlier & changed on 06/12/2020
+        if(userId && props?.profile?.carList){
             const selectedCarId = props?.cart?.car?.carId || (props?.profile?.carList.find(({carId}) => carId == carSelectedAnonymously) || props?.profile?.carList[0])?.carId
             //cart car is not same as car in local storage
             if( selectedCarId && selectedCarId != carSelectedAnonymously){
