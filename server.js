@@ -4,6 +4,7 @@ const MobileDetect = require('mobile-detect');
 const cookieParser = require("cookie-parser");
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
+
 const app = express();
 const PORT = 4000;
 
@@ -36,6 +37,15 @@ app.use(function (req, res, next) {
     }
 });
 
+
+// set up a route to redirect http to https
+app.get('*', function(req, res) {  
+    res.redirect('https://' + req.headers.host + req.url);
+
+    // Or, if you don't want to automatically detect the domain name from the request header, you can hard code it:
+    // res.redirect('https://example.com' + req.url);
+})
+
 app.get('*', (req, res) => {
     const md = new MobileDetect(req.headers['user-agent']);
     if(md.mobile()){
@@ -46,6 +56,8 @@ app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'dist/desktop', 'index.html')); 
     }
 });
+
+
 
 app.listen(PORT, () => {
     console.log('server started and listening on port : ' + PORT);
