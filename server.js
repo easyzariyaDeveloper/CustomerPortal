@@ -4,8 +4,8 @@ const MobileDetect = require('mobile-detect');
 const cookieParser = require("cookie-parser");
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-const fs = require('fs')
-const https = require('https')
+// const fs = require('fs')
+// const https = require('https')
 
 const app = express();
 const PORT = 4000;
@@ -50,6 +50,17 @@ app.use(function (req, res, next) {
 //     // res.redirect('https://example.com' + req.url);
 // })
 
+
+app.use (function (req, res, next) {
+    if (req.secure) {
+            // request was via https, so do no special handling
+            next();
+    } else {
+            // request was via http, so redirect to https
+            res.redirect('https://' + req.headers.host + req.url);
+    }
+});
+
 ////////////////////////////////////
 
 app.get('*', (req, res) => {
@@ -66,20 +77,16 @@ app.get('*', (req, res) => {
 
 
 
+app.listen(PORT, () => {
+    console.log('server started and listening on port : ' + PORT);
+});
 
 
 /** uncomment it if https.createServer() doesn't work **/
-
-// app.listen(PORT, () => {
-//     console.log('server started and listening on port : ' + PORT);
+// https.createServer({
+//     key: fs.readFileSync('./Certificate/ezautocare-private.key'),
+//     cert: fs.readFileSync('./Certificate/da20e24c4e4fb3e.crt'),
+//     ca: [fs.readFileSync('./Certificate/gd_bundle-g2-g1.crt')]
+// }, app).listen(PORT, ()=> {
+//    console.log("server started and listening on port : " + PORT);
 // });
-
-
-
-https.createServer({
-    key: fs.readFileSync('./Certificate/ezautocare-private.key'),
-    cert: fs.readFileSync('./Certificate/da20e24c4e4fb3e.crt'),
-    ca: [fs.readFileSync('./Certificate/gd_bundle-g2-g1.crt')]
-}, app).listen(PORT, ()=> {
-   console.log("server started and listening on port : " + PORT);
-});
