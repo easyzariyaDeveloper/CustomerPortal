@@ -106,7 +106,7 @@ export default function Login(props){
             labelWidth={70}
           />
         </FormControl>
-        <ValidationPara>*Min 6 digit.Please include Special Char,Uppercase,Lowercase &amp; Number in password.</ValidationPara> 
+        <ValidationPara>*Min 6 character password &amp; should include special char,uppercase, lowercase and number</ValidationPara> 
         {props?.loginErrorObj?.password ? <ValidationPara>{props?.loginErrorObj?.password}</ValidationPara> : null}
       </div>
     </form>

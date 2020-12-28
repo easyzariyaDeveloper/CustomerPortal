@@ -132,7 +132,7 @@ export default function Signup(props){
           />
         </FormControl>
         {/* {props?.errorObj?.password ? <ValidationPara>{props?.errorObj?.password}</ValidationPara> : null} */}
-        <ValidationPara>*Min 6 digit.Please include Special Char,Uppercase,Lowercase &amp; Number in password.</ValidationPara> 
+        <ValidationPara>*Min 6 character password &amp; should include special char,uppercase, lowercase and number</ValidationPara> 
         
         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size = "small">
           <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>

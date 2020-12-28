@@ -62,9 +62,10 @@ export const GoogleLoginButton = styled.button`
 `;
 
 export const ValidationPara = styled.p`
-    font-size: ${base_spacing * 1.4}px;
-    color: indianred;
-    margin-left:9%
+    font-size: ${base_spacing}px;
+    color: gray;
+    width: 80%;
+    margin: 10px auto
 `;
 
   

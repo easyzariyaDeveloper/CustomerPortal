@@ -104,7 +104,7 @@ export const OverlayCard = styled.div`
 export const CouponTextField = styled.input`
     border: none;
     width:80%;
-    font-size: ${base_spacing*2}px;
+    font-size: ${base_spacing*1.4}px;
     height: ${base_spacing*4}px;
     padding: ${base_spacing/2}px;
     outline:none;
@@ -154,7 +154,8 @@ export const MCouponCard = styled.div`
     background: white;
     position: fixed;
     top: 40%;
-    left: 5%;
+    left: 12%;
+    right: 12%;
     border-radius: ${base_spacing*1.5}px;
     
 `;
@@ -190,7 +191,8 @@ export const CartButtonDiv = styled.div`
 `;
 
 export const AppliedCouponDiv = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     padding: 15px 10px;
     background: antiquewhite;
     margin: 10px;

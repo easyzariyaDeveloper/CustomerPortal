@@ -86,10 +86,10 @@ function Cart(props){
 
                 {
                     props?.cart?.cart?.appliedVoucher ? <AppliedCouponDiv>
-                        <>
+                            <div>
                             <MCouponImage src = {Coupon} />
                             <span>{props.cart.cart.appliedVoucher.code} </span>
-                            </>
+                            </div>
                             <span style= {{fontStyle:"italic",fontSize:"12px",paddingLeft: "10px"}}>applied successfully</span>
                             
                             <button onClick= {() => {props?.removeCoupon();

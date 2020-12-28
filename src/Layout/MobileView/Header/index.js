@@ -3,6 +3,7 @@ import { HeaderWrapper, Hamburger, PageName, Link, BackButton, CartWrapper, Item
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {
   Box,
   List,
@@ -13,14 +14,23 @@ import {
 } from "@material-ui/core";
 import { readCookie, eraseCookie } from "../../../util";
 import { border_color, anchor_link_color, EZFontMediumSize } from "../../../Assets/style-var";
+import home from '../../../Assets/img/home.svg'
+import service from '../../../Assets/img/service.svg'
+import location from '../../../Assets/img/location.svg'
+import profile from '../../../Assets/img/profile.svg'
+import logout from '../../../Assets/img/logout.svg'
+import car from '../../../Assets/img/car.svg'
+import history from '../../../Assets/img/history.svg'
+
+
 const useStyles = makeStyles({
   list: {
     width: 250,
   },
   brand: {
-    display: "flex",
+    display: "grid",
     margin: "10px",
-    justifyContent: "space-around",
+    gridTemplateColumns: '1fr 3fr 1fr',
     alignItems: "center",
     height: "55px",
   },
@@ -33,8 +43,15 @@ const useStyles = makeStyles({
     display: "inline-block",
     margin: "0",
     padding: "0 10px",
-    color: `${anchor_link_color}`,
+    color: '#138A9A',
     fontSize: `${EZFontMediumSize}`
+  },
+
+  ezText: {
+    fontWeight: 'bold',
+    fontSize: '24px',
+    lineHeight: '28px',
+    color: '#138A9A'
   }
 });
 
@@ -55,20 +72,20 @@ export default function Header(props) {
 
   const userId = readCookie("userUUId");
   const links = [
-    { text: "Home", to: "/" },
-    { text: "Services", to: "/services" },
+    { text: "Home", to: "/" , image: `${home}`},
+    { text: "Services", to: "/services" ,image: `${service}`},
   ];
 
   if(userId){
     links.push(
-      { text: "Profile", to: "/profile" },
-      { text: "My Cars", to: "/profile/cars" },
-      { text: "Address List", to: "/profile/address" },
-      { text: "Service History", to: "/profile/orders" },
-      { text: "Logout", to: "/login" }
+      { text: "Profile", to: "/profile", image: `${profile}`},
+      { text: "My Cars", to: "/profile/cars", image: `${car}` },
+      { text: "Address List", to: "/profile/address", image: `${location}` },
+      { text: "Service History", to: "/profile/orders", image: `${history}` },
+      { text: "Logout", to: "/login", image: `${logout}` }
     );
   } else {
-    links.push({ text: "Login", to: "/login" },)
+    links.push({ text: "Login", to: "/login" , image: `${logout}`},)
   }
   return (
     <>
@@ -112,7 +129,13 @@ export default function Header(props) {
           onKeyDown={toggleDrawer(false)}
         >
           <Box className={classes.brand}>
-            EasyZariya
+            <span className = {classes.ezText}>EZ</span>
+            <span style = {{
+              background: '-webkit-linear-gradient(#00C37D, #138A9A)',
+              '-webkit-background-clip': 'text',
+              '-webkit-text-fill-color': 'transparent'
+            }}
+            >EasyZariya</span>
             <Avatar alt="Image" />
           </Box>
           <Divider />
@@ -120,7 +143,8 @@ export default function Header(props) {
             {links.map((link, key) => (
               <ListItem className={classes.listItem} key={key}>
                 {
-                  link.text === "Logout" ?  
+                  link.text === "Logout" ?<>
+                  <ListItemIcon style = {{minWidth: '25px'}}><img src = {link.image} /></ListItemIcon>
                   <ListItemText
                     onClick = {() => {
                       /**
@@ -128,10 +152,12 @@ export default function Header(props) {
                        */
                       props?.logout()
                     }}
-                  > {link.text} </ListItemText>
-                  : <ListItemText primary={
+                    className = {classes.link}
+                  > {link.text} </ListItemText></>
+                  : <><ListItemIcon style = {{minWidth: '25px'}}><img src = {link.image} /></ListItemIcon>
+                  <ListItemText primary={
                     <Link to={link.to} className = {classes.link}>{link.text}</Link>
-                  } />
+                  } /></>
                 }
               </ListItem>
             ))}
