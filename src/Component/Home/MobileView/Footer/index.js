@@ -25,7 +25,7 @@ export default function HomeFooter (props){
 
         <ContactInfoDiv>
             <ContactIcon src = {Address}/>
-            <FooterAddress>321 Pikes Place ParkwaySeattle, WA 54321</FooterAddress>
+            <FooterAddress>EzAutocare, Whitefield, Bengaluru</FooterAddress>
         </ContactInfoDiv>
         <ContactInfoDiv>
             <ContactIcon src = {Phone}/>
@@ -33,7 +33,7 @@ export default function HomeFooter (props){
         </ContactInfoDiv>
         <ContactInfoDiv>
             <ContactIcon src = {Mail}/>
-            <FooterAddress>Info@company.com</FooterAddress>
+            <FooterAddress>Info@ez.com</FooterAddress>
         </ContactInfoDiv>
 
         <BorderDiv/>
