@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -10,7 +10,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import { EZCard } from "../Common/MobileCard";
 import {useStyles} from "../../Assets/common-styled";
-import { addAddress, updateCustomerAddresss } from "./Data/action";
+import { addAddress, locationEnableNotification, updateCustomerAddresss } from "./Data/action";
 
 
 const textAddressArray = [["Flat/House No.","house"],["Address","address"],["Landmark","landmark"]];
@@ -38,9 +38,19 @@ function DoorstepPickup(props) {
     }, [props?.address?.addressId])
 
     const [radio, setRadio] = React.useState(props?.address?.addressLabel || "home");
+    const [ isLocationEnabled, setIsLocationEnabled] = useState(false)
 
     const checkoutReferrer = useRef(new URLSearchParams(window.location.search).get("referrer"));
     console.log(checkoutReferrer.current)
+
+    useEffect(() => {
+        if (!navigator.geolocation) {
+            setIsLocationEnabled(true)
+        } else {
+            setIsLocationEnabled(false);
+            props?.locationEnableNotification()
+        }
+    },[])
 
     function addAddress(){
         const addressObj = {
@@ -142,7 +152,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addAddress:(addressObj) => {dispatch(addAddress(addressObj))},
-        updateAddress: (updatedAddress, addressId)=> {dispatch(updateCustomerAddresss(updatedAddress,addressId))}
+        updateAddress: (updatedAddress, addressId)=> {dispatch(updateCustomerAddresss(updatedAddress,addressId))},
+        locationEnableNotification: () => {dispatch(locationEnableNotification())}
     }
 }
 

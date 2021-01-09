@@ -7,7 +7,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { fetchBrandForCars,fetchCarListByBrand, addCar, getCarById } from "../Data/action";
+import { fetchBrandForCars,fetchCarListByBrand, addCar, getCarById, updateCarDetail } from "../Data/action";
 import { connect } from "react-redux";
 import { base_spacing } from "../../../Assets/style-var";
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -55,13 +55,30 @@ function AddCar(props) {
         };
 
         const redirectURL = new URLSearchParams(window.location.search).get("redirect");
-        
-        props.addCar(carDetails, () => {
-            
-            if(redirectURL){
-                window.location.href = redirectURL;
+        const isExistingCarUpdating = new URLSearchParams(window.location.search).get("id");
+
+        if(isExistingCarUpdating){
+            const payload = {
+                "carId": vehicle?.model,
+                "carName":vehicle?.carName,
+                "color":vehicle?.carColor,
+                "fuelVariantId": vehicle?.fuelVariantId,
+                "variantName" : vehicle?.fuelType?.fuelType,
+                "registrationNum": vehicle?.registration,
+                "makeYear": vehicle?.makeYear
             }
-        });
+            props.updateCar(payload,isExistingCarUpdating, () => {
+                if(redirectURL){
+                    window.location.href = redirectURL;
+                }
+            });
+        } else {
+            props.addCar(carDetails, () => {
+                if(redirectURL){
+                    window.location.href = redirectURL;
+                }
+            });
+        }
     }
 
     useEffect(() => {
@@ -77,10 +94,24 @@ function AddCar(props) {
                     fuelType: vehicleData?.variants.find(({id, fuelType}) => id === preSelectFuelVariantId?.current && fuelType)
                 });
             });
+            
         } else {
             props.fetchBrandForCars();
         }
     }, []);
+
+    useEffect(() => {
+
+        const existingCarId = new URLSearchParams(window.location.search).get("id");
+        const carObject = props?.profile?.carList.find(({id}) => id === existingCarId);
+        if(carObject && Object.keys(carObject).length > 0){
+            setVehicle({
+                ...vehicle,
+                makeYear: carObject?.makeYear,
+                registration: carObject?.registrationNum
+            })
+        }
+    }, [props?.profile?.carList?.length])
 
     const handleChange = (prop) => (event) => { 
         if(prop == "model"){
@@ -113,7 +144,6 @@ function AddCar(props) {
             setVehicle({ ...vehicle, [prop]: event.target.value });
         }
     };
-    console.log(vehicle)
 
     return <MobilePageLayout pageName="Select Your Car">
         <MAddCarPageWrapper>
@@ -278,7 +308,8 @@ const mapStateToProps = (state) => {
     return {
         inProgress: state?.brands?.inProgress,
         brands: state?.brands?.brands,
-        models: state?.cars?.carModel
+        models: state?.cars?.carModel,
+        profile: state?.profile
     }
 };
 
@@ -287,6 +318,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchBrandForCars: () => { dispatch(fetchBrandForCars()) },
         fetchCarListByBrand: (brand ="") => { dispatch(fetchCarListByBrand(brand)) },
         addCar: (cardDetails, callback) => {dispatch(addCar(cardDetails, callback))},
+        updateCar: (cardDetails,id,callback) => {dispatch(updateCarDetail(cardDetails,id,callback))},
         getCarById: (carId = "", callBack) => { dispatch(getCarById(carId, callBack))}
     }
 }

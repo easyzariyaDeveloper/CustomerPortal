@@ -38,7 +38,7 @@ function OrderDetails(props){
                                 <CarInfo>
                                     {orderDetails?.cart?.car?.brand || ""} - {orderDetails?.cart?.car?.carName || ""} 
                                     <br/>
-                                    <VariantName>{orderDetails?.cart?.car?.variantName.toLowerCase()} ({orderDetails?.cart?.car?.registrationNum})</VariantName>
+                                    <VariantName>{orderDetails?.cart?.car?.variantName?.toLowerCase()} ({orderDetails?.cart?.car?.registrationNum})</VariantName>
                                     <br/>
                                 </CarInfo>
                             </CarWrapper>

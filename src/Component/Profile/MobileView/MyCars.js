@@ -61,12 +61,12 @@ function MyCars(props) {
                     index === indexForActionButton ? <KebabMenuCard>
                         <KebabMenuButton onClick = {()=> {
                           props?.deleteCar(car.id);
-                          props?.fetchProfile();
+                          // props?.fetchProfile();
                           SetIndexForActionButton(-1);
                         }}>Remove</KebabMenuButton>
 
                         <KebabMenuButton 
-                          onClick= {()=> location.href = `/add-car?carId=${car.carId}&fuelVariantId=${car.fuelVariantId}&redirect=/profile/cars`}>
+                          onClick= {()=> location.href = `/add-car?carId=${car.carId}&fuelVariantId=${car.fuelVariantId}&id=${car.id}&redirect=/profile/cars`}>
                             Edit
                         </KebabMenuButton>
                       </KebabMenuCard> : null
@@ -75,10 +75,10 @@ function MyCars(props) {
                 <LabelHeading>
                   <label> Brand: </label> {car.brand ? car?.brand.toLowerCase() : "" } </LabelHeading>
                 <LabelHeading>  <label> Car Model: </label> {car?.carName.toLowerCase()} </LabelHeading>
-                <LabelHeading> <label> Color: </label>  {car.color? car.color : "" } </LabelHeading>
+                <LabelHeading> <label> Fuel Type: </label> {car.variantName? car.variantName : "" } </LabelHeading>
+                {/* <LabelHeading> <label> Color: </label>  {car.color? car.color : "" } </LabelHeading> */}
                 <LabelHeading> <label> Reg Number: </label> {car.registrationNum? car.registrationNum : "" } </LabelHeading>
                 <LabelHeading> <label> Make Year: </label> {car.makeYear? car.makeYear : "" } </LabelHeading>
-                <LabelHeading> <label> Fuel Type: </label> {car.variantName? car.variantName : "" } </LabelHeading>
               </div>
             </CarDetailsCard>
           }) :null

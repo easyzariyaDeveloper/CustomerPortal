@@ -72,7 +72,7 @@ export function* deleteItem({payload}){
 
 export function* applyCoupon({payload}){
     yield put({type: "APPLYING_COUPON_INPROGRESS"});
-    
+    yield put({ type: "FETCHING_API" });
     try {
         const { data } = yield call(APIWrapper, {
             url: `/cart/applyvoucher`,
@@ -86,6 +86,7 @@ export function* applyCoupon({payload}){
             type: 'COUPON APPLIED_SUCCESS',
             data: data
         });
+        yield put({ type: "FETCHING_API_SUCCESS" });
     } catch (error) {
         console.log(error);
         yield put({
@@ -129,13 +130,15 @@ export function* navigateToSelectAddress({payload}){
 
 export function* removeCoupon(){
     yield put({type: "REMOVE_COUPON_INPROGRESS"});
-
+    yield put({ type: "FETCHING_API" });
     try {
-        const {data} = yield call(APIWrapper,{
+        const {data,status} = yield call(APIWrapper,{
             url: `/cart/removevoucher`,
             method: "DELETE"
         });
+        yield* fetchCart();
         yield put({type:"REMOVE_COUPON_SUCCESSFULLY"})
+        yield put({ type: "FETCHING_API_SUCCESS" });
     }
     catch(error){
         console.log(error);

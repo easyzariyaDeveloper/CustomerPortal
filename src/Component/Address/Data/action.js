@@ -16,3 +16,9 @@ export function updateCustomerAddresss(updatedAddress,addressId){
         }
     }
 }
+
+export function locationEnableNotification(){
+    return {
+        type: "ENABLE_LOCATION"
+    }
+}

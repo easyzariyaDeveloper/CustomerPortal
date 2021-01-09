@@ -54,3 +54,9 @@ export const setCarToCart = (carObject) =>{
     payload: carObject
   }
 }
+
+export function noCarInProfile(){
+  return {
+    type: "NO_CAR_IN_PROFILE"
+  }
+}

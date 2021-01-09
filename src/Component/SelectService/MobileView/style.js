@@ -34,12 +34,14 @@ export const FilterButton = styled.button`
     text-align: center;
     background: ${ez_button_color};
     color: ${white_color};
-    font-size: ${base_spacing *1.5}px;
+    font-size: ${base_spacing *1.2}px;
     padding: ${base_spacing/2}px;
     margin: ${base_spacing}px auto ${base_spacing}px;
     width: 80%;
     display: block;
-    height: 40px;
+    height: 30px;
+    min-width: 90px;
+    margin-bottom:0;
 `;
 
 export const RightNavigator = styled.img`

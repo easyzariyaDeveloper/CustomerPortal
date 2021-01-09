@@ -41,6 +41,44 @@ export default function LoadingReducer(state = defaultLoadingState, {type, data,
                 error: {}
             }
         break;
+        case "ENTER_DATE_TIME":
+            return {
+                ...state,
+                loadingInProgress:false,
+                error: {
+                    message: "Enter Service Date & Time"
+                }
+            }
+        case "ENTER_VALID_PASSWORD":
+            return {
+                ...state,
+                loadingInProgress:false,
+                error: {
+                    message: "Enter Valid Credentials...."
+                }
+            }
+        case "ENABLE_LOCATION":
+            return {
+                ...state,
+                loadingInProgress:false,
+                error: {
+                    message: "Enable Location In Your Phone...."
+                }
+            }
+        case "PASSWORD_CHANGED":
+            return {
+                ...state,
+                loadingInProgress:false,
+                message: "Password Changed Successfully!!"
+            }
+        case "NO_CAR_IN_PROFILE":
+            return {
+                ...state,
+                loadingInProgress:false,
+                error: {
+                    message: "No car in profile. Please add car to profile."
+                }
+            }
         default:
             return state
     }

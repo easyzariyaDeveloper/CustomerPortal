@@ -21,6 +21,7 @@ import profile from '../../../Assets/img/profile.svg'
 import logout from '../../../Assets/img/logout.svg'
 import car from '../../../Assets/img/car.svg'
 import history from '../../../Assets/img/history.svg'
+import { withRouter } from "react-router-dom";
 
 
 const useStyles = makeStyles({
@@ -55,7 +56,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Header(props) {
+function Header(props) {
   const classes = useStyles();
   const [slideMenu, setSlideMenu] = useState(false);
 
@@ -90,7 +91,7 @@ export default function Header(props) {
   return (
     <>
       <HeaderWrapper noborder = {props.noborder}>
-        { props.backButton ? <BackButton onClick={() => history?.go(-1)}>
+        { props.backButton ? <BackButton onClick={() => props?.history?.goBack()}>
           <svg viewBox="0 0 24 24" style = {{"width": "20px"}}>
             <path fill="#FFFFFF" fillrule="evenodd" d="M20.25 11.25H5.555l6.977-6.976a.748.748 0 000-1.056.749.749 0 00-1.056 0L3.262 11.43A.745.745 0 003 12a.745.745 0 00.262.57l8.214 8.212a.75.75 0 001.056 0 .748.748 0 000-1.056L5.555 12.75H20.25a.75.75 0 000-1.5"></path>
           </svg>
@@ -167,3 +168,5 @@ export default function Header(props) {
     </>
   );
 }
+
+export default withRouter(Header)

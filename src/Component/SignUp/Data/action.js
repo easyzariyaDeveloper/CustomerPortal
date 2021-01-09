@@ -35,3 +35,9 @@ export function logout(){
         type: "LOGOUT"
     }
 }
+
+export function enterValidPassword(){
+    return{
+        type: "ENTER_VALID_PASSWORD"
+    }
+}

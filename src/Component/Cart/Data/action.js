@@ -40,3 +40,9 @@ export function navigateNext(payload){
         payload
     }
 }
+
+export function setDateTimeError(){
+    return {
+        type: "ENTER_DATE_TIME"
+    }
+}

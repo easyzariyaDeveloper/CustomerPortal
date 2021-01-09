@@ -21,6 +21,15 @@ export function addCar(carDetails, callback){
     }
 }
 
+export function updateCarDetail(carDetails,id,callback){
+    return{
+        type:"CUSTOMER_UPDATE_CAR_DETAIL",
+        payload: carDetails,
+        callback: callback,
+        id: id
+    }
+}
+
 export function getCarById(carId, callBack){
     return{
         type: "FETCH_CAR_BY_ID",

@@ -18,6 +18,10 @@ function OrderHistory(props){
     return <>
         {
             orderHistory?.map((order) => {
+                const href = ["ORDER_COMPLETED"].includes(order?.status) ?
+                    `${window.location.origin}/api/cart/${order?.orderId}/invoice/download` : 
+                    `${window.location.origin}/api/job-card/${order?.orderId}/download`;
+
                 return <EZCard>
                         <OrderHistoryHeaderDiv>
                             <label>{moment(order?.orderPlacedTime).format('MMMM Do YYYY')}</label>
@@ -34,7 +38,8 @@ function OrderHistory(props){
                         <div style = {{display: "flex"}}>
                             <OrderDetailsButton onClick = {() => location.href = `/order/${order?.orderId}/detail`}>Order Details</OrderDetailsButton>
                             {/* <OrderDownloadButton onClick = {() => props?.downloadJobCard(order?.orderId)}>Download</OrderDownloadButton> */}
-                            <OrderDownloadButton href = {`/job-card/${order?.orderId}/download`} download>Download</OrderDownloadButton>
+
+                            <OrderDownloadButton href = {href} download>Download</OrderDownloadButton>
                         </div>
                     </>
                 </EZCard>

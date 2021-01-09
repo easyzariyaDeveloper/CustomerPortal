@@ -99,9 +99,7 @@ export function*  getResetPasswordOtp({payload}){
         const {data} = yield call(APIWrapper, {
             method: "POST",
             url: '/customer/otp/reset-password',
-            data: {
-                resetInput: payload
-            }
+            data: payload
         });
         yield put({
             type: 'FETCH_RESETPASSWORD_OTP_SUCCESS',

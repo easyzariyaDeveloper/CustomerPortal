@@ -16,7 +16,7 @@ import Coupon from "../../../Assets/img/coupon.png";
 import { ServiceCart, CouponCodes } from "../mockCartData";
 import CouponCancel from "../../../Assets/img/coupon_cancel.jpg"
 import { connect } from "react-redux";
-import { fetchCart, deleteItem, applyCoupon,navigateNext, removeCoupon } from "../Data/action";
+import { fetchCart, deleteItem, applyCoupon,navigateNext, removeCoupon, setDateTimeError } from "../Data/action";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { EZCard } from "../../Common/MobileCard";
 import CarIcon from "../../../Assets/img/carIcon.svg";
@@ -92,10 +92,10 @@ function Cart(props){
                             </div>
                             <span style= {{fontStyle:"italic",fontSize:"12px",paddingLeft: "10px"}}>applied successfully</span>
                             
-                            <button onClick= {() => {props?.removeCoupon();
-                                props?.fetchCart()
-                            }} style={{float:"right"}}>Remove</button>
-                    </AppliedCouponDiv>: <CouponCodeButton onClick = {() => setCouponCardVisibility(true)}>
+                            <button onClick= {() => 
+                            {props?.removeCoupon();}} 
+                            style={{float:"right"}}>Remove</button>
+                            </AppliedCouponDiv>: <CouponCodeButton onClick = {() => setCouponCardVisibility(true)}>
                             <MCouponImage src = {Coupon} />
                             {`Apply Coupon >`}
                         </CouponCodeButton>
@@ -112,7 +112,7 @@ function Cart(props){
                             <CouponTextField 
                                 name = "Enter Coupon Code"
                                 value = {couponCode}
-                                onChange={(event) => setCouponCode(event.target.value)}
+                                onChange={(event) => setCouponCode(event.target.value.toUpperCase())}
                                 label="Enter Coupon Code"
                             />
                             <MApplyCouponButton onClick={() => {props?.applyCoupon(couponCode)
@@ -149,7 +149,8 @@ function Cart(props){
             </EZCard> 
 
             <CartButtonDiv>
-                <MobileActionButton onClick = {() => navigateNext()}> Checkout </MobileActionButton>
+                <MobileActionButton onClick = {() => {
+                    dateTime ? navigateNext() : props?.setDateTimeError()}}> Checkout </MobileActionButton>
             </CartButtonDiv>    
         </MCartPageWrapper> : <EmptyCart/>)
         }
@@ -169,7 +170,8 @@ const mapDispatchToProps = (dispatch) => {
         deleteItem: (id="")=> {dispatch(deleteItem(id))},
         applyCoupon: (code="") => {dispatch(applyCoupon(code))},
         removeCoupon: () => {dispatch(removeCoupon())},
-        navigateNext: (payload) => {dispatch(navigateNext(payload))}
+        navigateNext: (payload) => {dispatch(navigateNext(payload))},
+        setDateTimeError: () => {dispatch(setDateTimeError())}
     }
 }
 

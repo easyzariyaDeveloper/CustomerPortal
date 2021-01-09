@@ -1,6 +1,6 @@
 import { takeLatest, takeEvery } from "redux-saga/effects";
 import { fetchPackages, fetchCars, fetchCities, fetchPackageById, addSubPackage, setCarToCart } from "../Component/SelectService/Data/saga";
-import { fetchBrandForCars, fetchCarListByBrand, addCarByUser, getCarById} from "../Component/AddCar/Data/saga";
+import { fetchBrandForCars, fetchCarListByBrand, addCarByUser, getCarById, updateCarDetail} from "../Component/AddCar/Data/saga";
 import { loginUser, userSignup, getResetPasswordOtp, verifyResetPasswordOtp, logout } from "../Component/SignUp/Data/saga";
 import { getProfile, changePassword, deleteCar, deleteAddress, fetchOrderHistory,downloadJobCard } from "../Component/Profile/Data/saga";
 import { createOtp, verifyOTP } from "../Component/OtpPage/Data/saga";
@@ -37,6 +37,7 @@ export default function* appSaga() {
 
     yield takeLatest("CUSTOMER_ADD_ADDRESS", addAddressByUser);
     yield takeLatest("CUSTOMER_ADD_CAR", addCarByUser);
+    yield takeLatest("CUSTOMER_UPDATE_CAR_DETAIL", updateCarDetail)
     yield takeLatest("DELETE_CAR", deleteCar);
     yield takeLatest("DELETE_ADDRESS", deleteAddress);
     yield takeLatest("CUSTOMER_UPDATE_ADDRESS", updateCustomerAddress);
@@ -56,6 +57,12 @@ export default function* appSaga() {
 
     yield takeLatest("CHANGE_PASSWORD", changePassword);
     yield takeEvery("FETCHING_API_FAILED", clearMessage);
+
+    yield takeEvery("ENTER_DATE_TIME", clearMessage);
+    yield takeEvery("ENTER_VALID_PASSWORD",clearMessage);
+    yield takeEvery("ENABLE_LOCATION",clearMessage)
+    yield takeEvery("PASSWORD_CHANGED",clearMessage)
+    yield takeEvery("NO_CAR_IN_PROFILE",clearMessage)
 
     yield takeLatest("DOWNLOAD JOBCARD",downloadJobCard)
 }

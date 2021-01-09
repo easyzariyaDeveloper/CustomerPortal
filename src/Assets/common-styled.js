@@ -155,7 +155,7 @@ export const MobileActionButton = styled.button`
     text-align: center;
     background: ${ez_button_color};
     color: ${white_color};
-    font-size: 18px;
+    font-size: 15px;
     outline: transparent;
 `;
 

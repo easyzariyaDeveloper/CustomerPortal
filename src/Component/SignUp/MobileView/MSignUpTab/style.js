@@ -6,7 +6,7 @@ export const TermsPara = styled.p`
 font-style: italic;
 padding: 13px;
 margin: 15px 0;
-font-weight:300
+font-weight:100
 `;
 
 export const SignupLogInButton = styled.button`

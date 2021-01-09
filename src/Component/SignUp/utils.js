@@ -18,7 +18,8 @@ export function isValidEmailOrPhone(value = ""){
 
 
 export function isValidPassword(password = ""){
-    let isPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
+    // let isPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/; --- for special character as well
+    let isPassword = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
     return isPassword.test(password) ? true : false;
 }
 

@@ -64,9 +64,9 @@ function SelectService(props) {
                 <SelectedCarIcon src={CarIcon} onClick= {()=>setCarIconVisibility(!carIconVisiblity)}/>
                 <SelectedCarCard visibility={carIconVisiblity}>
                     <p>{`${matchedCarData?.["brand"]} ${matchedCarData?.["carName"]}`}</p>
-                    <p style = {{"textTransform": "capitalize", "marginTop": "10px"}}>{matchedCarData?.variantName?.toLowerCase()}</p>
+                    {/* <p style = {{"textTransform": "capitalize", "marginTop": "10px"}}>{matchedCarData?.variantName?.toLowerCase()}</p> */}
                     <FilterButton onClick = {() => setSelectCarPopupVisibility(true)}>
-                        Change Car
+                        Change
                     </FilterButton>
                 </SelectedCarCard>
             </ServiceMPageWrapper> : null) 

@@ -32,10 +32,13 @@ export function*  getProfile(){
 export function* deleteCar({payload}){
     yield put ({type: "DELETE_CAR_INPROGRESS"});
     try{
-        const { data } = yield call(APIWrapper, {
+        const { data,status } = yield call(APIWrapper, {
             url: `/customer/car/${payload}`,
             method: "DELETE"
         });
+        if(status == 200){
+            yield *getProfile()
+        }
         yield put({
             type: 'DELETING_CAR_SUCCESS'
         });
@@ -51,6 +54,8 @@ export function* deleteCar({payload}){
 
 export function* changePassword({payload}){
     yield put ({type: "CHANGE_PASSWORD_INPROGRESS"});
+    yield put ({type: "FETCHING_API"});
+
     try{
         const { data } = yield call(APIWrapper, {
             url: `/customer/changepassword`,
@@ -63,6 +68,7 @@ export function* changePassword({payload}){
         yield put({
             type: 'FETCHING_API_SUCCESS'
         });
+        yield put({type: "PASSWORD_CHANGED"})
     }catch (error) {
         console.log(error);
         yield put({

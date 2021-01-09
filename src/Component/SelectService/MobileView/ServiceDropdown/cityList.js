@@ -23,12 +23,12 @@ function CityList(props) {
                 }
                 return accumlator;
             }, {});
-            // setCity(Object.values(cityMap) || props?.cities);
+       
 
             Object.values(cityMap).length > 0 ?  setCity(Object.values(cityMap)) : setCity(props?.cities)
             console.log(Object.values(cityMap))
         } else {
-            setCity(props?.cities || []);
+            setCity((props?.cities || []).filter(({active}) => active));
         }
     }, [userId && props?.profileAddress?.length, props?.cities?.length,props?.cities])
 

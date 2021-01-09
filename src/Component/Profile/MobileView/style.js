@@ -208,6 +208,7 @@ export const OrderHistoryHeaderDiv = styled.div`
 
 export const OrderDetailsButton = styled(MobileActionButton)`
     margin: 5px;
+    font-size: 15px;
 `;
 
 export const OrderDownloadButton = styled.a`

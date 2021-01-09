@@ -74,6 +74,36 @@ export function* addCarByUser({payload, callback}) {
 
 }
 
+export function* updateCarDetail({payload, callback, id}) {
+    yield put({ type: "CUSTOMER_ADD_CAR_INPROGESS" });
+    try {
+        const { data } = yield call(APIWrapper, {
+            url: `/customer/car/${id}`,
+            method: "PUT",
+            data: {
+                ...payload
+            }
+        });
+        yield put({
+            type: 'CUSTOMER_UPDATE_CAR_SUCCESS',
+            data
+        });
+        console.log(data);
+        callback && callback()
+    } catch (error) {
+        console.log(error);
+        yield put({
+            type: 'CUSTOMER_ADD_CAR_FAILED',
+            error
+        });
+        yield put({
+            type: 'FETCHING_API_FAILED',
+            error
+        })
+    }
+
+}
+
 export function* getCarById({payload, callBack}){
     yield put({type: "FETCHING_CAR_DETAILS_INPROGRESS"});
     try{

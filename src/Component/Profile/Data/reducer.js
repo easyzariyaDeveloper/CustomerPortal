@@ -29,6 +29,13 @@ export function ProfileReducer(state = defaultProfileState, {type, data, error})
                 orderList:  data.orderList || [],
             }
         break;
+        case "CUSTOMER_UPDATE_CAR_SUCCESS": 
+            return {
+                ...state,
+                carList: data.carList || [],
+            }
+        break;
+
         case "FETCH_PROFILE_FAILED":
             return {
                 ...state,

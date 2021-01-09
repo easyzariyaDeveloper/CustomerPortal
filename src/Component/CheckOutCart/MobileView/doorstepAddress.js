@@ -29,7 +29,7 @@ function DoorstepAddress(props) {
                     return <CheckoutRadioWrapper>
                         <FormControlLabel value={address.addressId} control={<Radio />} style = {{marginRight: "0px"}}/> 
                         {/* <CheckoutCard>{address.secondLine}</CheckoutCard> */}
-                        <ProfileCard style = {{margin: "0px"}}>
+                        <ProfileCard style = {{margin: "0px"}} >
                         <AddressLine>{address.firstLine}, {address.secondLine}</AddressLine>
                     {
                         address.landmark && <>

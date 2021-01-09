@@ -8,7 +8,7 @@ import Signup from '../TextComponent/Signup';
 import Login from '../TextComponent/Login';
 import { TermsPara,SignupLogInButton, RedirectButton } from './style';
 import { withRouter } from 'react-router-dom';
-import { loginUserByCredential, createSignup} from '../../Data/action';
+import { loginUserByCredential, createSignup, enterValidPassword} from '../../Data/action';
 import { connect } from 'react-redux';
 import { isValidUserDetail, isValidPassword, isValidEmail, isValidContactNumber, isPasswordMatching, isValidEmailOrPhone } from '../../utils';
 import { SocialButtonDiv,FbLoginButton, GoogleLoginButton, MAccountWrapper, MAccountCard } from '../style';
@@ -16,6 +16,7 @@ import Google from "../../../../Assets/img/google.jpg";
 import FacebookIcon from '@material-ui/icons/Facebook';
 import ResetPassword from './ResetPassword';
 import { createOtp } from '../../../OtpPage/Data/action';
+import { eraseCookie } from '../../../../util';
 
 
 
@@ -31,6 +32,10 @@ const AntTab = withStyles((theme) => ({
   root: {
     minWidth: 72,
     width: '50%',
+    '&:nth-of-type(1)': {
+      borderRight: `2px solid #71DA9C`,
+    },
+    
     // width: 'calc(100% / 2)',
     // maxWidth: 'inherit',
     '&:hover': {
@@ -72,6 +77,7 @@ function MSignUpTab(props) {
       
     if (!isValidPassword(userDetail?.current?.password)){
       loginError["password"] = "Invalid Password";
+      props?.enterValidPassword()
     }
     setLoginError(loginError);
 
@@ -100,8 +106,10 @@ function MSignUpTab(props) {
     }
     if(!isValidPassword(userDetail?.current?.password)){
       error["password"] = "Min 6 digit.Please include Special Char,Uppercase,Lowercase & Number in password.";
+      props?.enterValidPassword()
     } else if (!isPasswordMatching(userDetail?.current?.password,  userDetail?.current?.confirmPassword)){
       error["confirmPassword"] = "Password & Confirm password doesn't match";
+      props?.enterValidPassword()
     }
     setError(error);
     if(Object.keys(error).length == 0){
@@ -137,8 +145,12 @@ function MSignUpTab(props) {
             </div> */}
 
 
-            <div style= {{textAlign:"center", margin: "40px 0"}}>
-              <SignupLogInButton onClick = {() => loginUser()}>Login</SignupLogInButton>
+            <div style= {{textAlign:"center", margin: "25px 0"}}>
+              <SignupLogInButton onClick = {() => {
+                eraseCookie("isVerifiedUser");
+                eraseCookie("userUUId");
+                localStorage.clear();
+                loginUser()}}>Login</SignupLogInButton>
               {/* <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign In with</p> */}
             </div>
 
@@ -159,7 +171,7 @@ function MSignUpTab(props) {
               errorObj = {error}
             />
             <div style= {{textAlign:"center"}}>
-            <TermsPara>By Signing Up you agree to our &nbsp;<a href="#">terms and conditions</a></TermsPara>
+            <TermsPara>By Signing up you agree to our &nbsp;<a href="#">terms and conditions</a></TermsPara>
               <SignupLogInButton onClick = {() => {signUpUser()}}>Sign Up</SignupLogInButton>
               {/* <p style= {{fontWeight: "300", fontSize: "15px"}}>Or Sign Up with</p> */}
             </div>
@@ -192,8 +204,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loginUser: (userDetail, search) => {dispatch(loginUserByCredential(userDetail?.current, search))},
     signUpUser: (signupDetails) => {dispatch(createSignup(signupDetails?.current))},
-    createOtp : (customerId= "") => {dispatch(createOtp(customerId))}
-
+    createOtp : (customerId= "") => {dispatch(createOtp(customerId))},
+    enterValidPassword:( ) => {dispatch(enterValidPassword())}
   }
 }
 

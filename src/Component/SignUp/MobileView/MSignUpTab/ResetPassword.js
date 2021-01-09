@@ -51,7 +51,7 @@ function ResetPassword(props){
                     <TextField
                     required
                     id="outlined-required"
-                    label="Email/Phone"
+                    label="Phone"
                     value= {userId}
                     onChange={handleChange('userId')}
                     variant="outlined"
@@ -61,7 +61,7 @@ function ResetPassword(props){
 
                 <ResetSubmitButton onClick= {() => {sessionStorage.setItem("otpMobileNumber", userId);
                   setOtpCardVisibility(false);
-                  // props?.resetPasswordOtp(userId);
+                  props?.resetPasswordOtp(userId);
                 }}
                 >Submit</ResetSubmitButton>
 
