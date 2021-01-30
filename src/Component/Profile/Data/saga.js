@@ -18,9 +18,11 @@ export function*  getProfile(){
             type: 'FETCH_PROFILE_SUCCESS',
             data: profileResponse
         })
-    console.log(profileResponse);
-    }catch(error){
-        console.log(error);
+    } catch(error){
+        const {status} = error;
+        if(status === 401){
+            yield put ({ type: "LOGOUT"})   
+        }
         yield put({
             type: 'FETCH_PROFILE_FAILED',
             error

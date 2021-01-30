@@ -24,6 +24,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { EZCard } from "../../../Common/MobileCard";
+import { addCar } from "../../../AddCar/Data/action";
 
 
 export const ObjectList = (array) => array.reduce((accumulator, service) => {
@@ -58,8 +59,6 @@ function ServiceList(props) {
         cityId: localStorage.getItem("citySelectedPackage")
     });
 
-    
-
     const selectedCityId = new URLSearchParams(window.location.search).get("cityId") || localStorage.getItem("citySelectedPackage"); 
     const selectedCarId = localStorage.getItem("carSelectedPackage");
     const itemIdObj = {
@@ -79,7 +78,7 @@ function ServiceList(props) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-        <img src = {carMismatch}/>
+        <img src = {carMismatch} style = {{"width": "100px", "margin": "0 auto"}}/>
         <DialogTitle id="alert-dialog-title" style= {{textAlign: "center",padding: "0px"}}>Car Mismatch</DialogTitle>
         <DialogContent style= {{padding: "8px"}}>
           <DialogContentText id="alert-dialog-description" style= {{marginBottom: "0px", fontSize: "13px"}}>
@@ -150,8 +149,10 @@ function ServiceList(props) {
     }
 
     useEffect(() => {
-        props.fetchPackageById(params["type"], filter);
-    }, [filter?.carId]);
+        if(filter && filter.cityId && filter.carId){
+            props.fetchPackageById(params["type"], filter);
+        }
+    }, [filter?.carId, filter?.cityId]);
 
     useEffect(() => {
         const carSelectedAnonymously = localStorage.getItem("carSelectedPackage");
@@ -179,12 +180,12 @@ function ServiceList(props) {
 
       function addToCart(code){
         if(userId){
-            let carObj = matchedCarData;
+            let carObj = matchedCarData || {};
             if(props?.cart?.cart?.car?.carId && props?.cart?.cart?.car?.carId != selectedCarId ){
                 carObj = props?.profile?.carList.find(car => car["carId"] == selectedCarId);
                 props?.setCarToCart(carObj);
             }  
-            props.addSubPackage(carObj, selectedCityId,{...itemIdObj,subPackageName: code})
+            props.addSubPackage(carObj, selectedCityId,{...itemIdObj,subPackageName: code});
         } else {
             location.href = `/login?referrer=${location.pathname}?carId=${localStorage.getItem("carSelectedPackage")}&cityId=${localStorage.getItem("citySelectedPackage")}`
         }
@@ -229,9 +230,6 @@ function ServiceList(props) {
                                 <ButtonDiv>
                                     <ListImg src =  {Lists} />
                                     <AddButton onClick = {() => {
-                                        if(props?.profile?.carList == 0){
-                                            props?.noCarInProfile()
-                                        }
                                         addToCart(code)}}>Add</AddButton>
                                     {/* <AddButton onClick ={() => {
                                         userId ? props.addSubPackage(matchedCarData, selectedCityId,{...itemIdObj,subPackageName: code}) : 
@@ -272,7 +270,26 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchPackageById: (packageId = "", filter = {}) => { dispatch(fetchPackageById(packageId, filter)) },
-        addSubPackage: (car = {},cityId= "",itemIdObj ={}) => { dispatch(addSubPackage(car,cityId,itemIdObj)) },
+        addSubPackage: (car = {},cityId= "",itemIdObj ={}) => { 
+            if(Object.keys(car).length == 0){
+                const carDetails = JSON.parse(localStorage.getItem("carDetails"));
+                const selectedCarId = localStorage.getItem("carSelectedPackage");
+                const payload = {
+                    "carId": selectedCarId,
+                    "carName":carDetails?.carName,
+                    "color": "",
+                    "fuelVariantId": carDetails?.variantName,
+                    "variantName" : carDetails?.fuelName,
+                    "registrationNum": "",
+                    "makeYear": ""
+                }
+                dispatch(addCar(payload, (selectedCar) => {
+                    dispatch(addSubPackage(selectedCar ,cityId,itemIdObj));
+                }))
+            } else {
+                dispatch(addSubPackage(car, cityId,itemIdObj))
+            }  
+        },
         setCarToCart: (carObject ={}) => {dispatch(setCarToCart(carObject))},
         noCarInProfile: () => {dispatch(noCarInProfile())}
     }

@@ -25,6 +25,7 @@ export function ProfileReducer(state = defaultProfileState, {type, data, error})
                 ...state,
                 inProgress: false,
                 ...data,
+                carList: data.carList || [],
                 addressList: data.addressList || [],
                 orderList:  data.orderList || [],
             }

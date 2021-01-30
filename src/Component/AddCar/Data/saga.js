@@ -47,6 +47,7 @@ export function* fetchCarListByBrand({payload}) {
 
 export function* addCarByUser({payload, callback}) {
     yield put({ type: "CUSTOMER_ADD_CAR_INPROGESS" });
+    yield put({ type: "FETCHING_API"});
     try {
         const { data } = yield call(APIWrapper, {
             url: `/customer/car`,
@@ -59,7 +60,8 @@ export function* addCarByUser({payload, callback}) {
             type: 'CUSTOMER_ADD_CAR_SUCCESS',
             data
         });
-        callback && callback()
+        callback && callback(data);
+        yield put({type: "FETCHING_API_SUCCESS"});
     } catch (error) {
         console.log(error);
         yield put({

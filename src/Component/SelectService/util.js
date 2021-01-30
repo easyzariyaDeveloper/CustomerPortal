@@ -8,15 +8,15 @@ const CNG = "CNG";
 
 export function formatPackageResponse(response = []) {
     const formattedResponse = {
-        "autoCare": [],
-        "doorStep": []
+        "autocare": [],
+        "doorstep": []
     }
     if (response.length > 0) {
         response.forEach((servicePackage = {}) => {
             if (servicePackage["serviceableAtHome"]) {
-                formattedResponse["doorStep"] = [...formattedResponse["doorStep"], getPackageInfo(servicePackage)];
+                formattedResponse["doorstep"] = [...formattedResponse["doorstep"], getPackageInfo(servicePackage)];
             } else {
-                formattedResponse["autoCare"] = [...formattedResponse["autoCare"], getPackageInfo(servicePackage)]
+                formattedResponse["autocare"] = [...formattedResponse["autocare"], getPackageInfo(servicePackage)]
             }
         })
     }

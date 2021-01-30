@@ -35,7 +35,8 @@ function CarList(props) {
     const carDetails = {
         brand: matchedCarName?.brand,
         carName: matchedCarName?.model,
-        variantName: vehicle?.fuelType
+        variantName: vehicle?.fuelType,
+        fuelName: (matchedCarName?.variants?.find((variant) => (variant?.id === vehicle?.fuelType))|| {})["fuelType"]
     }
     localStorage.setItem("carDetails", JSON.stringify(carDetails));
 
@@ -48,11 +49,17 @@ function CarList(props) {
         props.fetchBrandForCars();
     }, []);
 
+    useEffect(() => {
+        if(props?.profileCars?.length === 0) {
+            setRadio("all");
+        } 
+    }, [props?.profileCars?.length])
+
 
     return <CarListWrapper>
 
-        {userId ? (props.profileCars ? <RadioGroup style ={{paddingLeft:"13px"}}row value={radio} onChange={(event)=> setRadio(event.target.value)}>
-                <FormControlLabel value="personal" control={<Radio/>} label="Personal" />
+        {userId ? (props?.profileCars?.length > 0 ? <RadioGroup style ={{paddingLeft:"13px"}}row value={radio} onChange={(event)=> setRadio(event.target.value)}>
+                <FormControlLabel value="personal" control={<Radio/>} label="Added" />
                 <FormControlLabel value="all" control={<Radio/>} label="All" />
         </RadioGroup> : null) : null}
             

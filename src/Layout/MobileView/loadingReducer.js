@@ -89,6 +89,8 @@ function setErrorData(error = {}){
     let errorMessage = message || "Something went wrong...";
     if(status === 401){
         errorMessage = "Unauthorized !! You need to login to use the service";
+        put ({ type: "LOGOUT"});
+        
     } else if(status === 400){
         errorMessage = "Bad credential !! Please verify the data";
     } else if(status === 403){
@@ -97,9 +99,14 @@ function setErrorData(error = {}){
         errorMessage = "Conflict !! This record already exists.";
     } else if(status === 404){
         errorMessage = "Not Found.. Something went wrong.";
+    } else if (status === 500){
+        errorMessage = "Internal Server Error";
+    } else if (status === 504){
+        errorMessage = "Gateway Timeout Error..";
     }
     
     errorMessage = error.ErrorMessage ? error.ErrorMessage : errorMessage;
+    window.scrollTo(0,0);
     return {
         message: errorMessage,
         status: error?.status

@@ -17,6 +17,7 @@ import { EZCard } from "../../../Common/MobileCard";
 import FloatingCarDetails from "../ServiceDropdown/FloatingCarDetails";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { readCookie } from "../../../../util";
+import { addCar } from "../../../AddCar/Data/action";
 
 
 
@@ -32,9 +33,10 @@ function ServiceDescription(props) {
     const [car, setCar] = useState([]);
 
     const userId = readCookie("userUUId");
-
+    
     function addSubPackage(selectedCity){
         const selectedCar = props?.profile?.carList?.find((car) => car["carId"] === selectedCarId);
+        
         const itemIdObj = {
             itemId: packageId,
             subPackageName: codeId,
@@ -44,6 +46,7 @@ function ServiceDescription(props) {
             package:true
         };
         props.addSubPackage(selectedCar ,selectedCity,itemIdObj)
+        
     }
     
 
@@ -132,7 +135,26 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchPackageById: (packageId = "", filter = {}) => { dispatch(fetchPackageById(packageId, filter)) },
-        addSubPackage: (car = {},city="", itemIdObj ={}) => { dispatch(addSubPackage(car,city,itemIdObj))},
+        addSubPackage: (car = {},city="", itemIdObj ={}) => { 
+            if(Object.keys(car).length == 0) {
+                const carDetails = JSON.parse(localStorage.getItem("carDetails"));
+                const selectedCarId = localStorage.getItem("carSelectedPackage");
+                const payload = {
+                    "carId": selectedCarId,
+                    "carName":carDetails?.carName,
+                    "color": "",
+                    "fuelVariantId": carDetails?.variantName,
+                    "variantName" : carDetails?.fuelName,
+                    "registrationNum": "",
+                    "makeYear": ""
+                }
+                dispatch(addCar(payload, (selectedCar) => {
+                    dispatch(addSubPackage(selectedCar,city,itemIdObj));
+                }))   
+            } else {
+                dispatch(addSubPackage(car,city,itemIdObj))
+            }     
+        },
     }
 }
 

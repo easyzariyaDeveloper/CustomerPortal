@@ -1,8 +1,8 @@
 const defaultPackagesState = {
     inProgress: true,
     packages:  {
-        "autoCare": [],
-        "doorStep": []
+        "autocare": [],
+        "doorstep": []
     },
     error:  {},
     carId: ""

@@ -25,12 +25,12 @@ function CityList(props) {
             }, {});
        
 
-            Object.values(cityMap).length > 0 ?  setCity(Object.values(cityMap)) : setCity(props?.cities)
+            Object.values(cityMap).length > 0 ?  setCity(Object.values(cityMap)) : setCity((props?.cities || []).filter(({active}) => active))
             console.log(Object.values(cityMap))
         } else {
             setCity((props?.cities || []).filter(({active}) => active));
         }
-    }, [userId && props?.profileAddress?.length, props?.cities?.length,props?.cities])
+    }, [userId && props?.profileAddress?.length, props?.cities?.length, props?.cities])
 
     return <div>
         {

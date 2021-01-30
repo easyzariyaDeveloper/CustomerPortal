@@ -159,11 +159,15 @@ export function* logout(){
         }
         
     }catch(error){
-        console.log(error)
         yield put({
             type: 'LOGOUT_FAILED',
             error
         })
+    } finally {
+        eraseCookie("userUUId");
+        eraseCookie("isVerifiedUser");
+        localStorage.clear();
+        location.href = '/login'
     }
 }
 

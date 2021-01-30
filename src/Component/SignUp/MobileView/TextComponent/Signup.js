@@ -51,6 +51,7 @@ export default function Signup(props){
       let value = event?.target?.value;
       if(key == 'phone'){
         value = value.length >MOBILE_NUMBER_LENGTH ? value.substring(0,MOBILE_NUMBER_LENGTH) :value;
+        sessionStorage.setItem("otpMobileNumber",value)
       }
       setValues({ ...values, [key]: value });
       props.updateValue(key, value);

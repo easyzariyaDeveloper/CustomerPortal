@@ -16,7 +16,10 @@ export function* hasActiveCart(){
         });
 
     }catch(error){
-        console.log(error);
+        const {status} = error;
+        if(status === 401){
+            yield put ({ type: "LOGOUT"})   
+        }
         yield put({
             type: 'FETCH_PROFILE_FAILED',
             error
@@ -43,7 +46,7 @@ export function* fetchCart(initialFetch = false){
     }catch(error){
         console.log(error);
         yield put({
-            type: 'FETCH_PROFILE_FAILED',
+            type: 'FETCHING_API_FAILED',
             error
         });
         yield put({ type: "FETCHING_API_FAILED" });
