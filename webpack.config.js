@@ -177,7 +177,14 @@ export default (mode) => {
       ...config,
       optimization: {
         minimize: true,
-        minimizer: [new TerserPlugin()],
+        minimizer: [new TerserPlugin({
+          parallel: true,
+          terserOptions: {
+            compress: {
+              drop_console: true
+            }
+          }
+        })],
       }
     }
   }
